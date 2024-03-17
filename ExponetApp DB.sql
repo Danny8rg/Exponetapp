@@ -104,6 +104,14 @@ foreign key (userComment) references appUsers(userId),
 appComment varchar (500)
 );
 
+create table appBuyCars(
+buyCarId int primary key auto_increment ,
+buyCarContent varchar (10000),
+buyCarState varchar (50),
+buyCarOwner int,
+foreign key (buyCarOwner) references appUsers (UserId)
+)
+
 insert into appComments (appComment, userComment ) values ("muy buena la app la interfaz muy intuitiva y bonita", 1)
 
 DELIMITER //
@@ -114,6 +122,17 @@ BEGIN
   FROM appComments
   INNER JOIN appUsers ON appComments.userComment = appUsers.userId;
 END //
+
+DELIMITER ;
+
+DELIMITER // 
+
+CREATE PROCEDURE GetBuyCarsAndUserInfo()
+BEGIN
+    SELECT appBuyCars.buyCarId, buyCarContent, buyCarState
+    FROM appBuyCars
+    INNER JOIN appUsers ON appBuyCars.buyCarId = appUsers.UserId;
+END//
 
 DELIMITER ;
 

@@ -36,7 +36,7 @@ function CreateShop() {
     formData.append("shopOwner", shopOwner);
     formData.append("shopComments", shopComments);
 
-    Axios.post("https://exponetappfinal.onrender.com/createShop", formData)
+    Axios.post("http://localhost:3000/createShop", formData)
       .then(() => {
         getShops();
         limpiarCampos();
@@ -85,11 +85,7 @@ function CreateShop() {
       formData.append("shopComments", shopComments);
       formData.append("shopId", shopId);
 
-      Axios.put(
-        "https://exponetappfinal.onrender.com/updateShop",
-        formData,
-        {}
-      ).then(() => {
+      Axios.put("https://localhost:3000/updateShop", formData, {}).then(() => {
         getShops();
         Swal.fire({
           position: "center",
@@ -115,9 +111,7 @@ function CreateShop() {
     );
 
     if (confirmation) {
-      Axios.put(
-        `https://exponetappfinal.onrender.com/deleteShop/${ShopId}`
-      ).then(() => {
+      Axios.put(`https://localhost:3000/deleteShop/${ShopId}`).then(() => {
         alert("Tienda eliminada");
         limpiarCampos();
         getShops();
@@ -129,9 +123,7 @@ function CreateShop() {
   };
 
   const deleteProducts = (ShopId) => {
-    Axios.put(
-      `https://exponetappfinal.onrender.com/deleteProducts/${ShopId}`
-    ).then(() => {
+    Axios.put(`https://localhost:3000/deleteProducts/${ShopId}`).then(() => {
       limpiarCampos();
       getShops();
     });
@@ -164,15 +156,14 @@ function CreateShop() {
     setShopComments(val.shopComments);
   };
 
-  const getShops = (userLogin) => {
-    Axios.get(
-      `https://exponetappfinal.onrender.com/shopsListCreateShops/${shopOwner}`
-    ).then((response) => {
-      setShopsList(response.data);
-      console.dir(response.data);
-    });
+  const getShops = (shopOwner) => {
+    Axios.get(`https://localhost:3000/shopsListCreateShops/${shopOwner}`).then(
+      (response) => {
+        setShopsList(response.data);
+        console.dir(response.data);
+      }
+    );
   };
-
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]); // Cambiado de file a selectedFile
   };
@@ -183,9 +174,9 @@ function CreateShop() {
 
   useEffect(() => {
     setShopOwner(Cookies.get("userId"));
-    console.log(shopOwner);
-    console.log(globalShopId);
-    getShops();
+    console.log("soy el shop owner",shopOwner);
+    console.log("soy el global shop id",globalShopId);
+    getShops(shopOwner); // Pasar shopOwner como argumento
   }, [shopOwner]);
 
   return (

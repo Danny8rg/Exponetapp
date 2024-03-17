@@ -16,7 +16,7 @@ function OrdersManagment() {
     const fetchBuyCars = async () => {
       try {
         const response = await axios.get(
-          "https://exponetappfinal.onrender.com/buyCarOrdersManagment"
+          "http://localhost:3000/buyCarOrdersManagment"
         );
         setOrders(response.data);
       } catch (error) {

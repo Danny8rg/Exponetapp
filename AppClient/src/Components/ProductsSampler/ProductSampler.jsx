@@ -129,14 +129,14 @@ function ProductSampler({ products, stock, quantityCards, Route }) {
               >
                 Comprar
               </button>
-              <button
+              {/* <button
                 className="delete-icon"
                 onClick={() => {
                   borrarCarrito();
                 }}
               >
                 <MdDeleteForever/>
-              </button>
+              </button> */}
             </section>
             <div className="box-img">
               <img
@@ -147,26 +147,26 @@ function ProductSampler({ products, stock, quantityCards, Route }) {
             </div>
             <h3 className="prod-title">{product.productName}</h3>
             <div className="card-item-descrip">
-              <p className="subtitle-descrip">Descripción</p>
+              {/* <p className="subtitle-descrip">Descripción</p> */}
               <p className="value-descrip">{product.productDescription}</p>
             </div>
             <section className="card-dates">
               <div className="card-item">
-                <p className="subtitle">Precio</p>
+                {/* <p className="subtitle">Precio</p> */}
                 <p className="value">${product.productPrize}</p>
               </div>
-              <div className="card-item">
+              {/* <div className="card-item">
                 <p className="subtitle">Stock</p>
                 <p className="value">{stock[product.productId]}</p>
-              </div>
-              <div className="card-item">
+              </div> */}
+              {/* <div className="card-item">
                 <p className="subtitle">Total</p>
                 <p className="value">
                   ${calculateTotalPrice(product.productId)}
                 </p>
-              </div>
+              </div> */}
             </section>
-            <div className="quantity-controls">
+            {/* <div className="quantity-controls">
                   <button
                     className="btn-minor shadow-sm"
                     onClick={() => handleDecrement(product.productId)}
@@ -184,7 +184,7 @@ function ProductSampler({ products, stock, quantityCards, Route }) {
                       <FaPlus />
                     </span>
                   </button>
-                </div>
+            </div> */}
           </div>
         ))}
       </div>

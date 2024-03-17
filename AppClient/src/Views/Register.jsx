@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { IoStorefrontSharp } from "react-icons/io5";
 import "./Register.css";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 
 function RegisterForm() {
   const [formData, setFormData] = useState({
@@ -62,7 +62,7 @@ function RegisterForm() {
     }
 
     try {
-      const response = await axios.post("https://exponetappfinal.onrender.com/createUser", {
+      const response = await axios.post("http://localhost:3000/createUser", {
         userName: formData.userName,
         userMail: formData.userMail,
         userPassword: formData.userPassword,
@@ -88,8 +88,11 @@ function RegisterForm() {
           <form onSubmit={handleSubmit} className="form-register">
             <h4 className="form-title-b">Registro</h4>
             <div className="info-b">
-              <label htmlFor="userName" className="register-label" 
-              placeholder="">
+              <label
+                htmlFor="userName"
+                className="register-label"
+                placeholder=""
+              >
                 Nombre De Usuario
               </label>
               <input
@@ -174,7 +177,11 @@ function RegisterForm() {
           </form>
           <section className="right-section">
             <h1 className="right-title">EXPONET</h1>
-            <img className="right-logo" src="https://media.discordapp.net/attachments/1088828343731900429/1215287895284518912/Captura_de_pantalla_2024-03-07_080922-removebg-preview.png?ex=65fc340d&is=65e9bf0d&hm=bd96221de684f02eb50594f4791686e8ada3664468ab3100ad71003a35943a34&=&format=webp&quality=lossless&width=622&height=482" alt="" />
+            <img
+              className="right-logo"
+              src="https://media.discordapp.net/attachments/1088828343731900429/1215287895284518912/Captura_de_pantalla_2024-03-07_080922-removebg-preview.png?ex=65fc340d&is=65e9bf0d&hm=bd96221de684f02eb50594f4791686e8ada3664468ab3100ad71003a35943a34&=&format=webp&quality=lossless&width=622&height=482"
+              alt=""
+            />
             <div className="info-b-right">
               <Link className="right-link" to={"/"}>
                 <IoStorefrontSharp /> Inicio

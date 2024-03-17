@@ -3,52 +3,87 @@ const app = express();
 const mysql = require("mysql");
 const bcrypt = require("bcryptjs");
 const cors = require("cors");
-const multer = require("multer");
 const bodyParser = require("body-parser");
-const nodemailer = require("nodemailer")
-const path = require('path');
+const nodemailer = require("nodemailer");
+const path = require("path");
+const cloudinary = require("cloudinary").v2;
+const fileUpload = require("express-fileupload");
 
-storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, 'public'));
-  },
-  filename: (req, file, cb) => {
-      cb(null, file.originalname);
-  },
+// cludinary
+
+async function uploadImage(filePath) {
+  cloudinary.config({
+    cloud_name: "dwdbmekqi",
+    api_key: "596813682749268",
+    api_secret: "B6VBVtTIYLOj55BNgMDfwOYS4pA",
+    secure: true,
+  });
+  cloudinary.api.usage((error, result) => {
+    if (error) {
+      console.error("Error al verificar la conexión con Cloudinary:", error);
+    } else {
+      console.log(
+        "Conexión exitosa con Cloudinary. Información de uso de la cuenta:",
+        result
+      );
+    }
+  });
+  return await cloudinary.uploader.upload(filePath, {
+    equalize: true,
+    quality: "auto",
+  });
+}
+
+// cloudinary end
+
+cloudinary.config({
+  cloud_name: "TU_CLOUD_NAME",
+  api_key: "TU_API_KEY",
+  api_secret: "TU_API_SECRET",
 });
 
-const upload = multer({ storage: storage });
-
-app.use(cors());
+app.use(cors("*"));
 app.use(express.json());
 app.use(bodyParser.json());
-app.use('/public', express.static(path.join(__dirname, 'public')));
+app.use("/public", express.static(path.join(__dirname, "public")));
+
+// const db = mysql.createPool({
+//   host: "be2akte2ntisg7onaynu-mysql.services.clever-cloud.com",
+//   user: "umitr9ccarbghg5i",
+//   password: "i1JW2NSotnKXIjkAkHTR",
+//   database: "be2akte2ntisg7onaynu",
+//   insecureAuth: true,
+//   ssl: {
+//     rejectUnauthorized: false,
+//   },
+// });
 
 const db = mysql.createPool({
-  host: "be2akte2ntisg7onaynu-mysql.services.clever-cloud.com",
-  user: "umitr9ccarbghg5i",
-  password: "i1JW2NSotnKXIjkAkHTR",
-  database: "be2akte2ntisg7onaynu",
-  insecureAuth: true,
+  // connectionLimit: 10, // Establecer un límite de conexiones
+  host: "localhost",
+  user: "root",
+  password: "",
+  database: "exponetApp",
+  port: 3306,
 });
 
 let transporter = nodemailer.createTransport({
-  host:"smtp.gmail.com",
+  host: "smtp.gmail.com",
   port: 587,
   secure: false,
   auth: {
     user: "darom3t48@gmail.com",
-    pass: "evskhrsbrxeejwys"
+    pass: "evskhrsbrxeejwys",
   },
-})
+});
 
-transporter.verify().then(()=> {
-  console.log("Ready to send mails")
-})
-
-db.getConnection(function (err) {
-  if (err) throw err;
-  console.log("esta conectado a mysql");
+db.getConnection(function (connect) {
+  if (connect) {
+    console.log(connect.name);
+  } else {
+    console.log("esta conectado a mysql");
+  }
+  // console.log("esta conectado a mysql", connect);
 });
 
 app.post("/createUser", async (req, res) => {
@@ -75,20 +110,28 @@ app.post("/createUser", async (req, res) => {
             res.status(500).send("Error al registrar el usuario");
           } else {
             // Envío de correo electrónico al usuario registrado
-            try {
-              await transporter.sendMail({
-                from: `forgot password <Exponet.Com>`,
-                to: userMail,
-                subject: "Bienvenido a Exponet.com",
-                html: `<h1>Bienvenido a Exponet.com</h1>
-                       <p>Gracias por registrarte en Exponet.com</p>`
-              });
-              console.log("Correo electrónico de bienvenida enviado correctamente a:", userMail);
-              res.status(200).send("Registro de usuario exitoso");
-            } catch (emailError) {
-              console.log("Error al enviar el correo electrónico de bienvenida:", emailError);
-              res.status(500).send("Error al enviar el correo electrónico de bienvenida");
-            }
+            // try {
+            //   await transporter.sendMail({
+            //     from: `forgot password <Exponet.Com>`,
+            //     to: userMail,
+            //     subject: "Bienvenido a Exponet.com",
+            //     html: `<h1>Bienvenido a Exponet.com</h1>
+            //            <p>Gracias por registrarte en Exponet.com</p>`,
+            //   });
+            //   console.log(
+            //     "Correo electrónico de bienvenida enviado correctamente a:",
+            //     userMail
+            //   );
+            //   res.status(200).send("Registro de usuario exitoso");
+            // } catch (emailError) {
+            //   console.log(
+            //     "Error al enviar el correo electrónico de bienvenida:",
+            //     emailError
+            //   );
+            //   res
+            //     .status(500)
+            //     .send("Error al enviar el correo electrónico de bienvenida");
+            // }
           }
         }
       );
@@ -131,45 +174,89 @@ app.post("/userRead", (req, res) => {
   );
 });
 
-app.post("/createShop", upload.single("file"), (req, res) => {
-  const { shopName, shopTell, shopMail, shopAdress, shopOwner, shopComments } =
-    req.body;
+app.post(
+  "/createShop",
+  fileUpload({
+    useTempFiles: true,
+    tempFileDir: "./uploads",
+  }),
+  async (req, res) => {
+    try {
+      const {
+        shopName,
+        shopTell,
+        shopMail,
+        shopAdress,
+        shopOwner,
+        shopComments,
+      } = req.body;
 
-    const imageUrl = req.file ? `/public/${req.file.filename}` : null;
-
-  db.query(
-    "INSERT INTO appShops (shopName, shopTell, shopMail, shopAdress, shopOwner, shopComments, shopImgUrl) VALUES (?, ?, ?, ?, ?, ?, ?)",
-    [shopName, shopTell, shopMail, shopAdress, shopOwner, shopComments, imageUrl],
-    (err, result) => {
-      if (err) {
-        console.log(err);
-        res.status(500).send("Error al crear la tienda");
-      } else {
-        res.status(200).send(result);
+      let imgurl = null;
+      let imgid = null;
+      if (req.files?.file) {
+        const result = await uploadImage(req.files.file.tempFilePath);
+        imgurl = result.secure_url;
+        imgid = result.public_id;
       }
+
+      db.query(
+        "INSERT INTO appShops (shopName, shopTell, shopMail, shopAdress, shopOwner, shopComments, shopImgUrl) VALUES (?, ?, ?, ?, ?, ?, ?)",
+        [
+          shopName,
+          shopTell,
+          shopMail,
+          shopAdress,
+          shopOwner,
+          shopComments,
+          imgurl,
+        ],
+        (err, result) => {
+          if (err) {
+            console.log(err);
+            res.status(500).send("Error al crear la tienda");
+          } else {
+            res.status(200).send(result);
+          }
+        }
+      );
+    } catch (error) {
+      console.log(error);
     }
-  );
-});
+  }
+);
 
-app.put("/updateShop", upload.single("file"), (req, res) => {
-  const { shopName, shopAdress, shopTell, shopMail, shopComments, shopId } =
-    req.body;
+app.put(
+  "/updateShop",
+  fileUpload({
+    useTempFiles: true,
+    tempFileDir: "./uploads",
+  }),
+  async (req, res) => {
+    const { shopName, shopAdress, shopTell, shopMail, shopComments, shopId } =
+      req.body;
 
-    const imageUrl = req.file ? `/public/${req.file.filename}` : null;
+    let imgurl = null;
+    let imgid = null;
+    if (req.files?.file) {
+      const result = await uploadImage(req.files.file.tempFilePath);
+      imgurl = result.secure_url;
+      imgid = result.public_id;
+    }
 
-  db.query(
-    "UPDATE appShops SET shopName=?, shopAdress=?, shopTell=?, shopMail=?, shopComments=?, shopImgUrl=? WHERE shopId=?",
-    [shopName, shopAdress, shopTell, shopMail, shopComments, imageUrl, shopId],
-    (err, result) => {
-      if (err) {
-        console.log(err);
-        res.status(500).send("Error al actualizar la tienda");
-      } else {
-        res.status(200).send(result);
+    db.query(
+      "UPDATE appShops SET shopName=?, shopAdress=?, shopTell=?, shopMail=?, shopComments=?, shopImgUrl=? WHERE shopId=?",
+      [shopName, shopAdress, shopTell, shopMail, shopComments, imgurl, shopId],
+      (err, result) => {
+        if (err) {
+          console.log(err);
+          res.status(500).send("Error al actualizar la tienda");
+        } else {
+          res.status(200).send(result);
+        }
       }
-    }
-  );
-});
+    );
+  }
+);
 
 app.get("/shopsList", (req, res) => {
   db.query("SELECT * FROM appShops", (err, result) => {
@@ -185,7 +272,7 @@ app.get("/shopsList", (req, res) => {
 
 app.get("/shopsListCreateShops/:shopOwner", (req, res) => {
   const shopOwner = req.params.shopOwner;
-
+  console.log(shopOwner);
   db.query(
     "SELECT * FROM appShops WHERE shopOwner = ?",
     shopOwner,
@@ -232,41 +319,52 @@ app.put("/deleteProducts/:shopId"),
     );
   };
 
-app.post("/createProduct", upload.single("file"), (req, res) => {
-  const {
-    productName,
-    productStock,
-    productCategory,
-    productDescription,
-    productPrize,
-    productShopOwner,
-  } = req.body;
-
-  const imageUrl = req.file ? `/public/${req.file.filename}` : null;
-
-  
-
-  db.query(
-    "INSERT INTO appProducts(productName, productDescription, productPrize, productStock, productCategory, productImgUrl, productShopOwner ) VALUES (?, ?, ?, ?, ?, ?, ?)",
-    [
+app.post(
+  "/createProduct",
+  fileUpload({
+    useTempFiles: true,
+    tempFileDir: "./uploads",
+  }),
+  async (req, res) => {
+    const {
       productName,
-      productDescription,
-      productPrize,
       productStock,
       productCategory,
-      imageUrl,
+      productDescription,
+      productPrize,
       productShopOwner,
-    ],
-    (err, result) => {
-      if (err) {
-        console.log(err);
-        res.status(500).send("Error al registrar el producto");
-      } else {
-        res.status(200).send("Registro de producto exitoso");
-      }
+    } = req.body;
+
+    let imgurl = null;
+    let imgid = null;
+    if (req.files?.file) {
+      const result = await uploadImage(req.files.file.tempFilePath);
+      imgurl = result.secure_url;
+      imgid = result.public_id;
     }
-  );
-});
+
+    db.query(
+      "INSERT INTO appProducts(productName, productDescription, productPrize, productStock, productCategory, productImgUrl, productShopOwner ) VALUES (?, ?, ?, ?, ?, ?, ?)",
+      [
+        productName,
+        productDescription,
+        productPrize,
+        productStock,
+        productCategory,
+        imgurl,
+        productShopOwner,
+      ],
+      (err, result) => {
+        if (err) {
+          console.log(err);
+          res.status(500).send("Error al registrar el producto");
+        } else {
+          res.status(200).send("Registro de producto exitoso");
+        }
+      }
+    );
+  }
+);
 
 app.get("/productsList", (req, res) => {
   db.query("SELECT * FROM appProducts", (err, result) => {
@@ -313,39 +411,52 @@ app.put("/deleteProduct/:productId", (req, res) => {
   );
 });
 
-app.put("/updateProduct", upload.single("file"), (req, res) => {
-  const {
-    productId,
-    productName,
-    productStock,
-    productCategory,
-    productDescription,
-    productPrize,
-  } = req.body;
-
-  const imageUrl = req.file ? `/public/${req.file.filename}` : null;
-
-  db.query(
-    "UPDATE appProducts SET productName=?, productDescription=?, productPrize=?, productStock=?, productCategory=?, productimgurl=? WHERE productId=?",
-    [
+app.put(
+  "/updateProduct",
+  fileUpload({
+    useTempFiles: true,
+    tempFileDir: "./uploads",
+  }),
+  async (req, res) => {
+    const {
+      productId,
       productName,
-      productDescription,
-      productPrize,
       productStock,
       productCategory,
-      imageUrl,
-      productId,
-    ],
-    (err, result) => {
-      if (err) {
-        console.log(err);
-        res.status(500).send("Error al actualizar la tienda");
-      } else {
-        res.status(200).send(result);
-      }
+      productDescription,
+      productPrize,
+    } = req.body;
+
+    let imgurl = null;
+    let imgid = null;
+    if (req.files?.file) {
+      const result = await uploadImage(req.files.file.tempFilePath);
+      imgurl = result.secure_url;
+      imgid = result.public_id;
     }
-  );
-});
+
+    db.query(
+      "UPDATE appProducts SET productName=?, productDescription=?, productPrize=?, productStock=?, productCategory=?, productimgurl=? WHERE productId=?",
+      [
+        productName,
+        productDescription,
+        productPrize,
+        productStock,
+        productCategory,
+        imgurl,
+        productId,
+      ],
+      (err, result) => {
+        if (err) {
+          console.log(err);
+          res.status(500).send("Error al actualizar la tienda");
+        } else {
+          res.status(200).send(result);
+        }
+      }
+    );
+  }
+);
 
 app.get("/commentsList", (req, res) => {
   db.query("CALL GetCommentsWithUser()", (err, result) => {
@@ -402,7 +513,7 @@ app.get("/buyCarsList", async (req, res) => {
 });
 
 app.get("/buyCarOrdersManagment", (req, res) => {
-  db.query("CALL GetBuyCarsAndUsers()", (err, result) => {
+  db.query("CALL  GetBuyCarsAndUserInfo()", (err, result) => {
     if (err) {
       console.error(err);
       res.status(500).send("Error al obtener los pedidos");
@@ -460,7 +571,8 @@ app.post("/ProductStockUpdate", (req, res) => {
               currentProductQuantity,
               currentProductId,
               currentProductShopOwner,
-              newBuyCarContent
+
+              newBuyCarContent,
             ],
             (err, result) => {
               if (err) {
@@ -483,21 +595,23 @@ app.post("/ProductStockUpdate", (req, res) => {
             }
           );
 
-
-
-          db.query("UPDATE buyCarContent FROM appBuyCar WHERE buyCarId = ?",[currentProductId]),
-          (err, result) => {
-            if(err){
-              console.log(err);
-              // Si hay un error, puedes enviar una respuesta de error
-              res
-                .status(500)
-                .send("Error al actualizar el estado del producto");
-            } else {
-              console.log(result);
-              res.status(500).send("actualisacion de estado del producto exitosa")
-            }
-          }
+          db.query("UPDATE buyCarContent FROM appBuyCar WHERE buyCarId = ?", [
+            currentProductId,
+          ]),
+            (err, result) => {
+              if (err) {
+                console.log(err);
+                // Si hay un error, puedes enviar una respuesta de error
+                res
+                  .status(500)
+                  .send("Error al actualizar el estado del producto");
+              } else {
+                console.log(result);
+                res
+                  .status(500)
+                  .send("actualisacion de estado del producto exitosa");
+              }
+            };
         } else {
           // Si productShopOwner no coincide, continúa con la siguiente iteración sin hacer cambios
           updatedProductsCount++;
@@ -529,6 +643,6 @@ app.put("/deleteBuyCar/:buyCarId", (req, res) => {
   );
 });
 
-app.listen(3001, () => {
-  console.log(`Servidor escuchando en el puerto 3001`);
+app.listen(3000, () => {
+  console.log(`Servidor escuchando en el puerto 3000`);
 });

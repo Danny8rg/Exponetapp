@@ -14,20 +14,24 @@ function UserHistory() {
     setBuyCarUser(Cookies.get("userId"));
     const fetchShops = async () => {
       try {
-        const response = await axios.get(
-          "https://exponet-app-final.vercel.app/buyCarsList"
-        );
+        const response = await axios.get("http://localhost:3000/buyCarsList");
         console.dir(response.data);
         setBuyCars(response.data);
-        setBuyCarUser(Cookies.get("userId"))
+        setBuyCarUser(Cookies.get("userId"));
         setLoading(false); // Cambia el estado de carga a falso cuando se completa la solicitud
       } catch (error) {
         if (error.response) {
-          console.error("Error de respuesta del servidor:", error.response.data);
+          console.error(
+            "Error de respuesta del servidor:",
+            error.response.data
+          );
         } else if (error.request) {
           console.error("No se recibió respuesta del servidor");
         } else {
-          console.error("Error de configuración de la solicitud:", error.message);
+          console.error(
+            "Error de configuración de la solicitud:",
+            error.message
+          );
         }
         setLoading(false); // Cambia el estado de carga a falso si hay un error
       }
@@ -49,7 +53,10 @@ function UserHistory() {
           {buyCars
             .filter((buyCar) => buyCar.buyCarUser === parseInt(buyCarUser))
             .map((filteredBuyCar) => (
-              <div key={filteredBuyCar.buyCarId} className="shop-card-historial">
+              <div
+                key={filteredBuyCar.buyCarId}
+                className="shop-card-historial"
+              >
                 <div className="shops-info">
                   <h4 className="shops-title m-0">Detalle de Compra</h4>
                   {Array.isArray(
@@ -69,11 +76,11 @@ function UserHistory() {
                           <p className="invoice-item">Cantidad</p>
                           <p>
                             {Array.isArray(
-                              JSON.parse(filteredBuyCar.buyCarContent).quantities
+                              JSON.parse(filteredBuyCar.buyCarContent)
+                                .quantities
                             ) &&
-                              JSON.parse(filteredBuyCar.buyCarContent).quantities[
-                                index
-                              ].quantity}
+                              JSON.parse(filteredBuyCar.buyCarContent)
+                                .quantities[index].quantity}
                           </p>
                         </div>
                       )

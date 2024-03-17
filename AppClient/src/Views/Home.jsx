@@ -17,9 +17,7 @@ function Home() {
     globalShopId.setGlobalShopId(0);
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          "https://exponetappfinal.onrender.com/productsList"
-        );
+        const response = await axios.get("http://localhost:3000/productsList");
         setProducts(response.data);
 
         const stockData = response.data.reduce((acc, product) => {

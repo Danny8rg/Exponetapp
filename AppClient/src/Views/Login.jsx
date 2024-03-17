@@ -34,14 +34,11 @@ function Login() {
     e.preventDefault();
 
     try {
-      const response = await axios.post(
-        "https://exponetappfinal.onrender.com/UserRead",
-        {
-          userMail: formData.userMail,
-          userPassword: formData.userPassword,
-          userRoll: formData.userRoll,
-        }
-      );
+      const response = await axios.post("http://localhost:3000/UserRead", {
+        userMail: formData.userMail,
+        userPassword: formData.userPassword,
+        userRoll: formData.userRoll,
+      });
 
       console.log(response.data);
 

@@ -21,7 +21,7 @@ function Shops() {
   useEffect(() => {
     const fetchShops = async () => {
       try {
-        const response = await axios.get("https://exponetappfinal.onrender.com/shopsList");
+        const response = await axios.get("http://localhost:3000/shopsList");
         setShops(response.data);
       } catch (error) {
         console.error("Error al obtener la lista de tiendas:", error);

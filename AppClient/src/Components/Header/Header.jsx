@@ -36,7 +36,7 @@ const Header = () => {
               alt=""
             />
           </Link>
-          <li className="box-select-category">
+          {/* <li className="box-select-category">
             <select name="" id="" placeholder="Categorías">
               <option value="" disabled selected>
                 Categorías
@@ -44,7 +44,7 @@ const Header = () => {
               <option value="">Ensayo1</option>
               <option value="">Ensayo2</option>
             </select>
-          </li>
+          </li> */}
         </ul>
         <nav>
           <ul className="links-nav">

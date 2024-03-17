@@ -15,10 +15,6 @@ function ProductSamplerBuyCar() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    updateTotal();
-  }, [buyCarProducts]);
-
-  useEffect(() => {
     const initialQuantities = buyCarProducts.reduce((quantities, product) => {
       quantities[product.productId] = product.quantity || 0;
       return quantities;
@@ -125,7 +121,7 @@ function ProductSamplerBuyCar() {
       buyCarState: buyCarState,
     };
 
-    Axios.post("https://exponetappfinal.onrender.com/createBuyCar", requestData)
+    Axios.post("https://localhost:3000/createBuyCar", requestData)
       .then((response) => {
         console.log(response.data);
       })
