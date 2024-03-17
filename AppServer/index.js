@@ -8,14 +8,15 @@ const nodemailer = require("nodemailer");
 const path = require("path");
 const cloudinary = require("cloudinary").v2;
 const fileUpload = require("express-fileupload");
+const fs = require("fs-extra");
 
 // cludinary
 
 async function uploadImage(filePath) {
   cloudinary.config({
-    cloud_name: "dwdbmekqi",
-    api_key: "596813682749268",
-    api_secret: "B6VBVtTIYLOj55BNgMDfwOYS4pA",
+    cloud_name: "dooxttior",
+    api_key: "148272244235469",
+    api_secret: "iGx6mGHsLBGrxiIdXrl60oOyX4s",
     secure: true,
   });
   cloudinary.api.usage((error, result) => {
@@ -47,35 +48,25 @@ app.use(express.json());
 app.use(bodyParser.json());
 app.use("/public", express.static(path.join(__dirname, "public")));
 
-// const db = mysql.createPool({
-//   host: "be2akte2ntisg7onaynu-mysql.services.clever-cloud.com",
-//   user: "umitr9ccarbghg5i",
-//   password: "i1JW2NSotnKXIjkAkHTR",
-//   database: "be2akte2ntisg7onaynu",
-//   insecureAuth: true,
-//   ssl: {
-//     rejectUnauthorized: false,
-//   },
-// });
-
 const db = mysql.createPool({
-  // connectionLimit: 10, // Establecer un límite de conexiones
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "exponetApp",
-  port: 3306,
-});
-
-let transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 587,
-  secure: false,
-  auth: {
-    user: "darom3t48@gmail.com",
-    pass: "evskhrsbrxeejwys",
+  host: "be2akte2ntisg7onaynu-mysql.services.clever-cloud.com",
+  user: "umitr9ccarbghg5i",
+  password: "i1JW2NSotnKXIjkAkHTR",
+  database: "be2akte2ntisg7onaynu",
+  insecureAuth: true,
+  ssl: {
+    rejectUnauthorized: false,
   },
 });
+
+// const db = mysql.createPool({
+//   // connectionLimit: 10, // Establecer un límite de conexiones
+//   host: "localhost",
+//   user: "root",
+//   password: "",
+//   database: "exponetApp",
+//   port: 3306,
+// });
 
 db.getConnection(function (connect) {
   if (connect) {
@@ -109,30 +100,36 @@ app.post("/createUser", async (req, res) => {
             console.log(error);
             res.status(500).send("Error al registrar el usuario");
           } else {
-            // Envío de correo electrónico al usuario registrado
-            // try {
-            //   await transporter.sendMail({
-            //     from: `forgot password <Exponet.Com>`,
-            //     to: userMail,
-            //     subject: "Bienvenido a Exponet.com",
-            //     html: `<h1>Bienvenido a Exponet.com</h1>
-            //            <p>Gracias por registrarte en Exponet.com</p>`,
-            //   });
-            //   console.log(
-            //     "Correo electrónico de bienvenida enviado correctamente a:",
-            //     userMail
-            //   );
-            //   res.status(200).send("Registro de usuario exitoso");
-            // } catch (emailError) {
-            //   console.log(
-            //     "Error al enviar el correo electrónico de bienvenida:",
-            //     emailError
-            //   );
-            //   res
-            //     .status(500)
-            //     .send("Error al enviar el correo electrónico de bienvenida");
-            // }
+            const transporter = nodemailer.createTransport({
+              host: "smtp.gmail.com",
+              port: 587,
+              auth: {
+                user: "exponetapppuntocom@gmail.com",
+                pass: "krjkuexigsvcbgnk",
+              },
+              tls: {
+                rejectUnauthorized: false,
+              },
+            });
+
+            await transporter
+              .sendMail({
+                from: "exponetapppuntocom@gmail.com",
+                to: userMail,
+                subject: "Mensajeria de notificaciónes de Invensys",
+                html: ` Mensaje Nuevo
+                                        `,
+              })
+              .then((res) => {
+                console.log("Se envio ok", res);
+                return "registro exitoso";
+              })
+              .catch((err) => {
+                console.log("Error", err);
+                return "error al registrar el usuario";
+              });
           }
+          res.status(200).send("registro exitoso");
         }
       );
     });
@@ -342,7 +339,7 @@ app.post(
       imgurl = result.secure_url;
       imgid = result.public_id;
     }
-
+    console.log("soy la imagen del producto", imgurl);
     db.query(
       "INSERT INTO appProducts(productName, productDescription, productPrize, productStock, productCategory, productImgUrl, productShopOwner ) VALUES (?, ?, ?, ?, ?, ?, ?)",
       [
@@ -354,11 +351,12 @@ app.post(
         imgurl,
         productShopOwner,
       ],
-      (err, result) => {
+      async (err, result) => {
         if (err) {
           console.log(err);
           res.status(500).send("Error al registrar el producto");
         } else {
+          await fs.remove(req.files?.file.tempFilePath);
           res.status(200).send("Registro de producto exitoso");
         }
       }

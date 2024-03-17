@@ -157,7 +157,7 @@ function CreateShop() {
   };
 
   const getShops = (shopOwner) => {
-    Axios.get(`https://localhost:3000/shopsListCreateShops/${shopOwner}`).then(
+    Axios.get(`http://localhost:3000/shopsListCreateShops/${shopOwner}`).then(
       (response) => {
         setShopsList(response.data);
         console.dir(response.data);
@@ -174,8 +174,8 @@ function CreateShop() {
 
   useEffect(() => {
     setShopOwner(Cookies.get("userId"));
-    console.log("soy el shop owner",shopOwner);
-    console.log("soy el global shop id",globalShopId);
+    console.log("soy el shop owner", shopOwner);
+    console.log("soy el global shop id", globalShopId);
     getShops(shopOwner); // Pasar shopOwner como argumento
   }, [shopOwner]);
 
