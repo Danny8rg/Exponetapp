@@ -77,7 +77,10 @@ function OrdersManagment() {
 
   function ChangeState(buyCarContent, globalShopId) {
     const parsedContent = JSON.parse(buyCarContent);
-    console.dir(parsedContent);
+    console.dir(
+      "soy el buyCarContent de la funcion change state",
+      parsedContent
+    );
 
     parsedContent.products.forEach((product) => {
       if (
@@ -89,7 +92,7 @@ function OrdersManagment() {
         product.productState = "pendiente";
       }
     });
-
+    console.dir("soy el buycarcontent con el estado cambiado", parsedContent);
     return JSON.stringify(parsedContent);
   }
 
