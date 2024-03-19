@@ -32,7 +32,7 @@ function UpdateProduct() {
     formData.append("productShopOwner", productShopOwner);
     formData.append("file", selectedFile);
 
-    Axios.post("https://exponet-app-pjv8.vercel.app/createProduct", formData)
+    Axios.post("https://exponetapp-8fxj.onrender.com/createProduct", formData)
       .then(() => {
         getProductsList();
         limpiarCampos();
@@ -73,7 +73,7 @@ function UpdateProduct() {
     formData.append("productPrize", productPrize);
     formData.append("file", selectedFile);
 
-    Axios.put("https://exponet-app-pjv8.vercel.app/updateProduct", formData)
+    Axios.put("https://exponetapp-8fxj.onrender.com/updateProduct", formData)
       .then(() => {
         Swal.fire({
           position: "center",
@@ -101,7 +101,7 @@ function UpdateProduct() {
     }
 
     Axios.put(
-      `https://exponet-app-pjv8.vercel.app/deleteProduct/${productId}`
+      `https://exponetapp-8fxj.onrender.com/deleteProduct/${productId}`
     ).then(() => {
       Swal.fire({
         position: "center",
@@ -147,7 +147,7 @@ function UpdateProduct() {
 
   const getProductsList = () => {
     Axios.get(
-      `https://exponet-app-pjv8.vercel.app/productsListUpdateProducts/${productShopOwner}`
+      `https://exponetapp-8fxj.onrender.com/productsListUpdateProducts/${productShopOwner}`
     ).then((response) => {
       setProductsList(response.data);
       console.dir(response.data);

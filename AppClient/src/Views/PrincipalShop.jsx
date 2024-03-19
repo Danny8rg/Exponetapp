@@ -15,7 +15,7 @@ function PrincipalShop() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://exponet-app-pjv8.vercel.app/productsList"
+          "https://exponetapp-8fxj.onrender.com/productsList"
         );
         setProducts(response.data);
         console.log(globalShopName);
