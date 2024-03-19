@@ -36,7 +36,7 @@ function CreateShop() {
     formData.append("shopOwner", shopOwner);
     formData.append("shopComments", shopComments);
 
-    Axios.post("http://localhost:3000/createShop", formData)
+    Axios.post("https://exponetapp-237w.onrender.com/createShop", formData)
       .then(() => {
         getShops();
         limpiarCampos();
@@ -85,7 +85,11 @@ function CreateShop() {
       formData.append("shopComments", shopComments);
       formData.append("shopId", shopId);
 
-      Axios.put("https://localhost:3000/updateShop", formData, {}).then(() => {
+      Axios.put(
+        "https://exponetapp-237w.onrender.com/updateShop",
+        formData,
+        {}
+      ).then(() => {
         getShops();
         Swal.fire({
           position: "center",
@@ -111,7 +115,9 @@ function CreateShop() {
     );
 
     if (confirmation) {
-      Axios.put(`https://localhost:3000/deleteShop/${ShopId}`).then(() => {
+      Axios.put(
+        `https://exponetapp-237w.onrender.com/deleteShop/${ShopId}`
+      ).then(() => {
         alert("Tienda eliminada");
         limpiarCampos();
         getShops();
@@ -123,7 +129,9 @@ function CreateShop() {
   };
 
   const deleteProducts = (ShopId) => {
-    Axios.put(`https://localhost:3000/deleteProducts/${ShopId}`).then(() => {
+    Axios.put(
+      `https://exponetapp-237w.onrender.com/deleteProducts/${ShopId}`
+    ).then(() => {
       limpiarCampos();
       getShops();
     });
@@ -157,12 +165,12 @@ function CreateShop() {
   };
 
   const getShops = (shopOwner) => {
-    Axios.get(`http://localhost:3000/shopsListCreateShops/${shopOwner}`).then(
-      (response) => {
-        setShopsList(response.data);
-        console.dir(response.data);
-      }
-    );
+    Axios.get(
+      `https://exponetapp-237w.onrender.com/shopsListCreateShops/${shopOwner}`
+    ).then((response) => {
+      setShopsList(response.data);
+      console.dir(response.data);
+    });
   };
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]); // Cambiado de file a selectedFile

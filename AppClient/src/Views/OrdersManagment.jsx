@@ -16,7 +16,7 @@ function OrdersManagment() {
     const fetchBuyCars = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/buyCarOrdersManagment"
+          "https://exponetapp-237w.onrender.com/buyCarOrdersManagment"
         );
         setOrders(response.data);
       } catch (error) {
@@ -103,15 +103,17 @@ function OrdersManagment() {
       return;
     }
 
-    axios.put(`https://exponetappfinal.onrender.com/deleteBuyCar/${buyCarId}`).then(() => {
-      Swal.fire({
-        position: "center",
-        icon: "success",
-        title: "Carrito eliminado",
-        showConfirmButton: false,
-        timer: 1500,
+    axios
+      .put(`https://exponetappfinal.onrender.com/deleteBuyCar/${buyCarId}`)
+      .then(() => {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Carrito eliminado",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       });
-    });
   };
   return (
     <>

@@ -14,9 +14,11 @@ function PrincipalShop() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/productsList");
+        const response = await axios.get(
+          "https://exponetapp-237w.onrender.com/productsList"
+        );
         setProducts(response.data);
-        console.log(globalShopName)
+        console.log(globalShopName);
         const stockData = response.data.reduce((acc, product) => {
           acc[product.productId] = product.productStock;
           return acc;

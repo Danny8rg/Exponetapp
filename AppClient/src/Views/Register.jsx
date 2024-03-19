@@ -62,13 +62,16 @@ function RegisterForm() {
     }
 
     try {
-      const response = await axios.post("http://localhost:3000/createUser", {
-        userName: formData.userName,
-        userMail: formData.userMail,
-        userPassword: formData.userPassword,
-        userAdress: formData.userAdress,
-        userRole: formData.userRole,
-      });
+      const response = await axios.post(
+        "https://exponetapp-237w.onrender.com/createUser",
+        {
+          userName: formData.userName,
+          userMail: formData.userMail,
+          userPassword: formData.userPassword,
+          userAdress: formData.userAdress,
+          userRole: formData.userRole,
+        }
+      );
 
       console.log(response.data);
       Swal.fire({

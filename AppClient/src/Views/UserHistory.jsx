@@ -14,7 +14,9 @@ function UserHistory() {
     setBuyCarUser(Cookies.get("userId"));
     const fetchShops = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/buyCarsList");
+        const response = await axios.get(
+          "https://exponetapp-237w.onrender.com/buyCarsList"
+        );
         console.dir(response.data);
         setBuyCars(response.data);
         setBuyCarUser(Cookies.get("userId"));

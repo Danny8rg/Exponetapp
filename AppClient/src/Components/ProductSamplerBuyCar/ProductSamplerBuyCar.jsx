@@ -121,7 +121,7 @@ function ProductSamplerBuyCar() {
       buyCarState: buyCarState,
     };
 
-    Axios.post("https://localhost:3000/createBuyCar", requestData)
+    Axios.post("https://exponetapp-237w.onrender.com/createBuyCar", requestData)
       .then((response) => {
         console.log(response.data);
       })
