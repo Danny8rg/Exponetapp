@@ -12,34 +12,21 @@ function UserHistory() {
 
   useEffect(() => {
     setBuyCarUser(Cookies.get("userId"));
-    const fetchShops = async () => {
+    const fetchBuyCars = async () => {
       try {
         const response = await axios.get(
           "https://exponetapp-8fxj.onrender.com/buyCarsList"
         );
         console.dir(response.data);
         setBuyCars(response.data);
-        setBuyCarUser(Cookies.get("userId"));
         setLoading(false); // Cambia el estado de carga a falso cuando se completa la solicitud
       } catch (error) {
-        if (error.response) {
-          console.error(
-            "Error de respuesta del servidor:",
-            error.response.data
-          );
-        } else if (error.request) {
-          console.error("No se recibió respuesta del servidor");
-        } else {
-          console.error(
-            "Error de configuración de la solicitud:",
-            error.message
-          );
-        }
+        console.error("Error al obtener historial de compras:", error);
         setLoading(false); // Cambia el estado de carga a falso si hay un error
       }
     };
 
-    fetchShops();
+    fetchBuyCars();
   }, []);
 
   return (
@@ -52,88 +39,40 @@ function UserHistory() {
         <p>Cargando historial de compras...</p>
       ) : (
         <div className="shops-container-historial">
-          {buyCars
-            .filter((buyCar) => buyCar.buyCarUser === parseInt(buyCarUser))
-            .map((filteredBuyCar) => (
-              <div
-                key={filteredBuyCar.buyCarId}
-                className="shop-card-historial"
-              >
-                <div className="shops-info">
-                  <table>
-                    <thead>
-                      <tr>
-                        <th colSpan="2">Detalle de Compra</th>
+          <table>
+            <thead>
+              <tr>
+                <th>Nombre del Producto</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th>Estado</th>
+                <th>Cantidad</th>
+              </tr>
+            </thead>
+            <tbody>
+              {buyCars
+                .filter((buyCar) => buyCar.buyCarUser === parseInt(buyCarUser))
+                .map((filteredBuyCar) =>
+                  JSON.parse(filteredBuyCar.buyCarContent).products.map(
+                    (product, index) => (
+                      <tr key={product.productId}>
+                        <td>{product.productName}</td>
+                        <td>{product.productDescription}</td>
+                        <td>{product.productPrize}</td>
+                        <td>{product.productState}</td>
+                        <td>
+                          {Array.isArray(
+                            JSON.parse(filteredBuyCar.buyCarContent).quantities
+                          ) &&
+                            JSON.parse(filteredBuyCar.buyCarContent)
+                              .quantities[index].quantity}
+                        </td>
                       </tr>
-                    </thead>
-                    <tbody>
-                      {Array.isArray(
-                        JSON.parse(filteredBuyCar.buyCarContent).products
-                      ) &&
-                        JSON.parse(filteredBuyCar.buyCarContent).products.map(
-                          (product, index) => (
-                            <tr key={product.productId}>
-                              <td>Nombre del Producto</td>
-                              <td>{product.productName}</td>
-                            </tr>
-                          )
-                        )}
-                      {Array.isArray(
-                        JSON.parse(filteredBuyCar.buyCarContent).products
-                      ) &&
-                        JSON.parse(filteredBuyCar.buyCarContent).products.map(
-                          (product, index) => (
-                            <tr key={product.productId}>
-                              <td>Descripción</td>
-                              <td>{product.productDescription}</td>
-                            </tr>
-                          )
-                        )}
-                      {Array.isArray(
-                        JSON.parse(filteredBuyCar.buyCarContent).products
-                      ) &&
-                        JSON.parse(filteredBuyCar.buyCarContent).products.map(
-                          (product, index) => (
-                            <tr key={product.productId}>
-                              <td>Precio</td>
-                              <td>{product.productPrize}</td>
-                            </tr>
-                          )
-                        )}
-                      {Array.isArray(
-                        JSON.parse(filteredBuyCar.buyCarContent).products
-                      ) &&
-                        JSON.parse(filteredBuyCar.buyCarContent).products.map(
-                          (product, index) => (
-                            <tr key={product.productId}>
-                              <td>Estado</td>
-                              <td>{product.productState}</td>
-                            </tr>
-                          )
-                        )}
-                      {Array.isArray(
-                        JSON.parse(filteredBuyCar.buyCarContent).products
-                      ) &&
-                        JSON.parse(filteredBuyCar.buyCarContent).products.map(
-                          (product, index) => (
-                            <tr key={product.productId}>
-                              <td>Cantidad</td>
-                              <td>
-                                {Array.isArray(
-                                  JSON.parse(filteredBuyCar.buyCarContent)
-                                    .quantities
-                                ) &&
-                                  JSON.parse(filteredBuyCar.buyCarContent)
-                                    .quantities[index].quantity}
-                              </td>
-                            </tr>
-                          )
-                        )}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            ))}
+                    )
+                  )
+                )}
+            </tbody>
+          </table>
         </div>
       )}
       <Footer />
