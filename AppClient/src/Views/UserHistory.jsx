@@ -60,33 +60,77 @@ function UserHistory() {
                 className="shop-card-historial"
               >
                 <div className="shops-info">
-                  <h4 className="shops-title m-0">Detalle de Compra</h4>
-                  {Array.isArray(
-                    JSON.parse(filteredBuyCar.buyCarContent).products
-                  ) &&
-                    JSON.parse(filteredBuyCar.buyCarContent).products.map(
-                      (product, index) => (
-                        <div key={product.productId}>
-                          <p className="invoice-item">nombre del producto</p>
-                          <h5>{product.productName}</h5>
-                          <p className="invoice-item">Descripcion</p>
-                          <p>{product.productDescription}</p>
-                          <p className="invoice-item">precio: </p>
-                          <p>{product.productPrize}</p>
-                          <p className="invoice-item">Estado</p>
-                          <p>{product.productState}</p>
-                          <p className="invoice-item">Cantidad</p>
-                          <p>
-                            {Array.isArray(
-                              JSON.parse(filteredBuyCar.buyCarContent)
-                                .quantities
-                            ) &&
-                              JSON.parse(filteredBuyCar.buyCarContent)
-                                .quantities[index].quantity}
-                          </p>
-                        </div>
-                      )
-                    )}
+                  <table>
+                    <thead>
+                      <tr>
+                        <th colSpan="2">Detalle de Compra</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {Array.isArray(
+                        JSON.parse(filteredBuyCar.buyCarContent).products
+                      ) &&
+                        JSON.parse(filteredBuyCar.buyCarContent).products.map(
+                          (product, index) => (
+                            <tr key={product.productId}>
+                              <td>Nombre del Producto</td>
+                              <td>{product.productName}</td>
+                            </tr>
+                          )
+                        )}
+                      {Array.isArray(
+                        JSON.parse(filteredBuyCar.buyCarContent).products
+                      ) &&
+                        JSON.parse(filteredBuyCar.buyCarContent).products.map(
+                          (product, index) => (
+                            <tr key={product.productId}>
+                              <td>Descripción</td>
+                              <td>{product.productDescription}</td>
+                            </tr>
+                          )
+                        )}
+                      {Array.isArray(
+                        JSON.parse(filteredBuyCar.buyCarContent).products
+                      ) &&
+                        JSON.parse(filteredBuyCar.buyCarContent).products.map(
+                          (product, index) => (
+                            <tr key={product.productId}>
+                              <td>Precio</td>
+                              <td>{product.productPrize}</td>
+                            </tr>
+                          )
+                        )}
+                      {Array.isArray(
+                        JSON.parse(filteredBuyCar.buyCarContent).products
+                      ) &&
+                        JSON.parse(filteredBuyCar.buyCarContent).products.map(
+                          (product, index) => (
+                            <tr key={product.productId}>
+                              <td>Estado</td>
+                              <td>{product.productState}</td>
+                            </tr>
+                          )
+                        )}
+                      {Array.isArray(
+                        JSON.parse(filteredBuyCar.buyCarContent).products
+                      ) &&
+                        JSON.parse(filteredBuyCar.buyCarContent).products.map(
+                          (product, index) => (
+                            <tr key={product.productId}>
+                              <td>Cantidad</td>
+                              <td>
+                                {Array.isArray(
+                                  JSON.parse(filteredBuyCar.buyCarContent)
+                                    .quantities
+                                ) &&
+                                  JSON.parse(filteredBuyCar.buyCarContent)
+                                    .quantities[index].quantity}
+                              </td>
+                            </tr>
+                          )
+                        )}
+                    </tbody>
+                  </table>
                 </div>
               </div>
             ))}
