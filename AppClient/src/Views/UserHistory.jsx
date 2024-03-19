@@ -33,14 +33,13 @@ function UserHistory() {
     <>
       <Header />
       <div className="box-title-historial">
-        <h2 className="product-title-historial">Historial De Compra</h2>
+        <h2 className="product-title-historial">Historial De Compras</h2>
       </div>
       {loading ? (
         <p>Cargando historial de compras...</p>
       ) : (
         <div className="shops-container-historial">
-          <table>
-            <thead>
+           <thead>
               <tr>
                 <th>Nombre del Producto</th>
                 <th>Descripción</th>
@@ -49,6 +48,7 @@ function UserHistory() {
                 <th>Cantidad</th>
               </tr>
             </thead>
+          <table>
             <tbody>
               {buyCars
                 .filter((buyCar) => buyCar.buyCarUser === parseInt(buyCarUser))

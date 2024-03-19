@@ -39,6 +39,9 @@
     width: 35%;
     border: 2px solid #c1e1f6;
     box-shadow: 1px 1px 4px rgb(220, 220, 220);
+    display: flex;
+    flex-direction: column;
+    
 }
 
 .shop-card-historial{
