@@ -22,7 +22,7 @@ function Shops() {
     const fetchShops = async () => {
       try {
         const response = await axios.get(
-          "https://exponetapp-237w.onrender.com/shopsList"
+          "https://exponet-app-pjv8.vercel.app/shopsList"
         );
         setShops(response.data);
       } catch (error) {

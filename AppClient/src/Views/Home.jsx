@@ -18,7 +18,7 @@ function Home() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://exponetapp-237w.onrender.com/productsList"
+          "https://exponet-app-pjv8.vercel.app/productsList"
         );
         setProducts(response.data);
 
