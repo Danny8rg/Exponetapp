@@ -38,9 +38,9 @@ async function uploadImage(filePath) {
 // cloudinary end
 
 cloudinary.config({
-  cloud_name: "TU_CLOUD_NAME",
-  api_key: "TU_API_KEY",
-  api_secret: "TU_API_SECRET",
+  cloud_name: "dooxttior",
+  api_key: "148272244235469",
+  api_secret: "iGx6mGHsLBGrxiIdXrl60oOyX4s",
 });
 
 app.use(cors("*"));
