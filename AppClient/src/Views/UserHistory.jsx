@@ -29,26 +29,37 @@ function UserHistory() {
     fetchBuyCars();
   }, []);
 
+  // Función para manejar la eliminación del producto
+  const handleDelete = (productId, buyCarContent) => {
+    console.dir("soy el buycarcontent del boton deletear",buyCarContent);
+  };
+
+  // Función para manejar la acción de comentario del producto
+  const handleComment = (productId) => {
+    // Lógica para añadir comentario al producto
+  };
+
   return (
     <>
       <Header />
       <div className="box-title-historial">
-        <h2 className="product-title-historial">Historial De Compras</h2>
+        <h2 className="product-title-historial">Historial De Compra</h2>
       </div>
       {loading ? (
         <p>Cargando historial de compras...</p>
       ) : (
         <div className="shops-container-historial">
-           <thead>
+          <table>
+            <thead>
               <tr>
                 <th>Nombre del Producto</th>
                 <th>Descripción</th>
                 <th>Precio</th>
                 <th>Estado</th>
                 <th>Cantidad</th>
+                <th>Acciones</th> {/* Columna para los botones */}
               </tr>
             </thead>
-          <table>
             <tbody>
               {buyCars
                 .filter((buyCar) => buyCar.buyCarUser === parseInt(buyCarUser))
@@ -64,8 +75,31 @@ function UserHistory() {
                           {Array.isArray(
                             JSON.parse(filteredBuyCar.buyCarContent).quantities
                           ) &&
-                            JSON.parse(filteredBuyCar.buyCarContent)
-                              .quantities[index].quantity}
+                            JSON.parse(filteredBuyCar.buyCarContent).quantities[
+                              index
+                            ].quantity}
+                        </td>
+                        {/* Condición para renderizar los botones */}
+                        <td>
+                          {product.productState === "entregado" && (
+                            <>
+                              <button
+                                onClick={() => {
+                                  handleDelete(
+                                    product.productId,
+                                    buyCarContent
+                                  );
+                                }}
+                              >
+                                Eliminar
+                              </button>
+                              <button
+                                onClick={() => handleComment(product.productId)}
+                              >
+                                Comentario
+                              </button>
+                            </>
+                          )}
                         </td>
                       </tr>
                     )

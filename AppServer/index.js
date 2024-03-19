@@ -641,6 +641,10 @@ app.put("/deleteBuyCar/:buyCarId", (req, res) => {
   );
 });
 
+app.put("/deleteProductFromBuyCar"), (req, res) =>{
+  db.query("UPDATE ")
+}
+
 app.listen(3000, () => {
   console.log(`Servidor escuchando en el puerto 3000`);
 });
