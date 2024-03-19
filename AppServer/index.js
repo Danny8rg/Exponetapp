@@ -511,7 +511,7 @@ app.get("/buyCarsList", async (req, res) => {
 });
 
 app.get("/buyCarOrdersManagment", (req, res) => {
-  db.query("CALL GetShopAndBuyCarData();", (err, result) => {
+  db.query("CALL GetAllUserDataAndBuyCarData();", (err, result) => {
     if (err) {
       console.error(err);
       res.status(500).send("Error al obtener los pedidos");
@@ -641,9 +641,10 @@ app.put("/deleteBuyCar/:buyCarId", (req, res) => {
   );
 });
 
-app.put("/deleteProductFromBuyCar"), (req, res) =>{
-  db.query("UPDATE ")
-}
+app.put("/deleteProductFromBuyCar"),
+  (req, res) => {
+    db.query("UPDATE ");
+  };
 
 app.listen(3000, () => {
   console.log(`Servidor escuchando en el puerto 3000`);
