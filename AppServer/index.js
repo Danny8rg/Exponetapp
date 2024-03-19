@@ -511,7 +511,7 @@ app.get("/buyCarsList", async (req, res) => {
 });
 
 app.get("/buyCarOrdersManagment", (req, res) => {
-  db.query("CALL  GetBuyCarsAndUserInfo()", (err, result) => {
+  db.query("CALL GetShopAndBuyCarData();", (err, result) => {
     if (err) {
       console.error(err);
       res.status(500).send("Error al obtener los pedidos");
