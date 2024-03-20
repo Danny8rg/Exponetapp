@@ -15,7 +15,7 @@ function ProductSampler({ products, stock, quantityCards, Route }) {
     setBuyCarProducts,
   } = useContext(ShopContextValues);
   const valor = globalShopId;
-  const [productState, setProductSate] = useState("pendiente ");
+  const [productState, setProductSate] = useState("pendiente");
 
   const calculateTotalPrice = (productId) => {
     const product = products.find((p) => p.productId === productId);

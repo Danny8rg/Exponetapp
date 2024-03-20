@@ -109,7 +109,7 @@ function OrdersManagment() {
         product.productState.trim() === "pendiente"
       ) {
         product.productState = "Entregado";
-      } else if (product.productState.trim() === "pendiente ") { // Aquí se cambió la comparación
+      } else if (product.productState.trim() === "pendiente") { // Aquí se cambió la comparación
         product.productState = "pendiente";
       }
     });
