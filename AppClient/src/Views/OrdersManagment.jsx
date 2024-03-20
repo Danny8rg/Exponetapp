@@ -138,8 +138,37 @@ function OrdersManagment() {
   return (
     <>
       <Header />
-      {}
-
+      <div className="orders-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Carrito ID</th>
+              <th>Contenido</th>
+              <th>Estado</th>
+              <th>Usuario</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {orders.map((order) => (
+              <tr key={order.buyCarId}>
+                <td>{order.buyCarId}</td>
+                <td>{order.buyCarContent}</td>
+                <td>{order.buyCarState}</td>
+                <td>{order.buyCarUser}</td>
+                <td>
+                  <button onClick={() => orderDelivered(order.buyCarContent)}>
+                    Marcar como entregado
+                  </button>
+                  <button onClick={() => DeleteBuyCar(order.buyCarId)}>
+                    Eliminar
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       <Footer />
     </>
   );
