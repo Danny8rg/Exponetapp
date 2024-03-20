@@ -135,6 +135,7 @@ function OrdersManagment() {
         {orders.length > 0 ? (
           orders.map((order) => (
             <div key={order.buyCars.buyCarId} className="order-card">
+              <h3>{orders}</h3>
               <h3>Usuario</h3>
               <p>ID: {order.users.userId}</p>
               <p>Nombre: {order.users.userName}</p>

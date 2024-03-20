@@ -15,7 +15,7 @@ function ProductSampler({ products, stock, quantityCards, Route }) {
     setBuyCarProducts,
   } = useContext(ShopContextValues);
   const valor = globalShopId;
-  const [productState, setProductSate] = useState("pendiente ")
+  const [productState, setProductSate] = useState("pendiente ");
 
   const calculateTotalPrice = (productId) => {
     const product = products.find((p) => p.productId === productId);
@@ -72,11 +72,11 @@ function ProductSampler({ products, stock, quantityCards, Route }) {
     productPrize,
     productStock,
     productCategory,
-    productimgurl
+    productimgurl,
+    productShopOwner
   ) {
     const selectedQuantity = selectedProducts[productId] || 0;
-    
-  
+
     setBuyCarProducts((prevBuyCarProducts) => [
       ...prevBuyCarProducts,
       {
@@ -87,14 +87,14 @@ function ProductSampler({ products, stock, quantityCards, Route }) {
         productStock,
         productCategory,
         productimgurl,
+        productShopOwner,
         quantity: selectedQuantity, // Añadir la cantidad seleccionada
-        productState
+        productState,
       },
     ]);
-  
+
     alert("Producto Añadido Al Carrito");
   }
-  
 
   function borrarCarrito() {
     setBuyCarProducts([]);
@@ -123,6 +123,7 @@ function ProductSampler({ products, stock, quantityCards, Route }) {
                     product.productStock,
                     product.productCategory,
                     product.productimgurl,
+                    product.productShopOwner,
                     productState
                   )
                 }
