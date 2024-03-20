@@ -18,8 +18,8 @@ function OrdersManagment() {
         const response = await axios.get(
           "https://exponetapp-8fxj.onrender.com/buyCarOrdersManagment"
         );
-        setOrders(response);
         console.log("soy response.data", response.data);
+        setOrders(response.data)
         console.dir("soy orders ya seteado", orders);
       } catch (error) {
         console.error("Error al obtener la lista de Ordenes:", error);
