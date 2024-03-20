@@ -148,7 +148,7 @@ function OrdersManagment() {
               {order && order.buyCarContent && (
                 <table key={order.buyCarId}>
                   <thead>
-                    <tr>                   
+                    <tr>
                       <th>Nombre del Producto</th>
                       <th>Descripción</th>
                       <th>Precio</th>
@@ -159,7 +159,12 @@ function OrdersManagment() {
                   <tbody>
                     {JSON.parse(order.buyCarContent).products.map(
                       (product, index) => (
-                        <tr key={index}>                                               
+                        <tr key={index}>
+                          <th>Nombre del Producto</th>
+                          <th>Descripción</th>
+                          <th>Precio</th>
+                          <th>Cantidad</th>
+                          <th>Estado</th>
                           <td>{product.productName}</td>
                           <td>{product.productDescription}</td>
                           <td>{product.productPrize}</td>
