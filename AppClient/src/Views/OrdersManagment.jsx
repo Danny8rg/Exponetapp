@@ -122,8 +122,48 @@ function OrdersManagment() {
   return (
     <>
       <Header />
-      <div>
-        Gestion De Entregas 
+      <div className="orders-container">
+        <h2>Gestión de Entregas</h2>
+        {orders.map((order) => (
+          <div key={order.buyCars.buyCarId} className="order-card">
+            <h3>Usuario</h3>
+            <p>ID: {order.users.userId}</p>
+            <p>Nombre: {order.users.userName}</p>
+            <p>Email: {order.users.userMail}</p>
+            <p>Dirección: {order.users.userAdress}</p>
+            <h3>Productos Comprados</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Descripción</th>
+                  <th>Precio</th>
+                  <th>Cantidad</th>
+                </tr>
+              </thead>
+              <tbody>
+                {JSON.parse(order.buyCars.buyCarContent).products.map(
+                  (product) => (
+                    <tr key={product.productId}>
+                      <td>{product.productName}</td>
+                      <td>{product.productDescription}</td>
+                      <td>{product.productPrize}</td>
+                      <td>{product.quantity}</td>
+                    </tr>
+                  )
+                )}
+              </tbody>
+            </table>
+            <div className="order-actions">
+              <button onClick={() => orderDelivered(order.buyCars.buyCarContent)}>
+                Marcar como entregado
+              </button>
+              <button onClick={() => DeleteBuyCar(order.buyCars.buyCarId)}>
+                Eliminar Carrito
+              </button>
+            </div>
+          </div>
+        ))}
       </div>
       <Footer />
     </>
