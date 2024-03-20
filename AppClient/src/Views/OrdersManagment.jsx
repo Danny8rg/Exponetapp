@@ -177,7 +177,7 @@ function OrdersManagment() {
           <p>No hay órdenes disponibles</p>
         )}
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

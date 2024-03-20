@@ -31,7 +31,7 @@ function UserHistory() {
 
   // Función para manejar la eliminación del producto
   const handleDelete = (productId, buyCarContent) => {
-    console.dir("soy el buycarcontent del boton deletear", buyCarContent);
+    console.dir("soy el buycarcontent del boton deletear",buyCarContent);
   };
 
   // Función para manejar la acción de comentario del producto
@@ -109,6 +109,7 @@ function UserHistory() {
           </table>
         </div>
       )}
+    <Footer />
     </>
   );
 }
