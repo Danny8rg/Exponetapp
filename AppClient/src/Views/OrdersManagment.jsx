@@ -37,7 +37,7 @@ function OrdersManagment() {
         setOrders(response.data);
         console.log("soy orders ya seteado", response.data);
       } catch (error) {
-        console.error("Error al obtener la lista de Usuarios:", error);
+        console.error("Error al obtener la lista de Carritos :", error);
       }
     };
     fetchBuyCars();

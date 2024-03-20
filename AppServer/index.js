@@ -510,25 +510,25 @@ app.get("/buyCarsList", async (req, res) => {
   }
 });
 
-app.get("/ordersManagmentUsers"), (req, res) =>{
-  db.query("SELECT * FROM appUsers"), (err, result) =>{
-    if(err){
-      res.status(400).send("error al obtener la lista de usuarios")
+app.get("/ordersManagmentUsers", (req, res) => {
+  db.query("SELECT * FROM appUsers", (err, result) => {
+    if (err) {
+      res.status(400).send("Error al obtener la lista de usuarios");
     } else {
-      res.status(200).send(result)
+      res.status(200).send(result);
     }
-  }
-}
+  });
+});
 
-app.get("/ordersManagmentBuyCarList"), (req, res) =>{
-  db.query("SELECT * FROM appBuyCars"), (err, result) =>{
-    if(err){
-      res.status(400).send("error al obtener la lista de Carritos De Compras")
+app.get("/ordersManagmentBuyCarList", (req, res) => {
+  db.query("SELECT * FROM appBuyCars", (err, result) => {
+    if (err) {
+      res.status(400).send("Error al obtener la lista de Carritos De Compras");
     } else {
-      res.status(200).send(result)
+      res.status(200).send(result);
     }
-  }
-}
+  });
+});
 
 app.post("/ProductStockUpdate", (req, res) => {
   const productIds = req.body.productsIds;
