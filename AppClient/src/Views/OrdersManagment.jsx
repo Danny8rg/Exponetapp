@@ -71,7 +71,7 @@ function OrdersManagment() {
 
   function orderDelivered(buyCarContent) {
     console.log("soy funcion");
-    console.dir(buyCarContent);
+    console.dir("soy el buy car original que llega ",buyCarContent);
 
     const newBuyCarContent = ChangeState(buyCarContent, globalShopId);
 
@@ -81,20 +81,20 @@ function OrdersManagment() {
     const productsIds = parsedContent.products.map(
       (product) => product.productId
     );
-    console.dir(productsIds);
+    console.dir("soy lista de ids",productsIds);
 
     const productsQuantities = parsedContent.products.map(
       (product) => product.quantity
     );
 
-    console.dir(productsQuantities);
+    console.dir("soy product quantities",productsQuantities);
 
     const productsShopOwners = parsedContent.products.map(
       (product) => product.productShopOwner
     );
 
-    console.dir(productsShopOwners);
-    console.dir(newBuyCarContent);
+    console.dir("soy el product shop owner", productsShopOwners);
+    console.dir("soy el newbuycarcontent del final",newBuyCarContent);
 
   //  axios
   //    .post("https://exponetapp-8fxj.onrender.com/ProductStockUpdate", {
