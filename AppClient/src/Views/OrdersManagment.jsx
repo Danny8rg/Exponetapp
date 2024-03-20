@@ -93,10 +93,10 @@ function OrdersManagment() {
     parsedContent.products.forEach((product) => {
       if (
         product.productShopOwner === globalShopId &&
-        product.productState === "pendiente"
+        product.productState.trim() === "pendiente"
       ) {
         product.productState = "Despachado";
-      } else if (product.productState === "pendiente") {
+      } else if (product.productState.trim() === "pendiente") {
         product.productState = "pendiente";
       }
     });
@@ -126,6 +126,7 @@ function OrdersManagment() {
         });
       });
   };
+
   return (
     <>
       <Header />
