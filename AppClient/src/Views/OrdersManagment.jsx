@@ -125,6 +125,9 @@ function OrdersManagment() {
   return (
     <>
       <Header />
+      {orders.buyCars.map(buyCars=(
+        buyCars.productName
+      ))}
       <Footer />
     </>
   );
