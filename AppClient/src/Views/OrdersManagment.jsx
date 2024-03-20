@@ -12,6 +12,7 @@ function OrdersManagment() {
   const [productsId, setProductsId] = useState([]);
   const [productsQuantity, setProductQuantity] = useState([]);
   const { globalShopId, setGlobalShopId } = useContext(ShopContextValues);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchBuyCarsUsers = async () => {
@@ -22,6 +23,7 @@ function OrdersManagment() {
         console.log("soy response.data", response.data);
         setUsers(response.data);
         console.log("soy orders ya seteado", response.data);
+        setLoading(false);
       } catch (error) {
         console.error("Error al obtener la lista de Usuarios:", error);
       }
@@ -36,6 +38,7 @@ function OrdersManagment() {
         console.log("soy response.data", response.data);
         setOrders(response.data);
         console.log("soy orders ya seteado", response.data);
+        setLoading(false);
       } catch (error) {
         console.error("Error al obtener la lista de Carritos :", error);
       }
@@ -139,35 +142,39 @@ function OrdersManagment() {
     <>
       <Header />
       <div className="orders-table">
-        <table>
-          <thead>
-            <tr>
-              <th>Carrito ID</th>
-              <th>Contenido</th>
-              <th>Estado</th>
-              <th>Usuario</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {orders.map((order) => (
-              <tr key={order.buyCarId}>
-                <td>{order.buyCarId}</td>
-                <td>{order.buyCarContent}</td>
-                <td>{order.buyCarState}</td>
-                <td>{order.buyCarUser}</td>
-                <td>
-                  <button onClick={() => orderDelivered(order.buyCarContent)}>
-                    Marcar como entregado
-                  </button>
-                  <button onClick={() => DeleteBuyCar(order.buyCarId)}>
-                    Eliminar
-                  </button>
-                </td>
+        {loading ? (
+          <p>Cargando...</p>
+        ) : (
+          <table>
+            <thead>
+              <tr>
+                <th>Carrito ID</th>
+                <th>Contenido</th>
+                <th>Estado</th>
+                <th>Usuario</th>
+                <th>Acciones</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {orders.map((order) => (
+                <tr key={order.buyCarId}>
+                  <td>{order.buyCarId}</td>
+                  <td>{order.buyCarContent}</td>
+                  <td>{order.buyCarState}</td>
+                  <td>{order.buyCarUser}</td>
+                  <td>
+                    <button onClick={() => orderDelivered(order.buyCarContent)}>
+                      Marcar como entregado
+                    </button>
+                    <button onClick={() => DeleteBuyCar(order.buyCarId)}>
+                      Eliminar
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
       <Footer />
     </>
