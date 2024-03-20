@@ -18,9 +18,23 @@ function RegisterForm() {
   const navigate = useNavigate();
 
   const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    // Validación en tiempo real para el correo electrónico
+    if (name === "userMail") {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(value)) {
+        Swal.fire({
+          icon: "warning",
+          title: "Formato de correo electrónico inválido",
+        });
+        return;
+      }
+    }
+
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [name]: value,
     });
   };
 
@@ -28,7 +42,6 @@ function RegisterForm() {
     e.preventDefault();
 
     if (formData.userPassword !== formData.confirmPassword) {
-      console.error("Las contraseñas no coinciden");
       Swal.fire({
         icon: "error",
         text: "Contraseñas no coinciden!",
@@ -43,20 +56,9 @@ function RegisterForm() {
       !formData.confirmPassword ||
       !formData.userRole
     ) {
-      console.error("Por favor, complete todos los campos");
       Swal.fire({
         icon: "error",
         text: "Complete todos los campos requeridos en el formulario!",
-      });
-      return;
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.userMail)) {
-      console.error("Formato de correo electrónico inválido");
-      Swal.fire({
-        icon: "warning",
-        title: "Formato de correo electronico invalido",
       });
       return;
     }

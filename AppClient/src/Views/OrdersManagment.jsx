@@ -122,70 +122,9 @@ function OrdersManagment() {
   return (
     <>
       <Header />
-
       <div>
-        <div className="box-title-historial">
-          <h2 className="product-title-historial">
-            Lista De Ordenes De Compra
-          </h2>
-        </div>
-        <ul className="orders-container">
-          {orders.map((order, index) => (
-            <li key={index}>
-              <h3 className="subtitles">Usuario: {order.userName}</h3>
-              <p className="subtitles">Correo Electrónico: {order.userMail}</p>
-              <p className="subtitles">Dirección: {order.userAdress}</p>
-
-              <h4 className="subtitles">Productos:</h4>
-              <ul className="product-container">
-                {JSON.parse(order.buyCarContent).products.map(
-                  (product, productIndex) => (
-                    <li key={productIndex}>
-                      <p className="invoice-item">Producto:</p>
-                      <p>{product.productName}</p>
-
-                      <p className="invoice-item">Cantidad: </p>
-                      <p>{product.quantity}</p>
-
-                      <p className="invoice-item">Descripción:</p>
-                      <p>{product.productDescription}</p>
-
-                      <p className="invoice-item">Precio:</p>
-                      <p>{product.productPrize}</p>
-
-                      <p className="invoice-item">Categoría:</p>
-                      <p>{product.productCategory}</p>
-
-                      <p className="invoice-item">
-                        Estado: {product.productState}
-                      </p>
-                    </li>
-                  )
-                )}
-              </ul>
-              <button
-                className="form-control"
-                onClick={() => {
-                  console.log("soy botton");
-                  console.dir(order.buyCarContent);
-                  orderDelivered(order.buyCarContent);
-                }}
-              >
-                Enviar Entrega
-              </button>
-              <button
-                className="form-control"
-                onClick={() => {
-                  DeleteBuyCar(order.buyCarId, globalShopId);
-                }}
-              >
-                Borrar Carrito
-              </button>
-            </li>
-          ))}
-        </ul>
+        Gestion De Entregas 
       </div>
-
       <Footer />
     </>
   );

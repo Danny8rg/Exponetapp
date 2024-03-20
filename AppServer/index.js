@@ -511,13 +511,30 @@ app.get("/buyCarsList", async (req, res) => {
 });
 
 app.get("/buyCarOrdersManagment", (req, res) => {
-  db.query("CALL GetAllUserDataAndBuyCarData();", (err, result) => {
+  let responseData = {}; // Objeto para almacenar los resultados
+  
+  // Consulta para obtener los datos de appUsers
+  db.query("SELECT * FROM appUsers", (err, usersResult) => {
     if (err) {
       console.error(err);
-      res.status(500).send("Error al obtener los pedidos");
+      res.status(500).send("Error al obtener los datos de usuarios");
     } else {
-      res.status(200).json(result[0]); // Cambiado a status 200 y result[0]
-      console.log(result);
+      responseData.users = usersResult[0]; // Almacenar resultados en el objeto responseData
+      console.log(usersResult);
+      
+      // Consulta para obtener los datos de appBuyCars
+      db.query("SELECT * FROM appBuyCars", (err, buyCarsResult) => {
+        if (err) {
+          console.error(err);
+          res.status(500).send("Error al obtener los datos de compras de carros");
+        } else {
+          responseData.buyCars = buyCarsResult[0]; // Almacenar resultados en el objeto responseData
+          console.log(buyCarsResult);
+          
+          // Enviar el objeto responseData como respuesta
+          res.status(200).send(responseData);
+        }
+      });
     }
   });
 });
