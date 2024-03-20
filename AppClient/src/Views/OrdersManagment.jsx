@@ -160,6 +160,7 @@ function OrdersManagment() {
                         <th className="subtitles">Precio</th>
                         <th className="subtitles">Cantidad</th>
                         <th className="subtitles">Estado</th>
+                        <th className="subtitles">Acciones</th>
                       </tr>
                     </thead>
                     <tbody className="product-container">
@@ -174,6 +175,16 @@ function OrdersManagment() {
                                 <td>{product.productPrize}</td>
                                 <td>{product.quantity}</td>
                                 <td>{product.productState}</td>
+                                <td>
+                                  <button>
+                                    Cancelar
+                                  </button>
+                                  <button onClick={()=>{
+                                    orderDelivered(order.buyCarContent)
+                                  }}>
+                                    Despachar
+                                  </button>
+                                </td>
                               </tr>
                             );
                           } else {
