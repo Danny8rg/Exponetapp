@@ -8,23 +8,36 @@ import Swal from "sweetalert2";
 
 function OrdersManagment() {
   const [orders, setOrders] = useState();
+  const [users, setUsers] = useState();
   const [productsId, setProductsId] = useState([]);
   const [productsQuantity, setProductQuantity] = useState([]);
   const { globalShopId, setGlobalShopId } = useContext(ShopContextValues);
 
   useEffect(() => {
+    const fetchBuyCarsUsers = async () => {
+      try {
+        const response = await axios.get(
+          "https://exponetapp-8fxj.onrender.com/ordersManagmentUsers"
+        );
+        console.log("soy response.data", response.data);
+        setUsers(response.data);
+        console.log("soy orders ya seteado", response.data);
+      } catch (error) {
+        console.error("Error al obtener la lista de Usuarios:", error);
+      }
+    };
+    fetchBuyCarsUsers();
+
     const fetchBuyCars = async () => {
       try {
         const response = await axios.get(
-          "https://exponetapp-8fxj.onrender.com/buyCarOrdersManagment"
+          "https://exponetapp-8fxj.onrender.com/ordersManagmentBuyCarList"
         );
         console.log("soy response.data", response.data);
         setOrders(response.data);
         console.log("soy orders ya seteado", response.data);
-
-        // Realiza cualquier operación necesaria con los datos actualizados de orders aquí
       } catch (error) {
-        console.error("Error al obtener la lista de Ordenes:", error);
+        console.error("Error al obtener la lista de Usuarios:", error);
       }
     };
     fetchBuyCars();
@@ -125,9 +138,8 @@ function OrdersManagment() {
   return (
     <>
       <Header />
-      {orders.buyCars.map(buyCars=(
-        buyCars.productName
-      ))}
+      {}
+
       <Footer />
     </>
   );

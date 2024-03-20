@@ -510,34 +510,25 @@ app.get("/buyCarsList", async (req, res) => {
   }
 });
 
-app.get("/buyCarOrdersManagment", (req, res) => {
-  let responseData = {}; // Objeto para almacenar los resultados
-
-  // Consulta para obtener todos los datos de appUsers
-  db.query("SELECT * FROM appUsers", (err, usersResult) => {
-    if (err) {
-      console.error(err);
-      res.status(500).send("Error al obtener los datos de usuarios");
+app.get("/ordersManagmentUsers"), (req, res) =>{
+  db.query("SELECT * FROM appUsers"), (err, result) =>{
+    if(err){
+      res.status(400).send("error al obtener la lista de usuarios")
     } else {
-      responseData.users = usersResult; // Almacenar todos los resultados en un array
-      console.log(usersResult);
-      
-      // Consulta para obtener todos los datos de appBuyCars
-      db.query("SELECT * FROM appBuyCars", (err, buyCarsResult) => {
-        if (err) {
-          console.error(err);
-          res.status(500).send("Error al obtener los datos de compras de carros");
-        } else {
-          responseData.buyCars = buyCarsResult; // Almacenar todos los resultados en un array
-          console.log(buyCarsResult);
-          
-          // Enviar el objeto responseData como respuesta
-          res.status(200).send(responseData);
-        }
-      });
+      res.status(200).send(result)
     }
-  });
-});
+  }
+}
+
+app.get("/ordersManagmentBuyCarList"), (req, res) =>{
+  db.query("SELECT * FROM appBuyCars"), (err, result) =>{
+    if(err){
+      res.status(400).send("error al obtener la lista de Carritos De Compras")
+    } else {
+      res.status(200).send(result)
+    }
+  }
+}
 
 app.post("/ProductStockUpdate", (req, res) => {
   const productIds = req.body.productsIds;
