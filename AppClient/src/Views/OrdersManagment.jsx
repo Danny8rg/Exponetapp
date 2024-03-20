@@ -146,39 +146,44 @@ function OrdersManagment() {
         {!loading && orders.length > 0 ? (
           orders.map((order) => (
             <React.Fragment key={order.buyCarId}>
-              {order && order.buyCarContent && (
-                <table key={order.buyCarId}>
-                  <thead>
-                    <tr>
-                      <th className="subtitles">Nombre del Producto</th>
-                      <th className="subtitles">Descripción</th>
-                      <th className="subtitles">Precio</th>
-                      <th className="subtitles">Cantidad</th>
-                      <th className="subtitles">Estado</th>
-                    </tr>
-                  </thead>
-                  <tbody className="product-container">
-                    {JSON.parse(order.buyCarContent).products.map(
-                      (product, index) => {
-                        // Solo renderiza el producto si el productShopOwner coincide con globalShopId
-                        if (product.productShopOwner === globalShopId) {
-                          return (
-                            <tr key={index}>
-                              <td>{product.productName}</td>
-                              <td>{product.productDescription}</td>
-                              <td>{product.productPrize}</td>
-                              <td>{product.quantity}</td>
-                              <td>{product.productState}</td>
-                            </tr>
-                          );
-                        } else {
-                          return null; // Si no coincide, devuelve null para no renderizar este producto
+              {order &&
+                order.buyCarContent &&
+                // Mueve la condición de renderizado de la tabla completa aquí
+                JSON.parse(order.buyCarContent).products.some(
+                  (product) => product.productShopOwner === globalShopId
+                ) && (
+                  <table key={order.buyCarId}>
+                    <thead>
+                      <tr>
+                        <th className="subtitles">Nombre del Producto</th>
+                        <th className="subtitles">Descripción</th>
+                        <th className="subtitles">Precio</th>
+                        <th className="subtitles">Cantidad</th>
+                        <th className="subtitles">Estado</th>
+                      </tr>
+                    </thead>
+                    <tbody className="product-container">
+                      {JSON.parse(order.buyCarContent).products.map(
+                        (product, index) => {
+                          // Solo renderiza el producto si el productShopOwner coincide con globalShopId
+                          if (product.productShopOwner === globalShopId) {
+                            return (
+                              <tr key={index}>
+                                <td>{product.productName}</td>
+                                <td>{product.productDescription}</td>
+                                <td>{product.productPrize}</td>
+                                <td>{product.quantity}</td>
+                                <td>{product.productState}</td>
+                              </tr>
+                            );
+                          } else {
+                            return null; // Si no coincide, devuelve null para no renderizar este producto
+                          }
                         }
-                      }
-                    )}
-                  </tbody>
-                </table>
-              )}
+                      )}
+                    </tbody>
+                  </table>
+                )}
             </React.Fragment>
           ))
         ) : (
