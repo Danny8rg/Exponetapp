@@ -20,13 +20,19 @@ function OrdersManagment() {
         );
         console.log("soy response.data", response.data);
         setOrders(response.data);
-        console.log("soy orders ya seteado", orders);
+        console.log("soy orders ya seteado", response.data);
+
+        // Realiza cualquier operación necesaria con los datos actualizados de orders aquí
       } catch (error) {
         console.error("Error al obtener la lista de Ordenes:", error);
       }
     };
     fetchBuyCars();
   }, []);
+
+  useEffect(() => {
+    console.log("Orden actualizada:", orders);
+  }, [orders]);
 
   function orderDelivered(buyCarContent) {
     console.log("soy funcion");
