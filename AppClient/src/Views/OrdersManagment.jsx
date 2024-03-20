@@ -30,10 +30,6 @@ function OrdersManagment() {
     fetchBuyCars();
   }, []);
 
-  useEffect(() => {
-    console.log("Orden actualizada:", orders);
-  }, [orders]);
-
   function orderDelivered(buyCarContent) {
     console.log("soy funcion");
     console.dir(buyCarContent);
@@ -129,33 +125,6 @@ function OrdersManagment() {
   return (
     <>
       <Header />
-      <div className="BuyCardsContainer">
-        {orders &&
-          orders.buyCars &&
-          orders.buyCars.map((buyCar) => (
-            <div key={buyCar.buyCarId} className="BuyCard">
-              <h3>Compra ID: {buyCar.buyCarId}</h3>
-              <h4>Estado: {buyCar.buyCarState}</h4>
-              <ul>
-                {buyCar.buyCarContent.products.map((product) => (
-                  <li key={product.productId}>
-                    <h5>{product.productName}</h5>
-                    <p>Descripción: {product.productDescription}</p>
-                    <p>Precio: ${product.productPrize}</p>
-                    <p>Cantidad: {product.quantity}</p>
-                    {/* Agrega aquí más detalles del producto si es necesario */}
-                  </li>
-                ))}
-              </ul>
-              <button onClick={() => orderDelivered(buyCar.buyCarContent)}>
-                Marcar como entregado
-              </button>
-              <button onClick={() => DeleteBuyCar(buyCar.buyCarId)}>
-                Eliminar carrito
-              </button>
-            </div>
-          ))}
-      </div>
       <Footer />
     </>
   );
