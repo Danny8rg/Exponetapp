@@ -110,7 +110,6 @@ function OrdersManagment() {
     );
 
     if (!confirmation) {
-      // El usuario hizo clic en "Cancelar"
       return;
     }
 
@@ -135,6 +134,7 @@ function OrdersManagment() {
         {orders.length > 0 ? (
           orders.map((order) => (
             <div key={order.buyCars.buyCarId} className="order-card">
+              {console.log("soy orders en el return ",orders)}
               <h3>{orders}</h3>
               <h3>Usuario</h3>
               <p>ID: {order.users.userId}</p>
