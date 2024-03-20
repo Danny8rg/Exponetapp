@@ -129,65 +129,37 @@ function OrdersManagment() {
   return (
     <>
       <Header />
-      <div className="orders-container">
-        <h2>Gestión de Entregas</h2>
-        {orders.length > 0 ? (
-          orders.map((order) => (
-            <div key={order.buyCarId} className="order-card">
-              <h3>Pedido ID: {order.buyCarId}</h3>
-              <h3>Usuario</h3>
-              <p>ID: {order.buyCarUser}</p>
-              {/* Mostrar la información del usuario */}
-              {users.map((user) => {
-                if (user.userId === order.buyCarUser) {
-                  return (
-                    <div key={user.userId}>
-                      <p>ID: {user.userId}</p>
-                      <p>Nombre: {user.userName}</p>
-                      <p>Email: {user.userMail}</p>
-                      <p>Dirección: {user.userAdress}</p>
-                    </div>
-                  );
-                }
-                return null;
-              })}
-              {/* Mostrar los productos comprados */}
-              <h3>Productos Comprados</h3>
-              <table>
-                <thead>
-                  <tr>
-                    <th>Nombre</th>
-                    <th>Descripción</th>
-                    <th>Precio</th>
-                    <th>Cantidad</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {JSON.parse(order.buyCarContent).products.map((product) => (
-                    <tr key={product.productId}>
-                      <td>{product.productName}</td>
-                      <td>{product.productDescription}</td>
-                      <td>{product.productPrize}</td>
-                      <td>{product.quantity}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              <div className="order-actions">
-                <button onClick={() => orderDelivered(order.buyCarContent)}>
-                  Marcar como entregado
-                </button>
-                <button onClick={() => DeleteBuyCar(order.buyCarId)}>
-                  Eliminar Carrito
-                </button>
-              </div>
+      return (
+      <>
+        <Header />
+        <div className="BuyCardsContainer">
+          {orders.buyCars.map((buyCar) => (
+            <div key={buyCar.buyCarId} className="BuyCard">
+              <h3>Compra ID: {buyCar.buyCarId}</h3>
+              <h4>Estado: {buyCar.buyCarState}</h4>
+              <ul>
+                {buyCar.buyCarContent.products.map((product) => (
+                  <li key={product.productId}>
+                    <h5>{product.productName}</h5>
+                    <p>Descripción: {product.productDescription}</p>
+                    <p>Precio: ${product.productPrize}</p>
+                    <p>Cantidad: {product.quantity}</p>
+                    {/* Agrega aquí más detalles del producto si es necesario */}
+                  </li>
+                ))}
+              </ul>
+              <button onClick={() => orderDelivered(buyCar.buyCarContent)}>
+                Marcar como entregado
+              </button>
+              <button onClick={() => DeleteBuyCar(buyCar.buyCarId)}>
+                Eliminar carrito
+              </button>
             </div>
-          ))
-        ) : (
-          <p>No hay pedidos disponibles.</p>
-        )}
-      </div>
-
+          ))}
+        </div>
+        <Footer />
+      </>
+      );
       <Footer />
     </>
   );
