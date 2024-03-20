@@ -5,6 +5,7 @@ import Footer from "../Components/Footer/Footer";
 import "./OrdersManagment.css";
 import { ShopContextValues } from "../Components/Context/ShopContext";
 import Swal from "sweetalert2";
+import "./OrdersManagment.css";
 
 function OrdersManagment() {
   const [orders, setOrders] = useState([]);
@@ -141,7 +142,7 @@ function OrdersManagment() {
   return (
     <>
       <Header />
-      <div className="orders-table">
+      <div className="orders-container">
         {!loading && orders.length > 0 ? (
           orders.map((order) => (
             <React.Fragment key={order.buyCarId}>
@@ -149,22 +150,17 @@ function OrdersManagment() {
                 <table key={order.buyCarId}>
                   <thead>
                     <tr>
-                      <th>Nombre del Producto</th>
-                      <th>Descripción</th>
-                      <th>Precio</th>
-                      <th>Cantidad</th>
-                      <th>Estado</th>
+                      <th className="subtitles">Nombre del Producto</th>
+                      <th className="subtitles">Descripción</th>
+                      <th className="subtitles">Precio</th>
+                      <th className="subtitles">Cantidad</th>
+                      <th className="subtitles">Estado</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody className="product-container">
                     {JSON.parse(order.buyCarContent).products.map(
                       (product, index) => (
                         <tr key={index}>
-                          <th>Nombre del Producto</th>
-                          <th>Descripción</th>
-                          <th>Precio</th>
-                          <th>Cantidad</th>
-                          <th>Estado</th>
                           <td>{product.productName}</td>
                           <td>{product.productDescription}</td>
                           <td>{product.productPrize}</td>
