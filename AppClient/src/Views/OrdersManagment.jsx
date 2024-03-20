@@ -159,15 +159,22 @@ function OrdersManagment() {
                   </thead>
                   <tbody className="product-container">
                     {JSON.parse(order.buyCarContent).products.map(
-                      (product, index) => (
-                        <tr key={index}>
-                          <td>{product.productName}</td>
-                          <td>{product.productDescription}</td>
-                          <td>{product.productPrize}</td>
-                          <td>{product.quantity}</td>
-                          <td>{product.productState}</td>
-                        </tr>
-                      )
+                      (product, index) => {
+                        // Solo renderiza el producto si el productShopOwner coincide con globalShopId
+                        if (product.productShopOwner === globalShopId) {
+                          return (
+                            <tr key={index}>
+                              <td>{product.productName}</td>
+                              <td>{product.productDescription}</td>
+                              <td>{product.productPrize}</td>
+                              <td>{product.quantity}</td>
+                              <td>{product.productState}</td>
+                            </tr>
+                          );
+                        } else {
+                          return null; // Si no coincide, devuelve null para no renderizar este producto
+                        }
+                      }
                     )}
                   </tbody>
                 </table>
@@ -178,7 +185,7 @@ function OrdersManagment() {
           <p>No hay órdenes disponibles</p>
         )}
       </div>
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 }
