@@ -7,6 +7,7 @@ import { ShopContextValues } from "../Components/Context/ShopContext";
 import Swal from "sweetalert2";
 import "./OrdersManagment.css";
 
+
 function OrdersManagment() {
   const [orders, setOrders] = useState([]);
   const [users, setUsers] = useState([]);
@@ -47,13 +48,34 @@ function OrdersManagment() {
     fetchBuyCars();
   }, []);
 
+  function ChangeState(buyCarContent, globalShopId) {
+    const parsedContent = JSON.parse(buyCarContent);
+    console.dir(
+      "soy el buyCarContent de la funcion change state",
+      parsedContent
+    );
+  
+    parsedContent.products.forEach((product) => {
+      if (
+        product.productShopOwner === globalShopId &&
+        product.productState.trim() === "pendiente"
+      ) {
+        product.productState = "Entregado";
+      } else if (product.productState.trim() === "pendiente") { // Aquí se cambió la comparación
+        product.productState = "pendiente";
+      }
+    });
+    console.dir("soy el buycarcontent con el estado cambiado", parsedContent);
+    return JSON.stringify(parsedContent);
+  }
+
   function orderDelivered(buyCarContent) {
     console.log("soy funcion");
     console.dir(buyCarContent);
 
     const newBuyCarContent = ChangeState(buyCarContent, globalShopId);
 
-    const parsedContent = JSON.parse(buyCarContent);
+    const parsedContent = JSON.parse(newBuyCarContent);
     console.dir(parsedContent);
 
     const productsIds = parsedContent.products.map(
@@ -72,28 +94,29 @@ function OrdersManagment() {
     );
 
     console.dir(productsShopOwners);
+    console.dir(newBuyCarContent);
 
-    axios
-      .post("https://exponetapp-8fxj.onrender.com/ProductStockUpdate", {
-        productsIds,
-        productsQuantities,
-        productsShopOwners,
-        newBuyCarContent,
-      })
-      .then((response) => {
-        // Maneja la respuesta si es necesario
-        console.log(response.data);
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Pedido despachado",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-      })
-      .catch((error) => {
-        console.error("Error al actualizar el stock del producto:", error);
-      });
+  //  axios
+  //    .post("https://exponetapp-8fxj.onrender.com/ProductStockUpdate", {
+  //      productsIds,
+  //      productsQuantities,
+  //      productsShopOwners,
+  //      newBuyCarContent,
+  //    })
+  //    .then((response) => {
+  //      // Maneja la respuesta si es necesario
+  //      console.log(response.data);
+  //      Swal.fire({
+  //        position: "center",
+  //        icon: "success",
+  //        title: "Pedido despachado",
+  //        showConfirmButton: false,
+  //        timer: 1500,
+  //      });
+  //    })
+  //    .catch((error) => {
+  //      console.error("Error al actualizar el stock del producto:", error);
+  //    });
   }
 
   function ChangeState(buyCarContent, globalShopId) {
