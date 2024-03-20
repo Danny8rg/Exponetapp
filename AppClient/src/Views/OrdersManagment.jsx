@@ -19,8 +19,8 @@ function OrdersManagment() {
           "https://exponetapp-8fxj.onrender.com/buyCarOrdersManagment"
         );
         setOrders(response.data);
-        console.log(response.data);
-        console.dir(orders);
+        console.log("soy response.data", response.data);
+        console.dir("soy orders ya seteado", orders);
       } catch (error) {
         console.error("Error al obtener la lista de Ordenes:", error);
       }
