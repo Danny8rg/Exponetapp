@@ -145,22 +145,22 @@ function OrdersManagment() {
         {loading ? (
           <p>Cargando...</p>
         ) : (
-          <table>
-            <thead>
-              <tr>
-                <th>Carrito ID</th>
-                <th>Producto ID</th>
-                <th>Nombre del Producto</th>
-                <th>Descripción</th>
-                <th>Precio</th>
-                <th>Cantidad</th>
-                <th>Estado</th>
-              </tr>
-            </thead>
-            <tbody>
-              {orders.map((order) => (
-                <React.Fragment key={order.buyCarId}>
-                  {order.products.map((product) => (
+          orders.map((order) => (
+            <React.Fragment key={order.buyCarId}>
+              {order.products.map((product, index) => (
+                <table key={index}>
+                  <thead>
+                    <tr>
+                      <th>Carrito ID</th>
+                      <th>Producto ID</th>
+                      <th>Nombre del Producto</th>
+                      <th>Descripción</th>
+                      <th>Precio</th>
+                      <th>Cantidad</th>
+                      <th>Estado</th>
+                    </tr>
+                  </thead>
+                  <tbody>
                     <tr key={product.productId}>
                       <td>{order.buyCarId}</td>
                       <td>{product.productId}</td>
@@ -170,11 +170,11 @@ function OrdersManagment() {
                       <td>{product.quantity}</td>
                       <td>{product.productState}</td>
                     </tr>
-                  ))}
-                </React.Fragment>
+                  </tbody>
+                </table>
               ))}
-            </tbody>
-          </table>
+            </React.Fragment>
+          ))
         )}
       </div>
       <Footer />
