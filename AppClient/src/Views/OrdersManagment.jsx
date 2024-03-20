@@ -108,14 +108,14 @@ function OrdersManagment() {
         product.productShopOwner === globalShopId &&
         product.productState.trim() === "pendiente"
       ) {
-        product.productState = "Despachado";
-      } else if (product.productState.trim() === "pendiente") {
+        product.productState = "Entregado";
+      } else if (product.productState.trim() === "pendiente ") { // Aquí se cambió la comparación
         product.productState = "pendiente";
       }
     });
     console.dir("soy el buycarcontent con el estado cambiado", parsedContent);
     return JSON.stringify(parsedContent);
-  }
+}
 
   const DeleteBuyCar = (buyCarId) => {
     const confirmation = window.confirm(
