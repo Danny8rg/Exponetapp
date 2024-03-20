@@ -149,28 +149,29 @@ function OrdersManagment() {
             <thead>
               <tr>
                 <th>Carrito ID</th>
-                <th>Contenido</th>
+                <th>Producto ID</th>
+                <th>Nombre del Producto</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
                 <th>Estado</th>
-                <th>Usuario</th>
-                <th>Acciones</th>
               </tr>
             </thead>
             <tbody>
               {orders.map((order) => (
-                <tr key={order.buyCarId}>
-                  <td>{order.buyCarId}</td>
-                  <td>{order.buyCarContent}</td>
-                  <td>{order.buyCarState}</td>
-                  <td>{order.buyCarUser}</td>
-                  <td>
-                    <button onClick={() => orderDelivered(order.buyCarContent)}>
-                      Marcar como entregado
-                    </button>
-                    <button onClick={() => DeleteBuyCar(order.buyCarId)}>
-                      Eliminar
-                    </button>
-                  </td>
-                </tr>
+                <React.Fragment key={order.buyCarId}>
+                  {order.products.map((product) => (
+                    <tr key={product.productId}>
+                      <td>{order.buyCarId}</td>
+                      <td>{product.productId}</td>
+                      <td>{product.productName}</td>
+                      <td>{product.productDescription}</td>
+                      <td>{product.productPrize}</td>
+                      <td>{product.quantity}</td>
+                      <td>{product.productState}</td>
+                    </tr>
+                  ))}
+                </React.Fragment>
               ))}
             </tbody>
           </table>
