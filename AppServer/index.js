@@ -512,23 +512,23 @@ app.get("/buyCarsList", async (req, res) => {
 
 app.get("/buyCarOrdersManagment", (req, res) => {
   let responseData = {}; // Objeto para almacenar los resultados
-  
-  // Consulta para obtener los datos de appUsers
+
+  // Consulta para obtener todos los datos de appUsers
   db.query("SELECT * FROM appUsers", (err, usersResult) => {
     if (err) {
       console.error(err);
       res.status(500).send("Error al obtener los datos de usuarios");
     } else {
-      responseData.users = usersResult[0]; // Almacenar resultados en el objeto responseData
+      responseData.users = usersResult; // Almacenar todos los resultados en un array
       console.log(usersResult);
       
-      // Consulta para obtener los datos de appBuyCars
+      // Consulta para obtener todos los datos de appBuyCars
       db.query("SELECT * FROM appBuyCars", (err, buyCarsResult) => {
         if (err) {
           console.error(err);
           res.status(500).send("Error al obtener los datos de compras de carros");
         } else {
-          responseData.buyCars = buyCarsResult[0]; // Almacenar resultados en el objeto responseData
+          responseData.buyCars = buyCarsResult; // Almacenar todos los resultados en un array
           console.log(buyCarsResult);
           
           // Enviar el objeto responseData como respuesta
