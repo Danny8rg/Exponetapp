@@ -129,11 +129,10 @@ function OrdersManagment() {
   return (
     <>
       <Header />
-      return (
-      <>
-        <Header />
-        <div className="BuyCardsContainer">
-          {orders.buyCars.map((buyCar) => (
+      <div className="BuyCardsContainer">
+        {orders &&
+          orders.buyCars &&
+          orders.buyCars.map((buyCar) => (
             <div key={buyCar.buyCarId} className="BuyCard">
               <h3>Compra ID: {buyCar.buyCarId}</h3>
               <h4>Estado: {buyCar.buyCarState}</h4>
@@ -156,10 +155,7 @@ function OrdersManagment() {
               </button>
             </div>
           ))}
-        </div>
-        <Footer />
-      </>
-      );
+      </div>
       <Footer />
     </>
   );
