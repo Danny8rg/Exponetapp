@@ -536,6 +536,11 @@ app.post("/ProductStockUpdate", (req, res) => {
   const productsShopOwners = req.body.productsShopOwners;
   const newBuyCarContent = req.body.newBuyCarContent;
 
+  console.log(productIds);
+  console.log(productQuantities);
+  console.log(productsShopOwners);
+  console.log(newBuyCarContent);
+
   // Variable para llevar el registro de cuántas actualizaciones se han completado
   let updatedProductsCount = 0;
 
