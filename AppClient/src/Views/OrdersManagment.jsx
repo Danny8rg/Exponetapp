@@ -7,8 +7,8 @@ import { ShopContextValues } from "../Components/Context/ShopContext";
 import Swal from "sweetalert2";
 
 function OrdersManagment() {
-  const [orders, setOrders] = useState();
-  const [users, setUsers] = useState();
+  const [orders, setOrders] = useState([]);
+  const [users, setUsers] = useState([]);
   const [productsId, setProductsId] = useState([]);
   const [productsQuantity, setProductQuantity] = useState([]);
   const { globalShopId, setGlobalShopId } = useContext(ShopContextValues);
