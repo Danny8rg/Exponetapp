@@ -15,6 +15,8 @@ function RegisterForm() {
     userRole: "",
   });
 
+  const [emailError, setEmailError] = useState("");
+
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -24,11 +26,9 @@ function RegisterForm() {
     if (name === "userMail") {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(value)) {
-        Swal.fire({
-          icon: "warning",
-          title: "Formato de correo electrónico inválido",
-        });
-        return;
+        setEmailError("Formato de correo electrónico inválido");
+      } else {
+        setEmailError("");
       }
     }
 
@@ -121,6 +121,7 @@ function RegisterForm() {
                 value={formData.userMail}
                 onChange={handleChange}
               />
+              {emailError && <p className="error-message">{emailError}</p>}
             </div>
             <div className="info-b">
               <label htmlFor="userAdress" className="register-label">
