@@ -142,13 +142,11 @@ function OrdersManagment() {
     <>
       <Header />
       <div className="orders-table">
-        {loading ? (
-          <p>Cargando...</p>
-        ) : (
+        {!loading && orders.length > 0 ? (
           orders.map((order) => (
             <React.Fragment key={order.buyCarId}>
-              {order.products.map((product, index) => (
-                <table key={index}>
+              {order && order.buyCarContent && (
+                <table key={order.buyCarId}>
                   <thead>
                     <tr>
                       <th>Carrito ID</th>
@@ -161,20 +159,26 @@ function OrdersManagment() {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr key={product.productId}>
-                      <td>{order.buyCarId}</td>
-                      <td>{product.productId}</td>
-                      <td>{product.productName}</td>
-                      <td>{product.productDescription}</td>
-                      <td>{product.productPrize}</td>
-                      <td>{product.quantity}</td>
-                      <td>{product.productState}</td>
-                    </tr>
+                    {JSON.parse(order.buyCarContent).products.map(
+                      (product, index) => (
+                        <tr key={index}>
+                          <td>{order.buyCarId}</td>
+                          <td>{product.productId}</td>
+                          <td>{product.productName}</td>
+                          <td>{product.productDescription}</td>
+                          <td>{product.productPrize}</td>
+                          <td>{product.quantity}</td>
+                          <td>{product.productState}</td>
+                        </tr>
+                      )
+                    )}
                   </tbody>
                 </table>
-              ))}
+              )}
             </React.Fragment>
           ))
+        ) : (
+          <p>No hay órdenes disponibles</p>
         )}
       </div>
       <Footer />
