@@ -535,7 +535,6 @@ app.post("/ProductStockUpdate", (req, res) => {
   const productQuantities = req.body.productsQuantities;
   const productsShopOwners = req.body.productsShopOwners;
   const newBuyCarContent = req.body.newBuyCarContent;
-  const buyCarId = req.file.body.buyCarId
 
   console.log(productIds);
   console.log(productQuantities);
