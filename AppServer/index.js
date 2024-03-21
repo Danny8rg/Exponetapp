@@ -636,7 +636,7 @@ app.put("/updateBuyCar"), (req, res) => {
         }
       }
       );
-    }
+}
 
 
                  
