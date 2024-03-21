@@ -622,7 +622,7 @@ app.put("/updateBuyCar"), (req, res) => {
   console.log("soy el newBuyCarContent en el back",newBuyCarContent)
 
       db.query(
-      "UPDATE appBuyCars SET buyCarState WHERE buyCarId = ?",
+      "UPDATE appBuyCars SET buyCarContent = ? WHERE buyCarId = ?",
       [newBuyCarContent, buyCarId],
       (err, result) => {
         if (err) {
