@@ -151,7 +151,7 @@ function OrdersManagment() {
       }
     });
     console.dir("soy el buycarcontent con el estado cambiado", parsedContent);
-    return JSON.stringify(parsedContent);
+    return parsedContent;
 }
 
   const DeleteBuyCar = (buyCarId) => {
