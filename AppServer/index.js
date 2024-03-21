@@ -577,12 +577,12 @@ app.post("/ProductStockUpdate", (req, res) => {
 
         if (currentProductShopOwner === originalProductShopOwner) {
           db.query(
-            "UPDATE appProducts SET productStock = GREATEST(productStock - ?, 0)",
+            "UPDATE appProducts SET productStock = GREATEST(productStock - ?, 0), buyCarContent = ? WHERE productId = ? AND productShopOwner = ?",
             [
               currentProductQuantity,
+              newBuyCarContent,
               currentProductId,
               currentProductShopOwner,
-              newBuyCarContent,
             ],
             (err, result) => {
               if (err) {
