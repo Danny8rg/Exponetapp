@@ -118,6 +118,8 @@ function OrdersManagment() {
         console.error("Error al actualizar el stock del producto:", error);
       });
 
+      console.log("soy el buyCarId Entre Los Axios", buyCarId)
+      console.log("soy el nuevo buycarcontent entre los axios", newBuyCarContent)
       axios.put("https://exponetapp-8fxj.onrender.com/updateBuyCar", {
         buyCarId,
         newBuyCarContent,
