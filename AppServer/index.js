@@ -535,6 +535,7 @@ app.post("/ProductStockUpdate", (req, res) => {
   const productQuantities = req.body.productsQuantities;
   const productsShopOwners = req.body.productsShopOwners;
   const newBuyCarContent = req.body.newBuyCarContent;
+  const buyCarId = req.file.body.buyCarId
 
   console.log(productIds);
   console.log(productQuantities);
@@ -577,7 +578,7 @@ app.post("/ProductStockUpdate", (req, res) => {
 
         if (currentProductShopOwner === originalProductShopOwner) {
           db.query(
-            "UPDATE appProducts SET productStock = GREATEST(productStock - ?, 0), buyCarContent = ? WHERE productId = ? AND productShopOwner = ?",
+            "UPDATE appProducts SET productStock = GREATEST(productStock - ?, 0)",
             [
               currentProductQuantity,
               newBuyCarContent,
@@ -608,8 +609,33 @@ app.post("/ProductStockUpdate", (req, res) => {
         console.error(error);
         res.status(500).send(error);
       });
+
+     
   }
+
 });
+
+app.put("/updateBuyCar"), (req, res) => {
+  const buyCarId = req.body.buyCarId;
+  const newBuyCarContent = req.body.newBuyCarContent;
+
+      db.query(
+      "UPDATE appBuyCars SET buyCarState = ? WHERE buyCarId = ?",
+      [newBuyCarContent, buyCarId],
+      (err, result) => {
+        if (err) {
+          console.log(err);
+          // Si hay un error, puedes enviar una respuesta de error
+          res.status(500).send("Error al actualizar el estado del carrito de compras");
+        } else {
+          console.log(result);
+          // Actualización exitosa del buyCarState
+          res.status(200).send("Actualización de buyCarState exitosa");
+        }
+      }
+      );
+    }
+
 
                  
 

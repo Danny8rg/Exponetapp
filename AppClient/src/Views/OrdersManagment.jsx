@@ -69,7 +69,7 @@ function OrdersManagment() {
     return JSON.stringify(parsedContent);
   }
 
-  function orderDelivered(buyCarContent) {
+  function orderDelivered(buyCarContent, buyCarId) {
     console.log("soy funcion");
     console.dir("soy el buy car original que llega ",buyCarContent);
 
@@ -102,6 +102,7 @@ function OrdersManagment() {
         productsQuantities,
         productsShopOwners,
         newBuyCarContent,
+        buyCarId,
       })
       .then((response) => {
         console.log(response.data);
@@ -116,6 +117,18 @@ function OrdersManagment() {
       .catch((error) => {
         console.error("Error al actualizar el stock del producto:", error);
       });
+
+      axios.put("https://exponetapp-8fxj.onrender.com/updateBuyCar", {
+        buyCarId,
+        newBuyCarContent,
+      })
+      .then((response) => {
+        console.log(response.data)
+      })
+      .catch((error) =>{
+        console.error("error al actualizar el carro de compras", error);
+      })
+
   }
 
   function ChangeState(buyCarContent, globalShopId) {
@@ -202,7 +215,7 @@ function OrdersManagment() {
                                     Cancelar
                                   </button>
                                   <button onClick={()=>{
-                                    orderDelivered(order.buyCarContent)
+                                    orderDelivered(order.buyCarContent, order.buyCarId)
                                   }}>
                                     Despachar
                                   </button>
