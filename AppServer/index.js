@@ -618,6 +618,9 @@ app.put("/updateBuyCar"), (req, res) => {
   const buyCarId = req.body.buyCarId;
   const newBuyCarContent = req.body.newBuyCarContent;
 
+  console.log("soy el id del carro de compras",buyCarId)
+  console.log("soy el newBuyCarContent en el back",newBuyCarContent)
+
       db.query(
       "UPDATE appBuyCars SET buyCarState = ? WHERE buyCarId = ?",
       [newBuyCarContent, buyCarId],
