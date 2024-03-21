@@ -614,29 +614,29 @@ app.post("/ProductStockUpdate", (req, res) => {
 
 });
 
-app.put("/updateBuyCar"), (req, res) => {
+app.put("/updateBuyCar", (req, res) => {
   const buyCarId = req.body.buyCarId;
   const newBuyCarContent = req.body.newBuyCarContent;
 
-  console.log("soy el id del carro de compras",buyCarId)
-  console.log("soy el newBuyCarContent en el back",newBuyCarContent)
+  console.log("ID del carrito de compras:", buyCarId);
+  console.log("Nuevo contenido del carrito de compras:", newBuyCarContent);
 
-      db.query(
-      "UPDATE appBuyCars SET buyCarContent = ? WHERE buyCarId = ?",
-      [newBuyCarContent, buyCarId],
-      (err, result) => {
-        if (err) {
-          console.log(err);
-          // Si hay un error, puedes enviar una respuesta de error
-          res.status(500).send("Error al actualizar el estado del carrito de compras");
-        } else {
-          console.log(result);
-          // Actualización exitosa del buyCarState
-          res.status(200).send("Actualización de buyCarState exitosa");
-        }
+  db.query(
+    "UPDATE appBuyCars SET buyCarContent = ? WHERE buyCarId = ?",
+    [JSON.stringify(newBuyCarContent), buyCarId],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+        // Si hay un error, puedes enviar una respuesta de error
+        res.status(500).send("Error al actualizar el contenido del carrito de compras");
+      } else {
+        console.log(result);
+        // Actualización exitosa del contenido del carrito de compras
+        res.status(200).send("Actualización de BuyCarContent exitosa");
       }
-      );
-}
+    }
+  );
+});
 
 
                  
