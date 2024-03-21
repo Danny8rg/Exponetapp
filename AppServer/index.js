@@ -528,7 +528,7 @@ app.get("/ordersManagmentBuyCarList", (req, res) => {
       res.status(200).send(result);
     }
   });
-});
+});  
 
 app.post("/ProductStockUpdate", (req, res) => {
   const productIds = req.body.productsIds;
@@ -577,21 +577,18 @@ app.post("/ProductStockUpdate", (req, res) => {
 
         if (currentProductShopOwner === originalProductShopOwner) {
           db.query(
-            "UPDATE appProducts SET productStock = GREATEST(productStock - ?, 0), buyCarState = ? WHERE productId = ? AND productShopOwner = ?, buyCarContent = ?",
+            "UPDATE appProducts SET productStock = GREATEST(productStock - ?, 0), buyCarState = ? WHERE productId = ? AND productShopOwner = ?",
             [
               currentProductQuantity,
               currentProductId,
               currentProductShopOwner,
-
               newBuyCarContent,
             ],
             (err, result) => {
               if (err) {
                 console.log(err);
                 // Si hay un error, puedes enviar una respuesta de error
-                res
-                  .status(500)
-                  .send("Error al actualizar el stock del producto");
+                res.status(500).send("Error al actualizar el stock del producto");
               } else {
                 console.log(result);
                 // Actualización exitosa para el producto actual
@@ -605,30 +602,6 @@ app.post("/ProductStockUpdate", (req, res) => {
               }
             }
           );
-
-          db.query("UPDATE buyCarContent FROM appBuyCar WHERE buyCarId = ?", [
-            currentProductId,
-          ]),
-            (err, result) => {
-              if (err) {
-                console.log(err);
-                // Si hay un error, puedes enviar una respuesta de error
-                res
-                  .status(500)
-                  .send("Error al actualizar el estado del producto");
-              } else {
-                console.log(result);
-                res
-                  .status(500)
-                  .send("actualisacion de estado del producto exitosa");
-              }
-            };
-        } else {
-          // Si productShopOwner no coincide, continúa con la siguiente iteración sin hacer cambios
-          updatedProductsCount++;
-          if (updatedProductsCount === productIds.length) {
-            res.status(200).send("Actualización de stock exitosa");
-          }
         }
       })
       .catch((error) => {
@@ -637,6 +610,8 @@ app.post("/ProductStockUpdate", (req, res) => {
       });
   }
 });
+
+                 
 
 app.put("/deleteBuyCar/:buyCarId", (req, res) => {
   const buyCarId = req.params.buyCarId;
@@ -659,6 +634,8 @@ app.put("/deleteProductFromBuyCar"),
     db.query("UPDATE ");
   };
 
-app.listen(3000, () => {
-  console.log(`Servidor escuchando en el puerto 3000`);
-});
+
+  app.listen(3000, () => {
+    console.log(`Servidor escuchando en el puerto 3000`);
+  });
+  
