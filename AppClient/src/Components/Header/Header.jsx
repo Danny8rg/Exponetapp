@@ -39,12 +39,12 @@ const Header = () => {
             />
           </Link>
           <nav className={`nav ${isMenuOpen ? 'open' : ''}`}>
-            <ul className="filter-nav">
+         {/*   <ul className="filter-nav">
               <li className="box-input-search">
                 <FaSearch className="icon-search" />
                 <input type="text" name="" id="" placeholder="Buscar producto" />
               </li>
-            </ul>
+            </ul> **/}
             <ul className="links-nav">
               <li>
                 <Link to="/" className={`link-header ${location.pathname === '/' ? 'link-header-b' : ''}`}>
