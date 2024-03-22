@@ -29,7 +29,7 @@ const Header = () => {
   return (
     <>
       <header className="header-home">
-        <div className="h-full flex items-center justify-center">
+        <div className="h-full flex items-center justify-center header-home-box">
           <Link to="/" className="icon-box">
             <h1 className="icon-txt">EXPONET</h1>
             <img
@@ -38,8 +38,8 @@ const Header = () => {
               alt=""
             />
           </Link>
-          <nav className={`nav ${isMenuOpen ? 'open' : ''}`}>
-         {/*   <ul className="filter-nav">
+          <nav className={`nav ${isMenuOpen ? "open" : ""}`}>
+            {/*   <ul className="filter-nav">
               <li className="box-input-search">
                 <FaSearch className="icon-search" />
                 <input type="text" name="" id="" placeholder="Buscar producto" />
@@ -47,7 +47,12 @@ const Header = () => {
             </ul> **/}
             <ul className="links-nav">
               <li>
-                <Link to="/" className={`link-header ${location.pathname === '/' ? 'link-header-b' : ''}`}>
+                <Link
+                  to="/"
+                  className={`link-header ${
+                    location.pathname === "/" ? "link-header-b" : ""
+                  }`}
+                >
                   Inicio
                 </Link>
               </li>
@@ -56,7 +61,14 @@ const Header = () => {
                   {userRoll === "vendedor" && (
                     <>
                       <li>
-                        <Link to="/CreateShop" className={`link-header ${location.pathname === '/CreateShop' ? 'link-header-b' : ''}`}>
+                        <Link
+                          to="/CreateShop"
+                          className={`link-header ${
+                            location.pathname === "/CreateShop"
+                              ? "link-header-b"
+                              : ""
+                          }`}
+                        >
                           Crear tienda
                         </Link>
                       </li>
@@ -70,23 +82,47 @@ const Header = () => {
                   {userRoll === "comprador" && (
                     <>
                       <li>
-                        <Link to="/Shops" className={`link-header ${location.pathname === '/Shops' ? 'link-header-b' : ''}`}>
+                        <Link
+                          to="/Shops"
+                          className={`link-header ${
+                            location.pathname === "/Shops"
+                              ? "link-header-b"
+                              : ""
+                          }`}
+                        >
                           Tiendas
                         </Link>
                       </li>
                       <li>
-                        <Link to="/UserHistory" className={`link-header ${location.pathname === '/UserHistory' ? 'link-header-b' : ''}`}>
+                        <Link
+                          to="/UserHistory"
+                          className={`link-header ${
+                            location.pathname === "/UserHistory"
+                              ? "link-header-b"
+                              : ""
+                          }`}
+                        >
                           Historial
                         </Link>
                       </li>
                       <li>
-                        <button onClick={handleLogout} className={`link-header`}>
+                        <button
+                          onClick={handleLogout}
+                          className={`link-header`}
+                        >
                           Cerrar sesión
                         </button>
                       </li>
                       <li>
-                        <Link to="/BuyCar" className={`link-header-cart ${location.pathname === '/BuyCar' ? 'link-header-cart-b' : ''}`} >
-                          <MdShoppingCart  />
+                        <Link
+                          to="/BuyCar"
+                          className={`link-header-cart ${
+                            location.pathname === "/BuyCar"
+                              ? "link-header-cart-b"
+                              : ""
+                          }`}
+                        >
+                          <MdShoppingCart />
                         </Link>
                       </li>
                     </>
@@ -101,7 +137,12 @@ const Header = () => {
                   </li>
                   {/* Agrega la condición para mostrar el botón de Tiendas cuando el usuario no está autenticado */}
                   <li>
-                    <Link to="/Shops" className={`link-header ${location.pathname === '/Shops' ? 'link-header-b' : ''}`}>
+                    <Link
+                      to="/Shops"
+                      className={`link-header ${
+                        location.pathname === "/Shops" ? "link-header-b" : ""
+                      }`}
+                    >
                       Tiendas
                     </Link>
                   </li>

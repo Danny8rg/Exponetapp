@@ -30,11 +30,12 @@ function ProductSamplerHome({ products, stock, quantityCards, Route }) {
   return (
     <>
       <div className="product-container-home">
-        <div className="box-title-sampler">
-
-        </div>
+        <div className="box-title-sampler"></div>
         {filteredProducts.slice(0, quantityCards).map((product) => (
-          <div key={product.productId} className="product-card-home shadow-sm bg-gray-50 card-home">
+          <div
+            key={product.productId}
+            className="product-card-home shadow-sm bg-gray-50"
+          >
             <Link to={Ruta} className="card-btn-home">
               Ir a tiendas
             </Link>
@@ -59,11 +60,11 @@ function ProductSamplerHome({ products, stock, quantityCards, Route }) {
               <p className="value-home-price">${product.productPrize}</p>
             </div>
           </div>
-        //   <Modal isOpen={modalOpen} onClose={closeModal}>
-        //    <h2>Contenido del Modal</h2>
-        //    <p>¡Aquí puedes poner lo que quieras dentro del modal!</p>
-        //    <button onClick={closeModal}>Cerrar Modal</button>
-        //   </Modal>
+          //   <Modal isOpen={modalOpen} onClose={closeModal}>
+          //    <h2>Contenido del Modal</h2>
+          //    <p>¡Aquí puedes poner lo que quieras dentro del modal!</p>
+          //    <button onClick={closeModal}>Cerrar Modal</button>
+          //   </Modal>
         ))}
       </div>
     </>
