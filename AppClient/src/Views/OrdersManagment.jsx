@@ -155,13 +155,13 @@ function OrdersManagment() {
 }
 
 function ChangeStateCanceled(buyCarContent, buyCarId) {
-  const parsedContent = JSON.parse(buyCarContent);
+  const parsedContentCanceled = JSON.parse(buyCarContent);
   console.dir(
-    "soy el buyCarContent de la funcion change state Canceled",
-    parsedContent
+    "soy el buyCarContentcanceled de la funcion change state Canceled",
+    parsedContentCanceled
   );
 
-  parsedContent.products.forEach((product) => {
+  parsedContentCanceled.products.forEach((product) => {
     if (
       product.productShopOwner === globalShopId &&
       product.productState.trim() === "pendiente"
@@ -172,11 +172,11 @@ function ChangeStateCanceled(buyCarContent, buyCarId) {
     }
   });
 
-  console.log("soy el parsedCOntent de changestatecanceled", parsedContent)
+  console.log("soy el parsedCOntent de changestatecanceled", parsedContentCanceled)
   
   axios.put("https://exponetapp-8fxj.onrender.com/updateBuyCar", {
     buyCarId,
-    parsedContent,
+    parsedContentCanceled,
   })
   .then((response) => {
     console.log(response.data)
@@ -252,10 +252,10 @@ function ChangeStateCanceled(buyCarContent, buyCarId) {
                             Despachar
                         </button>
                     )}
-                    <button onClick={()=>{
-                      ChangeStateCanceled(order.buyCarContent, order.buyCarId)
+                    <button onClick={() => {
+                        ChangeStateCanceled(order.buyCarContent, order.buyCarId);
                     }}>
-                      Cancelar
+                        Cancelar
                     </button>
                                 </td>
                               </tr>
