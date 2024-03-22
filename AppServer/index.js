@@ -10,7 +10,7 @@ const cloudinary = require("cloudinary").v2;
 const fileUpload = require("express-fileupload");
 const fs = require("fs-extra");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
-const { API_KEY_GEMINI } = require('./config')
+const { API_KEY_GEMINI } = require('./config.js')
 
 const genAI = new GoogleGenerativeAI(API_KEY_GEMINI);
 
