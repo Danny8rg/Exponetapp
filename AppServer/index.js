@@ -688,45 +688,52 @@ app.put("/deleteProductFromBuyCar"),
     });
   });
 
-  app.post("/createComment",  (req, res) => {
-    const {appComment, userComment, productComment} = req.body;
-    console.dir(appComment, userComment, productComment)
-    const positiveComments = 0;
-    const negativeComments = 0;
-
-    async function classify_text(msg) {  
-      const model = genAI.getGenerativeModel({ model: "gemini-pro"});
-      const result = await model.generateContent(msg);
-      const response = await result.response;
-      const text = response.text();
-      if (text == "A favor"){
-        console.log("El comentario es a favor");
-        positiveComments = 1; 
-      }
-        if (text == "En contra"){
-          console.log("El comentario es en contra");
-          negativeComments = 1; 
-        }
-    }  
-    
-    producto = productComment
-    prompt = `Clasifica el siguiente comentario como A favor o En contra del producto ${producto}:`
-    comentario = appComment
-    classify_text(`${prompt} ${comentario}`);
+  app.post("/createComment", async (req, res) => {
+    const { appComment, userComment, productComment } = req.body;
   
-    db.query(
-      "INSERT INTO appComments (userComment, productComment, appComment, positiveComments, negativeComments) VALUES (?, ?, ?, ?, ?)",
-      [userComment, productComment, appComment, positiveComments, negativeComments],
-      (err, result) => {
-        if (err) {
-          console.log(err);
-          res.status(500).send("Error al crear el comentario ");
-        } else {
-          res.status(200).send(result);
+    try {
+      // Clasificar el comentario usando la IA de Gemini
+      const classificationResult = await classify_text(appComment);
+  
+      // Determinar si el comentario es a favor o en contra
+      const positiveComments = classificationResult === "A favor" ? 1 : 0;
+      const negativeComments = classificationResult === "En contra" ? 1 : 0;
+  
+      // Insertar el comentario en la base de datos
+      db.query(
+        "INSERT INTO appComments (userComment, productComment, appComment, positiveComments, negativeComments) VALUES (?, ?, ?, ?, ?)",
+        [userComment, productComment, appComment, positiveComments, negativeComments],
+        (err, result) => {
+          if (err) {
+            console.log(err);
+            res.status(500).send("Error al crear el comentario ");
+          } else {
+            res.status(200).send(result);
+          }
         }
-      }
-    );
+      );
+    } catch (error) {
+      console.error("Error al clasificar el comentario:", error);
+      res.status(500).send("Error al clasificar el comentario");
+    }
   });
+  
+  // Función para clasificar el texto utilizando la IA de Gemini
+  async function classify_text(msg) {
+    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+    const result = await model.generateContent(msg);
+    const response = await result.response;
+    const text = response.text();
+    
+    if (text === "A favor") {
+      return "A favor";
+    } else if (text === "En contra") {
+      return "En contra";
+    } else {
+      return "Sin clasificar";
+    }
+  }
+  
   
 
 
