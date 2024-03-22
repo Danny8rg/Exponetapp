@@ -93,8 +93,8 @@ function OrdersManagment() {
       (product) => product.productShopOwner
     );
 
-    console.dir("soy el product shop owner", productsShopOwners);
-    console.dir("soy el newbuycarcontent del final",newBuyCarContent);
+    console.log("soy el product shop owner", productsShopOwners);
+    console.log("soy el newbuycarcontent del final",newBuyCarContent);
 
     axios
       .post("https://exponetapp-8fxj.onrender.com/ProductStockUpdate", {
@@ -120,6 +120,7 @@ function OrdersManagment() {
 
       console.log("soy el buyCarId Entre Los Axios", buyCarId)
       console.log("soy el nuevo buycarcontent entre los axios", newBuyCarContent)
+
       axios.put("https://exponetapp-8fxj.onrender.com/updateBuyCar", {
         buyCarId,
         newBuyCarContent,
@@ -154,7 +155,7 @@ function OrdersManagment() {
     return parsedContent;
 }
 
-function ChangeStateCanceled(buyCarContent, buyCarId) {
+function ChangeStateCanceled(buyCarContent, globalShopId) {
   const parsedContentCanceled = JSON.parse(buyCarContent);
   console.dir(
     "soy el buyCarContentcanceled de la funcion change state Canceled",
@@ -247,14 +248,14 @@ function ChangeStateCanceled(buyCarContent, buyCarId) {
                                 <td>
                                 {product.productState !== "Entregado" && (
                         <button onClick={() => {
-                            orderDelivered(order.buyCarContent, order.buyCarId);
+                            orderDelivered(order.buyCarContent, globalShopId);
                         }}>
                             Despachar
                         </button>
                     )}
                                     {product.productState !== "Entregado" && (
                         <button onClick={() => {
-                            ChangeStateCanceled(order.buyCarContent, order.buyCarId);
+                            ChangeStateCanceled(order.buyCarContent, globalShopId);
                         }}>
                             Cancelar
                         </button>
