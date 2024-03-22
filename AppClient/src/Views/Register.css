@@ -1,304 +1,112 @@
-.one-section {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+html{
+  height: 100%;
 }
 
-.two-section {
-  width: 60%;
-  height: 70%;
-  border-radius: 2px;
-  border: 2px solid #c1e1f6;
-  box-shadow: 1px 1px 4px rgb(220, 220, 220);
-  display: flex;
+body{
+  height: 100%;
 }
 
-.form-register {
-  padding: 1.5rem 2rem;
-  width: 50%;
-  gap: 0.4rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+#root{
+  height: 100%;
 }
 
-.form-title-b {
-  font-size: 2rem;
-  font-weight: 800;
-  text-align: center;
-}
-
-.info-b {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.info-b-right {
-  width: 86%;
-  display: flex;
-  flex-direction: column;
-}
-
-.register-label{
-  font-size: 1rem;
-  font-weight: 700;
-}
-
-.date-input-b {
-  width: 100%;
-  height: 1.5rem;
-  padding: 0.4rem;
-  font-size: 1rem;
-  letter-spacing: 0.02rem;
-  background-color: #e3f0fb;
-  border: 1px solid #c1e1f6;
-}
-
-.role-input{
-  height: 1.5rem;
-  font-size: 1rem;
-  background-color: whitesmoke;
-  letter-spacing: 0.02rem;
-  background-color: #e3f0fb;
-  border: 1px solid #c1e1f6;
-}
-
-.right-section {
-  width: 50%;
-  gap: 2rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;  
-  flex-direction: column;
-  background-color: #e3f0fb;
-}
-
-.right-title {
-  margin: 0;
-  font-size: 2rem;
-  font-weight: 800;
-  text-align: center;
-}
-
-.right-logo{
-  height: 12rem;
-}
-
-.right-link{
-  width: 5.2rem;
-  padding: 4px 12px;
-  font-size: 1rem;
-  font-weight: 700;
-  border-radius: 0.5rem;
-  text-decoration: none;
-  color: whitesmoke;
-  background-color: rgb(22, 118, 182);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  align-self: center;
-}
-
-.right-link:hover{
-  background-color: white;
-  color: #2493d3;
-  box-shadow: 1px 1px 2px ;
+.input-register:focus{
+  outline-style: auto;
+  outline-color: #7bd6e5;
 }
 
 .btn-register{
-  padding: 4px 8px;
-  font-size: 1rem;
-  font-weight: 700;
-  border-radius: 0.5rem;
-  text-decoration: none;
-  align-self: center;
-  background-color: #c1e1f6;
+  background-color: #4cbfd5;
 }
 
 .btn-register:hover{
-  background-color: white;
-  color: #2493d3;
-  box-shadow: 1px 1px 2px ;
+  background-color: #7bd6e5;
 }
 
-/* Media Query de 1200px  */
+.btn-home-register{
+  background-color: #bdbdbd;
+}
+
+.btn-home-register:hover{
+  background-color: #dcdcdc;
+}
 
 @media screen and (max-width: 1200px) {
-  
-  .two-section {
-    width: 70%;
-    height: 85%;
-  }
-  
-  .form-register {
-    padding: 1.5rem 1.5rem;
-    gap: 1.3rem;
-  }
-  
-  .form-title-b {
-    font-size: 2.5rem;
-  }
-  
-  .date-input-b {
-    width: 100%;
-    height: 1.7rem;
-  }
-  
-  .role-input{
-    height: 2rem;
-  }
-  
-  .right-section {
-    width: 50%;
-    gap: 1.7rem;
-  }
-  
-  .right-title {
-    font-size: 2.5rem;
-  }
-  
-  .right-logo{
-    height: 17rem;
-  }
-  
-  .right-link{
-    width: 6.7rem;
-    height: 2.6rem;
-    font-size: 1.2rem;
-  }
-  
-  .btn-register{
-    height: 2.6rem;
-    font-size: 1.2rem;
-  }
-  
-  .btn-register:hover{
-    background-color: white;
-    color: #2493d3;
-    box-shadow: 1px 1px 2px ;
-  }
-
-}
-
-
-/* Media Query de 992px  */
+ }
 
 @media screen and (max-width: 992px) {
-
-  .two-section {
-    width: 85%;
-    height: 85%;
-  }
-  
 }
-
-
-/* Media Query de 768px  */
 
 @media screen and (max-width: 768px) {
 
-  .one-section {
-    height: 110vh;
+  .general-register {
+    width: 57vw;
   }
-  
-  .two-section {
-    width: 80%;
-    height: 80%;
+
+  .title-register {
+    font-size: 25px;
   }
-  
-  .form-register {
-    padding: 1.5rem 1rem;
-    width: 60%;
-    gap: 0.6rem;
+
+  .label-register {
+    font-size: 16px;
+    color: rgb(70, 67, 67);
   }
-  
-  .form-title-b {
-    font-size: 2rem;
-  }
-  
-  .right-section {
-    width: 45%;
-    gap: 2.5rem;
-  }
-  
-  .right-title {
-    font-size: 2rem;
-  }
-  
-  .right-logo{
-    height: 10rem;
-  }
-  
-  .right-link{
-    width: 6.2rem;
-    font-size: 1.1rem;
-    border-radius: 0.5rem;
-  }
-  
-  .btn-register{
-    padding: 4px 8px;
-    font-size: 1rem;
-    font-weight: 700;
-    border-radius: 0.5rem;
-    text-decoration: none;
-    align-self: center;
-    background-color: #c1e1f6;
-  }
+
 }
 
+@media screen and (max-width: 600px) {
 
-/* Media Query de 480px  */
+  .general-register {
+    width: 60vw;
+  }
+
+  .general2-register {
+    width: 51vw;
+  }
+
+  .title-register {
+    font-size: 22px;
+  }
+
+  .label-register {
+    font-size: 14px;
+    color: rgb(70, 67, 67);
+  }
+
+
+}
 
 @media screen and (max-width: 480px) {
-  
-  .two-section {
-    width: 94%;
+
+  .general-register {
+    width: 60vw;
   }
-  
-  .form-register {
-    padding: 0.5rem 0.5rem;
-    width: 60%;
-    gap: 0.4rem;
+
+  .image-register {
+    height: 11vh;
   }
-  
-  .form-title-b {
-    font-size: 2rem;
-    font-weight: 800;
-    text-align: center;
+
+  .general2-register {
+    width: 52vw;
   }
-  
-  .date-input-b {
-    height: 1.5rem;
+
+  .title-register {
+    font-size: 19px;
   }
-  
-  .right-section {
-    width: 40%;
-    gap: 2rem;
+
+  .label-register {
+    font-size: 12px;
+    color: rgb(70, 67, 67);
   }
-  
-  .right-title {
-    font-size: 1.7rem;
+
+  .input-register {
+    height: 4vh;
+    font-size: 13px;
   }
-  
-  .right-logo{
-    height: 10rem;
+
+  .input-rol {
+    font-size: 13px;
   }
-  
-  .right-link{
-    height: 2rem;
-  }
-  
-  .right-link:hover{
-    background-color: white;
-    color: #2493d3;
-    box-shadow: 1px 1px 2px ;
-  }
-  
-  .btn-register{
-    height: 2rem;
-  }
-  
+
+
 }
