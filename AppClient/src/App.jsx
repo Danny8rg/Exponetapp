@@ -10,6 +10,7 @@ import PrincipalShop from "./Views/PrincipalShop";
 import Shops from "./Views/Shops";
 import UserHistory from "./Views/UserHistory";
 import OrdersManagment from "./Views/OrdersManagment";
+import ShopsManagment from "./Views/ShopsManagment";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/Shops" element={<Shops />}></Route>
         <Route path="/UserHistory" element={<UserHistory />}></Route>    
         <Route path="/OrdersManagment" element={<OrdersManagment />}> </Route> 
+        <Route path="/ShopsManagment" element={<ShopsManagment />}> </Route>
       </Routes>
     </>
   );

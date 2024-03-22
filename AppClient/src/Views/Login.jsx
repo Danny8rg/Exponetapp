@@ -71,11 +71,16 @@ function Login() {
             src="/exponet-logo.webp"
             alt=""
           />
-          <h1 className="mt-2 mb-0 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900 title">Accede a tu cuenta</h1>
+          <h1 className="mt-2 mb-0 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900 title">
+            Accede a tu cuenta
+          </h1>
           <div className="mt-3 sm:mx-auto sm:w-full sm:max-w-sm">
             <form onSubmit={handleSubmit} className="space-y-6 formulary">
               <div>
-                <label htmlFor="userMail" className="block text-sm font-medium leading-6 text-gray-900 gmail">
+                <label
+                  htmlFor="userMail"
+                  className="block text-sm font-medium leading-6 text-gray-900 gmail"
+                >
                   Correo electrónico
                 </label>
                 <div className="mt-2 input-gmail">
@@ -94,7 +99,10 @@ function Login() {
               </div>
               <div>
                 <div className="flex items-center justify-between general-password">
-                  <label htmlFor="userPassword" className="block text-sm font-medium leading-6 text-gray-900 password">
+                  <label
+                    htmlFor="userPassword"
+                    className="block text-sm font-medium leading-6 text-gray-900 password"
+                  >
                     Contraseña
                   </label>
                   {/* <div className="text-sm">
@@ -103,7 +111,7 @@ function Login() {
                     </a>
                   </div> */}
                 </div>
-                <div className="mt-2">  
+                <div className="mt-2">
                   <input
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 input-login"
                     type="password"
@@ -117,19 +125,26 @@ function Login() {
                 </div>
               </div>
               <div id="buttonbox">
-                <button type="submit" className="flex w-full justify-center rounded-md px-3 py-1 text-sm font-semibold leading-6 text-white shadow-sm btn-login">
+                <button
+                  type="submit"
+                  className="flex w-full justify-center rounded-md px-3 py-1 text-sm font-semibold leading-6 text-white shadow-sm btn-login"
+                >
                   Iniciar sesión
                 </button>
                 <hr />
                 <div className="flex items-center justify-center inicio">
-                  <Link className="flex w-22 justify-center rounded-md px-3 py-1 text-sm font-semibold no-underline leading-6 text-white shadow-sm btn-home-login" to={"/"}>
-                    Inicio <IoStorefrontSharp className="mx-1 w-auto self-center" /> 
+                  <Link
+                    className="flex w-22 justify-center rounded-md px-3 py-1 text-sm font-semibold no-underline leading-6 text-white shadow-sm btn-home-login"
+                    to={"/"}
+                  >
+                    Inicio{" "}
+                    <IoStorefrontSharp className="mx-1 w-auto self-center" />
                   </Link>
                 </div>
               </div>
             </form>
             <p className="mt-4 mb-0 text-center text-sm text-gray-500 question">
-              ¿No se ha registrado?{''}
+              ¿No se ha registrado?{""}
               <a
                 type="submit"
                 className="ml-1 font-semibold no-underline leading-6 link-new-account"
@@ -147,7 +162,6 @@ function Login() {
 
 export default Login;
 
-
 // <>
 //       <section className="first-section">
 //         <section className="second-section">
@@ -155,7 +169,7 @@ export default Login;
 //             <h1 className="left-title">EXPONET</h1>
 //             <img
 //               className="left-logo"
-//               src="https://media.discordapp.net/attachments/1088828343731900429/1215287895284518912/Captura_de_pantalla_2024-03-07_080922-removebg-preview.png?ex=65fc340d&is=65e9bf0d&hm=bd96221de684f02eb50594f4791686e8ada3664468ab3100ad71003a35943a34&=&format=webp&quality=lossless&width=622&height=482"
+//               src="./exponet-logo-webp"
 //               alt=""
 //             />
 //             <Link className="left-link" to={"/"}>

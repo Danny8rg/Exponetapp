@@ -73,6 +73,18 @@ const Header = () => {
                         </Link>
                       </li>
                       <li>
+                        <Link
+                          to="/ShopsManagment"
+                          className={`link-header ${
+                            location.pathname === "/ShopsManagment"
+                              ? "link-header-b"
+                              : ""
+                          }`}
+                        >
+                          Gestion Tiendas
+                        </Link>
+                      </li>
+                      <li>
                         <button onClick={handleLogout} className="logout">
                           Cerrar sesión
                         </button>

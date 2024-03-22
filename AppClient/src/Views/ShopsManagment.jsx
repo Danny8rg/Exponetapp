@@ -10,7 +10,7 @@ import { useContext } from "react";
 import { ShopContextValues } from "../Components/Context/ShopContext";
 import Swal from "sweetalert2";
 
-function CreateShop() {
+function ShopsManagment() {
   const [shopName, setShopName] = useState("");
   const [shopTell, setShopTell] = useState("");
   const [shopMail, setShopMail] = useState("");
@@ -191,6 +191,7 @@ function CreateShop() {
     <>
       <Header />
       <div className="container pt-36 pb-8">
+        {/*
         <div className="card text-center">
           <div className="card-header">
             <h2 className="title-create-store">Gestión De Tiendas</h2>
@@ -285,7 +286,7 @@ function CreateShop() {
               {selectedFile && (
                 <div className="file-info">
                   <p className="result-select-img">{selectedFile.name}</p>
-                  {/* Puedes agregar más información sobre el archivo si lo deseas */}
+                  {/* Puedes agregar más información sobre el archivo si lo deseas *
                 </div>
               )}
             </div>
@@ -308,7 +309,9 @@ function CreateShop() {
           </div>
         </div>
 
-      {/*  <table className="table table-hover mt-12">
+       */}
+
+        <table className="table table-hover mt-12">
           <thead className="table-titles">
             <tr>
               <th scope="col">Nombre</th>
@@ -376,11 +379,11 @@ function CreateShop() {
               </tr>
             ))}
           </tbody>
-                    </table> */}
+        </table>
       </div>
       <Footer />
     </>
   );
 }
 
-export default CreateShop;
+export default ShopsManagment;
