@@ -15,6 +15,10 @@ function ProductSamplerBuyCar() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    updateTotal();
+  }, [buyCarProducts]);
+
+  useEffect(() => {
     const initialQuantities = buyCarProducts.reduce((quantities, product) => {
       quantities[product.productId] = product.quantity || 0;
       return quantities;

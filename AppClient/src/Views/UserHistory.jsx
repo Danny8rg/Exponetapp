@@ -157,6 +157,11 @@ function UserHistory() {
             <button onClick={() => {
               createComment(comment, buyCarUser, momentId)
             }}>Enviar</button>
+            <button onClick={()=>{
+              setShowModal(false)
+            }}>
+              Cerrar
+            </button>
           </div>
         </div>
       )}

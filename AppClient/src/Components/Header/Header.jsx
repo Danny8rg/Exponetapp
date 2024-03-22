@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { ShopContextValues } from "../Context/ShopContext";
 import { MdShoppingCart } from "react-icons/md";
@@ -11,6 +11,11 @@ const Header = () => {
   const [userId, setUserId] = useState(Cookies.get("userId"));
   const [userRoll, setUserRoll] = useState(Cookies.get("userRoll"));
   const { buyCarProducts, setBuyCarProducts } = useContext(ShopContextValues);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   const handleLogout = () => {
     Cookies.remove("userId");
@@ -19,15 +24,12 @@ const Header = () => {
     navigate("/");
   };
 
+  const location = useLocation();
+
   return (
     <>
       <header className="header-home">
-        <ul className="filter-nav">
-          <li className="box-input-search">
-            <FaSearch className="icon-search" />
-            <input type="text" name="" id="" placeholder="Buscar producto" />
-          </li>
-          {/* AQUÍ CAMBIÉ PASÉ EL COMPONENTE 'ICON-BOX' A UNA ETIQUETA 'Link' PARA QUE REDIRIJA AL INICIO YA QUE ANTERIORMENTE ERA UN 'BUTTON' SIN FUNCIÓN */}
+        <div className="h-full flex items-center justify-center">
           <Link to="/" className="icon-box">
             <h1 className="icon-txt">EXPONET</h1>
             <img
@@ -36,81 +38,78 @@ const Header = () => {
               alt=""
             />
           </Link>
-          {/* <li className="box-select-category">
-            <select name="" id="" placeholder="Categorías">
-              <option value="" disabled selected>
-                Categorías
-              </option>
-              <option value="">Ensayo1</option>
-              <option value="">Ensayo2</option>
-            </select>
-          </li> */}
-        </ul>
-        <nav>
-          <ul className="links-nav">
-            <li>
-              <Link to="/" className="link-header-b">
-                Inicio
-              </Link>
-            </li>
-            {userId ? (
-              <>
-                {userRoll === "vendedor" && (
-                  <>
-                    <li>
-                      <Link to="/CreateShop" className="link-header-b">
-                        Crear tienda
-                      </Link>
-                    </li>
-                    <li>
-                      <button onClick={handleLogout} className="logout">
-                        Cerrar sesión
-                      </button>
-                    </li>
-                  </>
-                )}
-                {userRoll === "comprador" && (
-                  <>
-                    <li>
-                      <Link to="/Shops" className="link-header-b">
-                        Tiendas
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="/UserHistory" className="link-header-b">
-                        Historial
-                      </Link>
-                    </li>
-                    <li>
-                      <button onClick={handleLogout} className="link-header-b">
-                        Cerrar sesión
-                      </button>
-                    </li>
-                    <li>
-                      <Link to="/BuyCar">
-                        <MdShoppingCart className="link-header-cart" />
-                      </Link>
-                    </li>
-                  </>
-                )}
-              </>
-            ) : (
-              <>
-                <li>
-                  <Link to="/Login" className="link-header-b">
-                    Iniciar sesión
-                  </Link>
-                </li>
-                {/* Agrega la condición para mostrar el botón de Tiendas cuando el usuario no está autenticado */}
-                <li>
-                  <Link to="/Shops" className="link-header-b">
-                    Tiendas
-                  </Link>
-                </li>
-              </>
-            )}
-          </ul>
-        </nav>
+          <nav className={`nav ${isMenuOpen ? 'open' : ''}`}>
+            <ul className="filter-nav">
+              <li className="box-input-search">
+                <FaSearch className="icon-search" />
+                <input type="text" name="" id="" placeholder="Buscar producto" />
+              </li>
+            </ul>
+            <ul className="links-nav">
+              <li>
+                <Link to="/" className={`link-header ${location.pathname === '/' ? 'link-header-b' : ''}`}>
+                  Inicio
+                </Link>
+              </li>
+              {userId ? (
+                <>
+                  {userRoll === "vendedor" && (
+                    <>
+                      <li>
+                        <Link to="/CreateShop" className={`link-header ${location.pathname === '/CreateShop' ? 'link-header-b' : ''}`}>
+                          Crear tienda
+                        </Link>
+                      </li>
+                      <li>
+                        <button onClick={handleLogout} className="logout">
+                          Cerrar sesión
+                        </button>
+                      </li>
+                    </>
+                  )}
+                  {userRoll === "comprador" && (
+                    <>
+                      <li>
+                        <Link to="/Shops" className={`link-header ${location.pathname === '/Shops' ? 'link-header-b' : ''}`}>
+                          Tiendas
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/UserHistory" className={`link-header ${location.pathname === '/UserHistory' ? 'link-header-b' : ''}`}>
+                          Historial
+                        </Link>
+                      </li>
+                      <li>
+                        <button onClick={handleLogout} className={`link-header`}>
+                          Cerrar sesión
+                        </button>
+                      </li>
+                      <li>
+                        <Link to="/BuyCar" className={`link-header-cart ${location.pathname === '/BuyCar' ? 'link-header-cart-b' : ''}`} >
+                          <MdShoppingCart  />
+                        </Link>
+                      </li>
+                    </>
+                  )}
+                </>
+              ) : (
+                <>
+                  <li>
+                    <Link to="/Login" className={`link-header`}>
+                      Iniciar sesión
+                    </Link>
+                  </li>
+                  {/* Agrega la condición para mostrar el botón de Tiendas cuando el usuario no está autenticado */}
+                  <li>
+                    <Link to="/Shops" className={`link-header ${location.pathname === '/Shops' ? 'link-header-b' : ''}`}>
+                      Tiendas
+                    </Link>
+                  </li>
+                </>
+              )}
+            </ul>
+          </nav>
+        </div>
       </header>
     </>
   );

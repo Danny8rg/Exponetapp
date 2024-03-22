@@ -1,191 +1,164 @@
-/* PERTENECER AL HOME.JSX */
+.product-container-home {
+  width: 100%;
+  padding-top: 6rem;
+  /* padding-bottom: 2rem; */
+  gap: 3rem 5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 .box-title-sampler {
-    width: 100%;
-    height: 5rem;
-    bottom: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-  }
-  
-  .product-title-sampler {
-    margin: 0;
-    width: 100%;
-    font-size: 2.2rem;
-    font-weight: 800;
-    bottom: -5rem;
-    -webkit-text-stroke: 1px #c1e1f6;
-    position: absolute;
-    text-align: center;
-    text-shadow: 4px 4px #c1e1f6;
-    font-style: italic;
-  }
-  
-  /* ---------------------------------------------- */
-  
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-title-sampler {
+  margin: 0;
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-align: center;
+  border-bottom: 3px solid #b1e7f0;
+}
+
+.product-card-home {
+  width: 21rem;
+  height: 26rem;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #b2e8f3;
+  background-color: white;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease;
+}
+
+.product-card-home:hover {
+  transform: scale(1.05);
+}
+
+.card-btn-home {
+  width: 6.5rem;
+  padding: 2px;
+  top: 0.5rem;
+  right: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: 8px;
+  position: absolute;
+  color: #4cbfd5;
+  text-align: center;
+  text-decoration: none;
+  background-color: white;
+  box-shadow: 1px 1px 3px #efefef;
+}
+
+.card-btn-home:hover {
+  background-color: white;
+  box-shadow: 1px 1px 3px #efefef;
+}
+
+.box-img-home {
+  height: 20rem;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.prod-img-home {
+  width: 100%;
+  border-radius: 8px;
+  max-height: 100%;
+  display: block;
+  border: 1px solid #b2e8f3;
+  /* object-fit: cover; */
+}
+
+.prod-title-home {
+  font-size: 1rem;
+  margin: 0.5rem 0;
+  font-weight: 700;
+  /* text-align: center; */
+}
+
+.dates-box-descrip {
+  margin-bottom: 0.8rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.value-descrip-home {
+  height: 32px;
+  margin: 0;
+  line-height: 0.8rem;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.dates-box-one {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+}
+
+.subtitle-home {
+  margin: 0;
+  height: 0.6rem;
+  letter-spacing: 0.05rem;
+  font-size: 0.5rem;
+  color: #bdbdbd;
+}
+
+.value-home {
+  margin: 0;
+  height: 20px;
+  line-height: 0.8rem;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.dates-box-two {
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  text-align: center;
+  flex-direction: column;
+}
+
+.value-home-price {
+  margin: 0;
+  height: 20px;
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
+  color: #4cbfd5;
+}
+
+@media screen and (max-width: 768px) {
+
   .product-container-home {
-    width: 100%;
-    padding-top: 8rem;
-    padding-bottom: 3.5rem;
-    gap: 6rem 8rem;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  
-  .product-card-home {
-    width: 20rem;
-    height: 30rem;
-    border-radius: 12px;
-    position: relative;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    background-color: #efefef;
+  }
+
+  .product-title-sampler {
+    font-size: 2rem;
+  }
+
+  .product-card-home {
+    background-color: white;
     transition: transform 0.3s ease;
     border: 1px solid #c1e1f6;
+    margin-left: 28%;
   }
-  
-  .product-card-home:hover {
-    transform: scale(1.05);
-    box-shadow: 0px 0px 2px #8ac9ef;
-  }
-  
-  .card-btn-home {
-    width: 7rem;
-    top: 1rem;
-    right: 1rem;
-    font-size: 0.8rem;
-    font-weight: 700;
-    padding: 0.2rem 1rem;
-    border-radius: 4px;
-    position: absolute;
-    color: black;
-    text-align: center;
-    text-decoration: none;
-    background-color: #c1e1f6;
-  }
-  
-  .card-btn-home:hover {
-    background-color: white;
-    color: #2493d3;
-    box-shadow: 1px 1px 2px;
-  }
-  
-  .box-img-home {
-      height: 20rem;
-      width: 100%;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-  }
-    
-  .prod-img-home {
-      width: 92%;
-      border-radius: 0.4rem;
-      height: auto;
-      display: block;
-  }
-  
-  .prod-title-home {
-    font-size: 1.1rem;
-    margin: 0;
-    margin-bottom: 0.5rem;
-    font-weight: 700;
-    text-align: center;
-  }
-  
-  .dates-box-descrip {
-      margin-bottom: 0.5rem;
-      display: flex;
-      align-items: center;
-      text-align: center;
-      flex-direction: column;
-  }
-  
-  .value-descrip-home {
-    margin: 0;
-    line-height: 0.8rem;
-    height: 32px;
-    font-size: 0.8rem;
-    text-align: center;
-  }
-  
-  .dates-box-one {
-      margin-bottom: 0.8rem;
-      display: flex;
-      align-items: center;
-      text-align: center;
-      flex-direction: column;
-  }
-  
-  .dates-box-two {
-      padding-right: 1rem;
-      display: flex;
-      align-items: center;
-      align-self: flex-end;
-      text-align: center;
-      flex-direction: column;
-  }
-  
-  .subtitle-home {
-    margin: 0;
-    height: 0.6rem;
-    letter-spacing: 0.05rem;
-    font-size: 0.5rem;
-    color: #bdbdbd;
-  }
-  
-  .value-home {
-    margin: 0;
-    height: 20px;
-    font-size: 0.8rem;
-    text-align: center;
-  }
-  
-  .value-home-price {
-      margin: 0;
-      height: 20px;
-      font-size: 1.1rem;
-      font-weight: 700;
-      text-align: center;
-      color: #2493d3;
-    }
 
-    @media screen and (max-width: 480px){
-      .box-title-sampler {
-        height: 5rem;
-        bottom: 2.5rem;
-      }
-      
-      .product-title-sampler {
-        font-size: 1.5rem;
-        font-weight: 800;
-        bottom: 2rem;
-      }
-      
-      .product-container-home {
-        padding-top: 5rem;
-        padding-bottom: 3.5rem;
-        gap: 6rem 8rem;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-      
-      .product-card-home {
-        width: 20rem;
-        height: 30rem;
-        border-radius: 12px;
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        background-color: #efefef;
-        transition: transform 0.3s ease;
-        border: 1px solid #c1e1f6;
-      }
-      
-    }
+}

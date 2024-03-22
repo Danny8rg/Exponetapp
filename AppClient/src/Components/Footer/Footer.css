@@ -1,84 +1,89 @@
-footer{
-  height: 80px;
+footer {
+  height: 10vh;
   width: 100%;
   gap: 58rem;
-  position: relative;
   display: flex;
   align-items: center;
-  /* justify-content: center; da scroll horizontal  */
+  justify-content: center;
   text-align: center;
-  background-color: whitesmoke;
+  background-color: #f8f8f8;
 }
 
-.box-footer-txt{
+.box-footer-txt {
   width: 14rem;
 }
 
-.box-footer-txt h4{
+.box-footer-txt h3 {
   margin: 0;
   font-size: 1rem;
   font-weight: 700;
 }
 
-.social-media{
+.social-media {
   height: 100%;
   display: inline-flex;
+  gap: 3rem;
 }
 
-.social-media .icon{
-  margin: 18px 20px;
+.social-media .icon {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   position: relative;
   z-index: 2;
-  transition: all 0.4s cubic-bezier(0.68,-0.55,0.265,1.55);
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
-.social-media .icon a{
-  height: 40px;
-  width: 40px;
-  border-radius: 15%;
+.social-media .icon a {
+  height: 44px;
+  width: 44px;
+  border-radius: 10px;
   z-index: 2;
+  font-size: 1.8rem;
+  /* box-shadow: 1px 1px 3px #bdbdbd; */
+  /* border: 1px solid #dcdcdc; */
   position: relative;
-  display: block;
-  background-color: #c1e1f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
   color: black;
+  background-color: #dcdcdc;
 }
 
-.react-icon-mail{
-  margin: 0.4rem;
-  font-size: 1.8rem;
-  line-height: 40px;
+.react-icon-mail {
+  font-size: 2rem;
 }
 
 .react-icon-wpp{
-  margin: 0.5rem;
-  font-size: 1.6rem;
-  line-height: 40px;
+  font-size: 1.8rem;
 }
 
-.social-media .icon:hover a{
+.social-media .icon:hover a {
+  border-radius: 50%;
+  transition: 0.5s;
+  box-shadow: 0 0 8px #bdbdbd;
   color: white;
 }
 
-.social-media .icon .tool{
+.social-media .icon .tool {
   top: 0px;
-  font-size: 18px;
-  padding: 10px 18px;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 6px 18px;
   border-radius: 25px;
+  letter-spacing: 0.05rem;
   position: absolute;
   background: white;
   color: white;
-  box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 0 10px #d1d1d1;
   opacity: 0;
   pointer-events: none;
-  transition: all 0.4s cubic-bezier(0.68,-0.55,0.265,1.55);
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
-.social-media .icon .tool:before{
+.social-media .icon .tool:before {
   height: 15px;
   width: 15px;
   left: 50%;
@@ -87,90 +92,161 @@ footer{
   content: "";
   background: white;
   transform: translateX(-50%) rotate(45deg);
-  transition: all 0.4s cubic-bezier(0.68,-0.55,0.265,1.55);
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
-.social-media .icon:hover .tool{
+.social-media .icon:hover .tool {
   opacity: 1;
-  top: -72px;
+  top: -54px;
   pointer-events: auto;
 }
 
 .social-media .icon:hover a,
-.social-media .icon:hover .tool{
-  text-shadow: 0px -1px 0px rgba(0,0,0,0.4);
+.social-media .icon:hover .tool {
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.4);
 }
 
 .social-media .gmail:hover a,
 .social-media .gmail:hover .tool,
-.social-media .gmail:hover .tool:before{
+.social-media .gmail:hover .tool:before {
   background-color: #e30d31;
 }
 
 .social-media .whatsapp:hover a,
 .social-media .whatsapp:hover .tool,
-.social-media .whatsapp:hover .tool:before{
+.social-media .whatsapp:hover .tool:before {
   background-color: #1bd741;
 }
 
-
 /* MEDIA QUERY DEL FOOTER */
 
-@media screen and (max-width: 480px){
-  footer{
+@media screen and (max-width: 768px){
+  footer {
+    gap: 24rem;
+  }
+
+  .box-footer-txt {
+    width: 8.5rem;
+  }
+
+  .box-footer-txt h3 {
+    font-size: 0.9rem;
+  }
+
+  .social-media {
+    gap: 2.2rem;
+  }
+
+  .social-media .icon a {
+    height: 35px;
+    width: 35px;
+  }
+
+  .react-icon-mail {
+    font-size: 1.6rem;
+  }
+
+  .react-icon-wpp {
+    font-size: 1.4rem;
+  }
+
+  .social-media .icon .tool {
+    font-size: 0.9rem;
+    padding: 6px 12px;
+  }
+
+  .social-media .icon .tool:before {
+    height: 10px;
+    width: 10px;
+    bottom: -5px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+
+  footer {
     height: 8vh;
-    gap: 6rem;
+    gap: 16rem;
   }
-  
-  .box-footer-txt{
-    width: 10rem;
+
+  .box-footer-txt {
+    width: 8rem;
   }
-  
-  .box-footer-txt h4{
+
+  .box-footer-txt h3 {
     font-size: 0.8rem;
   }
 
-  .social-media{
-    display: inline-flex;
+  .social-media {
+    gap: 2rem;
   }
 
-  .social-media .icon{
-    margin: 10px 12px;
-  }
-  
-  .social-media .icon a{
+  .social-media .icon a {
     height: 30px;
     width: 30px;
   }
 
-  .react-icon-mail{
-    margin: 0.25rem;
+  .react-icon-mail {
     font-size: 1.4rem;
   }
-  
-  .react-icon-wpp{
-    margin: 0.3rem;
+
+  .react-icon-wpp {
     font-size: 1.3rem;
-    line-height: 40px;
   }
 
-  .social-media .icon .tool{
-    top: 0px;
+  .social-media .icon .tool {
     font-size: 0.8rem;
     padding: 6px 12px;
   }
 
-.social-media .icon .tool:before{
-  position: absolute;
-  content: "";
-  height: 15px;
-  width: 15px;
-  background: white;
-  left: 50%;
-  bottom: -7px;
-  transform: translateX(-50%) rotate(45deg);
-  transition: all 0.4s cubic-bezier(0.68,-0.55,0.265,1.55);
+  .social-media .icon .tool:before {
+    height: 10px;
+    width: 10px;
+    bottom: -5px;
+  }
+
 }
 
 
+@media screen and (max-width: 480px) {
+  footer {
+    height: 8vh;
+    gap: 11rem;
+  }
+
+  .box-footer-txt {
+    width: 8rem;
+  }
+
+  .box-footer-txt h3 {
+    font-size: 0.8rem;
+  }
+
+  .social-media {
+    gap: 2rem;
+  }
+
+  .social-media .icon a {
+    height: 30px;
+    width: 30px;
+  }
+
+  .react-icon-mail {
+    font-size: 1.4rem;
+  }
+
+  .react-icon-wpp {
+    font-size: 1.3rem;
+  }
+
+  .social-media .icon .tool {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+  }
+
+  .social-media .icon .tool:before {
+    height: 10px;
+    width: 10px;
+    bottom: -5px;
+  }
 }

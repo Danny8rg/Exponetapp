@@ -1,13 +1,14 @@
 import "./Footer.css";
 import { IoIosMail } from "react-icons/io";
-import { RiWhatsappFill } from "react-icons/ri";
+import { IoLogoWhatsapp } from "react-icons/io";
 
 function Footer() {
+
   return (
     <>
       <footer>
         <div className="box-footer-txt">
-          <h4>EXPONET | 2024 &copy;</h4>
+          <h3>EXPONET | 2024 &copy;</h3>
         </div>
         <div className="social-media">
           <div className="icon gmail">
@@ -26,7 +27,7 @@ function Footer() {
               rel="noopener noreferrer"
             >
               <i>
-                <RiWhatsappFill className="react-icon-wpp" />
+                <IoLogoWhatsapp className="react-icon-wpp" />
               </i>
             </a>
           </div>
