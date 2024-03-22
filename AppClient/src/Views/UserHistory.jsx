@@ -9,6 +9,8 @@ function UserHistory() {
   const [buyCars, setBuyCars] = useState([]);
   const [buyCarUser, setBuyCarUser] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [showModal, setShowModal] = useState(false); // Estado para controlar si se muestra la modal
+  const [comment, setComment] = useState(""); // Estado para almacenar el comentario
 
   useEffect(() => {
     setBuyCarUser(Cookies.get("userId"));
@@ -19,10 +21,10 @@ function UserHistory() {
         );
         console.dir(response.data);
         setBuyCars(response.data);
-        setLoading(false); // Cambia el estado de carga a falso cuando se completa la solicitud
+        setLoading(false);
       } catch (error) {
         console.error("Error al obtener historial de compras:", error);
-        setLoading(false); // Cambia el estado de carga a falso si hay un error
+        setLoading(false);
       }
     };
 
@@ -31,12 +33,20 @@ function UserHistory() {
 
   // Función para manejar la eliminación del producto
   const handleDelete = (productId, buyCarContent) => {
-    console.dir("soy el buycarcontent del boton deletear",buyCarContent);
+    console.dir("soy el buycarcontent del boton deletear", buyCarContent);
   };
 
   // Función para manejar la acción de comentario del producto
   const handleComment = (productId) => {
-    // Lógica para añadir comentario al producto
+    setShowModal(true); // Abrir la modal cuando se hace clic en el botón de comentario
+  };
+
+  // Función para manejar el envío del comentario
+  const handleSubmitComment = () => {
+    // Lógica para enviar el comentario
+    console.log("Comentario enviado:", comment);
+    setShowModal(false); // Cerrar la modal después de enviar el comentario
+    setComment(""); // Limpiar el área de comentario
   };
 
   return (
@@ -57,12 +67,14 @@ function UserHistory() {
                 <th>Precio</th>
                 <th>Estado</th>
                 <th>Cantidad</th>
-                <th>Acciones</th> {/* Columna para los botones */}
+                <th>Acciones</th>
               </tr>
             </thead>
             <tbody>
               {buyCars
-                .filter((buyCar) => buyCar.buyCarUser === parseInt(buyCarUser))
+                .filter(
+                  (buyCar) => buyCar.buyCarUser === parseInt(buyCarUser)
+                )
                 .map((filteredBuyCar) =>
                   JSON.parse(filteredBuyCar.buyCarContent).products.map(
                     (product, index) => (
@@ -73,13 +85,13 @@ function UserHistory() {
                         <td>{product.productState}</td>
                         <td>
                           {Array.isArray(
-                            JSON.parse(filteredBuyCar.buyCarContent).quantities
+                            JSON.parse(filteredBuyCar.buyCarContent)
+                              .quantities
                           ) &&
-                            JSON.parse(filteredBuyCar.buyCarContent).quantities[
-                              index
-                            ].quantity}
+                            JSON.parse(
+                              filteredBuyCar.buyCarContent
+                            ).quantities[index].quantity}
                         </td>
-                        {/* Condición para renderizar los botones */}
                         <td>
                           {product.productState === "Entregado" && (
                             <>
@@ -109,7 +121,20 @@ function UserHistory() {
           </table>
         </div>
       )}
-    <Footer />
+      {showModal && (
+        <div className="modal">
+          <div className="modal-content">
+            <h1>Hola usuario</h1>
+            <textarea
+              placeholder="Escribe tu comentario aquí"
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+            />
+            <button onClick={handleSubmitComment}>Enviar</button>
+          </div>
+        </div>
+      )}
+      <Footer />
     </>
   );
 }
