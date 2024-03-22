@@ -81,7 +81,7 @@ function UserHistory() {
                         </td>
                         {/* Condición para renderizar los botones */}
                         <td>
-                          {product.productState === "entregado" && (
+                          {product.productState === "Entregado" && (
                             <>
                               <button
                                 onClick={() => {

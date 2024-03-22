@@ -69,7 +69,7 @@ function OrdersManagment() {
     return JSON.stringify(parsedContent);
   }
 
-  function orderDelivered(buyCarContent, buyCarId) {
+  function orderDelivered(buyCarContent, globalShopId, buyCarId) {
     console.log("soy funcion");
     console.dir("soy el buy car original que llega ",buyCarContent);
 
@@ -152,7 +152,7 @@ function OrdersManagment() {
       }
     });
     console.dir("soy el buycarcontent con el estado cambiado", parsedContent);
-    return parsedContent;
+    return JSON.stringify(parsedContent);
 }
 
 function ChangeStateCanceled(buyCarContent, globalShopId) {
@@ -248,14 +248,14 @@ function ChangeStateCanceled(buyCarContent, globalShopId) {
                                 <td>
                                 {product.productState !== "Entregado" && (
                         <button onClick={() => {
-                            orderDelivered(order.buyCarContent, globalShopId);
+                            orderDelivered(order.buyCarContent, globalShopId, order.buyCarId);
                         }}>
                             Despachar
                         </button>
                     )}
                                     {product.productState !== "Entregado" && (
                         <button onClick={() => {
-                            ChangeStateCanceled(order.buyCarContent, globalShopId);
+                            ChangeStateCanceled(order.buyCarContent, globalShopId, order.buyCarId);
                         }}>
                             Cancelar
                         </button>
