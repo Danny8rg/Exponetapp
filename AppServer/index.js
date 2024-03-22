@@ -718,6 +718,23 @@ app.put("/deleteProductFromBuyCar"),
     }
   });
   
+  // Función para clasificar el texto utilizando la IA de Gemini
+  async function classify_text(msg) {
+    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+    const result = await model.generateContent(msg);
+    const response = await result.response;
+    const text = response.text();
+    
+    if (text === "A favor") {
+      return "A favor";
+    } else if (text === "En contra") {
+      return "En contra";
+    } else {
+      return "Sin clasificar";
+    }
+  }
+  
+  
 
   app.listen(3000, () => {
     console.log(`Servidor escuchando en el puerto 3000`);
