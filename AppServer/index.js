@@ -664,10 +664,8 @@ app.put("/deleteProductFromBuyCar"),
     });
   });
 
-  app.post("/createComment", upload.none(), (req, res) => {
-    const appComment = req.body.get('appComment');
-    const userComment = req.body.get('commentUser');
-    const productComment = req.body.get('productComment');
+  app.post("/createComment",  (req, res) => {
+    const {appComment, userComment, productComment} = req.body;
     const positiveComments = 0;
     const negativeComments = 0;
   
