@@ -666,6 +666,7 @@ app.put("/deleteProductFromBuyCar"),
 
   app.post("/createComment",  (req, res) => {
     const {appComment, userComment, productComment} = req.body;
+    console.dir(appComment, userComment, productComment)
     const positiveComments = 0;
     const negativeComments = 0;
   
