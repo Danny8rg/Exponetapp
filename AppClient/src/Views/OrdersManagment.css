@@ -18,20 +18,35 @@
     font-weight: bold;
     text-align: center;
     margin-top: 3%;
+    border: 2px solid #afb2b3;
+  }
+
+  .nameProductOrders {
+    width: 21%;
+  }
+
+  .descriptionOrders {
+    width: 30%;
   }
   
   .product-container {
-    list-style-type: none;
+    border: solid 2px #afb2b3;
+    height: 70px;
+    text-align: center;
+  }
+
+  .product-container td {
+    border: 2px solid #afb2b3;
   }
   
-  .product-container li {
+  /* .product-container li {
     padding: 1rem;
     width: 90%;
-    border: 2px solid #c1e1f6;
+    border: 2px solid #2a2b2c;
     box-shadow: 1px 1px 4px rgb(220, 220, 220);
     border-radius: 8px;
     margin-bottom: 5%;
-  }
+  } */
   
   /* .invoice-item {
     color: black;

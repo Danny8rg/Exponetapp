@@ -5,6 +5,7 @@ import Axios from "axios";
 import { ShopContextValues } from "../Context/ShopContext";
 import Cookies from "js-cookie";
 import "./ProductSamplerBuyCar.css";
+import Swal from "sweetalert2";
 
 function ProductSamplerBuyCar() {
   const { buyCarProducts, setBuyCarProducts } = useContext(ShopContextValues);
@@ -106,7 +107,13 @@ function ProductSamplerBuyCar() {
     setBuyCarProducts([]);
     setSelectedQuantities({});
     setTotal(0);
-    alert("Compra realizada con éxito");
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "Compra realizada con exito",
+      showConfirmButton: false,
+      timer: 1500,
+    });
     navigate("/UserHistory");
   };
 
@@ -138,7 +145,13 @@ function ProductSamplerBuyCar() {
     setBuyCarProducts([]);
     setSelectedQuantities({});
     setTotal(0);
-    alert("Productos eliminados del carrito");
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "Productos eliminados del carrito",
+      showConfirmButton: false,
+      timer: 1500,
+    });
   };
 
   return (

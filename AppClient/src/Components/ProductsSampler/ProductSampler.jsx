@@ -4,6 +4,7 @@ import { FaPlus, FaMinus } from "react-icons/fa";
 import { ShopContextValues } from "../Context/ShopContext";
 import { MdDeleteForever } from "react-icons/md";
 import "../ProductsSampler/ProductSampler.css";
+import Swal from "sweetalert2";
 
 function ProductSampler({ products, stock, quantityCards, Route }) {
   const [selectedProducts, setSelectedProducts] = useState({});
@@ -91,8 +92,13 @@ function ProductSampler({ products, stock, quantityCards, Route }) {
         productState
       },
     ]);
-
-    alert("Producto Añadido Al Carrito");
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "Producto añadido al carrito",
+      showConfirmButton: false,
+      timer: 1500,
+    });
   }
 
 

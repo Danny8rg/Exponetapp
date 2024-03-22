@@ -85,17 +85,17 @@ function UserHistory() {
       ) : (
         <div className="shops-container-historial">
           <table>
-            <thead>
+            <thead className="theadUserHistory">
               <tr>
-                <th>Nombre del Producto</th>
-                <th>Descripción</th>
-                <th>Precio</th>
-                <th>Estado</th>
-                <th>Cantidad</th>
-                <th>Acciones</th>
+                <th className="productName">Nombre del Producto</th>
+                <th className="description">Descripción</th>
+                <th className="prize">Precio</th>
+                <th className="state">Estado</th>
+                <th className="cant">Cantidad</th>
+                <th className="action">Acciones</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="tdBody">
               {buyCars
                 .filter(
                   (buyCar) => buyCar.buyCarUser === parseInt(buyCarUser)
@@ -103,12 +103,12 @@ function UserHistory() {
                 .map((filteredBuyCar) =>
                   JSON.parse(filteredBuyCar.buyCarContent).products.map(
                     (product, index) => (
-                      <tr key={product.productId}>
-                        <td>{product.productName}</td>
-                        <td>{product.productDescription}</td>
-                        <td>{product.productPrize}</td>
-                        <td>{product.productState}</td>
-                        <td>
+                      <tr className="trUserHistory" key={product.productId}>
+                        <td className="tdUserHistory">{product.productName}</td>
+                        <td className="tdUserHistory tdDescription">{product.productDescription}</td>
+                        <td className="tdUserHistory">{product.productPrize}</td>
+                        <td className="tdUserHistory">{product.productState}</td>
+                        <td className="tdUserHistory">
                           {Array.isArray(
                             JSON.parse(filteredBuyCar.buyCarContent)
                               .quantities
@@ -117,7 +117,7 @@ function UserHistory() {
                               filteredBuyCar.buyCarContent
                             ).quantities[index].quantity}
                         </td>
-                        <td>
+                        <td className="tdUserHistory">
                           {product.productState === "Entregado" && (
                             <>
                               <button

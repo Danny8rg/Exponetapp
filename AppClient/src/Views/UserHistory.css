@@ -72,3 +72,45 @@
     padding: 20px;
     border-radius: 5px;
 }
+
+.theadUserHistory th{
+    text-align: center;
+    border: solid 2px #afb2b3;
+}
+
+.productName {
+    width: 21%;
+}
+
+.description {
+    width: 30%;
+}
+
+.prize {
+    width: 13%;
+}
+
+.state {
+    width: 13%;
+}
+
+.cant {
+    width: 13%;
+}
+
+.action {
+    width: 13%;
+}
+
+.tdBody td {
+    text-align: center;
+}
+
+.tdUserHistory {
+    border: solid 2px #afb2b3;
+    height: 70px;
+}
+
+.tdDescription {
+    text-align: center;
+}

@@ -225,12 +225,12 @@ function ChangeStateCanceled(buyCarContent, globalShopId) {
                   <table key={order.buyCarId}>
                     <thead>
                       <tr>
-                        <th className="subtitles">Nombre del Producto</th>
-                        <th className="subtitles">Descripción</th>
-                        <th className="subtitles">Precio</th>
-                        <th className="subtitles">Cantidad</th>
-                        <th className="subtitles">Estado</th>
-                        <th className="subtitles">Acciones</th>
+                        <th className="subtitles nameProductOrders">Nombre del Producto</th>
+                        <th className="subtitles descriptionOrders">Descripción</th>
+                        <th className="subtitles prizeOrders">Precio</th>
+                        <th className="subtitles cantOrders">Cantidad</th>
+                        <th className="subtitles stateOrders">Estado</th>
+                        <th className="subtitles actionOrders">Acciones</th>
                       </tr>
                     </thead>
                     <tbody className="product-container">
