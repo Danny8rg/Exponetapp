@@ -617,15 +617,14 @@ app.post("/ProductStockUpdate", (req, res) => {
 app.put("/updateBuyCar", (req, res) => {
   const buyCarId = req.body.buyCarId;
   const newBuyCarContent = req.body.newBuyCarContent;
-  const carContent = JSON.stringify(newBuyCarContent)
 
   console.log("ID del carrito de compras:", buyCarId);
   console.log("Nuevo contenido del carrito de compras:", newBuyCarContent);
-  console.log("soy el carContent", carContent);
+
 
   db.query(
     "UPDATE appBuyCars SET buyCarContent = ? WHERE buyCarId = ?",
-    [carContent, buyCarId],
+    [newBuyCarContent, buyCarId],
     (err, result) => {
       if (err) {
         console.log(err);

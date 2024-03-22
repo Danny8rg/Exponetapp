@@ -75,7 +75,7 @@ function OrdersManagment() {
 
     const newBuyCarContent = ChangeState(buyCarContent, globalShopId);
 
-    const parsedContent = JSON.parse(newBuyCarContent);
+    const parsedContent = JSON.parse(buyCarContent);
     console.dir(parsedContent);
 
     const productsIds = parsedContent.products.map(
@@ -154,6 +154,38 @@ function OrdersManagment() {
     return parsedContent;
 }
 
+function ChangeStateCanceled(buyCarContent, buyCarId) {
+  const parsedContent = JSON.parse(buyCarContent);
+  console.dir(
+    "soy el buyCarContent de la funcion change state Canceled",
+    parsedContent
+  );
+
+  parsedContent.products.forEach((product) => {
+    if (
+      product.productShopOwner === globalShopId &&
+      product.productState.trim() === "pendiente"
+    ) {
+      product.productState = "Cancelado";
+    } else if (product.productState.trim() === "pendiente") { // Aquí se cambió la comparación
+      product.productState = "pendiente";
+    }
+  });
+
+  console.log("soy el parsedCOntent de changestatecanceled", parsedContent)
+  
+  axios.put("https://exponetapp-8fxj.onrender.com/updateBuyCar", {
+    buyCarId,
+    parsedContent,
+  })
+  .then((response) => {
+    console.log(response.data)
+  })
+  .catch((error) =>{
+    console.error("error al actualizar el carro de compras", error);
+  })
+}
+
   const DeleteBuyCar = (buyCarId) => {
     const confirmation = window.confirm(
       "¿Seguro que desea eliminar el Carrito?"
@@ -213,14 +245,18 @@ function OrdersManagment() {
                                 <td>{product.quantity}</td>
                                 <td>{product.productState}</td>
                                 <td>
-                                  <button>
-                                    Cancelar
-                                  </button>
-                                  <button onClick={()=>{
-                                    orderDelivered(order.buyCarContent, order.buyCarId)
-                                  }}>
-                                    Despachar
-                                  </button>
+                                {product.productState !== "Entregado" && (
+                        <button onClick={() => {
+                            orderDelivered(order.buyCarContent, order.buyCarId);
+                        }}>
+                            Despachar
+                        </button>
+                    )}
+                    <button onClick={()=>{
+                      ChangeStateCanceled(order.buyCarContent, order.buyCarId)
+                    }}>
+                      Cancelar
+                    </button>
                                 </td>
                               </tr>
                             );
