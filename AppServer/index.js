@@ -618,8 +618,8 @@ app.put("/updateBuyCar", (req, res) => {
   const buyCarId = req.body.buyCarId;
   const newBuyCarContent = req.body.newBuyCarContent;
 
-  console.log("ID del carrito de compras:", buyCarId);
-  console.log("Nuevo contenido del carrito de compras y el estado cambiado:", newBuyCarContent);
+  console.dir("ID del carrito de compras:", buyCarId);
+  console.dir("Nuevo contenido del carrito de compras y el estado:", newBuyCarContent);
 
 
   db.query(

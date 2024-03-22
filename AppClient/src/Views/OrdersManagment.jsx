@@ -252,11 +252,16 @@ function ChangeStateCanceled(buyCarContent, buyCarId) {
                             Despachar
                         </button>
                     )}
-                    <button onClick={() => {
-                        ChangeStateCanceled(order.buyCarContent, order.buyCarId);
-                    }}>
-                        Cancelar
-                    </button>
+                                    {product.productState !== "Entregado" && (
+                        <button onClick={() => {
+                            ChangeStateCanceled(order.buyCarContent, order.buyCarId);
+                        }}>
+                            Cancelar
+                        </button>
+                    )}
+                 
+                 
+                 
                                 </td>
                               </tr>
                             );
