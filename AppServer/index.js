@@ -732,10 +732,7 @@ app.put("/deleteProductFromBuyCar"),
     } else {
       return "Sin clasificar";
     }
-  }
-  
-  
-
+  }  
 
   app.listen(3000, () => {
     console.log(`Servidor escuchando en el puerto 3000`);
