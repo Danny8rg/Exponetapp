@@ -34,9 +34,20 @@ function UserHistory() {
   }, []);
 
   // Función para manejar la eliminación del producto
-  const handleDelete = (productId, buyCarContent) => {
-    console.dir("soy el buycarcontent del boton deletear", buyCarContent);
+  const handleDelete = (buyCarId) => {
+    console.dir("soy el buyCarId del boton deletear", buyCarId);
+    axios.put(`https://exponetapp-8fxj.onrender.com/deleteBuyCar/${buyCarId}`)
+      .then(response => {
+        console.log("Carrito eliminado exitosamente:", response.data);
+        alert("se elimino el carrito del historial")
+        // Aquí puedes realizar cualquier acción adicional después de eliminar el carrito
+      })
+      .catch(error => {
+        console.error("Error al eliminar el carrito:", error);
+        // Aquí puedes manejar el error de alguna manera si lo deseas
+      });
   };
+
 
   // Función para manejar la acción de comentario del producto
   const handleComment = (productId) => {
@@ -44,23 +55,16 @@ function UserHistory() {
     setMomentId(productId)
   };
 
-  // Función para manejar el envío del comentario
-  const handleSubmitComment = () => {
-    // Lógica para enviar el comentario
-    console.log("Comentario enviado:", comment);
-    setShowModal(false); // Cerrar la modal después de enviar el comentario
-    setComment(""); // Limpiar el área de comentario
-  };
-
   const createComment = (appComment, userComment, productId) => {
     console.log("soyAppComment en createComment", appComment)
     console.log("soyuserComment en createComment", userComment)
     console.log("soyProductId en createComment", productId)
-    const formData = new FormData();
-    formData.append("appComment", appComment);
-    formData.append("userComment", userComment);
-    formData.append("productComment", productId);
-    axios.put("https://exponetapp-8fxj.onrender.com/createComment", formData)
+  
+    axios.post("https://exponetapp-8fxj.onrender.com/createComment", {
+        appComment: appComment,
+        userComment: userComment,
+        productComment: productId
+      })
       .then(() => { 
         alert("Comentario Agregado");
         setComment("");
@@ -70,7 +74,6 @@ function UserHistory() {
         console.error("Error al enviar el comentario:", error);
       });
   }
-
   return (
     <>
       <Header />
@@ -120,8 +123,7 @@ function UserHistory() {
                               <button
                                 onClick={() => {
                                   handleDelete(
-                                    product.productId,
-                                    buyCarContent
+                                   filteredBuyCar.buyCarId // Pasar buyCarId como argumento
                                   );
                                 }}
                               >
