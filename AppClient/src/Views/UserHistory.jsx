@@ -11,6 +11,8 @@ function UserHistory() {
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false); // Estado para controlar si se muestra la modal
   const [comment, setComment] = useState(""); // Estado para almacenar el comentario
+  const [momentId, setMomentId] = useState(0)
+  
 
   useEffect(() => {
     setBuyCarUser(Cookies.get("userId"));
@@ -39,6 +41,7 @@ function UserHistory() {
   // Función para manejar la acción de comentario del producto
   const handleComment = (productId) => {
     setShowModal(true); // Abrir la modal cuando se hace clic en el botón de comentario
+    setMomentId(productId)
   };
 
   // Función para manejar el envío del comentario
@@ -48,6 +51,25 @@ function UserHistory() {
     setShowModal(false); // Cerrar la modal después de enviar el comentario
     setComment(""); // Limpiar el área de comentario
   };
+
+  const createComment = (appComment, userComment, productId) => {
+    console.log("soyAppComment en createComment", appComment)
+    console.log("soyuserComment en createComment", userComment)
+    console.log("soyProductId en createComment", productId)
+    const formData = new FormData();
+    formData.append("appComment", appComment);
+    formData.append("userComment", userComment);
+    formData.append("productComment", productId);
+    axios.put("https://exponetapp-8fxj.onrender.com/createComment", formData)
+      .then(() => { 
+        alert("Comentario Agregado");
+        setComment("");
+        setShowModal(false);
+      })
+      .catch((error) => {
+        console.error("Error al enviar el comentario:", error);
+      });
+  }
 
   return (
     <>
@@ -130,7 +152,9 @@ function UserHistory() {
               value={comment}
               onChange={(e) => setComment(e.target.value)}
             />
-            <button onClick={handleSubmitComment}>Enviar</button>
+            <button onClick={() => {
+              createComment(comment, buyCarUser, momentId)
+            }}>Enviar</button>
           </div>
         </div>
       )}

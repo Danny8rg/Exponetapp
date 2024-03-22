@@ -456,16 +456,6 @@ app.put(
   }
 );
 
-app.get("/commentsList", (req, res) => {
-  db.query("CALL GetCommentsWithUser()", (err, result) => {
-    if (err) {
-      console.log(err);
-      res.status(500).send("Error al obtener la lista de comentarios");
-    } else {
-      res.status(200).send(result[0]);
-    }
-  });
-});
 
 // carrito compras
 
@@ -662,6 +652,39 @@ app.put("/deleteProductFromBuyCar"),
   (req, res) => {
     db.query("UPDATE ");
   };
+
+  app.get("/commentsList", (req, res) => {
+    db.query("CALL GetCommentsWithUser()", (err, result) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send("Error al obtener la lista de comentarios");
+      } else {
+        res.status(200).send(result[0]);
+      }
+    });
+  });
+
+  app.post("/createComment", upload.none(), (req, res) => {
+    const appComment = req.body.get('appComment');
+    const userComment = req.body.get('commentUser');
+    const productComment = req.body.get('productComment');
+    const positiveComments = 0;
+    const negativeComments = 0;
+  
+    db.query(
+      "INSERT INTO appComments (userComment, productComment, appComment, positiveComments, negativeComments) VALUES (?, ?, ?, ?, ?)",
+      [userComment, productComment, appComment, positiveComments, negativeComments],
+      (err, result) => {
+        if (err) {
+          console.log(err);
+          res.status(500).send("Error al crear el comentario ");
+        } else {
+          res.status(200).send(result);
+        }
+      }
+    );
+  });
+  
 
 
   app.listen(3000, () => {
