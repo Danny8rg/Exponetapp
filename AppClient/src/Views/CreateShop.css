@@ -1,4 +1,151 @@
+.container {
+  height: 69vh;
+  margin-top: 8%;
+  margin-bottom: 9.5%;
+}
+
+.card {
+  width: 50%;
+  margin-left: 23%;
+}
+
 .title-create-store {
+  margin-left: 23%;
+}
+
+.label-store {
+  width: 25%;
+  margin-left: 7%;
+  font-weight: 600;
+}
+
+.input-store {
+  width: 340%;
+  margin-top: 3%;
+  margin-bottom: 6%;
+  padding-left: 5%;
+  background-color: #F8F8F8;
+}
+
+.select-img-store {
+  padding: 0.2rem 0.8rem;
+  font-weight: 600;
+  border-radius: 4px;
+  background-color: #DCDCDC;
+  cursor: pointer;
+  margin-left: 7%;
+}
+
+.result-select-img {
+  padding: 0.2rem;
+  margin: 0;
+  border-radius: 0px 4px 4px 0px;
+  border: 2px solid #DCDCDC;
+}
+
+.btn-new-store {
+  padding: 6px 8px;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: black;
+  background-color: #BDBDBD;
+}
+
+.btn-new-store:hover {
+  background-color: white;
+  color: #2493d3;
+  box-shadow: 1px 1px 2px;
+}
+
+.btn-edit-store {
+  padding: 6px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+  text-decoration: none;
+  color: black;
+  background-color: #c1e1f6;
+}
+
+.btn-edit-store:hover{
+    color: white;
+    background-color: #e3f0fb;
+}
+
+.btn-delete-store {
+  padding: 6px 8px;
+  font-weight: 600;
+  border-radius: 4px;
+  text-decoration: none;
+  color: black;
+  background-color: #d70000;
+}
+
+.btn-delete-store:hover{
+  background-color: #ffc8c8;
+  color: white;
+}
+
+.btn-link-store{
+  padding: 6px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+  text-decoration: none;
+  color: black;
+  background-color: #4cade4;
+}
+
+.btn-link-store:hover{
+  background-color: #c1e1f6;
+  color: white;
+}
+
+.btn-delivery-store{
+    padding: 6px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+    text-decoration: none;
+    color: black;
+    background-color: #1775b2;
+}
+
+.btn-delivery-store:hover{
+    color: white;
+    background-color: #4cade4;
+} 
+
+/* Media Query de 1200px  */
+
+@media screen and (max-width: 1200px) {
+
+}
+
+
+/* Media Query de 992px  */
+
+@media screen and (max-width: 992px) {
+  
+}
+
+
+/* Media Query de 768px  */
+
+@media screen and (max-width: 768px) {
+  
+}
+
+
+/* Media Query de 480px  */
+
+@media screen and (max-width: 480px) {
+  
+}
+
+
+/* ----------------  */
+
+/* .title-create-store {
   margin: 0;
   width: 100%;
   font-size: 2.2rem;
@@ -137,31 +284,4 @@
 .btn-delivery-store:hover{
     color: white;
     background-color: #4cade4;
-}
-
-/* Media Query de 1200px  */
-
-@media screen and (max-width: 1200px) {
-
-}
-
-
-/* Media Query de 992px  */
-
-@media screen and (max-width: 992px) {
-  
-}
-
-
-/* Media Query de 768px  */
-
-@media screen and (max-width: 768px) {
-  
-}
-
-
-/* Media Query de 480px  */
-
-@media screen and (max-width: 480px) {
-  
-}
+} */ 

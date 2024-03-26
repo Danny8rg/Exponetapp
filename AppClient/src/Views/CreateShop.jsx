@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./CreateShop.css";
-import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "../Components/Header/Header";
 import Footer from "../Components/Footer/Footer";
 import Cookies from "js-cookie";
@@ -190,14 +190,14 @@ function CreateShop() {
   return (
     <>
       <Header />
-      <div className="container pt-36 pb-8">
-        <div className="card text-center">
+      <div className="container ">
+        <div className="card">
           <div className="card-header">
-            <h2 className="title-create-store">Gestión De Tiendas</h2>
+            <h2 className="title-create-store">Creación De Tiendas</h2>
           </div>
           <div className="card-body">
-            <div className="input-group mb-3">
-              <span className="input-group-text fw-semibold" id="basic-addon1">
+            <div className="label-store">
+              <span id="basic-addon1">
                 Nombre de la tienda:
               </span>
               <input
@@ -206,13 +206,13 @@ function CreateShop() {
                 onChange={(event) => {
                   setShopName(event.target.value);
                 }}
-                className="form-control m-0"
+                className="input-store"
                 placeholder="Nombre la tienda"
               />
             </div>
 
-            <div className="input-group mb-3">
-              <span className="input-group-text fw-semibold" id="basic-addon1">
+            <div className="label-store">
+              <span id="basic-addon1">
                 Teléfono:
               </span>
               <input
@@ -221,13 +221,13 @@ function CreateShop() {
                 onChange={(event) => {
                   setShopTell(event.target.value);
                 }}
-                className="form-control m-0"
+                className="input-store"
                 placeholder="315 000 0000"
               />
             </div>
 
-            <div className="input-group mb-3">
-              <span className="input-group-text fw-semibold" id="basic-addon1">
+            <div className="label-store">
+              <span id="basic-addon1">
                 Correo electrónico:
               </span>
               <input
@@ -236,13 +236,13 @@ function CreateShop() {
                 onChange={(event) => {
                   setShopMail(event.target.value);
                 }}
-                className="form-control m-0"
+                className="input-store"
                 placeholder="correo@gmail.com"
               />
             </div>
 
-            <div className="input-group mb-3">
-              <span className="input-group-text fw-semibold" id="basic-addon1">
+            <div className="label-store">
+              <span id="basic-addon1">
                 Dirección:
               </span>
               <input
@@ -251,13 +251,13 @@ function CreateShop() {
                 onChange={(event) => {
                   setShopAdress(event.target.value);
                 }}
-                className="form-control m-0"
+                className="input-store"
                 placeholder="Dirección de la tienda"
               />
             </div>
 
-            <div className="input-group">
-              <span className="input-group-text fw-semibold" id="basic-addon1">
+            <div className="label-store">
+              <span id="basic-addon1">
                 Descripción:
               </span>
               <textarea
@@ -266,7 +266,7 @@ function CreateShop() {
                 onChange={(event) => {
                   setShopComments(event.target.value);
                 }}
-                className="form-control m-0 resize-none"
+                className="input-store"
                 placeholder="Descripción de la tienda"
               />
             </div>

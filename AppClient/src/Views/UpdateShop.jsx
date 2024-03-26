@@ -174,91 +174,81 @@ function UpdateProduct() {
   return (
     <>
       <Header />
-      <div className="container pt-36 pb-8">
-        <div className="card text-center">
+      <div className="container">
+        <div className="card">
           <div className="card-header">
-            <h2 className="title-create-prod">Gestión De Productos</h2>
+            <h2 className="title-create-prod">Creación De Productos</h2>
           </div>
           <div className="card-body">
-            <div className="input-group mb-3">
-              <span className="input-group-text fw-semibold" id="basic-addon1">
-                Producto:
-              </span>
+            <div className="label-product">
+              <span id="basic-addon1">Producto:</span>
               <input
                 type="text"
                 value={productName}
                 onChange={(Event) => {
                   setProductName(Event.target.value);
                 }}
-                className="form-control m-0"
+                className="input-product"
                 placeholder="Ingrese un producto"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
               />
             </div>
 
-            <div className="input-group mb-3">
-              <span className="input-group-text fw-semibold" id="basic-addon1">
-                Cantidad:
-              </span>
+            <div className="label-store">
+              <span id="basic-addon1">Cantidad:</span>
               <input
                 type="number"
                 value={productStock}
                 onChange={(Event) => {
                   setProductStock(Event.target.value);
                 }}
-                className="form-control m-0"
+                className="input-product"
                 placeholder="Ingrese la cantidad"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
               />
             </div>
 
-            <div className="input-group mb-3">
-              <span className="input-group-text fw-semibold" id="basic-addon1">
-                Categoría:
-              </span>
+            <div className="label-product">
+              <span id="basic-addon1">Categoría:</span>
               <input
                 type="text"
                 value={productCategory}
                 onChange={(Event) => {
                   setProductCategory(Event.target.value);
                 }}
-                className="form-control m-0"
+                className="input-product"
                 placeholder="Ingrese la categoría"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
               />
             </div>
 
-            <div className="input-group mb-3">
-              <span className="input-group-text fw-semibold" id="basic-addon1">
-                Descripción:
-              </span>
+            <div className="label-product">
+              <span id="basic-addon1">Descripción:</span>
               <textarea
                 type="text"
                 value={productDescription}
                 onChange={(Event) => {
                   setProductDescription(Event.target.value);
                 }}
-                className="form-control m-0 resize-none"
+                className="input-product"
                 placeholder="Ingrese la descripción"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
               />
             </div>
 
-            <div className="input-group mb-3">
-              <span className="input-group-text fw-semibold" id="basic-addon1">
-                Precio:
-              </span>
+            <div className="label-product">
+              <span id="basic-addon1">Precio:</span>
               <input
                 type="number"
                 value={productPrize}
                 onChange={(Event) => {
                   setProductPrize(Event.target.value);
                 }}
-                className="form-control m-0"
+                className="input-product"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
               />
