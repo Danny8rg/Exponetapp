@@ -1,0 +1,11 @@
+.product-title-sampler {
+    border: none;
+}
+
+@media screen and (max-width: 992px) {
+
+    .product-title-sampler {
+        margin-left: 19%;
+    } 
+
+}

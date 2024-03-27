@@ -122,4 +122,14 @@ margin-left: 24%;
     background-color: #ffc8c8;
     color: white;
   }
+
+  .btn-new-prod {
+   padding: 6px 8px;
+   border-radius: 4px;
+   font-size: 1.1rem;
+   font-weight: 600;
+   text-decoration: none;
+   color: black;
+   background-color: #BDBDBD;
+  }
  

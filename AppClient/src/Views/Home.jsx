@@ -6,6 +6,7 @@ import About from "../Components/About/About";
 import { useState, useEffect, useContext } from "react";
 import { ShopContextValues } from "../Components/Context/ShopContext";
 import axios from "axios";
+import "./Home.css";
 
 function Home() {
   const [products, setProducts] = useState([]);
