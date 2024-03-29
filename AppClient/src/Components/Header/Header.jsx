@@ -1,7 +1,8 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { ShopContextValues } from "../Context/ShopContext";
+import Axios from "axios"; 
 import { MdShoppingCart } from "react-icons/md";
 import { FaSearch } from "react-icons/fa";
 import "./Header.css";
@@ -12,6 +13,7 @@ const Header = () => {
   const [userRoll, setUserRoll] = useState(Cookies.get("userRoll"));
   const { buyCarProducts, setBuyCarProducts } = useContext(ShopContextValues);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [userInfo, setUserInfo] = useState()
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -25,6 +27,25 @@ const Header = () => {
   };
 
   const location = useLocation();
+
+  const getUserInfo = (userId) => {
+    Axios.get(
+      `http://localhost:3000/readOneUser/${userId}`
+    ).then((response) => {
+      setUserInfo(response.data);
+      console.log("soy el userInfo")
+      console.log(response.data)
+      console.log(userInfo);
+    });
+  };
+
+  useEffect(() => {
+    if (userId) {
+      getUserInfo(userId);
+      console.log(userInfo);
+    }
+  }, [userId]); // Este efecto se ejecutará solo cuando userId cambie
+  
 
   return (
     <>
@@ -162,6 +183,13 @@ const Header = () => {
               )}
             </ul>
           </nav>
+          {userInfo && userInfo.length > 0 && (
+  <div className="profile-info">
+    <p>{userInfo[0].userName}</p>
+    <p>{userInfo[0].userRoll}</p>
+    <img src={userInfo[0].imgurl} alt="" className="profile-image"/>
+  </div>
+)}
         </div>
       </header>
     </>

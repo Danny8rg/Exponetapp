@@ -19,7 +19,7 @@ function UserHistory() {
     const fetchBuyCars = async () => {
       try {
         const response = await axios.get(
-          "https://exponetapp-8fxj.onrender.com/buyCarsList"
+          "http://localhost:3000/buyCarsList"
         );
         console.dir(response.data);
         setBuyCars(response.data);
@@ -36,7 +36,7 @@ function UserHistory() {
   // Función para manejar la eliminación del producto
   const handleDelete = (buyCarId) => {
     console.dir("soy el buyCarId del boton deletear", buyCarId);
-    axios.put(`https://exponetapp-8fxj.onrender.com/deleteBuyCar/${buyCarId}`)
+    axios.put(`http://localhost:3000/deleteBuyCar/${buyCarId}`)
       .then(response => {
         console.log("Carrito eliminado exitosamente:", response.data);
         alert("se elimino el carrito del historial")
@@ -60,7 +60,7 @@ function UserHistory() {
     console.log("soyuserComment en createComment", userComment)
     console.log("soyProductId en createComment", productId)
   
-    axios.post("https://exponetapp-8fxj.onrender.com/createComment", {
+    axios.post("http://localhost:3000/createComment", {
         appComment: appComment,
         userComment: userComment,
         productComment: productId

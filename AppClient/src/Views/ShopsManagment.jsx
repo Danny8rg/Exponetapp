@@ -36,7 +36,7 @@ function ShopsManagment() {
     formData.append("shopOwner", shopOwner);
     formData.append("shopComments", shopComments);
 
-    Axios.post("https://exponetapp-8fxj.onrender.com/createShop", formData)
+    Axios.post("http://localhost:3000/createShop", formData)
       .then(() => {
         getShops();
         limpiarCampos();
@@ -86,7 +86,7 @@ function ShopsManagment() {
       formData.append("shopId", shopId);
 
       Axios.put(
-        "https://exponetapp-8fxj.onrender.com/updateShop",
+        "http://localhost:3000/updateShop",
         formData,
         {}
       ).then(() => {
@@ -116,7 +116,7 @@ function ShopsManagment() {
 
     if (confirmation) {
       Axios.put(
-        `https://exponetapp-8fxj.onrender.com/deleteShop/${ShopId}`
+        `http://localhost:3000/deleteShop/${ShopId}`
       ).then(() => {
         alert("Tienda eliminada");
         limpiarCampos();
@@ -130,7 +130,7 @@ function ShopsManagment() {
 
   const deleteProducts = (ShopId) => {
     Axios.put(
-      `https://exponetapp-8fxj.onrender.com/deleteProducts/${ShopId}`
+      `http://localhost:3000/deleteProducts/${ShopId}`
     ).then(() => {
       limpiarCampos();
       getShops();
@@ -166,7 +166,7 @@ function ShopsManagment() {
 
   const getShops = (shopOwner) => {
     Axios.get(
-      `https://exponetapp-8fxj.onrender.com/shopsListCreateShops/${shopOwner}`
+      `http://localhost:3000/shopsListCreateShops/${shopOwner}`
     ).then((response) => {
       setShopsList(response.data);
       console.dir(response.data);

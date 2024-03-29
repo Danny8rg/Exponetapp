@@ -20,7 +20,7 @@ function OrdersManagment() {
     const fetchBuyCarsUsers = async () => {
       try {
         const response = await axios.get(
-          "https://exponetapp-8fxj.onrender.com/ordersManagmentUsers"
+          "http://localhost:3000/ordersManagmentUsers"
         );
         console.log("soy response.data", response.data);
         setUsers(response.data);
@@ -35,7 +35,7 @@ function OrdersManagment() {
     const fetchBuyCars = async () => {
       try {
         const response = await axios.get(
-          "https://exponetapp-8fxj.onrender.com/ordersManagmentBuyCarList"
+          "http://localhost:3000/ordersManagmentBuyCarList"
         );
         console.log("soy response.data", response.data);
         setOrders(response.data);
@@ -97,7 +97,7 @@ function OrdersManagment() {
     console.log("soy el newbuycarcontent del final",newBuyCarContent);
 
     axios
-      .post("https://exponetapp-8fxj.onrender.com/ProductStockUpdate", {
+      .post("http://localhost:3000/ProductStockUpdate", {
         productsIds,
         productsQuantities,
         productsShopOwners,
@@ -121,7 +121,7 @@ function OrdersManagment() {
       console.log("soy el buyCarId Entre Los Axios", buyCarId)
       console.log("soy el nuevo buycarcontent entre los axios", newBuyCarContent)
 
-      axios.put("https://exponetapp-8fxj.onrender.com/updateBuyCar", {
+      axios.put("http://localhost:3000/updateBuyCar", {
         buyCarId,
         newBuyCarContent,
       })
@@ -175,7 +175,7 @@ function ChangeStateCanceled(buyCarContent, globalShopId) {
 
   console.log("soy el parsedCOntent de changestatecanceled", parsedContentCanceled)
   
-  axios.put("https://exponetapp-8fxj.onrender.com/updateBuyCar", {
+  axios.put("http://localhost:3000/updateBuyCar", {
     buyCarId,
     parsedContentCanceled,
   })
@@ -197,7 +197,7 @@ function ChangeStateCanceled(buyCarContent, globalShopId) {
     }
 
     axios
-      .put(`https://exponetapp-8fxj.onrender.com/deleteBuyCar/${buyCarId}`)
+      .put(`http://localhost:3000/deleteBuyCar/${buyCarId}`)
       .then(() => {
         Swal.fire({
           position: "center",

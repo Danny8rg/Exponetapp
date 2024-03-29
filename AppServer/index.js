@@ -207,6 +207,19 @@ app.post("/userRead", (req, res) => {
   );
 });
 
+app.get("/readOneUser/:userId", (req, res) => {
+  const userId = req.params.userId;
+
+  db.query("SELECT * FROM appUsers WHERE userId = ?", [userId], async (err, result) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send("Error al leer el usuario ");
+    } else {
+      res.status(200).send(result);
+    }
+  });
+});
+
 app.post(
   "/createShop",
   fileUpload({

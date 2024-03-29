@@ -13,8 +13,10 @@ function RegisterForm() {
     confirmPassword: "",
     userAdress: "",
     userRole: "",
+    file: null, 
   });
-  const [selectedFile, setSelectedFile] = useState(null);
+
+  const [selectedFile, setSelectedFile] = useState(null)
 
   const navigate = useNavigate();
 
@@ -62,16 +64,21 @@ function RegisterForm() {
       return;
     }
 
-    try {
-      const response = await axios.post("https://exponetapp-8fxj.onrender.com/createUser", {
-        userName: formData.userName,
-        userMail: formData.userMail,
-        userPassword: formData.userPassword,
-        userAdress: formData.userAdress,
-        userRole: formData.userRole,
-        file: selectedFile,
-      });
+    const formDataToSend = new FormData();
+    formDataToSend.append('userName', formData.userName);
+    formDataToSend.append('userMail', formData.userMail);
+    formDataToSend.append('userPassword', formData.userPassword);
+    formDataToSend.append('confirmPassword', formData.confirmPassword);
+    formDataToSend.append('userAdress', formData.userAdress);
+    formDataToSend.append('userRole', formData.userRole);
+    formDataToSend.append('file', formData.file); // Adjuntar el archivo al FormData
 
+    try {
+      const response = await axios.post("http://localhost:3000/createUser", formDataToSend, {
+        headers: {
+          'Content-Type': 'multipart/form-data' // Es importante establecer el encabezado correcto para la carga de archivos
+        }
+      });
       console.log(response.data);
       Swal.fire({
         title: "¡Registro exitoso!",
@@ -84,7 +91,10 @@ function RegisterForm() {
   };
 
   const handleFileChange = (event) => {
-    setSelectedFile(event.target.files[0]); // Cambiado de file a selectedFile
+    setFormData({
+      ...formData,
+      file: event.target.files[0], // Guardar el archivo seleccionado en el estado
+    });
   };
 
   return (
