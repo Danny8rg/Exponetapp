@@ -14,6 +14,7 @@ function RegisterForm() {
     userAdress: "",
     userRole: "",
   });
+  const [selectedFile, setSelectedFile] = useState(null);
 
   const navigate = useNavigate();
 
@@ -68,6 +69,7 @@ function RegisterForm() {
         userPassword: formData.userPassword,
         userAdress: formData.userAdress,
         userRole: formData.userRole,
+        userimgurl: selectedFile,
       });
 
       console.log(response.data);
@@ -79,6 +81,10 @@ function RegisterForm() {
     } catch (error) {
       console.error("Error al enviar la solicitud:", error);
     }
+  };
+
+  const handleFileChange = (event) => {
+    setSelectedFile(event.target.files[0]); // Cambiado de file a selectedFile
   };
 
   return (
@@ -186,6 +192,26 @@ function RegisterForm() {
                   <option value="vendedor">Vendedor</option>
                   <option value="comprador">Comprador</option>
                 </select>
+              </div>
+              <div>
+              <div className="input-group mt-3">
+              <label className="select-img-store" htmlFor="file">
+                Seleccionar imagen de usuario
+              </label>
+              <input
+                type="file"
+                id="file"
+                name="file"
+                onChange={handleFileChange}
+                style={{ display: "none" }} // Oculta el input de tipo archivo
+              />
+              {selectedFile && (
+                <div className="file-info">
+                  <p className="result-select-img">{selectedFile.name}</p>
+                  {/* Puedes agregar más información sobre el archivo si lo deseas */}
+                </div>
+              )}
+            </div>
               </div>
               <div className="flex">
                 <button type="submit" className="flex mr-2 w-full justify-center rounded-md px-3 py-1 text-sm font-semibold leading-6 text-white shadow-sm btn-register">

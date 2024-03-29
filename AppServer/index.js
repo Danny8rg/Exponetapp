@@ -101,11 +101,22 @@ db.getConnection(function (connect) {
   // console.log("esta conectado a mysql", connect);
 });
 
-app.post("/createUser", async (req, res) => {
+app.post("/createUser",  fileUpload({
+  useTempFiles: true,
+  tempFileDir: "./uploads",
+}), async (req, res) => {
   try {
     const { userName, userMail, userPassword, userAdress, userRole } = req.body;
 
     const hashedPassword = await bcrypt.hash(userPassword, 10);
+
+    let imgurl = null;
+    let imgid = null;
+    if (req.files?.file) {
+      const result = await uploadImage(req.files.file.tempFilePath);
+      imgurl = result.secure_url;
+      imgid = result.public_id;
+    }
 
     db.getConnection((err, connection) => {
       if (err) {
@@ -115,8 +126,8 @@ app.post("/createUser", async (req, res) => {
       }
 
       connection.query(
-        "INSERT INTO appUsers (userName, userMail, userPassword, userAdress, userRoll) VALUES (?, ?, ?, ?, ?)",
-        [userName, userMail, hashedPassword, userAdress, userRole],
+        "INSERT INTO appUsers (userName, userMail, userPassword, userAdress, userRoll, userimgurl) VALUES (?, ?, ?, ?, ?, ?)",
+        [userName, userMail, hashedPassword, userAdress, userRole, imgurl],
         async (error, result) => {
           connection.release();
 
