@@ -115,6 +115,7 @@ app.post("/createUser",  fileUpload({
     if (req.files?.file) {
       const result = await uploadImage(req.files.file.tempFilePath);
       imgurl = result.secure_url;
+      console.log(imgurl)
       imgid = result.public_id;
     }
 
