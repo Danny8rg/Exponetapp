@@ -69,7 +69,7 @@ function RegisterForm() {
         userPassword: formData.userPassword,
         userAdress: formData.userAdress,
         userRole: formData.userRole,
-        userimgurl: selectedFile,
+        file: selectedFile,
       });
 
       console.log(response.data);

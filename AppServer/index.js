@@ -126,7 +126,7 @@ app.post("/createUser",  fileUpload({
       }
 
       connection.query(
-        "INSERT INTO appUsers (userName, userMail, userPassword, userAdress, userRoll, userimgurl) VALUES (?, ?, ?, ?, ?, ?)",
+        "INSERT INTO appUsers (userName, userMail, userPassword, userAdress, userRoll, imgurl) VALUES (?, ?, ?, ?, ?, ?)",
         [userName, userMail, hashedPassword, userAdress, userRole, imgurl],
         async (error, result) => {
           connection.release();
