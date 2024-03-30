@@ -73,7 +73,9 @@ function ProductSampler({ products, stock, quantityCards, Route }) {
     productPrize,
     productStock,
     productCategory,
-    productimgurl
+    productimgurl,
+    productShopOwner,
+
   ) {
     const selectedQuantity = selectedProducts[productId] || 0;
 
@@ -88,6 +90,7 @@ function ProductSampler({ products, stock, quantityCards, Route }) {
         productStock,
         productCategory,
         productimgurl,
+        productShopOwner,
         quantity: selectedQuantity, // Añadir la cantidad seleccionada
         productState
       },
@@ -132,6 +135,7 @@ function ProductSampler({ products, stock, quantityCards, Route }) {
                     product.productStock,
                     product.productCategory,
                     product.productimgurl,
+                    product.productShopOwner,
                     productState
                   )
                 }

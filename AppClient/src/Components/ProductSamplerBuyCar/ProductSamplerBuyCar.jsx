@@ -103,7 +103,7 @@ function ProductSamplerBuyCar() {
   };
 
   const handleCompra = () => {
-    buyCarUpdate("pendiente", buyCarUser);
+    updateBuyCar("pendiente", buyCarUser);
     setBuyCarProducts([]);
     setSelectedQuantities({});
     setTotal(0);
@@ -117,11 +117,12 @@ function ProductSamplerBuyCar() {
     navigate("/UserHistory");
   };
 
-  const buyCarUpdate = (buyCarState, buyCarUser) => {
+  const updateBuyCar = (buyCarState, buyCarUser) => {
+    console.log("soy el buycarproducts antes de crear los arreglos")
+    console.log(buyCarProducts)
     const selectedQuantitiesArray = buyCarProducts.map((product) => ({
       productId: product.productId,
       quantity: selectedQuantities[product.productId] || 0,
-      productShopOwner: product.productShopOwner, // Agregar productShopOwner al objeto
     }));
   
     const requestData = {
@@ -141,7 +142,7 @@ function ProductSamplerBuyCar() {
         console.error("Error al enviar la solicitud:", error);
       });
   };
-  
+
   const handleBorrar = () => {
     setBuyCarProducts([]);
     setSelectedQuantities({});

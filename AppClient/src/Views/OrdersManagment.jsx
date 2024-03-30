@@ -218,29 +218,35 @@ function ChangeStateCanceled(buyCarContent, globalShopId) {
             if (userOrders.length > 0) {
               return (
                 <li key={userId}>
+                  <div className="userInfo">
                   <p>{user.userId}</p>
                   <p>{user.userName}</p>
-                  <p>{user.userAddress}</p>
-                  <p>Órdenes:</p>
+                  <p>{user.userAdress}</p>
+                  <p>{user.userMail}</p>
+                  </div>
                   <ul>
                     {userOrders.map((order, orderId) => (
                       <li key={orderId}>
-                        <p>Id Pedido: {order.buyCarId}</p>
-                        <p>Contenido del Pedido:</p>
                         <ul>
+                          <p>Id Pedido: {order.buyCarId}</p>
                           {JSON.parse(order.buyCarContent).products.map((product, productId) => {
-                            // Calcular el total para cada producto
-                            const total = product.productPrize * product.quantity;
-                            return (
-                              <li key={productId}>
-                                <p>Nombre del Producto: {product.productName}</p>
-                                <p>Id Tienda: {product.productShopOwner}</p>
-                                <p>Descripción del Producto: {product.productDescription}</p>
-                                <p>Precio del Producto: {product.productPrize}</p>
-                                <p>Cantidad: {product.quantity}</p>
-                                <p>Total: {total}</p>
-                              </li>
-                            );
+                            // Verificar si el producto pertenece a la tienda actual
+                            if (product.productShopOwner === globalShopId) {
+                              // Calcular el total para cada producto
+                              const total = product.productPrize * product.quantity;
+                              return (
+                                <li key={productId}>
+                                  <p>Nombre del Producto: {product.productName}</p>
+                                  <p>Id Tienda: {product.productShopOwner}</p>
+                                  <p>Descripción del Producto: {product.productDescription}</p>
+                                  <p>Precio del Producto: {product.productPrize}</p>
+                                  <p>Cantidad: {product.quantity}</p>
+                                  <p>Total: {total}</p>
+                                </li>
+                              );
+                            } else {
+                              return null; // No renderizar si el producto no pertenece a la tienda actual
+                            }
                           })}
                         </ul>
                       </li>
@@ -258,6 +264,7 @@ function ChangeStateCanceled(buyCarContent, globalShopId) {
       <Footer />
     </>
   );
+  
   
   
   
