@@ -17,36 +17,31 @@ function OrdersManagment() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchBuyCarsUsers = async () => {
+    const fetchData = async () => {
       try {
-        const response = await axios.get(
+        const usersResponse = await axios.get(
           "http://localhost:3000/ordersManagmentUsers"
         );
-        console.log("soy response.data", response.data);
-        setUsers(response.data);
-        console.log("soy orders ya seteado", response.data);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error al obtener la lista de Usuarios:", error);
-      }
-    };
-    fetchBuyCarsUsers();
-
-    const fetchBuyCars = async () => {
-      try {
-        const response = await axios.get(
+        const ordersResponse = await axios.get(
           "http://localhost:3000/ordersManagmentBuyCarList"
         );
-        console.log("soy response.data", response.data);
-        setOrders(response.data);
-        console.log("soy orders ya seteado", response.data);
+  
+        setUsers(usersResponse.data);
+        setOrders(ordersResponse.data); // Almacena los datos de los carritos de compras
+        console.log("soy orders")
+        console.log(orders)
+        console.log("soy users")
+        console.log(users)
         setLoading(false);
       } catch (error) {
-        console.error("Error al obtener la lista de Carritos :", error);
+        console.error("Error fetching data:", error);
       }
     };
-    fetchBuyCars();
+  
+    fetchData();
   }, []);
+
+   
 
   function ChangeState(buyCarContent, globalShopId) {
     const parsedContent = JSON.parse(buyCarContent);
@@ -208,81 +203,64 @@ function ChangeStateCanceled(buyCarContent, globalShopId) {
         });
       });
   };
-
+  
   return (
     <>
       <Header />
-      <div className="orders-container">
-        {!loading && orders.length > 0 ? (
-          orders.map((order) => (
-            <React.Fragment key={order.buyCarId}>
-              {order &&
-                order.buyCarContent &&
-                // Mueve la condición de renderizado de la tabla completa aquí
-                JSON.parse(order.buyCarContent).products.some(
-                  (product) => product.productShopOwner === globalShopId
-                ) && (
-                  <table key={order.buyCarId}>
-                    <thead>
-                      <tr>
-                        <th className="subtitles nameProductOrders">Nombre del Producto</th>
-                        <th className="subtitles descriptionOrders">Descripción</th>
-                        <th className="subtitles prizeOrders">Precio</th>
-                        <th className="subtitles cantOrders">Cantidad</th>
-                        <th className="subtitles stateOrders">Estado</th>
-                        <th className="subtitles actionOrders">Acciones</th>
-                      </tr>
-                    </thead>
-                    <tbody className="product-container">
-                      {JSON.parse(order.buyCarContent).products.map(
-                        (product, index) => {
-                          // Solo renderiza el producto si el productShopOwner coincide con globalShopId
-                          if (product.productShopOwner === globalShopId) {
+      <h1 className="subtitles"> Orders Managment </h1>
+      <div className="">
+        <h1>Usuarios</h1>
+        <ul>
+          {users.map((user, userId) => {
+            // Filtrar los pedidos del usuario actual
+            const userOrders = orders.filter(order => order.buyCarUser === user.userId);
+            // Verificar si el usuario tiene pedidos
+            if (userOrders.length > 0) {
+              return (
+                <li key={userId}>
+                  <p>{user.userId}</p>
+                  <p>{user.userName}</p>
+                  <p>{user.userAddress}</p>
+                  <p>Órdenes:</p>
+                  <ul>
+                    {userOrders.map((order, orderId) => (
+                      <li key={orderId}>
+                        <p>Id Pedido: {order.buyCarId}</p>
+                        <p>Contenido del Pedido:</p>
+                        <ul>
+                          {JSON.parse(order.buyCarContent).products.map((product, productId) => {
+                            // Calcular el total para cada producto
+                            const total = product.productPrize * product.quantity;
                             return (
-                              <tr key={index}>
-                                <td>{product.productName}</td>
-                                <td>{product.productDescription}</td>
-                                <td>{product.productPrize}</td>
-                                <td>{product.quantity}</td>
-                                <td>{product.productState}</td>
-                                <td>
-                                {product.productState !== "Entregado" && (
-                        <button onClick={() => {
-                            orderDelivered(order.buyCarContent, globalShopId, order.buyCarId);
-                        }}>
-                            Despachar
-                        </button>
-                    )}
-                                    {product.productState !== "Entregado" && (
-                        <button onClick={() => {
-                            ChangeStateCanceled(order.buyCarContent, globalShopId, order.buyCarId);
-                        }}>
-                            Cancelar
-                        </button>
-                    )}
-                 
-                 
-                 
-                                </td>
-                              </tr>
+                              <li key={productId}>
+                                <p>Nombre del Producto: {product.productName}</p>
+                                <p>Id Tienda: {product.productShopOwner}</p>
+                                <p>Descripción del Producto: {product.productDescription}</p>
+                                <p>Precio del Producto: {product.productPrize}</p>
+                                <p>Cantidad: {product.quantity}</p>
+                                <p>Total: {total}</p>
+                              </li>
                             );
-                          } else {
-                            return null; // Si no coincide, devuelve null para no renderizar este producto
-                          }
-                        }
-                      )}
-                    </tbody>
-                  </table>
-                )}
-            </React.Fragment>
-          ))
-        ) : (
-          <p>No hay órdenes disponibles</p>
-        )}
+                          })}
+                        </ul>
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              );
+            } else {
+              // No renderizar si el usuario no tiene pedidos
+              return null;
+            }
+          })}
+        </ul>
       </div>
       <Footer />
     </>
   );
+  
+  
+  
 }
 
 export default OrdersManagment;
