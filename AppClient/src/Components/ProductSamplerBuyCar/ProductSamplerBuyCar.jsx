@@ -121,8 +121,9 @@ function ProductSamplerBuyCar() {
     const selectedQuantitiesArray = buyCarProducts.map((product) => ({
       productId: product.productId,
       quantity: selectedQuantities[product.productId] || 0,
+      productShopOwner: product.productShopOwner, // Agregar productShopOwner al objeto
     }));
-
+  
     const requestData = {
       buyCarContent: JSON.stringify({
         products: buyCarProducts,
@@ -131,8 +132,8 @@ function ProductSamplerBuyCar() {
       buyCarUser: buyCarUser,
       buyCarState: buyCarState,
     };
-
-    Axios.post("https://exponetapp-8fxj.onrender.com/createBuyCar", requestData)
+  
+    Axios.post("http://localhost:3000/createBuyCar", requestData)
       .then((response) => {
         console.log(response.data);
       })
@@ -140,7 +141,7 @@ function ProductSamplerBuyCar() {
         console.error("Error al enviar la solicitud:", error);
       });
   };
-
+  
   const handleBorrar = () => {
     setBuyCarProducts([]);
     setSelectedQuantities({});

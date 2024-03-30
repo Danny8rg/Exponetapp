@@ -101,11 +101,23 @@ db.getConnection(function (connect) {
   // console.log("esta conectado a mysql", connect);
 });
 
-app.post("/createUser", async (req, res) => {
+app.post("/createUser",  fileUpload({
+  useTempFiles: true,
+  tempFileDir: "./uploads",
+}), async (req, res) => {
   try {
     const { userName, userMail, userPassword, userAdress, userRole } = req.body;
 
     const hashedPassword = await bcrypt.hash(userPassword, 10);
+
+    let imgurl = null;
+    let imgid = null;
+    if (req.files?.file) {
+      const result = await uploadImage(req.files.file.tempFilePath);
+      imgurl = result.secure_url;
+      console.log(imgurl)
+      imgid = result.public_id;
+    }
 
     db.getConnection((err, connection) => {
       if (err) {
@@ -115,8 +127,8 @@ app.post("/createUser", async (req, res) => {
       }
 
       connection.query(
-        "INSERT INTO appUsers (userName, userMail, userPassword, userAdress, userRoll) VALUES (?, ?, ?, ?, ?)",
-        [userName, userMail, hashedPassword, userAdress, userRole],
+        "INSERT INTO appUsers (userName, userMail, userPassword, userAdress, userRoll, imgurl) VALUES (?, ?, ?, ?, ?, ?)",
+        [userName, userMail, hashedPassword, userAdress, userRole, imgurl],
         async (error, result) => {
           connection.release();
 
@@ -193,6 +205,19 @@ app.post("/userRead", (req, res) => {
       }
     }
   );
+});
+
+app.get("/readOneUser/:userId", (req, res) => {
+  const userId = req.params.userId;
+
+  db.query("SELECT * FROM appUsers WHERE userId = ?", [userId], async (err, result) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send("Error al leer el usuario ");
+    } else {
+      res.status(200).send(result);
+    }
+  });
 });
 
 app.post(

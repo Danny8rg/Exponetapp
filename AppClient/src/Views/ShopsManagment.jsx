@@ -22,6 +22,7 @@ function ShopsManagment() {
   const [shopOwner, setShopOwner] = useState("");
   const [shopImgUrl, setShopImgUrl] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
+  const [showForm, setShowForm] = useState(false)
 
   const navigate = useNavigate();
   const { globalShopId, setGlobalShopId } = useContext(ShopContextValues);
@@ -36,7 +37,7 @@ function ShopsManagment() {
     formData.append("shopOwner", shopOwner);
     formData.append("shopComments", shopComments);
 
-    Axios.post("https://exponetapp-8fxj.onrender.com/createShop", formData)
+    Axios.post("http://localhost:3000/createShop", formData)
       .then(() => {
         getShops();
         limpiarCampos();
@@ -48,6 +49,7 @@ function ShopsManagment() {
   };
 
   const updateShop = () => {
+    setShowForm(false)
     // Almacena los valores originales antes de la actualización
     const originalShopName =
       shopsList.find((val) => val.shopId === shopId)?.shopName || "";
@@ -86,7 +88,7 @@ function ShopsManagment() {
       formData.append("shopId", shopId);
 
       Axios.put(
-        "https://exponetapp-8fxj.onrender.com/updateShop",
+        "http://localhost:3000/updateShop",
         formData,
         {}
       ).then(() => {
@@ -99,6 +101,7 @@ function ShopsManagment() {
           timer: 1500,
         });
         limpiarCampos();
+        getShops();
       });
     } else {
       // El usuario ha hecho clic en "Cancelar"
@@ -116,7 +119,7 @@ function ShopsManagment() {
 
     if (confirmation) {
       Axios.put(
-        `https://exponetapp-8fxj.onrender.com/deleteShop/${ShopId}`
+        `http://localhost:3000/deleteShop/${ShopId}`
       ).then(() => {
         alert("Tienda eliminada");
         limpiarCampos();
@@ -130,7 +133,7 @@ function ShopsManagment() {
 
   const deleteProducts = (ShopId) => {
     Axios.put(
-      `https://exponetapp-8fxj.onrender.com/deleteProducts/${ShopId}`
+      `http://localhost:3000/deleteProducts/${ShopId}`
     ).then(() => {
       limpiarCampos();
       getShops();
@@ -154,6 +157,7 @@ function ShopsManagment() {
   };
 
   const editarTienda = (val) => {
+    setShowForm(true)
     setEditar(true);
     console.log("soy valshop id de la funcion", val.shopId);
     setShopId(val.shopId);
@@ -166,7 +170,7 @@ function ShopsManagment() {
 
   const getShops = (shopOwner) => {
     Axios.get(
-      `https://exponetapp-8fxj.onrender.com/shopsListCreateShops/${shopOwner}`
+      `http://localhost:3000/shopsListCreateShops/${shopOwner}`
     ).then((response) => {
       setShopsList(response.data);
       console.dir(response.data);
@@ -191,125 +195,125 @@ function ShopsManagment() {
     <>
       <Header />
       <div className="container pt-36 pb-8">
-        {/*
-        <div className="card text-center">
-          <div className="card-header">
-            <h2 className="title-create-store">Gestión De Tiendas</h2>
+      {showForm ? (
+  <div className="card text-center">
+    <div className="card-header">
+      <h2 className="title-create-store">Gestión De Tiendas</h2>
+    </div>
+    <div className="card-body">
+      <div className="input-group mb-3">
+        <span className="input-group-text fw-semibold" id="basic-addon1">
+          Nombre de la tienda:
+        </span>
+        <input
+          type="text"
+          value={shopName}
+          onChange={(event) => {
+            setShopName(event.target.value);
+          }}
+          className="form-control m-0"
+          placeholder="Nombre la tienda"
+        />
+      </div>
+
+      <div className="input-group mb-3">
+        <span className="input-group-text fw-semibold" id="basic-addon1">
+          Teléfono:
+        </span>
+        <input
+          type="tel"
+          value={shopTell}
+          onChange={(event) => {
+            setShopTell(event.target.value);
+          }}
+          className="form-control m-0"
+          placeholder="315 000 0000"
+        />
+      </div>
+
+      <div className="input-group mb-3">
+        <span className="input-group-text fw-semibold" id="basic-addon1">
+          Correo electrónico:
+        </span>
+        <input
+          type="email"
+          value={shopMail}
+          onChange={(event) => {
+            setShopMail(event.target.value);
+          }}
+          className="form-control m-0"
+          placeholder="correo@gmail.com"
+        />
+      </div>
+
+      <div className="input-group mb-3">
+        <span className="input-group-text fw-semibold" id="basic-addon1">
+          Dirección:
+        </span>
+        <input
+          type="text"
+          value={shopAdress}
+          onChange={(event) => {
+            setShopAdress(event.target.value);
+          }}
+          className="form-control m-0"
+          placeholder="Dirección de la tienda"
+        />
+      </div>
+
+      <div className="input-group">
+        <span className="input-group-text fw-semibold" id="basic-addon1">
+          Descripción:
+        </span>
+        <textarea
+          type="text"
+          value={shopComments}
+          onChange={(event) => {
+            setShopComments(event.target.value);
+          }}
+          className="form-control m-0 resize-none"
+          placeholder="Descripción de la tienda"
+        />
+      </div>
+
+      <div className="input-group mt-3">
+        <label className="select-img-store" htmlFor="file">
+          Seleccionar imagen de la tienda
+        </label>
+        <input
+          type="file"
+          id="file"
+          name="file"
+          onChange={handleFileChange}
+          style={{ display: "none" }} // Oculta el input de tipo archivo
+        />
+        {selectedFile && (
+          <div className="file-info">
+            <p className="result-select-img">{selectedFile.name}</p>
+            {/* Puedes agregar más información sobre el archivo si lo deseas */}
           </div>
-          <div className="card-body">
-            <div className="input-group mb-3">
-              <span className="input-group-text fw-semibold" id="basic-addon1">
-                Nombre de la tienda:
-              </span>
-              <input
-                type="text"
-                value={shopName}
-                onChange={(event) => {
-                  setShopName(event.target.value);
-                }}
-                className="form-control m-0"
-                placeholder="Nombre la tienda"
-              />
-            </div>
-
-            <div className="input-group mb-3">
-              <span className="input-group-text fw-semibold" id="basic-addon1">
-                Teléfono:
-              </span>
-              <input
-                type="tel"
-                value={shopTell}
-                onChange={(event) => {
-                  setShopTell(event.target.value);
-                }}
-                className="form-control m-0"
-                placeholder="315 000 0000"
-              />
-            </div>
-
-            <div className="input-group mb-3">
-              <span className="input-group-text fw-semibold" id="basic-addon1">
-                Correo electrónico:
-              </span>
-              <input
-                type="email"
-                value={shopMail}
-                onChange={(event) => {
-                  setShopMail(event.target.value);
-                }}
-                className="form-control m-0"
-                placeholder="correo@gmail.com"
-              />
-            </div>
-
-            <div className="input-group mb-3">
-              <span className="input-group-text fw-semibold" id="basic-addon1">
-                Dirección:
-              </span>
-              <input
-                type="text"
-                value={shopAdress}
-                onChange={(event) => {
-                  setShopAdress(event.target.value);
-                }}
-                className="form-control m-0"
-                placeholder="Dirección de la tienda"
-              />
-            </div>
-
-            <div className="input-group">
-              <span className="input-group-text fw-semibold" id="basic-addon1">
-                Descripción:
-              </span>
-              <textarea
-                type="text"
-                value={shopComments}
-                onChange={(event) => {
-                  setShopComments(event.target.value);
-                }}
-                className="form-control m-0 resize-none"
-                placeholder="Descripción de la tienda"
-              />
-            </div>
-
-            <div className="input-group mt-3">
-              <label className="select-img-store" htmlFor="file">
-                Seleccionar imagen de la tienda
-              </label>
-              <input
-                type="file"
-                id="file"
-                name="file"
-                onChange={handleFileChange}
-                style={{ display: "none" }} // Oculta el input de tipo archivo
-              />
-              {selectedFile && (
-                <div className="file-info">
-                  <p className="result-select-img">{selectedFile.name}</p>
-                  {/* Puedes agregar más información sobre el archivo si lo deseas *
-                </div>
-              )}
-            </div>
-          </div>
-          <div className="card-footer text-body-secondary d-flex justify-content-center">
-            {editar ? (
-              <div className="w-52 d-flex justify-content-between">
-                <button onClick={updateShop} className="btn-update-store">
-                  Actualizar
-                </button>
-                <button onClick={CancelarUpdate} className="btn-cancel-store">
-                  Cancelar
-                </button>
-              </div>
-            ) : (
-              <button onClick={addShop} className="btn-new-store">
-                Registrar
-              </button>
-            )}
-          </div>
+        )}
+      </div>
+    </div>
+    <div className="card-footer text-body-secondary d-flex justify-content-center">
+      {editar ? (
+        <div className="w-52 d-flex justify-content-between">
+          <button onClick={updateShop} className="btn-update-store">
+            Actualizar
+          </button>
+          <button onClick={CancelarUpdate} className="btn-cancel-store">
+            Cancelar
+          </button>
         </div>
+      ) : (
+        <button onClick={addShop} className="btn-new-store">
+          Registrar
+        </button>
+      )}
+    </div>
+  </div>
+) : null}
 
-       */}
 
         <table className="table table-hover mt-12">
           <thead className="table-titles">

@@ -24,6 +24,18 @@ color: #4cbfd5; */
   text-decoration: none;
 }
 
+.profile-image{
+  width: 25px;
+  height: 25px;
+}
+
+.profile-info{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 400px;
+}
+
 .icon-box:hover {
   animation: subir-bajar 1s infinite;
 }

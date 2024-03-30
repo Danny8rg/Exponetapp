@@ -13,7 +13,10 @@ function RegisterForm() {
     confirmPassword: "",
     userAdress: "",
     userRole: "",
+    file: null, 
   });
+
+  const [selectedFile, setSelectedFile] = useState(null)
 
   const navigate = useNavigate();
 
@@ -61,15 +64,21 @@ function RegisterForm() {
       return;
     }
 
-    try {
-      const response = await axios.post("https://exponetapp-8fxj.onrender.com/createUser", {
-        userName: formData.userName,
-        userMail: formData.userMail,
-        userPassword: formData.userPassword,
-        userAdress: formData.userAdress,
-        userRole: formData.userRole,
-      });
+    const formDataToSend = new FormData();
+    formDataToSend.append('userName', formData.userName);
+    formDataToSend.append('userMail', formData.userMail);
+    formDataToSend.append('userPassword', formData.userPassword);
+    formDataToSend.append('confirmPassword', formData.confirmPassword);
+    formDataToSend.append('userAdress', formData.userAdress);
+    formDataToSend.append('userRole', formData.userRole);
+    formDataToSend.append('file', formData.file); // Adjuntar el archivo al FormData
 
+    try {
+      const response = await axios.post("http://localhost:3000/createUser", formDataToSend, {
+        headers: {
+          'Content-Type': 'multipart/form-data' // Es importante establecer el encabezado correcto para la carga de archivos
+        }
+      });
       console.log(response.data);
       Swal.fire({
         title: "¡Registro exitoso!",
@@ -79,6 +88,13 @@ function RegisterForm() {
     } catch (error) {
       console.error("Error al enviar la solicitud:", error);
     }
+  };
+
+  const handleFileChange = (event) => {
+    setFormData({
+      ...formData,
+      file: event.target.files[0], // Guardar el archivo seleccionado en el estado
+    });
   };
 
   return (
@@ -186,6 +202,26 @@ function RegisterForm() {
                   <option value="vendedor">Vendedor</option>
                   <option value="comprador">Comprador</option>
                 </select>
+              </div>
+              <div>
+              <div className="input-group mt-3">
+              <label className="select-img-store" htmlFor="file">
+                Seleccionar imagen de usuario
+              </label>
+              <input
+                type="file"
+                id="file"
+                name="file"
+                onChange={handleFileChange}
+                style={{ display: "none" }} // Oculta el input de tipo archivo
+              />
+              {selectedFile && (
+                <div className="file-info">
+                  <p className="result-select-img">{selectedFile.name}</p>
+                  {/* Puedes agregar más información sobre el archivo si lo deseas */}
+                </div>
+              )}
+            </div>
               </div>
               <div className="flex">
                 <button type="submit" className="flex mr-2 w-full justify-center rounded-md px-3 py-1 text-sm font-semibold leading-6 text-white shadow-sm btn-register">
