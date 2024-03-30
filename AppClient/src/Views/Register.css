@@ -10,6 +10,10 @@ body{
   height: 100%;
 }
 
+.general-register{
+  border: 1px solid #efefef;
+}
+
 .input-register:focus{
   outline-style: auto;
   outline-color: #7bd6e5;
@@ -29,12 +33,6 @@ body{
 
 .btn-home-register:hover{
   background-color: #dcdcdc;
-}
-
-@media screen and (max-width: 1200px) {
- }
-
-@media screen and (max-width: 992px) {
 }
 
 @media screen and (max-width: 768px) {
@@ -79,7 +77,7 @@ body{
 @media screen and (max-width: 480px) {
 
   .general-register {
-    width: 60vw;
+    width: 80%;
   }
 
   .image-register {
@@ -87,11 +85,12 @@ body{
   }
 
   .general2-register {
-    width: 52vw;
+    width: 100%;
   }
 
   .title-register {
-    font-size: 19px;
+    margin: 0;
+    font-size: 1.4rem;
   }
 
   .label-register {
@@ -99,9 +98,13 @@ body{
     color: rgb(70, 67, 67);
   }
 
+  .input-box{
+    margin-top: 0;
+  }
+
   .input-register {
-    height: 4vh;
-    font-size: 13px;
+    padding: 0.25rem;
+    font-size: 0.8rem;
   }
 
   .input-rol {

@@ -11,6 +11,10 @@ body{
   width: 100%;
 }
 
+.general-2{
+  border: 1px solid #efefef;
+}
+
 .input-login:focus{
   outline-style: auto;
   outline-color: #7bd6e5;

@@ -190,14 +190,14 @@ function CreateShop() {
   return (
     <>
       <Header />
-      <div className="container ">
-        <div className="card">
-          <div className="card-header">
-            <h2 className="title-create-store">Creación De Tiendas</h2>
+      <div className="container-create-shop">
+        <div className="card shadow-sm">
+          <div className="card-header flex justify-center">
+            <h2 className="mt-1 mb-0 text-center text-4xl font-bold leading-9 tracking-tight text-gray-900 title-create-store">Registro de tiendas</h2>
           </div>
-          <div className="card-body">
-            <div className="label-store">
-              <span id="basic-addon1">
+          <div className="card-body flex flex-col">
+            <div className="label-store mb-2">
+              <span id="basic-addon1" className="block font-medium leading-6 text-gray-900">
                 Nombre de la tienda:
               </span>
               <input
@@ -206,13 +206,13 @@ function CreateShop() {
                 onChange={(event) => {
                   setShopName(event.target.value);
                 }}
-                className="input-store"
+                className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-store"
                 placeholder="Nombre la tienda"
               />
             </div>
 
-            <div className="label-store">
-              <span id="basic-addon1">
+            <div className="label-store mb-2">
+              <span id="basic-addon1" className="block font-medium leading-6 text-gray-900">
                 Teléfono:
               </span>
               <input
@@ -221,13 +221,13 @@ function CreateShop() {
                 onChange={(event) => {
                   setShopTell(event.target.value);
                 }}
-                className="input-store"
+                className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-store"
                 placeholder="315 000 0000"
               />
             </div>
 
-            <div className="label-store">
-              <span id="basic-addon1">
+            <div className="label-store mb-2">
+              <span id="basic-addon1" className="block font-medium leading-6 text-gray-900">
                 Correo electrónico:
               </span>
               <input
@@ -236,13 +236,13 @@ function CreateShop() {
                 onChange={(event) => {
                   setShopMail(event.target.value);
                 }}
-                className="input-store"
+                className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-store"
                 placeholder="correo@gmail.com"
               />
             </div>
 
-            <div className="label-store">
-              <span id="basic-addon1">
+            <div className="label-store mb-2">
+              <span id="basic-addon1" className="block font-medium leading-6 text-gray-900">
                 Dirección:
               </span>
               <input
@@ -251,13 +251,13 @@ function CreateShop() {
                 onChange={(event) => {
                   setShopAdress(event.target.value);
                 }}
-                className="input-store"
+                className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-store"
                 placeholder="Dirección de la tienda"
               />
             </div>
 
             <div className="label-store">
-              <span id="basic-addon1">
+              <span id="basic-addon1" className="block font-medium leading-6 text-gray-900">
                 Descripción:
               </span>
               <textarea
@@ -266,12 +266,12 @@ function CreateShop() {
                 onChange={(event) => {
                   setShopComments(event.target.value);
                 }}
-                className="input-store"
+                className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 resize-none focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-store"
                 placeholder="Descripción de la tienda"
               />
             </div>
 
-            <div className="input-group mt-3">
+            <div className="mt-3 flex">
               <label className="select-img-store" htmlFor="file">
                 Seleccionar imagen de la tienda
               </label>
@@ -290,7 +290,7 @@ function CreateShop() {
               )}
             </div>
           </div>
-          <div className="card-footer text-body-secondary d-flex justify-content-center">
+          <div className="card-footer d-flex justify-content-center">
             {editar ? (
               <div className="w-52 d-flex justify-content-between">
                 <button onClick={updateShop} className="btn-update-store">
@@ -376,7 +376,7 @@ function CreateShop() {
               </tr>
             ))}
           </tbody>
-                    </table> */}
+        </table> */}
       </div>
       <Footer />
     </>

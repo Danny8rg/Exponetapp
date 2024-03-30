@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { ShopContextValues } from "../Context/ShopContext";
 import { MdShoppingCart } from "react-icons/md";
-import { FaSearch } from "react-icons/fa";
+// import { FaSearch } from "react-icons/fa";
 import "./Header.css";
 
 const Header = () => {
@@ -81,7 +81,7 @@ const Header = () => {
                               : ""
                           }`}
                         >
-                          Gestion Tiendas
+                          Gestión tiendas
                         </Link>
                       </li>
                       <li>

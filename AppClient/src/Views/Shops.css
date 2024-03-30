@@ -1,44 +1,45 @@
-.shops-container{
+.shops-container {
     width: 100%;
     padding-top: 7rem;
     padding-bottom: 4rem;
-    gap: 3rem 6rem;
+    gap: 2rem 6rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-}
-
-.box-title-shop{
+  }
+  
+  .box-title-shop {
     width: 100%;
     height: 3rem;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.product-title-shop{
+  }
+  
+  .product-title-shop {
     margin: 0;
     font-size: 2.2rem;
     font-weight: 700;
     text-align: center;
-}
-
-.shop-card{
+  }
+  
+  .shop-card {
     width: 35%;
     height: 18rem;
     padding: 1rem;
     border-radius: 8px;
     gap: 6px;
     display: flex;
+    border: 1px solid #dcdcdc;
     align-items: center;
     transition: transform 0.3s ease;
-}
-
-.shop-card:hover {
-  transform: scale(1.05);
-}
-
-.box-img-shops{
+  }
+  
+  .shop-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .box-img-shops {
     width: 100%;
     height: 100%;
     border-radius: 8px;
@@ -46,40 +47,43 @@
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.shops-img{
+  }
+  
+  .shops-img {
     height: 100%;
     width: 100%;
+    border: 1px solid #dcdcdc;
     border-radius: 8px;
     object-fit: cover;
-}
-
-.shops-info{
+  }
+  
+  .shops-info {
     height: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-}
-
-.shops-title{
-    font-size: 1.5rem;
+  }
+  
+  .shops-title {
+    font-size: 1.4rem;
     font-weight: 700;
     text-align: center;
-}
-
-.shops-descrip{
+  }
+  
+  .shops-descrip {
+    width: 95%;
     font-size: 1rem;
     text-align: center;
-
-}
-
-.shops-btn{
+  }
+  
+  .shops-btn {
+    font-size: 1rem;
     background-color: #4cbfd5;
-}
-
-.shops-btn:hover{
-    background-color: #7bd6e5; 
-}
+  }
+  
+  .shops-btn:hover {
+    background-color: #7bd6e5;
+  }
+  

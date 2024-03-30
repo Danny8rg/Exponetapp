@@ -30,7 +30,9 @@ function ProductSamplerHome({ products, stock, quantityCards, Route }) {
   return (
     <>
       <div className="product-container-home">
-        <div className="box-title-sampler"></div>
+        <div className="box-title-sampler">
+          <h1 className="product-title-sampler">Productos de interés</h1>
+        </div>
         {filteredProducts.slice(0, quantityCards).map((product) => (
           <div
             key={product.productId}

@@ -1,7 +1,6 @@
 .about-container {
     position: relative;
-    height: 99vh;
-    padding-top: 2rem;
+    height: 100vh;
     width: 100%;
     display: flex;
     align-items: center;
@@ -21,7 +20,7 @@
     background-image: url("https://images.unsplash.com/photo-1423768164017-3f27c066407f?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
     background-size: cover;
     background-position: center;
-    opacity: 0.6; /* ACA CAMBIAMOS LA OPACIDAD A LA IMAGEN DE FONDO*/
+    opacity: 0.7; /* ACA CAMBIAMOS LA OPACIDAD A LA IMAGEN DE FONDO*/
 }
 
 .about-container .about-title,
@@ -30,68 +29,68 @@
     z-index: 1; /* Asegura que el texto esté por encima del fondo con opacidad */
 }
 
-.about-title{
-    font-size: 3.5rem;
-    font-weight: 600;
+.about-title {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    font-weight: 800;
 }
 
 .about-txt{
-    width: 60%;
-    font-size: 1.5rem;
+    width: 50%;
+    font-size: 1rem;
 }
 
 
 /* MEDIA QUERY DE ABOUT */
-@media screen and (max-width: 1200px) {
-
-    .about-container {
-        width: 103%;
-    }
-
-}
 
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 768px) {
 
-    .about-container {
-        width: 111%;
-    }
+  .about-container {
+    height: 75vh;
+  }
+
+  .about-title {
+    font-size: 2rem;
+  }
+
+  .about-txt{
+    width: 70%;
+    font-size: 1rem;
+  }
 
 }
 
 @media screen and (max-width: 600px) {
 
-    .about-title{
-        font-size: 1.5rem;
-        font-weight: 600;
-    }
+  .about-container {
+    height: 75vh;
+  }
     
-    .about-txt{
-        width: 85%;
-        font-size: 1rem;
-        margin-bottom: 3rem;
-    }
+  .about-title {
+    font-size: 1.7rem;
+  }
+    
+  .about-txt{
+    width: 70%;
+    font-size: 0.9rem;
+  }
 
 }
 
 @media screen and (max-width: 480px) {
 
-    .about-container{
-        padding-top: 0;
-        height: 60vh;
-        background-attachment: initial;
+  .about-container {
+    height: 75vh;
+  }
 
-    }
-
-    .about-container .about-title {
-        font-size: 1.7rem;
-        margin-top: 1.7rem;
-        font-weight: 500;
-    }
-    
-    .about-txt{
-        font-size: 1rem;
-        width: 80%;
-    }
+  .about-title {
+    font-size: 1.5rem;
+  }
+        
+  .about-txt{
+    width: 70%;
+    font-size: 0.8rem;
+  }
 
 }

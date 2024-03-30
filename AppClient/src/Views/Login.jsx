@@ -65,7 +65,7 @@ function Login() {
   return (
     <>
       <section className="flex min-h-full flex-1 flex-col justify-center  items-center px-6 py-12 lg:px-8 general">
-        <div className="w-1/4 py-8 px-4 flex flex-col items-center justify-center rounded-md shadow-sm bg-gray-50 general-2">
+        <div className="w-1/3 py-4 px-4 flex flex-col items-center justify-center rounded-md shadow-sm bg-gray-50 general-2">
           <img
             className="mx-auto h-20 w-auto image"
             src="/exponet-logo.webp"
@@ -85,7 +85,7 @@ function Login() {
                 </label>
                 <div className="mt-2 input-gmail">
                   <input
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm placeholder:text-gray-400 sm:text-sm sm:leading-6 input-login"
+                    className="block w-full rounded-md border-0 pl-3 py-1.5 text-gray-900 shadow-sm placeholder:text-gray-400 sm:text-sm sm:leading-6 input-login"
                     type="email"
                     placeholder="example@mail.com"
                     id="userMail"
@@ -113,7 +113,7 @@ function Login() {
                 </div>
                 <div className="mt-2">
                   <input
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 input-login"
+                    className="block w-full rounded-md border-0 pl-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 input-login"
                     type="password"
                     id="userPassword"
                     name="userPassword"
@@ -161,64 +161,3 @@ function Login() {
 }
 
 export default Login;
-
-// <>
-//       <section className="first-section">
-//         <section className="second-section">
-//           <section className="left-section">
-//             <h1 className="left-title">EXPONET</h1>
-//             <img
-//               className="left-logo"
-//               src="./exponet-logo-webp"
-//               alt=""
-//             />
-//             <Link className="left-link" to={"/"}>
-//               <IoStorefrontSharp className="left-link-icon" /> Inicio
-//             </Link>
-//           </section>
-//           <form onSubmit={handleSubmit} className="form-login">
-//             <h4 className="form-title">Acceso</h4>
-//             <div className="info">
-//               <label htmlFor="userMail" className="login-label">
-//                 Correo electrónico
-//               </label>
-//               <input
-//                 className="date-input"
-//                 type="email"
-//                 placeholder="Ej: correo@mail.com"
-//                 id="userMail"
-//                 name="userMail"
-//                 value={formData.userMail}
-//                 onChange={handleChange}
-//               />
-//             </div>
-//             <div className="info mb-3">
-//               <label htmlFor="userPassword" className="login-label">
-//                 Contraseña
-//               </label>
-//               <input
-//                 className="date-input"
-//                 type="password"
-//                 id="userPassword"
-//                 name="userPassword"
-//                 value={formData.userPassword}
-//                 onChange={handleChange}
-//               />
-//             </div>
-//             <div className="info" id="buttonbox">
-//               <button type="submit" className="btn-login">
-//                 Iniciar sesión
-//               </button>
-//               <hr />
-//               <button
-//                 type="submit"
-//                 className="btn-new-account"
-//                 onClick={navigateToRegister}
-//               >
-//                 Cree una nueva cuenta
-//               </button>
-//             </div>
-//           </form>
-//         </section>
-//       </section>
-//     </>

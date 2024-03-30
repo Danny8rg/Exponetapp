@@ -1,7 +1,7 @@
 import ProductSamplerHome from "../Components/ProductSamplerHome/ProductSamplerHome";
 import Footer from "../Components/Footer/Footer";
 import Header from "../Components/Header/Header";
-// import Comments from "../Components/Comments/Comments";
+import ContactUs from "../Components/ContactUs/ContactUs" 
 import About from "../Components/About/About";
 import { useState, useEffect, useContext } from "react";
 import { ShopContextValues } from "../Components/Context/ShopContext";
@@ -41,16 +41,13 @@ function Home() {
       <section>
         <Header />
         <About />
-        <div className="box-title-sampler">
-          <h2 className="product-title-sampler">Productos de interés</h2>
-        </div>
         <ProductSamplerHome
           products={products}
           stock={stock}
           quantityCards={quantityCards}
           Route="/PrincipalShop"
         />
-        {/* <Comments /> */}
+        <ContactUs />
         <Footer />
       </section>
     </>

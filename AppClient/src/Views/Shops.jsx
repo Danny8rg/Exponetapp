@@ -56,7 +56,7 @@ function Shops() {
               <h4 className="shops-title m-0">{shop.shopName}</h4>
               <p className="shops-descrip m-0">{shop.shopComments}</p>
               <button
-                className="flex w-20 justify-center rounded-md px-3 py-1 text-sm font-semibold leading-6 text-white shadow-sm shops-btn"
+                className="flex justify-center rounded-md px-3 py-1 text-sm font-semibold leading-6 text-white shadow-sm shops-btn"
                 onClick={() => handleEnterShop(shop.shopId, shop.shopName)}
               >
                 Entrar
