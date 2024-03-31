@@ -189,6 +189,22 @@ const handleBankChange = (e) => {
   setBank(e.target.value);
 };
 
+const deleteOneProduct = (productId) => {
+  
+  const confirmDelete = window.confirm("¿Seguro que desea eliminar el producto del carrito de compras?");
+
+  
+  if (confirmDelete) {
+    const updatedProducts = buyCarProducts.filter((product) => product.productId !== productId);
+    setBuyCarProducts(updatedProducts);
+    setSelectedQuantities((prevQuantities) => {
+      const updatedQuantities = { ...prevQuantities };
+      delete updatedQuantities[productId];
+      return updatedQuantities;
+    });
+    updateTotal();
+  }
+};
   return (
     <>
       <div className="product-container-cart">
@@ -247,7 +263,7 @@ const handleBankChange = (e) => {
             </div>
             <div>
                 <button className="DeleteButton" onClick={()=>{
-
+                  deleteOneProduct(product.productId);
                 }}>Borrar</button>
               </div>
           </div>
