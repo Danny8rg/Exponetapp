@@ -1,6 +1,8 @@
 const dotenv = require('dotenv'); 
 dotenv.config();
 
-const API_KEY_GEMINI = process.env.KEY_GEMINI;
+ // AIzaSyD4bye52uZhgUjqW7YxQbpt2hEBGurJbpo   api key
+
+const API_KEY_GEMINI = "AIzaSyD4bye52uZhgUjqW7YxQbpt2hEBGurJbpo" ;
 
 module.exports = {API_KEY_GEMINI};

@@ -73,33 +73,50 @@ function ProductSampler({ products, stock, quantityCards, Route }) {
     productPrize,
     productStock,
     productCategory,
-    productimgurl
+    productimgurl,
+    productShopOwner,
+    productState
   ) {
-    const selectedQuantity = selectedProducts[productId] || 0;
-
-
-    setBuyCarProducts((prevBuyCarProducts) => [
-      ...prevBuyCarProducts,
-      {
-        productId,
-        productName,
-        productDescription,
-        productPrize,
-        productStock,
-        productCategory,
-        productimgurl,
-        quantity: selectedQuantity, // Añadir la cantidad seleccionada
-        productState
-      },
-    ]);
-    Swal.fire({
-      position: "center",
-      icon: "success",
-      title: "Producto añadido al carrito",
-      showConfirmButton: false,
-      timer: 1500,
-    });
+    // Verificar si el producto ya está en el carrito
+    const alreadyInCart = buyCarProducts.some(
+      (item) => item.productId === productId
+    );
+  
+    if (alreadyInCart) {
+      // Mostrar alerta de que el producto ya está en el carrito
+      alert("¡Ya has comprado este producto! si deseas comprar otra unidad de este producto ve al carrito de compras y selecciona la cantidad");
+    } else {
+      // Incrementar la cantidad a 1 si es 0
+      const selectedQuantity = selectedProducts[productId] <= 0 ? 1 : selectedProducts[productId];
+  
+      // Agregar el producto al carrito
+      setBuyCarProducts((prevBuyCarProducts) => [
+        ...prevBuyCarProducts,
+        {
+          productId,
+          productName,
+          productDescription,
+          productPrize,
+          productStock,
+          productCategory,
+          productimgurl,
+          productShopOwner,
+          quantity: selectedQuantity,
+          productState
+        },
+      ]);
+  
+      // Mostrar mensaje de éxito
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Producto añadido al carrito",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
   }
+  
 
 
   function borrarCarrito() {
@@ -132,19 +149,12 @@ function ProductSampler({ products, stock, quantityCards, Route }) {
                     product.productStock,
                     product.productCategory,
                     product.productimgurl,
+                    product.productShopOwner,
                     productState
                   )
                 }
               >
                 Comprar
-              </button>
-              <button
-                className="delete-icon"
-                onClick={() => {
-                  borrarCarrito();
-                }}
-              >
-                <MdDeleteForever />
               </button>
             </section>
             <div className="box-img">

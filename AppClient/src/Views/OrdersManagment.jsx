@@ -207,57 +207,80 @@ function ChangeStateCanceled(buyCarContent, globalShopId) {
   return (
     <>
       <Header />
-      <h1 className="subtitles"> Orders Managment </h1>
-      <div className="">
-        <h1>Usuarios</h1>
-        <ul>
-          {users.map((user, userId) => {
-            // Filtrar los pedidos del usuario actual
-            const userOrders = orders.filter(order => order.buyCarUser === user.userId);
-            // Verificar si el usuario tiene pedidos
-            if (userOrders.length > 0) {
-              return (
-                <li key={userId}>
-                  <p>{user.userId}</p>
-                  <p>{user.userName}</p>
-                  <p>{user.userAddress}</p>
-                  <p>Órdenes:</p>
-                  <ul>
+      <h1 className="subtitles"> Orders Management </h1>
+      <div className="orders-container">
+        {users.map((user, userId) => {
+          const userOrders = orders.filter(order => order.buyCarUser === user.userId);
+          if (userOrders.length > 0) {
+            return (
+              <li key={userId}>
+                <div className="userInfo">
+                  <p>ID: {user.userId}</p>
+                  <p>Nombre: {user.userName}</p>
+                  <p>Dirección: {user.userAdress}</p>
+                  <p>Correo Electrónico: {user.userMail}</p>
+                </div>
+                <table className="product-container">
+                  <thead>
+                    <tr>
+                      <th>Producto</th>
+                      <th>ID Tienda</th>
+                      <th>Descripción</th>
+                      <th>Precio</th>
+                      <th>Unidades</th>
+                      <th>Total</th>
+                      <th>Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
                     {userOrders.map((order, orderId) => (
-                      <li key={orderId}>
-                        <p>Id Pedido: {order.buyCarId}</p>
-                        <p>Contenido del Pedido:</p>
-                        <ul>
-                          {JSON.parse(order.buyCarContent).products.map((product, productId) => {
-                            // Calcular el total para cada producto
+                      <React.Fragment key={orderId}>
+                        {JSON.parse(order.buyCarContent).products.map((product, productId) => {
+                          if (product.productShopOwner === globalShopId) {
                             const total = product.productPrize * product.quantity;
                             return (
-                              <li key={productId}>
-                                <p>Nombre del Producto: {product.productName}</p>
-                                <p>Id Tienda: {product.productShopOwner}</p>
-                                <p>Descripción del Producto: {product.productDescription}</p>
-                                <p>Precio del Producto: {product.productPrize}</p>
-                                <p>Cantidad: {product.quantity}</p>
-                                <p>Total: {total}</p>
-                              </li>
+                              <tr key={productId}>
+                                <td>{product.productName}</td>
+                                <td>{product.productShopOwner}</td>
+                                <td>{product.productDescription}</td>
+                                <td>{product.productPrize}</td>
+                                <td>{product.quantity}</td>
+                                <td>{total}</td>
+                                <td><button onClick={()=>{
+                                  orderDelivered(order.buyCarContent, globalShopId, order.buyCarId)
+                                }}>
+                                  Despachar
+                                  </button>
+                                  <button onClick={()=> {
+                                    ChangeStateCanceled(order.buyCarContent, globalShopId)
+                                  }}>
+                                    Cancelar
+                                  </button>
+                                  </td>
+                              </tr>
                             );
-                          })}
-                        </ul>
-                      </li>
+                          } else {
+                            return null;
+                          }
+                        })}
+                      </React.Fragment>
                     ))}
-                  </ul>
-                </li>
-              );
-            } else {
-              // No renderizar si el usuario no tiene pedidos
-              return null;
-            }
-          })}
-        </ul>
+                  </tbody>
+                </table>
+              </li>
+            );
+          } else {
+            return null;
+          }
+        })}
       </div>
       <Footer />
     </>
   );
+  
+  
+  
+  
   
   
   

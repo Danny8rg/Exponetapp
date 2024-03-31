@@ -65,3 +65,10 @@
     color: #56aee0;
     background-color: white;
   }
+
+  .userInfo{
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    align-items: center;
+  }

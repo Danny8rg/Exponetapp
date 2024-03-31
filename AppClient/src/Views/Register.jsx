@@ -14,6 +14,7 @@ function RegisterForm() {
     userAdress: "",
     userRole: "",
     file: null,
+    passwordError: "", // Agregar estado para el error de contraseña
   });
 
   const [selectedFile, setSelectedFile] = useState(null)
@@ -21,10 +22,27 @@ function RegisterForm() {
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+    setFormData(prevState => ({
+      ...prevState,
+      [name]: value,
+    }));
+
+    // Validar las contraseñas en tiempo real
+    if (name === "userPassword" || name === "confirmPassword") {
+      const passwordRegex = /^(?=.*[A-Z]).{6,}$/; // Al menos 6 caracteres con al menos una mayúscula
+      if (!passwordRegex.test(value)) {
+        setFormData(prevState => ({
+          ...prevState,
+          passwordError: "La contraseña debe tener al menos 6 caracteres y una mayúscula",
+        }));
+      } else {
+        setFormData(prevState => ({
+          ...prevState,
+          passwordError: "",
+        }));
+      }
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -34,7 +52,17 @@ function RegisterForm() {
       console.error("Las contraseñas no coinciden");
       Swal.fire({
         icon: "error",
-        text: "Contraseñas no coinciden!",
+        text: "Las contraseñas no coinciden!",
+      });
+      return;
+    }
+
+    if (formData.passwordError) {
+      console.error("La contraseña no cumple con los requisitos");
+      Swal.fire({
+        icon: "warning",
+        title: "La contraseña no cumple con los requisitos",
+        text: formData.passwordError,
       });
       return;
     }
@@ -54,16 +82,6 @@ function RegisterForm() {
       return;
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.userMail)) {
-      console.error("Formato de correo electrónico inválido");
-      Swal.fire({
-        icon: "warning",
-        title: "Formato de correo electronico invalido",
-      });
-      return;
-    }
-
     const formDataToSend = new FormData();
     formDataToSend.append('userName', formData.userName);
     formDataToSend.append('userMail', formData.userMail);
@@ -71,12 +89,12 @@ function RegisterForm() {
     formDataToSend.append('confirmPassword', formData.confirmPassword);
     formDataToSend.append('userAdress', formData.userAdress);
     formDataToSend.append('userRole', formData.userRole);
-    formDataToSend.append('file', formData.file); // Adjuntar el archivo al FormData
+    formDataToSend.append('file', formData.file);
 
     try {
       const response = await axios.post("http://localhost:3000/createUser", formDataToSend, {
         headers: {
-          'Content-Type': 'multipart/form-data' // Es importante establecer el encabezado correcto para la carga de archivos
+          'Content-Type': 'multipart/form-data'
         }
       });
       console.log(response.data);
@@ -91,10 +109,10 @@ function RegisterForm() {
   };
 
   const handleFileChange = (event) => {
-    setFormData({
-      ...formData,
-      file: event.target.files[0], // Guardar el archivo seleccionado en el estado
-    });
+    setFormData(prevState => ({
+      ...prevState,
+      file: event.target.files[0],
+    }));
   };
 
   return (
@@ -122,13 +140,14 @@ function RegisterForm() {
                   />
                 </div>
               </div>
-              <div>
-                <label htmlFor="userMail" className="block text-sm font-medium leading-6 text-gray-900 label-register">
+              <label htmlFor="userMail" className="block text-sm font-medium leading-6 text-gray-900 label-register">
                   Correo electrónico
                 </label>
                 <div className="mt-0">
                   <input
-                    className="block w-full rounded-md border-0 pl-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-register"
+                    className={`block w-full rounded-md border-0 pl-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-register ${
+                      formData.emailError ? 'border-red-500' : ''
+                    }`}
                     type="email"
                     placeholder="example@mail.com"
                     id="userMail"
@@ -137,8 +156,10 @@ function RegisterForm() {
                     value={formData.userMail}
                     onChange={handleChange}
                   />
-                </div>
-              </div>
+                  {formData.emailError && (
+                    <p className="text-red-500 text-xs mt-1">{formData.emailError}</p>
+                  )}
+                </div>  
               <div>
                 <label htmlFor="userAdress" className="block text-sm font-medium leading-6 text-gray-900 label-register">
                   Direccion de residencia
@@ -162,7 +183,9 @@ function RegisterForm() {
                 </label>
                 <div className="mt-0">
                   <input
-                    className="block w-full rounded-md border-0 pl-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-register"
+                    className={`block w-full rounded-md border-0 pl-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-register ${
+                      formData.passwordError ? 'border-red-500' : ''
+                    }`}
                     type="password"
                     id="userPassword"
                     name="userPassword"
@@ -170,6 +193,9 @@ function RegisterForm() {
                     value={formData.userPassword}
                     onChange={handleChange}
                   />
+                  {formData.passwordError && (
+                    <p className="text-red-500 text-xs mt-1">{formData.passwordError}</p>
+                  )}
                 </div>
               </div>
               <div>
@@ -178,7 +204,9 @@ function RegisterForm() {
                 </label>
                 <div className="mt-0">
                   <input
-                    className="block w-full rounded-md border-0 pl-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-register"
+                    className={`block w-full rounded-md border-0 pl-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-register ${
+                      formData.passwordError ? 'border-red-500' : ''
+                    }`}
                     type="password"
                     id="confirmPassword"
                     name="confirmPassword"
@@ -213,13 +241,12 @@ function RegisterForm() {
                     id="file"
                     name="file"
                     onChange={handleFileChange}
-                    style={{ display: "none" }} // Oculta el input de tipo archivo
+                    style={{ display: "none" }}
                   />
                   {selectedFile && (
                     <div className="file-info2">
                       <p className="result-select-img2">{selectedFile.name}</p>
-                      {/* Puedes agregar más información sobre el archivo si lo deseas */}
-                    </div>
+                        </div>
                   )}
                 </div>
               </div>

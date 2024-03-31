@@ -13,7 +13,12 @@ function ProductSamplerBuyCar() {
 
   const [selectedQuantities, setSelectedQuantities] = useState({});
   const [total, setTotal] = useState(0);
+  const [showModal, setShowModal] = useState(false)
   const navigate = useNavigate();
+  const [showCardInput, setShowCardInput] = useState(false);
+  const [cardNumber, setCardNumber] = useState("")
+  const [bank, setBank] = useState("")
+  const [userInfo, setUserInfo] = useState()
 
   useEffect(() => {
     updateTotal();
@@ -103,7 +108,7 @@ function ProductSamplerBuyCar() {
   };
 
   const handleCompra = () => {
-    buyCarUpdate("pendiente", buyCarUser);
+    updateBuyCar("pendiente", buyCarUser);
     setBuyCarProducts([]);
     setSelectedQuantities({});
     setTotal(0);
@@ -117,11 +122,12 @@ function ProductSamplerBuyCar() {
     navigate("/UserHistory");
   };
 
-  const buyCarUpdate = (buyCarState, buyCarUser) => {
+  const updateBuyCar = (buyCarState, buyCarUser) => {
+    console.log("soy el buycarproducts antes de crear los arreglos")
+    console.log(buyCarProducts)
     const selectedQuantitiesArray = buyCarProducts.map((product) => ({
       productId: product.productId,
       quantity: selectedQuantities[product.productId] || 0,
-      productShopOwner: product.productShopOwner, // Agregar productShopOwner al objeto
     }));
   
     const requestData = {
@@ -141,7 +147,7 @@ function ProductSamplerBuyCar() {
         console.error("Error al enviar la solicitud:", error);
       });
   };
-  
+
   const handleBorrar = () => {
     setBuyCarProducts([]);
     setSelectedQuantities({});
@@ -154,6 +160,34 @@ function ProductSamplerBuyCar() {
       timer: 1500,
     });
   };
+
+  const updateUserCreditCard = (userCreditCard, userId, bank) => {
+    Axios.put("http://localhost:3000/updateUserCreditCard", { userId: userId, userCreditCard: userCreditCard, bank: bank })
+      .then(response => {
+        console.log(response.data);
+        // Manejar la respuesta del servidor según sea necesario
+      })
+      .catch(error => {
+        console.error("Error al enviar la solicitud:", error);
+        // Manejar errores según sea necesario
+      });
+}
+
+const getUserInfo = (userId) => {
+  Axios.get(
+    `http://localhost:3000/readOneUser/${userId}`
+  ).then((response) => {
+    setUserInfo(response.data);
+    console.log("soy el userInfo")
+    console.log(response.data)
+    console.log(userInfo);
+  });
+};
+
+
+const handleBankChange = (e) => {
+  setBank(e.target.value);
+};
 
   return (
     <>
@@ -211,6 +245,11 @@ function ProductSamplerBuyCar() {
                 </span>
               </button>
             </div>
+            <div>
+                <button className="DeleteButton" onClick={()=>{
+
+                }}>Borrar</button>
+              </div>
           </div>
         ))}
         <div className="box-btn-buyCart">
@@ -219,7 +258,9 @@ function ProductSamplerBuyCar() {
             <p className="value-buyCart">${total}</p>
           </div>
           <div className="flex flex-col gap-1">
-            <button className="btn-buyCart" onClick={handleCompra}>
+            <button className="btn-buyCart" onClick={()=>{
+              setShowModal(true)
+            }}>
               Comprar Productos
             </button>
             <button className="btn-buyCart" onClick={handleBorrar}>
@@ -227,6 +268,77 @@ function ProductSamplerBuyCar() {
             </button>
           </div>
         </div>
+        
+        {showModal && (
+  <div className="modal2">
+  
+    <select
+      name="DeliveredSelector"
+      id="DeliveredSelector"
+      onChange={(e) => {
+        if (e.target.value === "Targeta De Credito") {
+          setShowCardInput(true);
+        } else {
+          setShowCardInput(false);
+        }
+      }}
+    >
+      <option value="contraEntrega">ContraEntrega</option>
+      <option value="Targeta De Credito">Pago Con Tarjeta</option>
+    </select>
+    {showCardInput && (
+       <div>
+          <select name="Bank" id="Bank" onChange={handleBankChange}>
+            <option value="bancolombia">Bancolombia</option>
+            <option value="davivienda">Davivienda</option>
+            <option value="popular">Banco Popular</option>
+          </select>
+          <input
+            id="cardNumber"
+            type="text"
+            placeholder="Número de tu tarjeta"
+            value={cardNumber}
+            onChange={(e) => setCardNumber(e.target.value)}
+          />
+          {cardNumber.length !== 16 && <p>Formato inválido. Se requieren 16 dígitos.</p>}
+       </div>
+    )}
+    <button
+      onClick={() => {
+        setShowModal(false);
+      }}
+
+      className="buttons2"
+    >
+      Cerrar
+    </button>
+    <button className="buttons2" onClick={()=>{
+      if(showCardInput == true){
+        let name = userInfo[0].userName
+        let adrees = userInfo[0].userAdress
+         setShowModal(false)
+         setCardNumber(cardNumber);
+         setBank(bank);
+         updateUserCreditCard(cardNumber, buyCarUser, bank);
+         handleCompra();
+         alert("Pagaste con tarjeta de crédito") 
+         let message = `usuario ",${name}, " su pedido sera entregado en ", ${adrees}, "el dia de la entrega le sera confirmado en las proximas horas ` 
+        alert(message)
+      } else {
+        getUserInfo(buyCarUser)
+        let name = userInfo[0].userName
+        let adrees = userInfo[0].userAdress
+        let message = `usuario ",${name}, " su pedido sera entregado en ", ${adrees}, "el dia de la entrega le sera confirmado en las proximas horas ` 
+        alert(message)
+        handleCompra()
+      }
+    }}>
+      Comprar
+    </button>
+  </div>
+)}
+
+
       </div>
     </>
   );
