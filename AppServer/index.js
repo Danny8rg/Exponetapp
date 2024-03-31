@@ -714,15 +714,22 @@ app.put("/deleteProductFromBuyCar"),
   });
 
   app.post("/createComment", async (req, res) => {
-    const { appComment, userComment, productComment } = req.body;
-  
+    const { appComment, userComment, productComment, productName } = req.body;
+    let positiveComments
+    let negativeComments
     try {
       // Clasificar el comentario usando la IA de Gemini
-      const classificationResult = await classify_text(appComment);
-  
-      // Determinar si el comentario es a favor o en contra
-      const positiveComments = classificationResult === "A favor" ? 1 : 0;
-      const negativeComments = classificationResult === "En contra" ? 1 : 0;
+      prompt = `Clasifica el siguiente comentario como A favor o En contra del producto ${productName}:`
+      const classificationResult = await classify_text(`${prompt}, ${appComment}`);
+
+      console.log(classificationResult);
+      if (classificationResult == "A favor"){
+        positiveComments = 1
+        negativeComments = 0
+      }else if (classificationResult == "En contra"){
+        negativeComments = 1
+        positiveComments = 0
+      }
   
       // Insertar el comentario en la base de datos
       db.query(
@@ -742,23 +749,29 @@ app.put("/deleteProductFromBuyCar"),
       res.status(500).send("Error al clasificar el comentario");
     }
   });
+
+  // AIzaSyD4bye52uZhgUjqW7YxQbpt2hEBGurJbpo   api key
+
+
+  // producto = "Gelatina"
+// prompt = `Clasifica el siguiente comentario como A favor o En contra del producto ${producto}:`
+// comentario = "Es una gelatina costosa y de mal sabor"
+// classify_text(`${prompt} ${comentario}`);
   
   // Función para clasificar el texto utilizando la IA de Gemini
-  async function classify_text(msg) {
-    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-    const result = await model.generateContent(msg);
-    const response = await result.response;
-    const text = response.text();
-    
-    if (text === "A favor") {
-      return "A favor";
-    } else if (text === "En contra") {
-      return "En contra";
-    } else {
-      return "Sin clasificar";
-    }
-  }
-  
+   async function classify_text(msg) {  
+  const model = genAI.getGenerativeModel({ model: "gemini-pro"});
+  const result = await model.generateContent(msg);
+  const response = await result.response;
+  const text = response.text();
+  console.log(text)
+  if (text == "A favor"){
+    console.log("El comentario es a favor"); }
+    if (text == "En contra"){
+      console.log("El comentario es en contra"); }
+
+      return text
+}  
   
 
   app.listen(3000, () => {

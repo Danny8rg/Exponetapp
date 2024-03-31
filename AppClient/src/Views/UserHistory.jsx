@@ -9,10 +9,10 @@ function UserHistory() {
   const [buyCars, setBuyCars] = useState([]);
   const [buyCarUser, setBuyCarUser] = useState(0);
   const [loading, setLoading] = useState(true);
-  const [showModal, setShowModal] = useState(false); // Estado para controlar si se muestra la modal
-  const [comment, setComment] = useState(""); // Estado para almacenar el comentario
-  const [momentId, setMomentId] = useState(0)
-  
+  const [showModal, setShowModal] = useState(false);
+  const [comment, setComment] = useState("");
+  const [momentId, setMomentId] = useState(0);
+  const [selectedProductName, setSelectedProductName] = useState(""); // Estado para almacenar el nombre del producto seleccionado
 
   useEffect(() => {
     setBuyCarUser(Cookies.get("userId"));
@@ -21,7 +21,6 @@ function UserHistory() {
         const response = await axios.get(
           "http://localhost:3000/buyCarsList"
         );
-        console.dir(response.data);
         setBuyCars(response.data);
         setLoading(false);
       } catch (error) {
@@ -33,37 +32,28 @@ function UserHistory() {
     fetchBuyCars();
   }, []);
 
-  // Función para manejar la eliminación del producto
   const handleDelete = (buyCarId) => {
-    console.dir("soy el buyCarId del boton deletear", buyCarId);
     axios.put(`http://localhost:3000/deleteBuyCar/${buyCarId}`)
       .then(response => {
-        console.log("Carrito eliminado exitosamente:", response.data);
         alert("se elimino el carrito del historial")
-        // Aquí puedes realizar cualquier acción adicional después de eliminar el carrito
       })
       .catch(error => {
         console.error("Error al eliminar el carrito:", error);
-        // Aquí puedes manejar el error de alguna manera si lo deseas
       });
   };
 
-
-  // Función para manejar la acción de comentario del producto
-  const handleComment = (productId) => {
-    setShowModal(true); // Abrir la modal cuando se hace clic en el botón de comentario
-    setMomentId(productId)
+  const handleComment = (productName, productId) => { // Modificar handleComment para pasar productName
+    setShowModal(true);
+    setSelectedProductName(productName); // Almacenar el nombre del producto seleccionado
+    setMomentId(productId);
   };
 
-  const createComment = (appComment, userComment, productId) => {
-    console.log("soyAppComment en createComment", appComment)
-    console.log("soyuserComment en createComment", userComment)
-    console.log("soyProductId en createComment", productId)
-  
+  const createComment = (appComment, userComment, productId, productName) => {
     axios.post("http://localhost:3000/createComment", {
         appComment: appComment,
         userComment: userComment,
-        productComment: productId
+        productComment: productId,
+        productName: productName,
       })
       .then(() => { 
         alert("Comentario Agregado");
@@ -73,7 +63,8 @@ function UserHistory() {
       .catch((error) => {
         console.error("Error al enviar el comentario:", error);
       });
-  }
+  };
+
   return (
     <>
       <Header />
@@ -130,7 +121,7 @@ function UserHistory() {
                                 Eliminar
                               </button>
                               <button
-                                onClick={() => handleComment(product.productId)}
+                                onClick={() => handleComment(product.productName, product.productId)} // Pasar productName y productId como argumentos
                               >
                                 Comentario
                               </button>
@@ -148,14 +139,14 @@ function UserHistory() {
       {showModal && (
         <div className="modal">
           <div className="modal-content">
-            <h1>Hola usuario</h1>
+            <h1>Comentario para {selectedProductName}</h1> {/* Mostrar el nombre del producto seleccionado */}
             <textarea
               placeholder="Escribe tu comentario aquí"
               value={comment}
               onChange={(e) => setComment(e.target.value)}
             />
             <button onClick={() => {
-              createComment(comment, buyCarUser, momentId)
+              createComment(comment, buyCarUser, momentId, selectedProductName)
             }}>Enviar</button>
             <button onClick={()=>{
               setShowModal(false)
