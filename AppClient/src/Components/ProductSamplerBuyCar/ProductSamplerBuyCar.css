@@ -106,4 +106,14 @@
   .modal-content2 button:hover {
     background-color: #0056b3;
   }
+
+  .DeleteButton {
+    margin-top: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #ff0000;
+    color: #fff;
+    cursor: pointer;
+  }
   

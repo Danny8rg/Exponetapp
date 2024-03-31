@@ -242,6 +242,11 @@ const handleBankChange = (e) => {
                 </span>
               </button>
             </div>
+            <div>
+                <button className="DeleteButton" onClick={()=>{
+
+                }}>Borrar</button>
+              </div>
           </div>
         ))}
         <div className="box-btn-buyCart">
@@ -306,17 +311,21 @@ const handleBankChange = (e) => {
     </button>
     <button className="buttons2" onClick={()=>{
       if(showCardInput == true){
+        let name = userInfo[0].userName
+        let adrees = userInfo[0].userAdress
          setShowModal(false)
          setCardNumber(cardNumber);
          setBank(bank);
          updateUserCreditCard(cardNumber, buyCarUser, bank);
          handleCompra();
          alert("Pagaste con tarjeta de crédito") 
+         let message = `usuario ",${name}, " su pedido sera entregado en ", ${adrees}, "el dia de la entrega le sera confirmado en las proximas horas ` 
+        alert(message)
       } else {
         getUserInfo(buyCarUser)
         let name = userInfo[0].userName
         let adrees = userInfo[0].userAdress
-        let message = `usuario ",${name}, " su pedido sera entregado en ", ${adrees}, "el dia de mañana` 
+        let message = `usuario ",${name}, " su pedido sera entregado en ", ${adrees}, "el dia de la entrega le sera confirmado en las proximas horas ` 
         alert(message)
         handleCompra()
       }
