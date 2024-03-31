@@ -18,6 +18,7 @@ function ProductSamplerBuyCar() {
   const [showCardInput, setShowCardInput] = useState(false);
   const [cardNumber, setCardNumber] = useState("")
   const [bank, setBank] = useState("")
+  const [userInfo, setUserInfo] = useState()
 
   useEffect(() => {
     updateTotal();
@@ -172,6 +173,18 @@ function ProductSamplerBuyCar() {
       });
 }
 
+const getUserInfo = (userId) => {
+  Axios.get(
+    `http://localhost:3000/readOneUser/${userId}`
+  ).then((response) => {
+    setUserInfo(response.data);
+    console.log("soy el userInfo")
+    console.log(response.data)
+    console.log(userInfo);
+  });
+};
+
+
 const handleBankChange = (e) => {
   setBank(e.target.value);
 };
@@ -300,9 +313,12 @@ const handleBankChange = (e) => {
          handleCompra();
          alert("Pagaste con tarjeta de crédito") 
       } else {
-         handleCompra()
-         setShowModal(false)
-         alert("Pagarás en tu domicilio")
+        getUserInfo(buyCarUser)
+        let name = userInfo[0].userName
+        let adrees = userInfo[0].userAdress
+        let message = `usuario ",${name}, " su pedido sera entregado en ", ${adrees}, "el dia de mañana` 
+        alert(message)
+        handleCompra()
       }
     }}>
       Comprar
