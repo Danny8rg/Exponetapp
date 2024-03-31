@@ -220,6 +220,19 @@ app.get("/readOneUser/:userId", (req, res) => {
   });
 });
 
+app.put("/updateUserCreditCard", (req, res) => {
+  const {userCreditCard, userId, bank } = req.body;
+
+  db.query("UPDATE appUsers SET userCreditCard = ?, bank = ?WHERE userId = ?", [userCreditCard, bank, userId], (err, result) => {
+      if (err) {
+          console.log(err);
+          res.status(500).send("Error al registrar la tarjeta de crédito");
+      } else {
+          res.status(200).send(result);
+      }
+  });
+});
+
 app.post(
   "/createShop",
   fileUpload({
@@ -733,8 +746,8 @@ app.put("/deleteProductFromBuyCar"),
   
       // Insertar el comentario en la base de datos
       db.query(
-        "INSERT INTO appComments (userComment, productComment, appComment, positiveComments, negativeComments) VALUES (?, ?, ?, ?, ?)",
-        [userComment, productComment, appComment, positiveComments, negativeComments],
+        "INSERT INTO appComments (userComment, productComment, appComment, positiveComments, negativeComments, CommentState) VALUES (?, ?, ?, ?, ?, ?)",
+        [userComment, productComment, appComment, positiveComments, negativeComments, classificationResult],
         (err, result) => {
           if (err) {
             console.log(err);

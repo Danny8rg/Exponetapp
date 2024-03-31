@@ -13,7 +13,11 @@ function ProductSamplerBuyCar() {
 
   const [selectedQuantities, setSelectedQuantities] = useState({});
   const [total, setTotal] = useState(0);
+  const [showModal, setShowModal] = useState(false)
   const navigate = useNavigate();
+  const [showCardInput, setShowCardInput] = useState(false);
+  const [cardNumber, setCardNumber] = useState("")
+  const [bank, setBank] = useState("")
 
   useEffect(() => {
     updateTotal();
@@ -156,6 +160,22 @@ function ProductSamplerBuyCar() {
     });
   };
 
+  const updateUserCreditCard = (userCreditCard, userId, bank) => {
+    Axios.put("http://localhost:3000/updateUserCreditCard", { userId: userId, userCreditCard: userCreditCard, bank: bank })
+      .then(response => {
+        console.log(response.data);
+        // Manejar la respuesta del servidor según sea necesario
+      })
+      .catch(error => {
+        console.error("Error al enviar la solicitud:", error);
+        // Manejar errores según sea necesario
+      });
+}
+
+const handleBankChange = (e) => {
+  setBank(e.target.value);
+};
+
   return (
     <>
       <div className="product-container-stores">
@@ -217,7 +237,9 @@ function ProductSamplerBuyCar() {
             <p className="value-buyCart">${total}</p>
           </div>
           <div className="flex flex-col gap-1">
-            <button className="btn-buyCart" onClick={handleCompra}>
+            <button className="btn-buyCart" onClick={()=>{
+              setShowModal(true)
+            }}>
               Comprar Productos
             </button>
             <button className="btn-buyCart" onClick={handleBorrar}>
@@ -225,6 +247,67 @@ function ProductSamplerBuyCar() {
             </button>
           </div>
         </div>
+        
+        {showModal && (
+  <div className="modal">
+  
+    <select
+      name="DeliveredSelector"
+      id="DeliveredSelector"
+      onChange={(e) => {
+        if (e.target.value === "Targeta De Credito") {
+          setShowCardInput(true);
+        } else {
+          setShowCardInput(false);
+        }
+      }}
+    >
+      <option value="contraEntrega">ContraEntrega</option>
+      <option value="Targeta De Credito">Pago Con Tarjeta</option>
+    </select>
+    {showCardInput && (
+       <div>
+          <select name="Bank" id="Bank" onChange={handleBankChange}>
+      <option value="bancolombia">Bancolombia</option>
+      <option value="davivienda">Davivienda</option>
+      <option value="popular">Banco Popular</option>
+    </select>
+       <input
+         id="cardNumber"
+         type="text"
+         placeholder="Número de tu tarjeta"
+         value={cardNumber}
+         onChange={(e) => setCardNumber(e.target.value)}
+       />
+       {cardNumber.length !== 16 && <p>Formato inválido. Se requieren 16 dígitos.</p>}
+     </div>
+    )}
+    <button
+      onClick={() => {
+        setShowModal(false);
+      }}
+    >
+      Cerrar
+    </button>
+    <button onClick={()=>{
+      if(showCardInput == true){
+         setShowModal(false)
+         setCardNumber(cardNumber);
+         setBank(Bank.value)
+         updateUserCreditCard(cardNumber, buyCarUser, bank);
+         handleCompra();
+         alert("pagaste con tarjeta de credito") 
+      }else {
+         handleCompra()
+         setShowModal(false)
+         alert("pagaras en tu domicilio")
+      }
+    }}>
+      Comprar
+    </button>
+  </div>
+)}
+
       </div>
     </>
   );
