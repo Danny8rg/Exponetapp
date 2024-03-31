@@ -23,6 +23,14 @@ function UpdateProduct() {
   const [selectedFile, setSelectedFile] = useState(null);
 
   const add = () => {
+    if (!productName || !productName[0].match(/[A-Z]/)) {
+      Swal.fire({
+        icon: "warning",
+        title: "El nombre del producto debe comenzar con mayúscula",
+      });
+      return;
+    }
+
     const formData = new FormData();
     formData.append("productName", productName);
     formData.append("productStock", productStock);
