@@ -5,7 +5,7 @@ const ContactUs = () => {
     return (
         <div className="flex min-h-full flex-1 flex-col justify-center  items-center px-6 py-12 bg-white lg:px-8 container-contactus">
             <div className="box-title-contact">
-                <h1 className="mt-2 mb-4 text-center font-bold leading-9 tracking-tight text-gray-900 title-contact">Contáctanos</h1>
+                <h1 className="mt-2 mb-4 text-center font-bold leading-9 tracking-tight text-gray-900 title-contact">Sugerencias</h1>
             </div>
             <form className="w-2/5 py-8 px-4 flex flex-col items-center justify-center space-y-6 rounded-md shadow-sm bg-gray-50 form-contact">
                 <div className='min-w-full'>

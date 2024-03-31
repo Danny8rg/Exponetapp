@@ -12,7 +12,7 @@ function UserHistory() {
   const [showModal, setShowModal] = useState(false); // Estado para controlar si se muestra la modal
   const [comment, setComment] = useState(""); // Estado para almacenar el comentario
   const [momentId, setMomentId] = useState(0)
-  
+
 
   useEffect(() => {
     setBuyCarUser(Cookies.get("userId"));
@@ -59,13 +59,13 @@ function UserHistory() {
     console.log("soyAppComment en createComment", appComment)
     console.log("soyuserComment en createComment", userComment)
     console.log("soyProductId en createComment", productId)
-  
+
     axios.post("http://localhost:3000/createComment", {
-        appComment: appComment,
-        userComment: userComment,
-        productComment: productId
-      })
-      .then(() => { 
+      appComment: appComment,
+      userComment: userComment,
+      productComment: productId
+    })
+      .then(() => {
         alert("Comentario Agregado");
         setComment("");
         setShowModal(false);
@@ -77,25 +77,25 @@ function UserHistory() {
   return (
     <>
       <Header />
-      <div className="box-title-historial">
-        <h2 className="product-title-historial">Historial De Compra</h2>
-      </div>
+          <div className="box-title-historial">
+            <h2 className="product-title-historial">Historial De Compra</h2>
+          </div>
       {loading ? (
         <p>Cargando historial de compras...</p>
       ) : (
         <div className="shops-container-historial">
-          <table>
-            <thead className="theadUserHistory">
-              <tr>
-                <th className="productName">Nombre del Producto</th>
-                <th className="description">Descripción</th>
-                <th className="prize">Precio</th>
-                <th className="state">Estado</th>
-                <th className="cant">Cantidad</th>
-                <th className="action">Acciones</th>
+          <table className="table table-bordered info-user-history">
+            <thead className="table-titles theadUserHistory">
+              <tr className="table-light tr-table-history">
+                <th scope="col" className="productName">Nombre del Producto</th>
+                <th scope="col" className="description">Descripción</th>
+                <th scope="col" className="prize">Precio</th>
+                <th scope="col" className="state">Estado</th>
+                <th scope="col" className="cant">Cantidad</th>
+                <th scope="col" className="action">Acciones</th>
               </tr>
             </thead>
-            <tbody className="tdBody">
+            <tbody className="table-body">
               {buyCars
                 .filter(
                   (buyCar) => buyCar.buyCarUser === parseInt(buyCarUser)
@@ -123,7 +123,7 @@ function UserHistory() {
                               <button
                                 onClick={() => {
                                   handleDelete(
-                                   filteredBuyCar.buyCarId // Pasar buyCarId como argumento
+                                    filteredBuyCar.buyCarId // Pasar buyCarId como argumento
                                   );
                                 }}
                               >
@@ -157,7 +157,7 @@ function UserHistory() {
             <button onClick={() => {
               createComment(comment, buyCarUser, momentId)
             }}>Enviar</button>
-            <button onClick={()=>{
+            <button onClick={() => {
               setShowModal(false)
             }}>
               Cerrar

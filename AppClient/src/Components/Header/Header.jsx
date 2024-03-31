@@ -2,9 +2,10 @@ import React, { useState, useContext, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { ShopContextValues } from "../Context/ShopContext";
-import Axios from "axios"; 
+import Axios from "axios";
 import { MdShoppingCart } from "react-icons/md";
 // import { FaSearch } from "react-icons/fa";
+import { FaBars, FaTimes } from 'react-icons/fa'; // Importa los íconos de hamburguesa y de cerrar
 import "./Header.css";
 
 const Header = () => {
@@ -45,7 +46,7 @@ const Header = () => {
       console.log(userInfo);
     }
   }, [userId]); // Este efecto se ejecutará solo cuando userId cambie
-  
+
 
   return (
     <>
@@ -55,7 +56,7 @@ const Header = () => {
             <h1 className="icon-txt">EXPONET</h1>
             <img
               className="logo-header"
-              src="https://media.discordapp.net/attachments/1088828343731900429/1215287895284518912/Captura_de_pantalla_2024-03-07_080922-removebg-preview.png?ex=65fc340d&is=65e9bf0d&hm=bd96221de684f02eb50594f4791686e8ada3664468ab3100ad71003a35943a34&=&format=webp&quality=lossless&width=622&height=482"
+              src="./exponet-logo.webp"
               alt=""
             />
           </Link>
@@ -70,9 +71,8 @@ const Header = () => {
               <li>
                 <Link
                   to="/"
-                  className={`link-header ${
-                    location.pathname === "/" ? "link-header-b" : ""
-                  }`}
+                  className={`link-header ${location.pathname === "/" ? "link-header-b" : ""
+                    }`}
                 >
                   Inicio
                 </Link>
@@ -84,11 +84,10 @@ const Header = () => {
                       <li>
                         <Link
                           to="/CreateShop"
-                          className={`link-header ${
-                            location.pathname === "/CreateShop"
-                              ? "link-header-b"
-                              : ""
-                          }`}
+                          className={`link-header ${location.pathname === "/CreateShop"
+                            ? "link-header-b"
+                            : ""
+                            }`}
                         >
                           Crear tienda
                         </Link>
@@ -96,11 +95,10 @@ const Header = () => {
                       <li>
                         <Link
                           to="/ShopsManagment"
-                          className={`link-header ${
-                            location.pathname === "/ShopsManagment"
-                              ? "link-header-b"
-                              : ""
-                          }`}
+                          className={`link-header ${location.pathname === "/ShopsManagment"
+                            ? "link-header-b"
+                            : ""
+                            }`}
                         >
                           Gestión tiendas
                         </Link>
@@ -117,11 +115,10 @@ const Header = () => {
                       <li>
                         <Link
                           to="/Shops"
-                          className={`link-header ${
-                            location.pathname === "/Shops"
-                              ? "link-header-b"
-                              : ""
-                          }`}
+                          className={`link-header ${location.pathname === "/Shops"
+                            ? "link-header-b"
+                            : ""
+                            }`}
                         >
                           Tiendas
                         </Link>
@@ -129,11 +126,10 @@ const Header = () => {
                       <li>
                         <Link
                           to="/UserHistory"
-                          className={`link-header ${
-                            location.pathname === "/UserHistory"
-                              ? "link-header-b"
-                              : ""
-                          }`}
+                          className={`link-header ${location.pathname === "/UserHistory"
+                            ? "link-header-b"
+                            : ""
+                            }`}
                         >
                           Historial
                         </Link>
@@ -149,11 +145,10 @@ const Header = () => {
                       <li>
                         <Link
                           to="/BuyCar"
-                          className={`link-header-cart ${
-                            location.pathname === "/BuyCar"
-                              ? "link-header-cart-b"
-                              : ""
-                          }`}
+                          className={`link-header-cart ${location.pathname === "/BuyCar"
+                            ? "link-header-cart-b"
+                            : ""
+                            }`}
                         >
                           <MdShoppingCart />
                         </Link>
@@ -172,9 +167,8 @@ const Header = () => {
                   <li>
                     <Link
                       to="/Shops"
-                      className={`link-header ${
-                        location.pathname === "/Shops" ? "link-header-b" : ""
-                      }`}
+                      className={`link-header ${location.pathname === "/Shops" ? "link-header-b" : ""
+                        }`}
                     >
                       Tiendas
                     </Link>
@@ -184,12 +178,17 @@ const Header = () => {
             </ul>
           </nav>
           {userInfo && userInfo.length > 0 && (
-  <div className="profile-info">
-    <p>{userInfo[0].userName}</p>
-    <p>{userInfo[0].userRoll}</p>
-    <img src={userInfo[0].imgurl} alt="" className="profile-image"/>
-  </div>
-)}
+            <div className="profile-info shadow-sm">
+              <img src={userInfo[0].imgurl} alt="" className="profile-image" />
+              <div className="flex items-center gap-1 profile-dates">
+                <p className="profile-user">{userInfo[0].userName}</p>
+                <p className="profile-rol">{userInfo[0].userRoll}</p>
+              </div>
+            </div>
+          )}
+          <div className="menu-toggle shadow-sm" onClick={toggleMenu}>
+            {isMenuOpen ? <FaTimes /> : <FaBars />}
+          </div>
         </div>
       </header>
     </>

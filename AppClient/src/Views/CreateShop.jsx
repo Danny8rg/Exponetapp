@@ -273,7 +273,7 @@ function CreateShop() {
             </div>
 
             <div className="mt-3 flex">
-              <label className="select-img-store" htmlFor="file">
+              <label className="block shadow-sm leading-6 text-gray-900 select-img-store" htmlFor="file">
                 Seleccionar imagen de la tienda
               </label>
               <input
@@ -302,8 +302,8 @@ function CreateShop() {
                 </button>
               </div>
             ) : (
-              <button onClick={addShop} className="btn-new-store">
-                Registrar
+              <button onClick={addShop} className="flex justify-center rounded-md px-3 py-1 font-semibold leading-6 text-white shadow-sm btn-new-store">
+                Registrar tienda
               </button>
             )}
           </div>

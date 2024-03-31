@@ -32,7 +32,21 @@ body{
 }
 
 .btn-home-register:hover{
-  background-color: #dcdcdc;
+  background-color: #e3e3e3;
+}
+
+.select-img-store2{
+  padding: 0 0.8rem;
+  font-weight: 500;
+  /* border: 1px solid #d1d1d1; */
+  background-color: #d6f4f7;
+  cursor: pointer;
+}
+
+.result-select-img2 {
+  margin: 0;
+  padding: 0.2rem 0.8rem;
+  border: 1px solid #d1d1d1;
 }
 
 @media screen and (max-width: 768px) {

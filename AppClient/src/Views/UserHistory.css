@@ -1,36 +1,38 @@
 .shops-container-historial {
+    height: 91vh;
     width: 100%;
-    padding-top: 14rem;
+    padding-top: 3rem;
     padding-bottom: 4rem;
-    gap: 6rem 10rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
 
 .box-title-historial {
+    padding-top: 8rem;
+    height: 2rem;
     width: 100%;
-    height: 6.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
 }
 
 .product-title-historial {
     margin: 0;
-    width: 100%;
     font-size: 2.2rem;
-    font-weight: 800;
-    bottom: -5rem;
-    -webkit-text-stroke: 1px #277075;
-    position: absolute;
+    font-weight: 700;
     text-align: center;
-    text-shadow: 4px 4px #ececec;
-    font-style: italic;
+    /* border-bottom: 3px solid #b1e7f0; */
 }
 
-.shop-card-historial {
+.info-user-history{
+    width: 78%;
+}
+
+.tr-table-history{
+    text-align: center;
+}
+/* .shop-card-historial {
     height: auto;
     padding: 1rem;
     width: 35%;
@@ -52,7 +54,7 @@
     padding: 0;
     font-weight: bold;
     color: black;
-}
+} */
 
 /* Estilos para la modal */
 .modal {
@@ -73,7 +75,7 @@
     border-radius: 5px;
 }
 
-.theadUserHistory th{
+/* .theadUserHistory th{
     text-align: center;
     border: solid 2px #afb2b3;
 }
@@ -113,4 +115,4 @@
 
 .tdDescription {
     text-align: center;
-}
+} */

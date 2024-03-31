@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { IoStorefrontSharp } from "react-icons/io5";
+// import { IoStorefrontSharp } from "react-icons/io5";
 import "./Register.css";
 import Swal from 'sweetalert2';
 
@@ -13,7 +13,7 @@ function RegisterForm() {
     confirmPassword: "",
     userAdress: "",
     userRole: "",
-    file: null, 
+    file: null,
   });
 
   const [selectedFile, setSelectedFile] = useState(null)
@@ -102,14 +102,14 @@ function RegisterForm() {
       <section className="flex min-h-full flex-1 flex-col justify-center  items-center px-6 py-12 bg-white lg:px-8">
         <div className="w-2/6 py-4 px-4 flex flex-col items-center justify-center rounded-md shadow-sm bg-gray-50 general-register">
           <img className="mx-auto h-20 w-auto image-register" src="/exponet-logo.webp" alt="" />
-          <h1 className="mt-1 mb-0 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900 title-register">Crea una cuenta</h1>
+          <h1 className="mt-0 mb-0 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900 title-register">Crea una cuenta</h1>
           <div className="mt-3 sm:mx-auto sm:w-full sm:max-w-sm general2-register">
-            <form onSubmit={handleSubmit} className="space-y-3">
+            <form onSubmit={handleSubmit} className="space-y-2">
               <div>
                 <label htmlFor="userName" className="block text-sm font-medium leading-6 text-gray-900 label-register">
                   Nombre de usuario
                 </label>
-                <div className="mt-1">
+                <div className="mt-0">
                   <input
                     className="block w-full rounded-md border-0 pl-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-register"
                     type="text"
@@ -126,7 +126,7 @@ function RegisterForm() {
                 <label htmlFor="userMail" className="block text-sm font-medium leading-6 text-gray-900 label-register">
                   Correo electrónico
                 </label>
-                <div className="mt-1">
+                <div className="mt-0">
                   <input
                     className="block w-full rounded-md border-0 pl-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-register"
                     type="email"
@@ -143,7 +143,7 @@ function RegisterForm() {
                 <label htmlFor="userAdress" className="block text-sm font-medium leading-6 text-gray-900 label-register">
                   Direccion de residencia
                 </label>
-                <div className="mt-1">
+                <div className="mt-0">
                   <input
                     className="block w-full rounded-md border-0 pl-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-register"
                     type="text"
@@ -160,7 +160,7 @@ function RegisterForm() {
                 <label htmlFor="userPassword" className="block text-sm font-medium leading-6 text-gray-900 label-register">
                   Contraseña
                 </label>
-                <div className="mt-1">
+                <div className="mt-0">
                   <input
                     className="block w-full rounded-md border-0 pl-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-register"
                     type="password"
@@ -176,7 +176,7 @@ function RegisterForm() {
                 <label htmlFor="confirmPassword" className="block text-sm font-medium leading-6 text-gray-900 label-register">
                   Confirmar contraseña
                 </label>
-                <div className="mt-1">
+                <div className="mt-0">
                   <input
                     className="block w-full rounded-md border-0 pl-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-register"
                     type="password"
@@ -192,7 +192,7 @@ function RegisterForm() {
                   Rol
                 </label>
                 <select
-                  className="block w-32 rounded-md border-0 px-2 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-register input-rol"
+                  className="block w-36 rounded-md border-0 px-2 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-register input-rol"
                   id="userRole"
                   name="userRole"
                   required
@@ -204,32 +204,33 @@ function RegisterForm() {
                 </select>
               </div>
               <div>
-              <div className="input-group mt-3">
-              <label className="select-img-store" htmlFor="file">
-                Seleccionar imagen de usuario
-              </label>
-              <input
-                type="file"
-                id="file"
-                name="file"
-                onChange={handleFileChange}
-                style={{ display: "none" }} // Oculta el input de tipo archivo
-              />
-              {selectedFile && (
-                <div className="file-info">
-                  <p className="result-select-img">{selectedFile.name}</p>
-                  {/* Puedes agregar más información sobre el archivo si lo deseas */}
+                <div className="mt-3 flex">
+                  <label className="block text-sm shadow-sm font-medium leading-6 text-gray-900 select-img-store2" htmlFor="file">
+                    Seleccionar imagen de usuario
+                  </label>
+                  <input
+                    type="file"
+                    id="file"
+                    name="file"
+                    onChange={handleFileChange}
+                    style={{ display: "none" }} // Oculta el input de tipo archivo
+                  />
+                  {selectedFile && (
+                    <div className="file-info2">
+                      <p className="result-select-img2">{selectedFile.name}</p>
+                      {/* Puedes agregar más información sobre el archivo si lo deseas */}
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
               </div>
-              <div className="flex">
+              <div className="flex mt-3">
                 <button type="submit" className="flex mr-2 w-full justify-center rounded-md px-3 py-1 text-sm font-semibold leading-6 text-white shadow-sm btn-register">
                   Registrarse
                 </button>
                 <div className="flex items-center justify-center">
                   <Link className="flex w-20 justify-center rounded-md px-3 py-1 text-sm font-semibold no-underline leading-6 text-white shadow-sm btn-home-register" to={"/"}>
-                    <IoStorefrontSharp className="mx-auto w-auto self-center"/> Inicio
+                    {/* <IoStorefrontSharp className="mx-auto w-auto self-center" />  */}
+                    Inicio
                   </Link>
                 </div>
               </div>

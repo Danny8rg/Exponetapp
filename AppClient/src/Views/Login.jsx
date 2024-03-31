@@ -3,7 +3,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
-import { IoStorefrontSharp } from "react-icons/io5";
+// import { IoStorefrontSharp } from "react-icons/io5";
 import { ShopContextValues } from "../Components/Context/ShopContext";
 import Swal from "sweetalert2";
 
@@ -138,7 +138,7 @@ function Login() {
                     to={"/"}
                   >
                     Inicio{" "}
-                    <IoStorefrontSharp className="mx-1 w-auto self-center" />
+                    {/* <IoStorefrontSharp className="mx-1 w-auto self-center" /> */}
                   </Link>
                 </div>
               </div>

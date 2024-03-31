@@ -1,0 +1,22 @@
+.container-shops-manag{
+    padding-top: 5.5rem;
+    height: 91vh;
+    display: flex;
+    justify-content: center;
+}
+
+.info-shops-manag{
+    width: 78%;
+}
+
+.tr-table{
+    text-align: center;
+}
+
+.btn-edit-store{
+  background-color: #4cbfd5;
+}
+
+.btn-edit-store:hover{
+  background-color: #7bd6e5;
+}

@@ -40,7 +40,7 @@
 }
 
 .card-btn-home {
-  width: 6.5rem;
+  width: 6rem;
   padding: 2px;
   top: 0.5rem;
   right: 0.5rem;
@@ -57,7 +57,7 @@
 }
 
 .card-btn-home:hover {
-  background-color: #effcfc;
+  background-color: white;
   box-shadow: 1px 1px 3px #efefef;
 }
 

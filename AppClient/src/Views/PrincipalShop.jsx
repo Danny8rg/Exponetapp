@@ -35,9 +35,6 @@ function PrincipalShop() {
   return (
     <>
       <Header />
-      <div className="box-title-principal">
-        <h1 className="product-title-principal">{globalShopName}</h1>
-      </div>
       <ProductSampler
         products={products}
         stock={stock}

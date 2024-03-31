@@ -30,38 +30,16 @@
 .result-select-img {
   margin: 0;
   padding: 0.2rem 0.8rem;
-  border-radius: 0px 4px 4px 0px;
   border: 1px solid #d1d1d1;
 }
 
 .btn-new-store {
-  padding: 6px 8px;
-  border-radius: 4px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  text-decoration: none;
-  color: black;
-  background-color: #BDBDBD;
+  font-size: 1rem;
+  background-color: #4cbfd5;
 }
 
 .btn-new-store:hover {
-  background-color: white;
-  color: #2493d3;
-  box-shadow: 1px 1px 2px;
-}
-
-.btn-edit-store {
-  padding: 6px 8px;
-  border-radius: 4px;
-  font-weight: 600;
-  text-decoration: none;
-  color: black;
-  background-color: #c1e1f6;
-}
-
-.btn-edit-store:hover{
-    color: white;
-    background-color: #e3f0fb;
+  background-color: #7bd6e5;
 }
 
 .btn-delete-store {

@@ -157,9 +157,12 @@ function ProductSamplerBuyCar() {
 
   return (
     <>
-      <div className="product-container-stores">
+      <div className="product-container-cart">
+      <div className="box-title-cart">
+        <h1 className="product-title-cart">Carrito De Compras </h1>
+      </div>
         {buyCarProducts.map((product) => (
-          <div key={product.productId} className="product-card-home">
+          <div key={product.productId} className="product-card-home bg-gray-50">
             <div className="box-img-home">
               <img
                 src={product.productimgurl}

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "./CreateShop.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "../Components/Header/Header";
 import Footer from "../Components/Footer/Footer";
@@ -9,6 +8,7 @@ import Cookies from "js-cookie";
 import { useContext } from "react";
 import { ShopContextValues } from "../Components/Context/ShopContext";
 import Swal from "sweetalert2";
+import "./ShopsManagment.css"
 
 function ShopsManagment() {
   const [shopName, setShopName] = useState("");
@@ -194,130 +194,130 @@ function ShopsManagment() {
   return (
     <>
       <Header />
-      <div className="container pt-36 pb-8">
-      {showForm ? (
-  <div className="card text-center">
-    <div className="card-header">
-      <h2 className="title-create-store">Gestión De Tiendas</h2>
-    </div>
-    <div className="card-body">
-      <div className="input-group mb-3">
-        <span className="input-group-text fw-semibold" id="basic-addon1">
-          Nombre de la tienda:
-        </span>
-        <input
-          type="text"
-          value={shopName}
-          onChange={(event) => {
-            setShopName(event.target.value);
-          }}
-          className="form-control m-0"
-          placeholder="Nombre la tienda"
-        />
-      </div>
+      <div className="container-shops-manag">
+        {showForm ? (
+          <div className="card text-center">
+            <div className="card-header">
+              <h2 className="title-create-store">Gestión De Tiendas</h2>
+            </div>
+            <div className="card-body">
+              <div className="input-group mb-3">
+                <span className="input-group-text fw-semibold" id="basic-addon1">
+                  Nombre de la tienda:
+                </span>
+                <input
+                  type="text"
+                  value={shopName}
+                  onChange={(event) => {
+                    setShopName(event.target.value);
+                  }}
+                  className="form-control m-0"
+                  placeholder="Nombre la tienda"
+                />
+              </div>
 
-      <div className="input-group mb-3">
-        <span className="input-group-text fw-semibold" id="basic-addon1">
-          Teléfono:
-        </span>
-        <input
-          type="tel"
-          value={shopTell}
-          onChange={(event) => {
-            setShopTell(event.target.value);
-          }}
-          className="form-control m-0"
-          placeholder="315 000 0000"
-        />
-      </div>
+              <div className="input-group mb-3">
+                <span className="input-group-text fw-semibold" id="basic-addon1">
+                  Teléfono:
+                </span>
+                <input
+                  type="tel"
+                  value={shopTell}
+                  onChange={(event) => {
+                    setShopTell(event.target.value);
+                  }}
+                  className="form-control m-0"
+                  placeholder="315 000 0000"
+                />
+              </div>
 
-      <div className="input-group mb-3">
-        <span className="input-group-text fw-semibold" id="basic-addon1">
-          Correo electrónico:
-        </span>
-        <input
-          type="email"
-          value={shopMail}
-          onChange={(event) => {
-            setShopMail(event.target.value);
-          }}
-          className="form-control m-0"
-          placeholder="correo@gmail.com"
-        />
-      </div>
+              <div className="input-group mb-3">
+                <span className="input-group-text fw-semibold" id="basic-addon1">
+                  Correo electrónico:
+                </span>
+                <input
+                  type="email"
+                  value={shopMail}
+                  onChange={(event) => {
+                    setShopMail(event.target.value);
+                  }}
+                  className="form-control m-0"
+                  placeholder="correo@gmail.com"
+                />
+              </div>
 
-      <div className="input-group mb-3">
-        <span className="input-group-text fw-semibold" id="basic-addon1">
-          Dirección:
-        </span>
-        <input
-          type="text"
-          value={shopAdress}
-          onChange={(event) => {
-            setShopAdress(event.target.value);
-          }}
-          className="form-control m-0"
-          placeholder="Dirección de la tienda"
-        />
-      </div>
+              <div className="input-group mb-3">
+                <span className="input-group-text fw-semibold" id="basic-addon1">
+                  Dirección:
+                </span>
+                <input
+                  type="text"
+                  value={shopAdress}
+                  onChange={(event) => {
+                    setShopAdress(event.target.value);
+                  }}
+                  className="form-control m-0"
+                  placeholder="Dirección de la tienda"
+                />
+              </div>
 
-      <div className="input-group">
-        <span className="input-group-text fw-semibold" id="basic-addon1">
-          Descripción:
-        </span>
-        <textarea
-          type="text"
-          value={shopComments}
-          onChange={(event) => {
-            setShopComments(event.target.value);
-          }}
-          className="form-control m-0 resize-none"
-          placeholder="Descripción de la tienda"
-        />
-      </div>
+              <div className="input-group">
+                <span className="input-group-text fw-semibold" id="basic-addon1">
+                  Descripción:
+                </span>
+                <textarea
+                  type="text"
+                  value={shopComments}
+                  onChange={(event) => {
+                    setShopComments(event.target.value);
+                  }}
+                  className="form-control m-0 resize-none"
+                  placeholder="Descripción de la tienda"
+                />
+              </div>
 
-      <div className="input-group mt-3">
-        <label className="select-img-store" htmlFor="file">
-          Seleccionar imagen de la tienda
-        </label>
-        <input
-          type="file"
-          id="file"
-          name="file"
-          onChange={handleFileChange}
-          style={{ display: "none" }} // Oculta el input de tipo archivo
-        />
-        {selectedFile && (
-          <div className="file-info">
-            <p className="result-select-img">{selectedFile.name}</p>
-            {/* Puedes agregar más información sobre el archivo si lo deseas */}
+              <div className="input-group mt-3">
+                <label className="select-img-store" htmlFor="file">
+                  Seleccionar imagen de la tienda
+                </label>
+                <input
+                  type="file"
+                  id="file"
+                  name="file"
+                  onChange={handleFileChange}
+                  style={{ display: "none" }} // Oculta el input de tipo archivo
+                />
+                {selectedFile && (
+                  <div className="file-info">
+                    <p className="result-select-img">{selectedFile.name}</p>
+                    {/* Puedes agregar más información sobre el archivo si lo deseas */}
+                  </div>
+                )}
+              </div>
+            </div>
+            <div className="card-footer text-body-secondary d-flex justify-content-center">
+              {editar ? (
+                <div className="w-52 d-flex justify-content-between">
+                  <button onClick={updateShop} className="btn-update-store">
+                    Actualizar
+                  </button>
+                  <button onClick={CancelarUpdate} className="btn-cancel-store">
+                    Cancelar
+                  </button>
+                </div>
+              ) : (
+                <button onClick={addShop} className="btn-new-store">
+                  Registrar
+                </button>
+              )}
+            </div>
           </div>
-        )}
-      </div>
-    </div>
-    <div className="card-footer text-body-secondary d-flex justify-content-center">
-      {editar ? (
-        <div className="w-52 d-flex justify-content-between">
-          <button onClick={updateShop} className="btn-update-store">
-            Actualizar
-          </button>
-          <button onClick={CancelarUpdate} className="btn-cancel-store">
-            Cancelar
-          </button>
-        </div>
-      ) : (
-        <button onClick={addShop} className="btn-new-store">
-          Registrar
-        </button>
-      )}
-    </div>
-  </div>
-) : null}
+        ) : null}
 
-
-        <table className="table table-hover mt-12">
+                {/* <h1></h1> */}
+        <table className="table table-bordered info-shops-manag">
           <thead className="table-titles">
-            <tr>
+            <tr className="table-light tr-table">
               <th scope="col">Nombre</th>
               <th scope="col">Teléfono</th>
               <th scope="col">Correo Electrónico</th>
@@ -346,7 +346,7 @@ function ShopsManagment() {
                         console.log("soy val shop id", val.shopId);
                         editarTienda(val);
                       }}
-                      className="btn-edit-store"
+                      className="flex justify-center rounded-md px-2 py-1 font-semibold leading-6 text-white shadow-sm btn-edit-store"
                     >
                       Editar
                     </button>
@@ -356,7 +356,7 @@ function ShopsManagment() {
                         setGlobalShopId(val.shopId);
                         navigate("/UpdateShop");
                       }}
-                      className="btn-link-store"
+                      className="flex justify-center rounded-md px-2 py-1 font-semibold leading-6 text-white shadow-sm btn-link-store"
                     >
                       Productos
                     </button>
@@ -365,7 +365,7 @@ function ShopsManagment() {
                         GoToOrdersManagment(val.shopId);
                         navigate("/OrdersManagment");
                       }}
-                      className="btn-delivery-store"
+                      className="flex justify-center rounded-md px-2 py-1 font-semibold leading-6 text-white shadow-sm btn-delivery-store"
                     >
                       Entregas
                     </button>
@@ -374,7 +374,7 @@ function ShopsManagment() {
                       onClick={() => {
                         deleteProducts(shopOwner), deleteShop(val.shopId);
                       }}
-                      className="btn-delete-store"
+                      className="flex justify-center rounded-md px-2 py-1 font-semibold leading-6 text-white shadow-sm btn-delete-store"
                     >
                       Eliminar
                     </button>
