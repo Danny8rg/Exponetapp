@@ -14,7 +14,7 @@ function RegisterForm() {
     userAdress: "",
     userRole: "",
     file: null,
-    emailError: "", // Agregar el estado para el error de correo electrónico
+    passwordError: "", // Agregar estado para el error de contraseña
   });
 
   const [selectedFile, setSelectedFile] = useState(null)
@@ -28,18 +28,18 @@ function RegisterForm() {
       [name]: value,
     }));
 
-    // Validar el correo electrónico en tiempo real
-    if (name === "userMail") {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(value)) {
+    // Validar las contraseñas en tiempo real
+    if (name === "userPassword" || name === "confirmPassword") {
+      const passwordRegex = /^(?=.*[A-Z]).{6,}$/; // Al menos 6 caracteres con al menos una mayúscula
+      if (!passwordRegex.test(value)) {
         setFormData(prevState => ({
           ...prevState,
-          emailError: "Formato de correo electrónico inválido",
+          passwordError: "La contraseña debe tener al menos 6 caracteres y una mayúscula",
         }));
       } else {
         setFormData(prevState => ({
           ...prevState,
-          emailError: "",
+          passwordError: "",
         }));
       }
     }
@@ -52,7 +52,17 @@ function RegisterForm() {
       console.error("Las contraseñas no coinciden");
       Swal.fire({
         icon: "error",
-        text: "Contraseñas no coinciden!",
+        text: "Las contraseñas no coinciden!",
+      });
+      return;
+    }
+
+    if (formData.passwordError) {
+      console.error("La contraseña no cumple con los requisitos");
+      Swal.fire({
+        icon: "warning",
+        title: "La contraseña no cumple con los requisitos",
+        text: formData.passwordError,
       });
       return;
     }
@@ -68,15 +78,6 @@ function RegisterForm() {
       Swal.fire({
         icon: "error",
         text: "Complete todos los campos requeridos en el formulario!",
-      });
-      return;
-    }
-
-    if (formData.emailError) {
-      console.error("Formato de correo electrónico inválido");
-      Swal.fire({
-        icon: "warning",
-        title: "Formato de correo electronico invalido",
       });
       return;
     }
@@ -182,7 +183,9 @@ function RegisterForm() {
                 </label>
                 <div className="mt-1">
                   <input
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-register"
+                    className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-register ${
+                      formData.passwordError ? 'border-red-500' : ''
+                    }`}
                     type="password"
                     id="userPassword"
                     name="userPassword"
@@ -190,6 +193,9 @@ function RegisterForm() {
                     value={formData.userPassword}
                     onChange={handleChange}
                   />
+                  {formData.passwordError && (
+                    <p className="text-red-500 text-xs mt-1">{formData.passwordError}</p>
+                  )}
                 </div>
               </div>
               <div>
@@ -198,7 +204,9 @@ function RegisterForm() {
                 </label>
                 <div className="mt-1">
                   <input
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-register"
+                    className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-register ${
+                      formData.passwordError ? 'border-red-500' : ''
+                    }`}
                     type="password"
                     id="confirmPassword"
                     name="confirmPassword"
