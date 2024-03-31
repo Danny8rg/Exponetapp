@@ -249,7 +249,7 @@ const handleBankChange = (e) => {
         </div>
         
         {showModal && (
-  <div className="modal">
+  <div className="modal2">
   
     <select
       name="DeliveredSelector"
@@ -268,45 +268,48 @@ const handleBankChange = (e) => {
     {showCardInput && (
        <div>
           <select name="Bank" id="Bank" onChange={handleBankChange}>
-      <option value="bancolombia">Bancolombia</option>
-      <option value="davivienda">Davivienda</option>
-      <option value="popular">Banco Popular</option>
-    </select>
-       <input
-         id="cardNumber"
-         type="text"
-         placeholder="Número de tu tarjeta"
-         value={cardNumber}
-         onChange={(e) => setCardNumber(e.target.value)}
-       />
-       {cardNumber.length !== 16 && <p>Formato inválido. Se requieren 16 dígitos.</p>}
-     </div>
+            <option value="bancolombia">Bancolombia</option>
+            <option value="davivienda">Davivienda</option>
+            <option value="popular">Banco Popular</option>
+          </select>
+          <input
+            id="cardNumber"
+            type="text"
+            placeholder="Número de tu tarjeta"
+            value={cardNumber}
+            onChange={(e) => setCardNumber(e.target.value)}
+          />
+          {cardNumber.length !== 16 && <p>Formato inválido. Se requieren 16 dígitos.</p>}
+       </div>
     )}
     <button
       onClick={() => {
         setShowModal(false);
       }}
+
+      className="buttons2"
     >
       Cerrar
     </button>
-    <button onClick={()=>{
+    <button className="buttons2" onClick={()=>{
       if(showCardInput == true){
          setShowModal(false)
          setCardNumber(cardNumber);
-         setBank(Bank.value)
+         setBank(bank);
          updateUserCreditCard(cardNumber, buyCarUser, bank);
          handleCompra();
-         alert("pagaste con tarjeta de credito") 
-      }else {
+         alert("Pagaste con tarjeta de crédito") 
+      } else {
          handleCompra()
          setShowModal(false)
-         alert("pagaras en tu domicilio")
+         alert("Pagarás en tu domicilio")
       }
     }}>
       Comprar
     </button>
   </div>
 )}
+
 
       </div>
     </>
