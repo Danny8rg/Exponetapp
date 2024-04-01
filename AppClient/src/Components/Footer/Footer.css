@@ -6,6 +6,7 @@ footer {
   align-items: center;
   justify-content: center;
   text-align: center;
+  z-index: 999;
 }
 
 .box-footer-txt h3 {

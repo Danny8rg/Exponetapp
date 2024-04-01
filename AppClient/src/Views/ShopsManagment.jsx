@@ -196,13 +196,13 @@ function ShopsManagment() {
       <Header />
       <div className="container-shops-manag">
         {showForm ? (
-          <div className="card text-center">
-            <div className="card-header">
-              <h2 className="title-create-store">Gestión De Tiendas</h2>
+          <div className="card shadow-sm">
+            <div className="card-header flex justify-center">
+              <h2 className="text-center text-4xl font-bold leading-9 tracking-tight text-gray-900 title-edit-store">Gestión de tienda</h2>
             </div>
-            <div className="card-body">
-              <div className="input-group mb-3">
-                <span className="input-group-text fw-semibold" id="basic-addon1">
+            <div className="card-body flex flex-col">
+              <div className="info-store-edit mb-2">
+                <span className="block font-medium leading-6 text-gray-900" id="basic-addon1">
                   Nombre de la tienda:
                 </span>
                 <input
@@ -211,13 +211,13 @@ function ShopsManagment() {
                   onChange={(event) => {
                     setShopName(event.target.value);
                   }}
-                  className="form-control m-0"
+                  className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-edit-store"
                   placeholder="Nombre la tienda"
                 />
               </div>
 
-              <div className="input-group mb-3">
-                <span className="input-group-text fw-semibold" id="basic-addon1">
+              <div className="info-store-edit mb-2">
+                <span className="block font-medium leading-6 text-gray-900" id="basic-addon1">
                   Teléfono:
                 </span>
                 <input
@@ -226,13 +226,13 @@ function ShopsManagment() {
                   onChange={(event) => {
                     setShopTell(event.target.value);
                   }}
-                  className="form-control m-0"
+                  className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-edit-store"
                   placeholder="315 000 0000"
                 />
               </div>
 
-              <div className="input-group mb-3">
-                <span className="input-group-text fw-semibold" id="basic-addon1">
+              <div className="info-store-edit mb-2">
+                <span className="block font-medium leading-6 text-gray-900" id="basic-addon1">
                   Correo electrónico:
                 </span>
                 <input
@@ -241,13 +241,13 @@ function ShopsManagment() {
                   onChange={(event) => {
                     setShopMail(event.target.value);
                   }}
-                  className="form-control m-0"
+                  className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-edit-store"
                   placeholder="correo@gmail.com"
                 />
               </div>
 
-              <div className="input-group mb-3">
-                <span className="input-group-text fw-semibold" id="basic-addon1">
+              <div className="info-store-edit mb-2">
+                <span className="block font-medium leading-6 text-gray-900" id="basic-addon1">
                   Dirección:
                 </span>
                 <input
@@ -256,13 +256,13 @@ function ShopsManagment() {
                   onChange={(event) => {
                     setShopAdress(event.target.value);
                   }}
-                  className="form-control m-0"
+                  className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-edit-store"
                   placeholder="Dirección de la tienda"
                 />
               </div>
 
-              <div className="input-group">
-                <span className="input-group-text fw-semibold" id="basic-addon1">
+              <div className="info-store-edit mb-2">
+                <span className="block font-medium leading-6 text-gray-900" id="basic-addon1">
                   Descripción:
                 </span>
                 <textarea
@@ -271,13 +271,13 @@ function ShopsManagment() {
                   onChange={(event) => {
                     setShopComments(event.target.value);
                   }}
-                  className="form-control m-0 resize-none"
+                  className="resize-none block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-edit-store"
                   placeholder="Descripción de la tienda"
                 />
               </div>
 
-              <div className="input-group mt-3">
-                <label className="select-img-store" htmlFor="file">
+              <div className="mt-3 flex">
+                <label className="block shadow-sm leading-6 text-gray-900 select-img-store" htmlFor="file">
                   Seleccionar imagen de la tienda
                 </label>
                 <input
@@ -295,27 +295,26 @@ function ShopsManagment() {
                 )}
               </div>
             </div>
-            <div className="card-footer text-body-secondary d-flex justify-content-center">
+            <div className="card-footer d-flex justify-content-center">
               {editar ? (
                 <div className="w-52 d-flex justify-content-between">
-                  <button onClick={updateShop} className="btn-update-store">
+                  <button onClick={updateShop} className="flex justify-center rounded-md px-3 py-1 font-semibold leading-6 text-white shadow-sm btn-update-store">
                     Actualizar
                   </button>
-                  <button onClick={CancelarUpdate} className="btn-cancel-store">
+                  <button onClick={CancelarUpdate} className="flex justify-center rounded-md px-3 py-1 font-semibold leading-6 text-white shadow-sm btn-cancel-store">
                     Cancelar
                   </button>
                 </div>
               ) : (
-                <button onClick={addShop} className="btn-new-store">
+                <button onClick={addShop} className="flex justify-center rounded-md px-3 py-1 font-semibold leading-6 text-white shadow-sm btn-new-store">
                   Registrar
                 </button>
               )}
             </div>
           </div>
         ) : null}
-
-                {/* <h1></h1> */}
-        <table className="table table-bordered info-shops-manag">
+        
+        <table className="table table-bordered shadow-sm info-shops-manag">
           <thead className="table-titles">
             <tr className="table-light tr-table">
               <th scope="col">Nombre</th>

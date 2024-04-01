@@ -25,7 +25,7 @@ function OrdersManagment() {
         const ordersResponse = await axios.get(
           "http://localhost:3000/ordersManagmentBuyCarList"
         );
-  
+
         setUsers(usersResponse.data);
         setOrders(ordersResponse.data); // Almacena los datos de los carritos de compras
         console.log("soy orders")
@@ -37,11 +37,11 @@ function OrdersManagment() {
         console.error("Error fetching data:", error);
       }
     };
-  
+
     fetchData();
   }, []);
 
-   
+
 
   function ChangeState(buyCarContent, globalShopId) {
     const parsedContent = JSON.parse(buyCarContent);
@@ -49,7 +49,7 @@ function OrdersManagment() {
       "soy el buyCarContent de la funcion change state",
       parsedContent
     );
-  
+
     parsedContent.products.forEach((product) => {
       if (
         product.productShopOwner === globalShopId &&
@@ -66,7 +66,7 @@ function OrdersManagment() {
 
   function orderDelivered(buyCarContent, globalShopId, buyCarId) {
     console.log("soy funcion");
-    console.dir("soy el buy car original que llega ",buyCarContent);
+    console.dir("soy el buy car original que llega ", buyCarContent);
 
     const newBuyCarContent = ChangeState(buyCarContent, globalShopId);
 
@@ -76,20 +76,20 @@ function OrdersManagment() {
     const productsIds = parsedContent.products.map(
       (product) => product.productId
     );
-    console.dir("soy lista de ids",productsIds);
+    console.dir("soy lista de ids", productsIds);
 
     const productsQuantities = parsedContent.products.map(
       (product) => product.quantity
     );
 
-    console.dir("soy product quantities",productsQuantities);
+    console.dir("soy product quantities", productsQuantities);
 
     const productsShopOwners = parsedContent.products.map(
       (product) => product.productShopOwner
     );
 
     console.log("soy el product shop owner", productsShopOwners);
-    console.log("soy el newbuycarcontent del final",newBuyCarContent);
+    console.log("soy el newbuycarcontent del final", newBuyCarContent);
 
     axios
       .post("http://localhost:3000/ProductStockUpdate", {
@@ -113,17 +113,17 @@ function OrdersManagment() {
         console.error("Error al actualizar el stock del producto:", error);
       });
 
-      console.log("soy el buyCarId Entre Los Axios", buyCarId)
-      console.log("soy el nuevo buycarcontent entre los axios", newBuyCarContent)
+    console.log("soy el buyCarId Entre Los Axios", buyCarId)
+    console.log("soy el nuevo buycarcontent entre los axios", newBuyCarContent)
 
-      axios.put("http://localhost:3000/updateBuyCar", {
-        buyCarId,
-        newBuyCarContent,
-      })
+    axios.put("http://localhost:3000/updateBuyCar", {
+      buyCarId,
+      newBuyCarContent,
+    })
       .then((response) => {
         console.log(response.data)
       })
-      .catch((error) =>{
+      .catch((error) => {
         console.error("error al actualizar el carro de compras", error);
       })
 
@@ -148,39 +148,39 @@ function OrdersManagment() {
     });
     console.dir("soy el buycarcontent con el estado cambiado", parsedContent);
     return JSON.stringify(parsedContent);
-}
+  }
 
-function ChangeStateCanceled(buyCarContent, globalShopId) {
-  const parsedContentCanceled = JSON.parse(buyCarContent);
-  console.dir(
-    "soy el buyCarContentcanceled de la funcion change state Canceled",
-    parsedContentCanceled
-  );
+  function ChangeStateCanceled(buyCarContent, globalShopId) {
+    const parsedContentCanceled = JSON.parse(buyCarContent);
+    console.dir(
+      "soy el buyCarContentcanceled de la funcion change state Canceled",
+      parsedContentCanceled
+    );
 
-  parsedContentCanceled.products.forEach((product) => {
-    if (
-      product.productShopOwner === globalShopId &&
-      product.productState.trim() === "pendiente"
-    ) {
-      product.productState = "Cancelado";
-    } else if (product.productState.trim() === "pendiente") { // Aquí se cambió la comparación
-      product.productState = "pendiente";
-    }
-  });
+    parsedContentCanceled.products.forEach((product) => {
+      if (
+        product.productShopOwner === globalShopId &&
+        product.productState.trim() === "pendiente"
+      ) {
+        product.productState = "Cancelado";
+      } else if (product.productState.trim() === "pendiente") { // Aquí se cambió la comparación
+        product.productState = "pendiente";
+      }
+    });
 
-  console.log("soy el parsedCOntent de changestatecanceled", parsedContentCanceled)
-  
-  axios.put("http://localhost:3000/updateBuyCar", {
-    buyCarId,
-    parsedContentCanceled,
-  })
-  .then((response) => {
-    console.log(response.data)
-  })
-  .catch((error) =>{
-    console.error("error al actualizar el carro de compras", error);
-  })
-}
+    console.log("soy el parsedCOntent de changestatecanceled", parsedContentCanceled)
+
+    axios.put("http://localhost:3000/updateBuyCar", {
+      buyCarId,
+      parsedContentCanceled,
+    })
+      .then((response) => {
+        console.log(response.data)
+      })
+      .catch((error) => {
+        console.error("error al actualizar el carro de compras", error);
+      })
+  }
 
   const DeleteBuyCar = (buyCarId) => {
     const confirmation = window.confirm(
@@ -203,36 +203,38 @@ function ChangeStateCanceled(buyCarContent, globalShopId) {
         });
       });
   };
-  
+
   return (
     <>
       <Header />
-      <h1 className="subtitles"> Orders Management </h1>
       <div className="orders-container">
+        <div className="box-title-orders">
+          <h1 className="product-title-orders">Historial de entregas</h1>
+        </div>
         {users.map((user, userId) => {
           const userOrders = orders.filter(order => order.buyCarUser === user.userId);
           if (userOrders.length > 0) {
             return (
-              <li key={userId}>
-                <div className="userInfo">
-                  <p>ID: {user.userId}</p>
-                  <p>Nombre: {user.userName}</p>
-                  <p>Dirección: {user.userAdress}</p>
-                  <p>Correo Electrónico: {user.userMail}</p>
+              <li className="shadow-sm bg-gray-50" key={userId}>
+                <div className="user-info">
+                  <p className="m-0 w-24 shadow-sm"><span className="text-gray-300">ID</span> {user.userId}</p>
+                  <p className="m-0 w-72 shadow-sm"><span className="text-gray-300">Nombre cliente</span> {user.userName}</p>
+                  <p className="m-0 w-96 shadow-sm"><span className="text-gray-300">Dirección</span> {user.userAdress}</p>
+                  <p className="m-0 w-96 shadow-sm"><span className="text-gray-300">Correo electrónico</span> {user.userMail}</p>
                 </div>
-                <table className="product-container">
-                  <thead>
-                    <tr>
-                      <th>Producto</th>
-                      <th>ID Tienda</th>
-                      <th>Descripción</th>
-                      <th>Precio</th>
-                      <th>Unidades</th>
-                      <th>Total</th>
-                      <th>Acciones</th>
+                <table className="table table-bordered shadow-sm info-orders-manag">
+                  <thead className="table-titles">
+                    <tr className="tr-table">
+                      <th scope="col">Producto</th>
+                      <th scope="col">ID Tienda</th>
+                      <th scope="col">Descripción</th>
+                      <th scope="col">Precio</th>
+                      <th scope="col">Unidades</th>
+                      <th scope="col">Total</th>
+                      <th scope="col">Acciones</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody className="table-body">
                     {userOrders.map((order, orderId) => (
                       <React.Fragment key={orderId}>
                         {JSON.parse(order.buyCarContent).products.map((product, productId) => {
@@ -246,17 +248,18 @@ function ChangeStateCanceled(buyCarContent, globalShopId) {
                                 <td>{product.productPrize}</td>
                                 <td>{product.quantity}</td>
                                 <td>{total}</td>
-                                <td><button onClick={()=>{
-                                  orderDelivered(order.buyCarContent, globalShopId, order.buyCarId)
-                                }}>
-                                  Despachar
+                                <td>
+                                  <button onClick={() => {
+                                    orderDelivered(order.buyCarContent, globalShopId, order.buyCarId)
+                                  }}>
+                                    Despachar
                                   </button>
-                                  <button onClick={()=> {
+                                  <button onClick={() => {
                                     ChangeStateCanceled(order.buyCarContent, globalShopId)
                                   }}>
                                     Cancelar
                                   </button>
-                                  </td>
+                                </td>
                               </tr>
                             );
                           } else {
@@ -277,7 +280,7 @@ function ChangeStateCanceled(buyCarContent, globalShopId) {
       <Footer />
     </>
   );
-  
+
 }
 
 export default OrdersManagment;

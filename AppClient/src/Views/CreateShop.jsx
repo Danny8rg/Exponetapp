@@ -79,7 +79,7 @@ function CreateShop() {
             <h2 className="mt-1 mb-0 text-center text-4xl font-bold leading-9 tracking-tight text-gray-900 title-create-store">Registro de tiendas</h2>
           </div>
           <div className="card-body flex flex-col">
-            <div className="label-store mb-2">
+            <div className="info-store mb-2">
               <span id="basic-addon1" className="block font-medium leading-6 text-gray-900">
                 Nombre de la tienda:
               </span>
@@ -97,7 +97,7 @@ function CreateShop() {
               )}
             </div>
 
-            <div className="label-store mb-2">
+            <div className="info-store mb-2">
               <span id="basic-addon1" className="block font-medium leading-6 text-gray-900">
                 Teléfono:
               </span>
@@ -115,7 +115,7 @@ function CreateShop() {
               )}
             </div>
 
-            <div className="label-store mb-2">
+            <div className="info-store mb-2">
               <span id="basic-addon1" className="block font-medium leading-6 text-gray-900">
                 Correo electrónico:
               </span>
@@ -133,7 +133,7 @@ function CreateShop() {
               )}
             </div>
 
-            <div className="label-store mb-2">
+            <div className="info-store mb-2">
               <span id="basic-addon1" className="block font-medium leading-6 text-gray-900">
                 Dirección:
               </span>
@@ -148,7 +148,7 @@ function CreateShop() {
               />
             </div>
 
-            <div className="label-store">
+            <div className="info-store">
               <span id="basic-addon1" className="block font-medium leading-6 text-gray-900">
                 Descripción:
               </span>
