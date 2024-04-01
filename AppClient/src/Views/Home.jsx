@@ -12,6 +12,7 @@ function Home() {
   const [products, setProducts] = useState([]);
   const [stock, setStock] = useState({});
   const globalShopId = useContext(ShopContextValues);
+  const { searchText } = useContext(ShopContextValues);
   useContext(ShopContextValues);
   const quantityCards = 4;
 
@@ -35,13 +36,17 @@ function Home() {
 
     fetchData();
   }, []);
+
+  const filteredProducts = products.filter((product) =>
+    product.productName.toLowerCase().includes(searchText.toLowerCase())
+  );
   return (
     <>
       <section>
         <Header />
         <About />
         <ProductSamplerHome
-          products={products}
+          products={filteredProducts}
           stock={stock}
           quantityCards={quantityCards}
           Route="/PrincipalShop"
