@@ -211,6 +211,8 @@ const deleteOneProduct = (productId) => {
     updateTotal();
   }
 };
+
+
   return (
     <>
       <div className="product-container-cart">
@@ -310,8 +312,8 @@ const deleteOneProduct = (productId) => {
       <option value="Targeta De Credito">Pago Con Tarjeta</option>
     </select>
     {showCardInput && (
-      <div>
-        <select name="Bank" id="Bank" onChange={handleBankChange}>
+      <div className="pago-tarjeta">
+        <select className="pago" name="Bank" id="Bank" onChange={handleBankChange}>
           <option value="bancolombia">Bancolombia</option>
           <option value="davivienda">Davivienda</option>
           <option value="popular">Banco Popular</option>
@@ -319,22 +321,22 @@ const deleteOneProduct = (productId) => {
         <input
           id="cardNumber"
           type="text"
-          placeholder="Número de tu tarjeta"
+          placeholder="Número de tu cuenta"
           value={cardNumber}
           onChange={(e) => setCardNumber(e.target.value)}
         />
-        {cardNumber.length !== 16 && <p>Formato inválido. Se requieren 16 dígitos.</p>}
+        {cardNumber.length !== 16 && <p className="format">Se requieren 16 dígitos.</p>}
       </div>
     )}
     <button
       onClick={() => {
         setShowModal(false);
       }}
-      className="buttons2"
+      className="buttons2 cerrar"
     >
       Cerrar
     </button>
-    <button className="buttons2" onClick={()=>{
+    <button className="buttons2 comprar" onClick={()=>{
       if(showCardInput == true){
         let name = userInfo[0].userName
         let adrees = userInfo[0].userAdress
@@ -344,7 +346,7 @@ const deleteOneProduct = (productId) => {
         updateUserCreditCard(cardNumber, buyCarUser, bank);
         handleCompra();
         alert("Pagaste con tarjeta de crédito") 
-        let message = `usuario ",${name}, " su pedido sera entregado en ", ${adrees}, "el dia de la entrega le sera confirmado en las proximas horas ` 
+        let message = `usuario ",${name}, " su pedido sera entregado en ", ${adrees}, "el dia de la entrega le sera confirmado en las proximas horas, la notificacion le llegara via correo electronico ` 
         alert(message)
       } else {
         getUserInfo(buyCarUser)
