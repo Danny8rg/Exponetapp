@@ -7,7 +7,6 @@ import { ShopContextValues } from "../Components/Context/ShopContext";
 import Swal from "sweetalert2";
 import "./OrdersManagment.css";
 
-
 function OrdersManagment() {
   const [orders, setOrders] = useState([]);
   const [users, setUsers] = useState([]);
@@ -26,12 +25,13 @@ function OrdersManagment() {
           "http://localhost:3000/ordersManagmentBuyCarList"
         );
 
+
         setUsers(usersResponse.data);
         setOrders(ordersResponse.data); // Almacena los datos de los carritos de compras
-        console.log("soy orders")
-        console.log(orders)
-        console.log("soy users")
-        console.log(users)
+        console.log("soy orders");
+        console.log(orders);
+        console.log("soy users");
+        console.log(users);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -56,7 +56,8 @@ function OrdersManagment() {
         product.productState.trim() === "pendiente"
       ) {
         product.productState = "Entregado";
-      } else if (product.productState.trim() === "pendiente") { // Aquí se cambió la comparación
+      } else if (product.productState.trim() === "pendiente") {
+        // Aquí se cambió la comparación
         product.productState = "pendiente";
       }
     });
@@ -113,20 +114,20 @@ function OrdersManagment() {
         console.error("Error al actualizar el stock del producto:", error);
       });
 
-    console.log("soy el buyCarId Entre Los Axios", buyCarId)
-    console.log("soy el nuevo buycarcontent entre los axios", newBuyCarContent)
+    console.log("soy el buyCarId Entre Los Axios", buyCarId);
+    console.log("soy el nuevo buycarcontent entre los axios", newBuyCarContent);
 
-    axios.put("http://localhost:3000/updateBuyCar", {
-      buyCarId,
-      newBuyCarContent,
-    })
+    axios
+      .put("http://localhost:3000/updateBuyCar", {
+        buyCarId,
+        newBuyCarContent,
+      })
       .then((response) => {
-        console.log(response.data)
+        console.log(response.data);
       })
       .catch((error) => {
         console.error("error al actualizar el carro de compras", error);
-      })
-
+      });
   }
 
   function ChangeState(buyCarContent, globalShopId) {
@@ -142,7 +143,8 @@ function OrdersManagment() {
         product.productState.trim() === "pendiente"
       ) {
         product.productState = "Entregado";
-      } else if (product.productState.trim() === "pendiente") { // Aquí se cambió la comparación
+      } else if (product.productState.trim() === "pendiente") {
+        // Aquí se cambió la comparación
         product.productState = "pendiente";
       }
     });
@@ -163,23 +165,28 @@ function OrdersManagment() {
         product.productState.trim() === "pendiente"
       ) {
         product.productState = "Cancelado";
-      } else if (product.productState.trim() === "pendiente") { // Aquí se cambió la comparación
+      } else if (product.productState.trim() === "pendiente") {
+        // Aquí se cambió la comparación
         product.productState = "pendiente";
       }
     });
 
-    console.log("soy el parsedCOntent de changestatecanceled", parsedContentCanceled)
+    console.log(
+      "soy el parsedCOntent de changestatecanceled",
+      parsedContentCanceled
+    );
 
-    axios.put("http://localhost:3000/updateBuyCar", {
-      buyCarId,
-      parsedContentCanceled,
-    })
+    axios
+      .put("http://localhost:3000/updateBuyCar", {
+        buyCarId,
+        parsedContentCanceled,
+      })
       .then((response) => {
-        console.log(response.data)
+        console.log(response.data);
       })
       .catch((error) => {
         console.error("error al actualizar el carro de compras", error);
-      })
+      });
   }
 
   const DeleteBuyCar = (buyCarId) => {
@@ -191,18 +198,17 @@ function OrdersManagment() {
       return;
     }
 
-    axios
-      .put(`http://localhost:3000/deleteBuyCar/${buyCarId}`)
-      .then(() => {
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Carrito eliminado",
-          showConfirmButton: false,
-          timer: 1500,
-        });
+    axios.put(`http://localhost:3000/deleteBuyCar/${buyCarId}`).then(() => {
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Carrito eliminado",
+        showConfirmButton: false,
+        timer: 1500,
       });
+    });
   };
+
 
   return (
     <>
@@ -212,26 +218,36 @@ function OrdersManagment() {
           <h1 className="product-title-orders">Historial de entregas</h1>
         </div>
         {users.map((user, userId) => {
-          const userOrders = orders.filter(order => order.buyCarUser === user.userId);
+          const userOrders = orders.filter(
+            (order) => order.buyCarUser === user.userId
+          );
           if (userOrders.length > 0) {
             return (
               <li className="shadow-sm bg-gray-50" key={userId}>
+              <h5 className="m-0 info-client">Información del cliente</h5>
                 <div className="user-info">
-                  <p className="m-0 w-24 shadow-sm"><span className="text-gray-300">ID</span> {user.userId}</p>
-                  <p className="m-0 w-72 shadow-sm"><span className="text-gray-300">Nombre cliente</span> {user.userName}</p>
-                  <p className="m-0 w-96 shadow-sm"><span className="text-gray-300">Dirección</span> {user.userAdress}</p>
-                  <p className="m-0 w-96 shadow-sm"><span className="text-gray-300">Correo electrónico</span> {user.userMail}</p>
+                  <p className="m-0 w-24 shadow-sm"><span className="text-gray-400">
+                    ID</span> {user.userId}
+                  </p>
+                  <p className="m-0 w-72 shadow-sm"><span className="text-gray-400">
+                    Nombre cliente</span>{user.userName}
+                  </p><p className="m-0 w-96 shadow-sm"><span className="text-gray-400">
+                    Dirección</span> {user.userAdress}
+                  </p>
+                  <p className="m-0 w-96 shadow-sm"><span className="text-gray-400">
+                    Correo electrónico</span> {user.userMail}
+                  </p>
                 </div>
                 <table className="table table-bordered shadow-sm info-orders-manag">
                   <thead className="table-titles">
                     <tr className="tr-table">
-                      <th scope="col">Producto</th>
-                      <th scope="col">ID Tienda</th>
-                      <th scope="col">Descripción</th>
-                      <th scope="col">Precio</th>
-                      <th scope="col">Unidades</th>
-                      <th scope="col">Total</th>
-                      <th scope="col">Acciones</th>
+                      <th>Producto</th>
+                      <th>ID Tienda</th>
+                      <th>Descripción</th>
+                      <th>Precio</th>
+                      <th>Unidades</th>
+                      <th>Total</th>
+                      <th>Acciones</th>
                     </tr>
                   </thead>
                   <tbody className="table-body">
@@ -248,12 +264,11 @@ function OrdersManagment() {
                                 <td>{product.productPrize}</td>
                                 <td>{product.quantity}</td>
                                 <td>{total}</td>
-                                <td>
-                                  <button onClick={() => {
-                                    orderDelivered(order.buyCarContent, globalShopId, order.buyCarId)
-                                  }}>
-                                    Despachar
-                                  </button>
+                                <td><button onClick={() => {
+                                  orderDelivered(order.buyCarContent, globalShopId, order.buyCarId)
+                                }}>
+                                  Despachar
+                                </button>
                                   <button onClick={() => {
                                     ChangeStateCanceled(order.buyCarContent, globalShopId)
                                   }}>

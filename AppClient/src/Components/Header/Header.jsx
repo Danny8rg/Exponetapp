@@ -4,17 +4,17 @@ import Cookies from "js-cookie";
 import { ShopContextValues } from "../Context/ShopContext";
 import Axios from "axios";
 import { MdShoppingCart } from "react-icons/md";
-import { FaSearch } from "react-icons/fa";
-import { FaBars, FaTimes } from 'react-icons/fa'; // Importa los íconos de hamburguesa y de cerrar
+import { FaBars, FaTimes, FaSearch } from "react-icons/fa"; // Importa los íconos de hamburguesa y de cerrar
 import "./Header.css";
 
 const Header = () => {
   const navigate = useNavigate();
   const [userId, setUserId] = useState(Cookies.get("userId"));
   const [userRoll, setUserRoll] = useState(Cookies.get("userRoll"));
-  const { buyCarProducts, setBuyCarProducts } = useContext(ShopContextValues);
+  const { buyCarProducts, setBuyCarProducts, searchText, setSearchText } =
+    useContext(ShopContextValues);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [userInfo, setUserInfo] = useState()
+  const [userInfo, setUserInfo] = useState();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -30,14 +30,18 @@ const Header = () => {
   const location = useLocation();
 
   const getUserInfo = (userId) => {
-    Axios.get(
-      `http://localhost:3000/readOneUser/${userId}`
-    ).then((response) => {
-      setUserInfo(response.data);
-      console.log("soy el userInfo")
-      console.log(response.data)
-      console.log(userInfo);
-    });
+    Axios.get(`http://localhost:3000/readOneUser/${userId}`).then(
+      (response) => {
+        setUserInfo(response.data);
+        console.log("soy el userInfo");
+        console.log(response.data);
+        console.log(userInfo);
+      }
+    );
+  };
+
+  const handleSearchInputChange = (event) => {
+    setSearchText(event.target.value);
   };
 
   useEffect(() => {
@@ -47,32 +51,35 @@ const Header = () => {
     }
   }, [userId]); // Este efecto se ejecutará solo cuando userId cambie
 
-
   return (
     <>
       <header className="header-home bg-gray-100">
         <div className="h-full flex items-center justify-center header-home-box">
           <Link to="/" className="icon-box">
             <h1 className="icon-txt">EXPONET</h1>
-            <img
-              className="logo-header"
-              src="./exponet-logo.webp"
-              alt=""
-            />
+            <img className="logo-header" src="./exponet-logo.webp" alt="" />
           </Link>
           <ul className="filter-nav">
             <li className="box-input-search shadow-sm">
                 <FaSearch className="icon-search" />
-              <input type="text" name="" id="" placeholder="Buscar producto" />
-            </li>
-          </ul>
+                <input
+                  type="text"
+                  name=""
+                  id=""
+                  placeholder="Buscar producto"
+                  value={searchText}
+                  onChange={handleSearchInputChange}
+                />
+              </li>
+            </ul>
           <nav className={`nav bg-gray-100 shadow-sm ${isMenuOpen ? "open" : ""}`}>
             <ul className="links-nav">
               <li>
                 <Link
                   to="/"
-                  className={`link-header ${location.pathname === "/" ? "link-header-b" : ""
-                    }`}
+                  className={`link-header ${
+                    location.pathname === "/" ? "link-header-b" : ""
+                  }`}
                 >
                   Inicio
                 </Link>
@@ -84,10 +91,11 @@ const Header = () => {
                       <li>
                         <Link
                           to="/CreateShop"
-                          className={`link-header ${location.pathname === "/CreateShop"
-                            ? "link-header-b"
-                            : ""
-                            }`}
+                          className={`link-header ${
+                            location.pathname === "/CreateShop"
+                              ? "link-header-b"
+                              : ""
+                          }`}
                         >
                           Crear tienda
                         </Link>
@@ -95,10 +103,11 @@ const Header = () => {
                       <li>
                         <Link
                           to="/ShopsManagment"
-                          className={`link-header ${location.pathname === "/ShopsManagment"
-                            ? "link-header-b"
-                            : ""
-                            }`}
+                          className={`link-header ${
+                            location.pathname === "/ShopsManagment"
+                              ? "link-header-b"
+                              : ""
+                          }`}
                         >
                           Gestión tiendas
                         </Link>
@@ -115,10 +124,11 @@ const Header = () => {
                       <li>
                         <Link
                           to="/Shops"
-                          className={`link-header ${location.pathname === "/Shops"
-                            ? "link-header-b"
-                            : ""
-                            }`}
+                          className={`link-header ${
+                            location.pathname === "/Shops"
+                              ? "link-header-b"
+                              : ""
+                          }`}
                         >
                           Tiendas
                         </Link>
@@ -126,10 +136,11 @@ const Header = () => {
                       <li>
                         <Link
                           to="/UserHistory"
-                          className={`link-header ${location.pathname === "/UserHistory"
-                            ? "link-header-b"
-                            : ""
-                            }`}
+                          className={`link-header ${
+                            location.pathname === "/UserHistory"
+                              ? "link-header-b"
+                              : ""
+                          }`}
                         >
                           Historial
                         </Link>
@@ -145,10 +156,11 @@ const Header = () => {
                       <li>
                         <Link
                           to="/BuyCar"
-                          className={`link-header-cart ${location.pathname === "/BuyCar"
-                            ? "link-header-cart-b"
-                            : ""
-                            }`}
+                          className={`link-header-cart ${
+                            location.pathname === "/BuyCar"
+                              ? "link-header-cart-b"
+                              : ""
+                          }`}
                         >
                           <MdShoppingCart />
                         </Link>
@@ -167,8 +179,9 @@ const Header = () => {
                   <li>
                     <Link
                       to="/Shops"
-                      className={`link-header ${location.pathname === "/Shops" ? "link-header-b" : ""
-                        }`}
+                      className={`link-header ${
+                        location.pathname === "/Shops" ? "link-header-b" : ""
+                      }`}
                     >
                       Tiendas
                     </Link>

@@ -8,7 +8,8 @@ import Swal from "sweetalert2";
 
 function ProductSampler({ products, stock, quantityCards, Route }) {
   const [selectedProducts, setSelectedProducts] = useState({});
-  const { globalShopId, setGlobalShopId } = useContext(ShopContextValues);
+  const { globalShopId, setGlobalShopId, searchText, setSearchText } =
+    useContext(ShopContextValues);
   const {
     globalShopName,
     setGlobalShopName,
@@ -16,7 +17,7 @@ function ProductSampler({ products, stock, quantityCards, Route }) {
     setBuyCarProducts,
   } = useContext(ShopContextValues);
   const valor = globalShopId;
-  const [productState, setProductSate] = useState("pendiente ")
+  const [productState, setProductSate] = useState("pendiente ");
 
   const calculateTotalPrice = (productId) => {
     const product = products.find((p) => p.productId === productId);
@@ -81,14 +82,17 @@ function ProductSampler({ products, stock, quantityCards, Route }) {
     const alreadyInCart = buyCarProducts.some(
       (item) => item.productId === productId
     );
-  
+
     if (alreadyInCart) {
       // Mostrar alerta de que el producto ya está en el carrito
-      alert("¡Ya has comprado este producto! si deseas comprar otra unidad de este producto ve al carrito de compras y selecciona la cantidad");
+      alert(
+        "¡Ya has comprado este producto! si deseas comprar otra unidad de este producto ve al carrito de compras y selecciona la cantidad"
+      );
     } else {
       // Incrementar la cantidad a 1 si es 0
-      const selectedQuantity = selectedProducts[productId] <= 0 ? 1 : selectedProducts[productId];
-  
+      const selectedQuantity =
+        selectedProducts[productId] <= 0 ? 1 : selectedProducts[productId];
+
       // Agregar el producto al carrito
       setBuyCarProducts((prevBuyCarProducts) => [
         ...prevBuyCarProducts,
@@ -102,10 +106,10 @@ function ProductSampler({ products, stock, quantityCards, Route }) {
           productimgurl,
           productShopOwner,
           quantity: selectedQuantity,
-          productState
+          productState,
         },
       ]);
-  
+
       // Mostrar mensaje de éxito
       Swal.fire({
         position: "center",
@@ -116,8 +120,6 @@ function ProductSampler({ products, stock, quantityCards, Route }) {
       });
     }
   }
-  
-
 
   function borrarCarrito() {
     setBuyCarProducts([]);
@@ -126,8 +128,14 @@ function ProductSampler({ products, stock, quantityCards, Route }) {
 
   // Filtrar productos según globalShopId
   const filteredProducts = globalShopId
-    ? products.filter((product) => product.productShopOwner === valor)
-    : products;
+    ? products.filter(
+        (product) =>
+          product.productShopOwner === valor &&
+          product.productName.toLowerCase().includes(searchText.toLowerCase())
+      )
+    : products.filter((product) =>
+        product.productName.toLowerCase().includes(searchText.toLowerCase())
+      );
 
   return (
     <>
@@ -136,7 +144,10 @@ function ProductSampler({ products, stock, quantityCards, Route }) {
           <h1 className="product-title-principal">{globalShopName}</h1>
         </div>
         {filteredProducts.slice(0, quantityCards).map((product) => (
-          <div key={product.productId} className="product-card shadow-sm bg-gray-50">
+          <div
+            key={product.productId}
+            className="product-card shadow-sm bg-gray-50"
+          >
             <section className="box-btn">
               <button
                 className="card-btn"
@@ -193,7 +204,9 @@ function ProductSampler({ products, stock, quantityCards, Route }) {
                   <FaMinus />
                 </span>
               </button>
-              <span className="span-quan">{selectedProducts[product.productId] || 0}</span>
+              <span className="span-quan">
+                {selectedProducts[product.productId] || 0}
+              </span>
               <button
                 className="btn-plus shadow-sm"
                 onClick={() => handleIncrement(product.productId)}
