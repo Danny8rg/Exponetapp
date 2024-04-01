@@ -19,7 +19,7 @@ function UserHistory() {
     const fetchBuyCars = async () => {
       try {
         const response = await axios.get(
-          "//https://exponetapp-8fxj.onrender.com/buyCarsList"
+          "https://exponetapp-8fxj.onrender.com/buyCarsList"
         );
         setBuyCars(response.data);
         setLoading(false);
