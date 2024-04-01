@@ -25,6 +25,12 @@ function ProductSamplerBuyCar() {
   }, [buyCarProducts]);
 
   useEffect(() => {
+    if (!userInfo) {
+      getUserInfo(buyCarUser);
+    }
+  }, []); 
+
+  useEffect(() => {
     const initialQuantities = buyCarProducts.reduce((quantities, product) => {
       quantities[product.productId] = product.quantity || 0;
       return quantities;
@@ -189,6 +195,22 @@ const handleBankChange = (e) => {
   setBank(e.target.value);
 };
 
+const deleteOneProduct = (productId) => {
+  
+  const confirmDelete = window.confirm("¿Seguro que desea eliminar el producto del carrito de compras?");
+
+  
+  if (confirmDelete) {
+    const updatedProducts = buyCarProducts.filter((product) => product.productId !== productId);
+    setBuyCarProducts(updatedProducts);
+    setSelectedQuantities((prevQuantities) => {
+      const updatedQuantities = { ...prevQuantities };
+      delete updatedQuantities[productId];
+      return updatedQuantities;
+    });
+    updateTotal();
+  }
+};
   return (
     <>
       <div className="product-container-cart">
@@ -247,7 +269,7 @@ const handleBankChange = (e) => {
             </div>
             <div>
                 <button className="DeleteButton" onClick={()=>{
-
+                  deleteOneProduct(product.productId);
                 }}>Borrar</button>
               </div>
           </div>
@@ -268,10 +290,11 @@ const handleBankChange = (e) => {
             </button>
           </div>
         </div>
+
+        {/* modal inicio */}
         
         {showModal && (
   <div className="modal2">
-  
     <select
       name="DeliveredSelector"
       id="DeliveredSelector"
@@ -287,27 +310,26 @@ const handleBankChange = (e) => {
       <option value="Targeta De Credito">Pago Con Tarjeta</option>
     </select>
     {showCardInput && (
-       <div>
-          <select name="Bank" id="Bank" onChange={handleBankChange}>
-            <option value="bancolombia">Bancolombia</option>
-            <option value="davivienda">Davivienda</option>
-            <option value="popular">Banco Popular</option>
-          </select>
-          <input
-            id="cardNumber"
-            type="text"
-            placeholder="Número de tu tarjeta"
-            value={cardNumber}
-            onChange={(e) => setCardNumber(e.target.value)}
-          />
-          {cardNumber.length !== 16 && <p>Formato inválido. Se requieren 16 dígitos.</p>}
-       </div>
+      <div>
+        <select name="Bank" id="Bank" onChange={handleBankChange}>
+          <option value="bancolombia">Bancolombia</option>
+          <option value="davivienda">Davivienda</option>
+          <option value="popular">Banco Popular</option>
+        </select>
+        <input
+          id="cardNumber"
+          type="text"
+          placeholder="Número de tu tarjeta"
+          value={cardNumber}
+          onChange={(e) => setCardNumber(e.target.value)}
+        />
+        {cardNumber.length !== 16 && <p>Formato inválido. Se requieren 16 dígitos.</p>}
+      </div>
     )}
     <button
       onClick={() => {
         setShowModal(false);
       }}
-
       className="buttons2"
     >
       Cerrar
@@ -316,13 +338,13 @@ const handleBankChange = (e) => {
       if(showCardInput == true){
         let name = userInfo[0].userName
         let adrees = userInfo[0].userAdress
-         setShowModal(false)
-         setCardNumber(cardNumber);
-         setBank(bank);
-         updateUserCreditCard(cardNumber, buyCarUser, bank);
-         handleCompra();
-         alert("Pagaste con tarjeta de crédito") 
-         let message = `usuario ",${name}, " su pedido sera entregado en ", ${adrees}, "el dia de la entrega le sera confirmado en las proximas horas ` 
+        setShowModal(false)
+        setCardNumber(cardNumber);
+        setBank(bank);
+        updateUserCreditCard(cardNumber, buyCarUser, bank);
+        handleCompra();
+        alert("Pagaste con tarjeta de crédito") 
+        let message = `usuario ",${name}, " su pedido sera entregado en ", ${adrees}, "el dia de la entrega le sera confirmado en las proximas horas ` 
         alert(message)
       } else {
         getUserInfo(buyCarUser)
@@ -338,6 +360,9 @@ const handleBankChange = (e) => {
   </div>
 )}
 
+
+{/* modal final */}
+        
 
       </div>
     </>

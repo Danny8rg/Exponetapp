@@ -181,21 +181,10 @@ function CreateShop() {
               )}
             </div>
           </div>
-          <div className="card-footer d-flex justify-content-center">
-            {editar ? (
-              <div className="w-52 d-flex justify-content-between">
-                <button onClick={updateShop} className="btn-update-store">
-                  Actualizar
-                </button>
-                <button onClick={CancelarUpdate} className="btn-cancel-store">
-                  Cancelar
-                </button>
-              </div>
-            ) : (
+          <div className="card-footer d-flex justify-content-center">          
               <button onClick={addShop} className="flex justify-center rounded-md px-3 py-1 font-semibold leading-6 text-white shadow-sm btn-new-store">
                 Registrar tienda
               </button>
-            )}
           </div>
         </div>
 

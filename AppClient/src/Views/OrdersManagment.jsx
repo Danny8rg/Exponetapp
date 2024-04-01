@@ -278,12 +278,6 @@ function ChangeStateCanceled(buyCarContent, globalShopId) {
     </>
   );
   
-  
-  
-  
-  
-  
-  
 }
 
 export default OrdersManagment;
