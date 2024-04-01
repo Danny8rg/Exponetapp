@@ -379,15 +379,21 @@ function ProductSamplerBuyCar() {
                   setBank(bank);
                   updateUserCreditCard(cardNumber, buyCarUser, bank);
                   handleCompra();
-                  alert("Pagaste con tarjeta de crédito");
+                  Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Pagaste con tarjeta de crédito",
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
                   let message = `usuario ",${name}, " su pedido sera entregado en ", ${adrees}, "el dia de la entrega le sera confirmado en las proximas horas, la notificacion le llegara via correo electronico `;
-                  alert(message);
+                  Swal.fire(message);
                 } else {
                   getUserInfo(buyCarUser);
                   let name = userInfo[0].userName;
                   let adrees = userInfo[0].userAdress;
                   let message = `usuario ",${name}, " su pedido sera entregado en ", ${adrees}, "el dia de la entrega le sera confirmado en las proximas horas `;
-                  alert(message);
+                  Swal.fire(message);
                   sendMail(userInfo[0].userName, userInfo[0].userMail);
                   handleCompra();
                 }
