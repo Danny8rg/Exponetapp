@@ -831,7 +831,9 @@ app.put("/sendSailMail", async (req, res) => {
       from: "exponetapppuntocom@gmail.com",
       to: userMail,
       subject: "Gracias por comprar en exponet.com",
-      html: `Hola ${userName},\n\nGracias por tu compra en Exponet. ¡Esperamos que disfrutes de nuestros productos!\n\nSaludos,\nEl equipo de Exponet`,
+      html: `Hola ${userName},\n\nGracias por tu compra en Exponet. ¡Esperamos que disfrutes de nuestros productos!\n\nSaludos,\nEl equipo de Exponet
+      <img src="https://res.cloudinary.com/dooxttior/image/upload/v1712008832/nohlp5rsuvaaacjolniw.webp" alt="Descripción de la imagen"`,
+
     });
 
     console.log("Correo electrónico enviado con éxito");
