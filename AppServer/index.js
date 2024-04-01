@@ -10,13 +10,13 @@ const cloudinary = require("cloudinary").v2;
 const fileUpload = require("express-fileupload");
 const fs = require("fs-extra");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
-const { API_KEY_GEMINI } = require('./config')
+const { API_KEY_GEMINI } = require("./config");
 
 const genAI = new GoogleGenerativeAI(API_KEY_GEMINI);
 
 // gemini
 
-// async function classify_text(msg) {  
+// async function classify_text(msg) {
 //  const model = genAI.getGenerativeModel({ model: "gemini-pro"});
 //  const result = await model.generateContent(msg);
 //  const response = await result.response;
@@ -25,7 +25,7 @@ const genAI = new GoogleGenerativeAI(API_KEY_GEMINI);
 //    console.log("El comentario es a favor"); }
 //    if (text == "En contra"){
 //      console.log("El comentario es en contra"); }
-//}  
+//}
 
 // producto = "Gelatina"
 // prompt = `Clasifica el siguiente comentario como A favor o En contra del producto ${producto}:`
@@ -101,79 +101,84 @@ db.getConnection(function (connect) {
   // console.log("esta conectado a mysql", connect);
 });
 
-app.post("/createUser",  fileUpload({
-  useTempFiles: true,
-  tempFileDir: "./uploads",
-}), async (req, res) => {
-  try {
-    const { userName, userMail, userPassword, userAdress, userRole } = req.body;
+app.post(
+  "/createUser",
+  fileUpload({
+    useTempFiles: true,
+    tempFileDir: "./uploads",
+  }),
+  async (req, res) => {
+    try {
+      const { userName, userMail, userPassword, userAdress, userRole } =
+        req.body;
 
-    const hashedPassword = await bcrypt.hash(userPassword, 10);
+      const hashedPassword = await bcrypt.hash(userPassword, 10);
 
-    let imgurl = null;
-    let imgid = null;
-    if (req.files?.file) {
-      const result = await uploadImage(req.files.file.tempFilePath);
-      imgurl = result.secure_url;
-      console.log(imgurl)
-      imgid = result.public_id;
-    }
-
-    db.getConnection((err, connection) => {
-      if (err) {
-        console.log(err);
-        res.status(500).send("Error de conexión a la base de datos");
-        return;
+      let imgurl = null;
+      let imgid = null;
+      if (req.files?.file) {
+        const result = await uploadImage(req.files.file.tempFilePath);
+        imgurl = result.secure_url;
+        console.log(imgurl);
+        imgid = result.public_id;
       }
 
-      connection.query(
-        "INSERT INTO appUsers (userName, userMail, userPassword, userAdress, userRoll, imgurl) VALUES (?, ?, ?, ?, ?, ?)",
-        [userName, userMail, hashedPassword, userAdress, userRole, imgurl],
-        async (error, result) => {
-          connection.release();
-
-          if (error) {
-            console.log(error);
-            res.status(500).send("Error al registrar el usuario");
-          } else {
-            const transporter = nodemailer.createTransport({
-              host: "smtp.gmail.com",
-              port: 587,
-              auth: {
-                user: "exponetapppuntocom@gmail.com",
-                pass: "krjkuexigsvcbgnk",
-              },
-              tls: {
-                rejectUnauthorized: false,
-              },
-            });
-
-            await transporter
-              .sendMail({
-                from: "exponetapppuntocom@gmail.com",
-                to: userMail,
-                subject: "Mensajeria de notificaciónes de Invensys",
-                html: ` Mensaje Nuevo
-                                        `,
-              })
-              .then((res) => {
-                console.log("Se envio ok", res);
-                return "registro exitoso";
-              })
-              .catch((err) => {
-                console.log("Error", err);
-                return "error al registrar el usuario";
-              });
-          }
-          res.status(200).send("registro exitoso");
+      db.getConnection((err, connection) => {
+        if (err) {
+          console.log(err);
+          res.status(500).send("Error de conexión a la base de datos");
+          return;
         }
-      );
-    });
-  } catch (err) {
-    console.log(err);
-    res.status(500).send("Error interno del servidor");
+
+        connection.query(
+          "INSERT INTO appUsers (userName, userMail, userPassword, userAdress, userRoll, imgurl) VALUES (?, ?, ?, ?, ?, ?)",
+          [userName, userMail, hashedPassword, userAdress, userRole, imgurl],
+          async (error, result) => {
+            connection.release();
+
+            if (error) {
+              console.log(error);
+              res.status(500).send("Error al registrar el usuario");
+            } else {
+              const transporter = nodemailer.createTransport({
+                host: "smtp.gmail.com",
+                port: 587,
+                auth: {
+                  user: "exponetapppuntocom@gmail.com",
+                  pass: "krjkuexigsvcbgnk",
+                },
+                tls: {
+                  rejectUnauthorized: false,
+                },
+              });
+
+              await transporter
+                .sendMail({
+                  from: "exponetapppuntocom@gmail.com",
+                  to: userMail,
+                  subject: "Gracias por inscribirse en exponet.com",
+                  html: `<p>Esperamos que disfrutes de nuestros productos y que nuestra app te sea de mucha utilidad</p>
+                  <img src="https://res.cloudinary.com/dooxttior/image/upload/v1712008832/nohlp5rsuvaaacjolniw.webp" alt="Descripción de la imagen">`
+                })
+                .then((res) => {
+                  console.log("Se envio ok", res);
+                  return "registro exitoso";
+                })
+                .catch((err) => {
+                  console.log("Error", err);
+                  return "error al registrar el usuario";
+                });
+            }
+            res.status(200).send("registro exitoso");
+          }
+        );
+      });
+    } catch (err) {
+      console.log(err);
+      res.status(500).send("Error interno del servidor");
+    }
   }
-});
+);
 
 app.post("/userRead", (req, res) => {
   const { userMail, userPassword } = req.body;
@@ -210,27 +215,35 @@ app.post("/userRead", (req, res) => {
 app.get("/readOneUser/:userId", (req, res) => {
   const userId = req.params.userId;
 
-  db.query("SELECT * FROM appUsers WHERE userId = ?", [userId], async (err, result) => {
-    if (err) {
-      console.log(err);
-      res.status(500).send("Error al leer el usuario ");
-    } else {
-      res.status(200).send(result);
+  db.query(
+    "SELECT * FROM appUsers WHERE userId = ?",
+    [userId],
+    async (err, result) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send("Error al leer el usuario ");
+      } else {
+        res.status(200).send(result);
+      }
     }
-  });
+  );
 });
 
 app.put("/updateUserCreditCard", (req, res) => {
-  const {userCreditCard, userId, bank } = req.body;
+  const { userCreditCard, userId, bank } = req.body;
 
-  db.query("UPDATE appUsers SET userCreditCard = ?, bank = ?WHERE userId = ?", [userCreditCard, bank, userId], (err, result) => {
+  db.query(
+    "UPDATE appUsers SET userCreditCard = ?, bank = ?WHERE userId = ?",
+    [userCreditCard, bank, userId],
+    (err, result) => {
       if (err) {
-          console.log(err);
-          res.status(500).send("Error al registrar la tarjeta de crédito");
+        console.log(err);
+        res.status(500).send("Error al registrar la tarjeta de crédito");
       } else {
-          res.status(200).send(result);
+        res.status(200).send(result);
       }
-  });
+    }
+  );
 });
 
 app.post(
@@ -518,7 +531,6 @@ app.put(
   }
 );
 
-
 // carrito compras
 
 app.post("/createBuyCar", (req, res) => {
@@ -580,7 +592,7 @@ app.get("/ordersManagmentBuyCarList", (req, res) => {
       res.status(200).send(result);
     }
   });
-});  
+});
 
 app.post("/ProductStockUpdate", (req, res) => {
   const productIds = req.body.productsIds;
@@ -640,7 +652,9 @@ app.post("/ProductStockUpdate", (req, res) => {
               if (err) {
                 console.log(err);
                 // Si hay un error, puedes enviar una respuesta de error
-                res.status(500).send("Error al actualizar el stock del producto");
+                res
+                  .status(500)
+                  .send("Error al actualizar el stock del producto");
               } else {
                 console.log(result);
                 // Actualización exitosa para el producto actual
@@ -660,10 +674,7 @@ app.post("/ProductStockUpdate", (req, res) => {
         console.error(error);
         res.status(500).send(error);
       });
-
-     
   }
-
 });
 
 app.put("/updateBuyCar", (req, res) => {
@@ -671,8 +682,10 @@ app.put("/updateBuyCar", (req, res) => {
   const newBuyCarContent = req.body.newBuyCarContent;
 
   console.dir("ID del carrito de compras:", buyCarId);
-  console.dir("Nuevo contenido del carrito de compras y el estado:", newBuyCarContent);
-
+  console.dir(
+    "Nuevo contenido del carrito de compras y el estado:",
+    newBuyCarContent
+  );
 
   db.query(
     "UPDATE appBuyCars SET buyCarContent = ? WHERE buyCarId = ?",
@@ -681,7 +694,9 @@ app.put("/updateBuyCar", (req, res) => {
       if (err) {
         console.log(err);
         // Si hay un error, puedes enviar una respuesta de error
-        res.status(500).send("Error al actualizar el contenido del carrito de compras");
+        res
+          .status(500)
+          .send("Error al actualizar el contenido del carrito de compras");
       } else {
         console.log(result);
         // Actualización exitosa del contenido del carrito de compras
@@ -690,9 +705,6 @@ app.put("/updateBuyCar", (req, res) => {
     }
   );
 });
-
-
-                 
 
 app.put("/deleteBuyCar/:buyCarId", (req, res) => {
   const buyCarId = req.params.buyCarId;
@@ -715,79 +727,121 @@ app.put("/deleteProductFromBuyCar"),
     db.query("UPDATE ");
   };
 
-  app.get("/commentsList", (req, res) => {
-    db.query("CALL GetCommentsWithUser()", (err, result) => {
-      if (err) {
-        console.log(err);
-        res.status(500).send("Error al obtener la lista de comentarios");
-      } else {
-        res.status(200).send(result[0]);
-      }
-    });
-  });
-
-  app.post("/createComment", async (req, res) => {
-    const { appComment, userComment, productComment, productName } = req.body;
-    let positiveComments
-    let negativeComments
-    try {
-      // Clasificar el comentario usando la IA de Gemini
-      prompt = `Clasifica el siguiente comentario como A favor o En contra del producto ${productName}:`
-      const classificationResult = await classify_text(`${prompt}, ${appComment}`);
-
-      console.log(classificationResult);
-      if (classificationResult == "A favor"){
-        positiveComments = 1
-        negativeComments = 0
-      }else if (classificationResult == "En contra"){
-        negativeComments = 1
-        positiveComments = 0
-      }
-  
-      // Insertar el comentario en la base de datos
-      db.query(
-        "INSERT INTO appComments (userComment, productComment, appComment, positiveComments, negativeComments, CommentState) VALUES (?, ?, ?, ?, ?, ?)",
-        [userComment, productComment, appComment, positiveComments, negativeComments, classificationResult],
-        (err, result) => {
-          if (err) {
-            console.log(err);
-            res.status(500).send("Error al crear el comentario ");
-          } else {
-            res.status(200).send(result);
-          }
-        }
-      );
-    } catch (error) {
-      console.error("Error al clasificar el comentario:", error);
-      res.status(500).send("Error al clasificar el comentario");
+app.get("/commentsList", (req, res) => {
+  db.query("CALL GetCommentsWithUser()", (err, result) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send("Error al obtener la lista de comentarios");
+    } else {
+      res.status(200).send(result[0]);
     }
   });
+});
 
-  // AIzaSyD4bye52uZhgUjqW7YxQbpt2hEBGurJbpo   api key
+app.post("/createComment", async (req, res) => {
+  const { appComment, userComment, productComment, productName } = req.body;
+  let positiveComments;
+  let negativeComments;
+  try {
+    // Clasificar el comentario usando la IA de Gemini
+    prompt = `Clasifica el siguiente comentario como A favor o En contra del producto ${productName}:`;
+    const classificationResult = await classify_text(
+      `${prompt}, ${appComment}`
+    );
 
+    console.log(classificationResult);
+    if (classificationResult == "A favor") {
+      positiveComments = 1;
+      negativeComments = 0;
+    } else if (classificationResult == "En contra") {
+      negativeComments = 1;
+      positiveComments = 0;
+    }
 
-  // producto = "Gelatina"
+    // Insertar el comentario en la base de datos
+    db.query(
+      "INSERT INTO appComments (userComment, productComment, appComment, positiveComments, negativeComments, CommentState) VALUES (?, ?, ?, ?, ?, ?)",
+      [
+        userComment,
+        productComment,
+        appComment,
+        positiveComments,
+        negativeComments,
+        classificationResult,
+      ],
+      (err, result) => {
+        if (err) {
+          console.log(err);
+          res.status(500).send("Error al crear el comentario ");
+        } else {
+          res.status(200).send(result);
+        }
+      }
+    );
+  } catch (error) {
+    console.error("Error al clasificar el comentario:", error);
+    res.status(500).send("Error al clasificar el comentario");
+  }
+});
+
+// AIzaSyD4bye52uZhgUjqW7YxQbpt2hEBGurJbpo   api key
+
+// producto = "Gelatina"
 // prompt = `Clasifica el siguiente comentario como A favor o En contra del producto ${producto}:`
 // comentario = "Es una gelatina costosa y de mal sabor"
 // classify_text(`${prompt} ${comentario}`);
-  
-  // Función para clasificar el texto utilizando la IA de Gemini
-   async function classify_text(msg) {  
-  const model = genAI.getGenerativeModel({ model: "gemini-pro"});
+
+// Función para clasificar el texto utilizando la IA de Gemini
+async function classify_text(msg) {
+  const model = genAI.getGenerativeModel({ model: "gemini-pro" });
   const result = await model.generateContent(msg);
   const response = await result.response;
   const text = response.text();
-  console.log(text)
-  if (text == "A favor"){
-    console.log("El comentario es a favor"); }
-    if (text == "En contra"){
-      console.log("El comentario es en contra"); }
+  console.log(text);
+  if (text == "A favor") {
+    console.log("El comentario es a favor");
+  }
+  if (text == "En contra") {
+    console.log("El comentario es en contra");
+  }
 
-      return text
-}  
-  
+  return text;
+}
 
-  app.listen(3000, () => {
-    console.log(`Servidor escuchando en el puerto 3000`);
+// Enviar el correo electrónico
+app.put("/sendSailMail", async (req, res) => {
+  const { userName, userMail } = req.body;
+
+  // Configurar el transporte Nodemailer
+  const transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 587,
+    auth: {
+      user: "exponetapppuntocom@gmail.com",
+      pass: "krjkuexigsvcbgnk",
+    },
+    tls: {
+      rejectUnauthorized: false,
+    },
   });
-  
+
+  try {
+    // Enviar el correo electrónico
+    await transporter.sendMail({
+      from: "exponetapppuntocom@gmail.com",
+      to: userMail,
+      subject: "Gracias por comprar en exponet.com",
+      html: `Hola ${userName},\n\nGracias por tu compra en Exponet. ¡Esperamos que disfrutes de nuestros productos!\n\nSaludos,\nEl equipo de Exponet`,
+    });
+
+    console.log("Correo electrónico enviado con éxito");
+    res.status(200).send("Correo electrónico enviado con éxito");
+  } catch (error) {
+    console.error("Error al enviar el correo electrónico:", error);
+    res.status(500).send("Error al enviar el correo electrónico");
+  }
+});
+
+app.listen(3000, () => {
+  console.log(`Servidor escuchando en el puerto 3000`);
+});

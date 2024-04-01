@@ -13,12 +13,12 @@ function ProductSamplerBuyCar() {
 
   const [selectedQuantities, setSelectedQuantities] = useState({});
   const [total, setTotal] = useState(0);
-  const [showModal, setShowModal] = useState(false)
+  const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
   const [showCardInput, setShowCardInput] = useState(false);
-  const [cardNumber, setCardNumber] = useState("")
-  const [bank, setBank] = useState("")
-  const [userInfo, setUserInfo] = useState()
+  const [cardNumber, setCardNumber] = useState("");
+  const [bank, setBank] = useState("");
+  const [userInfo, setUserInfo] = useState();
 
   useEffect(() => {
     updateTotal();
@@ -28,7 +28,7 @@ function ProductSamplerBuyCar() {
     if (!userInfo) {
       getUserInfo(buyCarUser);
     }
-  }, []); 
+  }, []);
 
   useEffect(() => {
     const initialQuantities = buyCarProducts.reduce((quantities, product) => {
@@ -129,13 +129,13 @@ function ProductSamplerBuyCar() {
   };
 
   const updateBuyCar = (buyCarState, buyCarUser) => {
-    console.log("soy el buycarproducts antes de crear los arreglos")
-    console.log(buyCarProducts)
+    console.log("soy el buycarproducts antes de crear los arreglos");
+    console.log(buyCarProducts);
     const selectedQuantitiesArray = buyCarProducts.map((product) => ({
       productId: product.productId,
       quantity: selectedQuantities[product.productId] || 0,
     }));
-  
+
     const requestData = {
       buyCarContent: JSON.stringify({
         products: buyCarProducts,
@@ -144,7 +144,7 @@ function ProductSamplerBuyCar() {
       buyCarUser: buyCarUser,
       buyCarState: buyCarState,
     };
-  
+
     Axios.post("http://localhost:3000/createBuyCar", requestData)
       .then((response) => {
         console.log(response.data);
@@ -168,57 +168,74 @@ function ProductSamplerBuyCar() {
   };
 
   const updateUserCreditCard = (userCreditCard, userId, bank) => {
-    Axios.put("http://localhost:3000/updateUserCreditCard", { userId: userId, userCreditCard: userCreditCard, bank: bank })
-      .then(response => {
+    Axios.put("http://localhost:3000/updateUserCreditCard", {
+      userId: userId,
+      userCreditCard: userCreditCard,
+      bank: bank,
+    })
+      .then((response) => {
         console.log(response.data);
         // Manejar la respuesta del servidor según sea necesario
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Error al enviar la solicitud:", error);
         // Manejar errores según sea necesario
       });
-}
+  };
 
-const getUserInfo = (userId) => {
-  Axios.get(
-    `http://localhost:3000/readOneUser/${userId}`
-  ).then((response) => {
-    setUserInfo(response.data);
-    console.log("soy el userInfo")
-    console.log(response.data)
-    console.log(userInfo);
-  });
-};
+  const getUserInfo = (userId) => {
+    Axios.get(`http://localhost:3000/readOneUser/${userId}`).then(
+      (response) => {
+        setUserInfo(response.data);
+        console.log("soy el userInfo");
+        console.log(response.data);
+        console.log(userInfo);
+      }
+    );
+  };
 
+  const handleBankChange = (e) => {
+    setBank(e.target.value);
+  };
 
-const handleBankChange = (e) => {
-  setBank(e.target.value);
-};
+  const deleteOneProduct = (productId) => {
+    const confirmDelete = window.confirm(
+      "¿Seguro que desea eliminar el producto del carrito de compras?"
+    );
 
-const deleteOneProduct = (productId) => {
-  
-  const confirmDelete = window.confirm("¿Seguro que desea eliminar el producto del carrito de compras?");
+    if (confirmDelete) {
+      const updatedProducts = buyCarProducts.filter(
+        (product) => product.productId !== productId
+      );
+      setBuyCarProducts(updatedProducts);
+      setSelectedQuantities((prevQuantities) => {
+        const updatedQuantities = { ...prevQuantities };
+        delete updatedQuantities[productId];
+        return updatedQuantities;
+      });
+      updateTotal();
+    }
+  };
 
-  
-  if (confirmDelete) {
-    const updatedProducts = buyCarProducts.filter((product) => product.productId !== productId);
-    setBuyCarProducts(updatedProducts);
-    setSelectedQuantities((prevQuantities) => {
-      const updatedQuantities = { ...prevQuantities };
-      delete updatedQuantities[productId];
-      return updatedQuantities;
-    });
-    updateTotal();
+  function sendMail(userName, userMail) {
+    // Enviar los datos al backend utilizando Axios
+    Axios.put("/sendSailMail", { userName, userMail })
+      .then((response) => {
+        // Manejar la respuesta del backend si es necesario
+        console.log("Correo electrónico enviado con éxito:", response.data);
+      })
+      .catch((error) => {
+        // Manejar errores en caso de que ocurran
+        console.error("Error al enviar el correo electrónico:", error);
+      });
   }
-};
-
 
   return (
     <>
       <div className="product-container-cart">
-      <div className="box-title-cart">
-        <h1 className="product-title-cart">Carrito De Compras </h1>
-      </div>
+        <div className="box-title-cart">
+          <h1 className="product-title-cart">Carrito De Compras </h1>
+        </div>
         {buyCarProducts.map((product) => (
           <div key={product.productId} className="product-card-home bg-gray-50">
             <div className="box-img-home">
@@ -270,10 +287,15 @@ const deleteOneProduct = (productId) => {
               </button>
             </div>
             <div>
-                <button className="DeleteButton" onClick={()=>{
+              <button
+                className="DeleteButton"
+                onClick={() => {
                   deleteOneProduct(product.productId);
-                }}>Borrar</button>
-              </div>
+                }}
+              >
+                Borrar
+              </button>
+            </div>
           </div>
         ))}
         <div className="box-btn-buyCart">
@@ -282,9 +304,12 @@ const deleteOneProduct = (productId) => {
             <p className="value-buyCart">${total}</p>
           </div>
           <div className="flex flex-col gap-1">
-            <button className="btn-buyCart" onClick={()=>{
-              setShowModal(true)
-            }}>
+            <button
+              className="btn-buyCart"
+              onClick={() => {
+                setShowModal(true);
+              }}
+            >
               Comprar Productos
             </button>
             <button className="btn-buyCart" onClick={handleBorrar}>
@@ -294,78 +319,86 @@ const deleteOneProduct = (productId) => {
         </div>
 
         {/* modal inicio */}
-        
+
         {showModal && (
-  <div className="modal2">
-    <select
-      name="DeliveredSelector"
-      id="DeliveredSelector"
-      onChange={(e) => {
-        if (e.target.value === "Targeta De Credito") {
-          setShowCardInput(true);
-        } else {
-          setShowCardInput(false);
-        }
-      }}
-    >
-      <option value="contraEntrega">ContraEntrega</option>
-      <option value="Targeta De Credito">Pago Con Tarjeta</option>
-    </select>
-    {showCardInput && (
-      <div className="pago-tarjeta">
-        <select className="pago" name="Bank" id="Bank" onChange={handleBankChange}>
-          <option value="bancolombia">Bancolombia</option>
-          <option value="davivienda">Davivienda</option>
-          <option value="popular">Banco Popular</option>
-        </select>
-        <input
-          id="cardNumber"
-          type="text"
-          placeholder="Número de tu cuenta"
-          value={cardNumber}
-          onChange={(e) => setCardNumber(e.target.value)}
-        />
-        {cardNumber.length !== 16 && <p className="format">Se requieren 16 dígitos.</p>}
-      </div>
-    )}
-    <button
-      onClick={() => {
-        setShowModal(false);
-      }}
-      className="buttons2 cerrar"
-    >
-      Cerrar
-    </button>
-    <button className="buttons2 comprar" onClick={()=>{
-      if(showCardInput == true){
-        let name = userInfo[0].userName
-        let adrees = userInfo[0].userAdress
-        setShowModal(false)
-        setCardNumber(cardNumber);
-        setBank(bank);
-        updateUserCreditCard(cardNumber, buyCarUser, bank);
-        handleCompra();
-        alert("Pagaste con tarjeta de crédito") 
-        let message = `usuario ",${name}, " su pedido sera entregado en ", ${adrees}, "el dia de la entrega le sera confirmado en las proximas horas, la notificacion le llegara via correo electronico ` 
-        alert(message)
-      } else {
-        getUserInfo(buyCarUser)
-        let name = userInfo[0].userName
-        let adrees = userInfo[0].userAdress
-        let message = `usuario ",${name}, " su pedido sera entregado en ", ${adrees}, "el dia de la entrega le sera confirmado en las proximas horas ` 
-        alert(message)
-        handleCompra()
-      }
-    }}>
-      Comprar
-    </button>
-  </div>
-)}
+          <div className="modal2">
+            <select
+              name="DeliveredSelector"
+              id="DeliveredSelector"
+              onChange={(e) => {
+                if (e.target.value === "Targeta De Credito") {
+                  setShowCardInput(true);
+                } else {
+                  setShowCardInput(false);
+                }
+              }}
+            >
+              <option value="contraEntrega">ContraEntrega</option>
+              <option value="Targeta De Credito">Pago Con Tarjeta</option>
+            </select>
+            {showCardInput && (
+              <div className="pago-tarjeta">
+                <select
+                  className="pago"
+                  name="Bank"
+                  id="Bank"
+                  onChange={handleBankChange}
+                >
+                  <option value="bancolombia">Bancolombia</option>
+                  <option value="davivienda">Davivienda</option>
+                  <option value="popular">Banco Popular</option>
+                </select>
+                <input
+                  id="cardNumber"
+                  type="text"
+                  placeholder="Número de tu cuenta"
+                  value={cardNumber}
+                  onChange={(e) => setCardNumber(e.target.value)}
+                />
+                {cardNumber.length !== 16 && (
+                  <p className="format">Se requieren 16 dígitos.</p>
+                )}
+              </div>
+            )}
+            <button
+              onClick={() => {
+                setShowModal(false);
+              }}
+              className="buttons2 cerrar"
+            >
+              Cerrar
+            </button>
+            <button
+              className="buttons2 comprar"
+              onClick={() => {
+                if (showCardInput == true) {
+                  let name = userInfo[0].userName;
+                  let adrees = userInfo[0].userAdress;
+                  setShowModal(false);
+                  setCardNumber(cardNumber);
+                  setBank(bank);
+                  updateUserCreditCard(cardNumber, buyCarUser, bank);
+                  handleCompra();
+                  alert("Pagaste con tarjeta de crédito");
+                  let message = `usuario ",${name}, " su pedido sera entregado en ", ${adrees}, "el dia de la entrega le sera confirmado en las proximas horas, la notificacion le llegara via correo electronico `;
+                  alert(message);
+                } else {
+                  getUserInfo(buyCarUser);
+                  let name = userInfo[0].userName;
+                  let adrees = userInfo[0].userAdress;
+                  let message = `usuario ",${name}, " su pedido sera entregado en ", ${adrees}, "el dia de la entrega le sera confirmado en las proximas horas `;
+                  alert(message);
+                  sendMail(userInfo[0].userName, userInfo[0].userMail);
+                  handleCompra();
+                }
+              }}
+            >
+              Comprar
+            </button>
+          </div>
+        )}
 
-
-{/* modal final */}
-        
-
+        {/* modal final */}
       </div>
     </>
   );
