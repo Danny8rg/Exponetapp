@@ -25,6 +25,12 @@ function ProductSamplerBuyCar() {
   }, [buyCarProducts]);
 
   useEffect(() => {
+    if (!userInfo) {
+      getUserInfo(buyCarUser);
+    }
+  }, []); 
+
+  useEffect(() => {
     const initialQuantities = buyCarProducts.reduce((quantities, product) => {
       quantities[product.productId] = product.quantity || 0;
       return quantities;
@@ -284,10 +290,11 @@ const deleteOneProduct = (productId) => {
             </button>
           </div>
         </div>
+
+        {/* modal inicio */}
         
         {showModal && (
   <div className="modal2">
-  
     <select
       name="DeliveredSelector"
       id="DeliveredSelector"
@@ -303,27 +310,26 @@ const deleteOneProduct = (productId) => {
       <option value="Targeta De Credito">Pago Con Tarjeta</option>
     </select>
     {showCardInput && (
-       <div>
-          <select name="Bank" id="Bank" onChange={handleBankChange}>
-            <option value="bancolombia">Bancolombia</option>
-            <option value="davivienda">Davivienda</option>
-            <option value="popular">Banco Popular</option>
-          </select>
-          <input
-            id="cardNumber"
-            type="text"
-            placeholder="Número de tu tarjeta"
-            value={cardNumber}
-            onChange={(e) => setCardNumber(e.target.value)}
-          />
-          {cardNumber.length !== 16 && <p>Formato inválido. Se requieren 16 dígitos.</p>}
-       </div>
+      <div>
+        <select name="Bank" id="Bank" onChange={handleBankChange}>
+          <option value="bancolombia">Bancolombia</option>
+          <option value="davivienda">Davivienda</option>
+          <option value="popular">Banco Popular</option>
+        </select>
+        <input
+          id="cardNumber"
+          type="text"
+          placeholder="Número de tu tarjeta"
+          value={cardNumber}
+          onChange={(e) => setCardNumber(e.target.value)}
+        />
+        {cardNumber.length !== 16 && <p>Formato inválido. Se requieren 16 dígitos.</p>}
+      </div>
     )}
     <button
       onClick={() => {
         setShowModal(false);
       }}
-
       className="buttons2"
     >
       Cerrar
@@ -332,13 +338,13 @@ const deleteOneProduct = (productId) => {
       if(showCardInput == true){
         let name = userInfo[0].userName
         let adrees = userInfo[0].userAdress
-         setShowModal(false)
-         setCardNumber(cardNumber);
-         setBank(bank);
-         updateUserCreditCard(cardNumber, buyCarUser, bank);
-         handleCompra();
-         alert("Pagaste con tarjeta de crédito") 
-         let message = `usuario ",${name}, " su pedido sera entregado en ", ${adrees}, "el dia de la entrega le sera confirmado en las proximas horas ` 
+        setShowModal(false)
+        setCardNumber(cardNumber);
+        setBank(bank);
+        updateUserCreditCard(cardNumber, buyCarUser, bank);
+        handleCompra();
+        alert("Pagaste con tarjeta de crédito") 
+        let message = `usuario ",${name}, " su pedido sera entregado en ", ${adrees}, "el dia de la entrega le sera confirmado en las proximas horas ` 
         alert(message)
       } else {
         getUserInfo(buyCarUser)
@@ -354,6 +360,9 @@ const deleteOneProduct = (productId) => {
   </div>
 )}
 
+
+{/* modal final */}
+        
 
       </div>
     </>
