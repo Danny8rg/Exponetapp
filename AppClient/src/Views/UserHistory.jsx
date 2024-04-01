@@ -19,7 +19,7 @@ function UserHistory() {
     const fetchBuyCars = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/buyCarsList"
+          "//https://exponetapp-8fxj.onrender.com/buyCarsList"
         );
         setBuyCars(response.data);
         setLoading(false);
@@ -33,28 +33,31 @@ function UserHistory() {
   }, []);
 
   const handleDelete = (buyCarId) => {
-    axios.put(`http://localhost:3000/deleteBuyCar/${buyCarId}`)
-      .then(response => {
-        alert("se elimino el carrito del historial")
+    axios
+      .put(`https://exponetapp-8fxj.onrender.com/deleteBuyCar/${buyCarId}`)
+      .then((response) => {
+        alert("se elimino el carrito del historial");
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Error al eliminar el carrito:", error);
       });
   };
 
-  const handleComment = (productName, productId) => { // Modificar handleComment para pasar productName
+  const handleComment = (productName, productId) => {
+    // Modificar handleComment para pasar productName
     setShowModal(true);
     setSelectedProductName(productName); // Almacenar el nombre del producto seleccionado
     setMomentId(productId);
   };
 
   const createComment = (appComment, userComment, productId, productName) => {
-    axios.post("http://localhost:3000/createComment", {
-      appComment: appComment,
-      userComment: userComment,
-      productComment: productId,
+    axios
+      .post("https://exponetapp-8fxj.onrender.com/createComment", {
+        appComment: appComment,
+        userComment: userComment,
+        productComment: productId,
         productName: productName,
-    })
+      })
       .then(() => {
         alert("Comentario Agregado");
         setComment("");
@@ -68,9 +71,9 @@ function UserHistory() {
   return (
     <>
       <Header />
-          <div className="box-title-historial">
-            <h2 className="product-title-historial">Historial De Compra</h2>
-          </div>
+      <div className="box-title-historial">
+        <h2 className="product-title-historial">Historial De Compra</h2>
+      </div>
       {loading ? (
         <p>Cargando historial de compras...</p>
       ) : (
@@ -78,35 +81,50 @@ function UserHistory() {
           <table className="table table-bordered info-user-history">
             <thead className="table-titles theadUserHistory">
               <tr className="table-light tr-table-history">
-                <th scope="col" className="productName">Nombre del Producto</th>
-                <th scope="col" className="description">Descripción</th>
-                <th scope="col" className="prize">Precio</th>
-                <th scope="col" className="state">Estado</th>
-                <th scope="col" className="cant">Cantidad</th>
-                <th scope="col" className="action">Acciones</th>
+                <th scope="col" className="productName">
+                  Nombre del Producto
+                </th>
+                <th scope="col" className="description">
+                  Descripción
+                </th>
+                <th scope="col" className="prize">
+                  Precio
+                </th>
+                <th scope="col" className="state">
+                  Estado
+                </th>
+                <th scope="col" className="cant">
+                  Cantidad
+                </th>
+                <th scope="col" className="action">
+                  Acciones
+                </th>
               </tr>
             </thead>
             <tbody className="table-body">
               {buyCars
-                .filter(
-                  (buyCar) => buyCar.buyCarUser === parseInt(buyCarUser)
-                )
+                .filter((buyCar) => buyCar.buyCarUser === parseInt(buyCarUser))
                 .map((filteredBuyCar) =>
                   JSON.parse(filteredBuyCar.buyCarContent).products.map(
                     (product, index) => (
                       <tr className="trUserHistory" key={product.productId}>
                         <td className="tdUserHistory">{product.productName}</td>
-                        <td className="tdUserHistory tdDescription">{product.productDescription}</td>
-                        <td className="tdUserHistory">{product.productPrize}</td>
-                        <td className="tdUserHistory">{product.productState}</td>
+                        <td className="tdUserHistory tdDescription">
+                          {product.productDescription}
+                        </td>
+                        <td className="tdUserHistory">
+                          {product.productPrize}
+                        </td>
+                        <td className="tdUserHistory">
+                          {product.productState}
+                        </td>
                         <td className="tdUserHistory">
                           {Array.isArray(
-                            JSON.parse(filteredBuyCar.buyCarContent)
-                              .quantities
+                            JSON.parse(filteredBuyCar.buyCarContent).quantities
                           ) &&
-                            JSON.parse(
-                              filteredBuyCar.buyCarContent
-                            ).quantities[index].quantity}
+                            JSON.parse(filteredBuyCar.buyCarContent).quantities[
+                              index
+                            ].quantity}
                         </td>
                         <td className="tdUserHistory">
                           {product.productState === "Entregado" && (
@@ -121,7 +139,12 @@ function UserHistory() {
                                 Eliminar
                               </button>
                               <button
-                                onClick={() => handleComment(product.productName, product.productId)} // Pasar productName y productId como argumentos
+                                onClick={() =>
+                                  handleComment(
+                                    product.productName,
+                                    product.productId
+                                  )
+                                } // Pasar productName y productId como argumentos
                               >
                                 Comentario
                               </button>
@@ -139,18 +162,30 @@ function UserHistory() {
       {showModal && (
         <div className="modal">
           <div className="modal-content">
-            <h1>Comentario para {selectedProductName}</h1> {/* Mostrar el nombre del producto seleccionado */}
+            <h1>Comentario para {selectedProductName}</h1>{" "}
+            {/* Mostrar el nombre del producto seleccionado */}
             <textarea
               placeholder="Escribe tu comentario aquí"
               value={comment}
               onChange={(e) => setComment(e.target.value)}
             />
-            <button onClick={() => {
-              createComment(comment, buyCarUser, momentId, selectedProductName)
-            }}>Enviar</button>
-            <button onClick={() => {
-              setShowModal(false)
-            }}>
+            <button
+              onClick={() => {
+                createComment(
+                  comment,
+                  buyCarUser,
+                  momentId,
+                  selectedProductName
+                );
+              }}
+            >
+              Enviar
+            </button>
+            <button
+              onClick={() => {
+                setShowModal(false);
+              }}
+            >
               Cerrar
             </button>
           </div>

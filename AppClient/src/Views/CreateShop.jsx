@@ -43,7 +43,10 @@ function CreateShop() {
     formData.append("shopAdress", shopAdress);
     formData.append("shopComments", shopComments);
 
-    Axios.post("http://localhost:3000/createShop", formData)
+    Axios.post(
+      "https://exponetapp-8fxj.onrender.com/createShop",
+      formData
+    )
       .then(() => {
         alert("Tienda registrada");
         limpiarCampos();
@@ -76,11 +79,16 @@ function CreateShop() {
       <div className="container-create-shop">
         <div className="card shadow-sm">
           <div className="card-header flex justify-center">
-            <h2 className="mt-1 mb-0 text-center text-4xl font-bold leading-9 tracking-tight text-gray-900 title-create-store">Registro de tiendas</h2>
+            <h2 className="mt-1 mb-0 text-center text-4xl font-bold leading-9 tracking-tight text-gray-900 title-create-store">
+              Registro de tiendas
+            </h2>
           </div>
           <div className="card-body flex flex-col">
             <div className="label-store mb-2">
-              <span id="basic-addon1" className="block font-medium leading-6 text-gray-900">
+              <span
+                id="basic-addon1"
+                className="block font-medium leading-6 text-gray-900"
+              >
                 Nombre de la tienda:
               </span>
               <input
@@ -93,12 +101,17 @@ function CreateShop() {
                 placeholder="Nombre la tienda"
               />
               {!validateShopName(shopName) && (
-                <p className="error-message">El nombre debe comenzar con mayúscula</p>
+                <p className="error-message">
+                  El nombre debe comenzar con mayúscula
+                </p>
               )}
             </div>
 
             <div className="label-store mb-2">
-              <span id="basic-addon1" className="block font-medium leading-6 text-gray-900">
+              <span
+                id="basic-addon1"
+                className="block font-medium leading-6 text-gray-900"
+              >
                 Teléfono:
               </span>
               <input
@@ -111,12 +124,17 @@ function CreateShop() {
                 placeholder="315 000 0000"
               />
               {!validatePhoneNumber(shopTell) && (
-                <p className="error-message">El teléfono debe tener 10 dígitos</p>
+                <p className="error-message">
+                  El teléfono debe tener 10 dígitos
+                </p>
               )}
             </div>
 
             <div className="label-store mb-2">
-              <span id="basic-addon1" className="block font-medium leading-6 text-gray-900">
+              <span
+                id="basic-addon1"
+                className="block font-medium leading-6 text-gray-900"
+              >
                 Correo electrónico:
               </span>
               <input
@@ -134,7 +152,10 @@ function CreateShop() {
             </div>
 
             <div className="label-store mb-2">
-              <span id="basic-addon1" className="block font-medium leading-6 text-gray-900">
+              <span
+                id="basic-addon1"
+                className="block font-medium leading-6 text-gray-900"
+              >
                 Dirección:
               </span>
               <input
@@ -149,7 +170,10 @@ function CreateShop() {
             </div>
 
             <div className="label-store">
-              <span id="basic-addon1" className="block font-medium leading-6 text-gray-900">
+              <span
+                id="basic-addon1"
+                className="block font-medium leading-6 text-gray-900"
+              >
                 Descripción:
               </span>
               <textarea
@@ -164,7 +188,10 @@ function CreateShop() {
             </div>
 
             <div className="mt-3 flex">
-              <label className="block shadow-sm leading-6 text-gray-900 select-img-store" htmlFor="file">
+              <label
+                className="block shadow-sm leading-6 text-gray-900 select-img-store"
+                htmlFor="file"
+              >
                 Seleccionar imagen de la tienda
               </label>
               <input
@@ -181,14 +208,17 @@ function CreateShop() {
               )}
             </div>
           </div>
-          <div className="card-footer d-flex justify-content-center">          
-              <button onClick={addShop} className="flex justify-center rounded-md px-3 py-1 font-semibold leading-6 text-white shadow-sm btn-new-store">
-                Registrar tienda
-              </button>
+          <div className="card-footer d-flex justify-content-center">
+            <button
+              onClick={addShop}
+              className="flex justify-center rounded-md px-3 py-1 font-semibold leading-6 text-white shadow-sm btn-new-store"
+            >
+              Registrar tienda
+            </button>
           </div>
         </div>
 
-      {/*  <table className="table table-hover mt-12">
+        {/*  <table className="table table-hover mt-12">
           <thead className="table-titles">
             <tr>
               <th scope="col">Nombre</th>

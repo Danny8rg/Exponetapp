@@ -8,7 +8,7 @@ import Cookies from "js-cookie";
 import { useContext } from "react";
 import { ShopContextValues } from "../Components/Context/ShopContext";
 import Swal from "sweetalert2";
-import "./ShopsManagment.css"
+import "./ShopsManagment.css";
 
 function ShopsManagment() {
   const [shopName, setShopName] = useState("");
@@ -22,7 +22,7 @@ function ShopsManagment() {
   const [shopOwner, setShopOwner] = useState("");
   const [shopImgUrl, setShopImgUrl] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
-  const [showForm, setShowForm] = useState(false)
+  const [showForm, setShowForm] = useState(false);
 
   const navigate = useNavigate();
   const { globalShopId, setGlobalShopId } = useContext(ShopContextValues);
@@ -37,7 +37,7 @@ function ShopsManagment() {
     formData.append("shopOwner", shopOwner);
     formData.append("shopComments", shopComments);
 
-    Axios.post("http://localhost:3000/createShop", formData)
+    Axios.post("https://exponetapp-8fxj.onrender.com/createShop", formData)
       .then(() => {
         getShops();
         limpiarCampos();
@@ -49,7 +49,7 @@ function ShopsManagment() {
   };
 
   const updateShop = () => {
-    setShowForm(false)
+    setShowForm(false);
     // Almacena los valores originales antes de la actualización
     const originalShopName =
       shopsList.find((val) => val.shopId === shopId)?.shopName || "";
@@ -88,7 +88,7 @@ function ShopsManagment() {
       formData.append("shopId", shopId);
 
       Axios.put(
-        "http://localhost:3000/updateShop",
+        "https://exponetapp-8fxj.onrender.com/updateShop",
         formData,
         {}
       ).then(() => {
@@ -119,7 +119,7 @@ function ShopsManagment() {
 
     if (confirmation) {
       Axios.put(
-        `http://localhost:3000/deleteShop/${ShopId}`
+        `//https://exponetapp-8fxj.onrender.com/deleteShop/${ShopId}`
       ).then(() => {
         alert("Tienda eliminada");
         limpiarCampos();
@@ -133,7 +133,7 @@ function ShopsManagment() {
 
   const deleteProducts = (ShopId) => {
     Axios.put(
-      `http://localhost:3000/deleteProducts/${ShopId}`
+      `https://exponetapp-8fxj.onrender.com/deleteProducts/${ShopId}`
     ).then(() => {
       limpiarCampos();
       getShops();
@@ -157,7 +157,7 @@ function ShopsManagment() {
   };
 
   const editarTienda = (val) => {
-    setShowForm(true)
+    setShowForm(true);
     setEditar(true);
     console.log("soy valshop id de la funcion", val.shopId);
     setShopId(val.shopId);
@@ -170,7 +170,7 @@ function ShopsManagment() {
 
   const getShops = (shopOwner) => {
     Axios.get(
-      `http://localhost:3000/shopsListCreateShops/${shopOwner}`
+      `https://exponetapp-8fxj.onrender.com/shopsListCreateShops/${shopOwner}`
     ).then((response) => {
       setShopsList(response.data);
       console.dir(response.data);
@@ -202,7 +202,10 @@ function ShopsManagment() {
             </div>
             <div className="card-body">
               <div className="input-group mb-3">
-                <span className="input-group-text fw-semibold" id="basic-addon1">
+                <span
+                  className="input-group-text fw-semibold"
+                  id="basic-addon1"
+                >
                   Nombre de la tienda:
                 </span>
                 <input
@@ -217,7 +220,10 @@ function ShopsManagment() {
               </div>
 
               <div className="input-group mb-3">
-                <span className="input-group-text fw-semibold" id="basic-addon1">
+                <span
+                  className="input-group-text fw-semibold"
+                  id="basic-addon1"
+                >
                   Teléfono:
                 </span>
                 <input
@@ -232,7 +238,10 @@ function ShopsManagment() {
               </div>
 
               <div className="input-group mb-3">
-                <span className="input-group-text fw-semibold" id="basic-addon1">
+                <span
+                  className="input-group-text fw-semibold"
+                  id="basic-addon1"
+                >
                   Correo electrónico:
                 </span>
                 <input
@@ -247,7 +256,10 @@ function ShopsManagment() {
               </div>
 
               <div className="input-group mb-3">
-                <span className="input-group-text fw-semibold" id="basic-addon1">
+                <span
+                  className="input-group-text fw-semibold"
+                  id="basic-addon1"
+                >
                   Dirección:
                 </span>
                 <input
@@ -262,7 +274,10 @@ function ShopsManagment() {
               </div>
 
               <div className="input-group">
-                <span className="input-group-text fw-semibold" id="basic-addon1">
+                <span
+                  className="input-group-text fw-semibold"
+                  id="basic-addon1"
+                >
                   Descripción:
                 </span>
                 <textarea
@@ -314,7 +329,7 @@ function ShopsManagment() {
           </div>
         ) : null}
 
-                {/* <h1></h1> */}
+        {/* <h1></h1> */}
         <table className="table table-bordered info-shops-manag">
           <thead className="table-titles">
             <tr className="table-light tr-table">

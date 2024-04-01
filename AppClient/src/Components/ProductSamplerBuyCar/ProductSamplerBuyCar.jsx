@@ -145,7 +145,7 @@ function ProductSamplerBuyCar() {
       buyCarState: buyCarState,
     };
 
-    Axios.post("http://localhost:3000/createBuyCar", requestData)
+    Axios.post("https://exponetapp-8fxj.onrender.com/createBuyCar", requestData)
       .then((response) => {
         console.log(response.data);
       })
@@ -168,7 +168,7 @@ function ProductSamplerBuyCar() {
   };
 
   const updateUserCreditCard = (userCreditCard, userId, bank) => {
-    Axios.put("http://localhost:3000/updateUserCreditCard", {
+    Axios.put("https://exponetapp-8fxj.onrender.com/updateUserCreditCard", {
       userId: userId,
       userCreditCard: userCreditCard,
       bank: bank,
@@ -184,14 +184,14 @@ function ProductSamplerBuyCar() {
   };
 
   const getUserInfo = (userId) => {
-    Axios.get(`http://localhost:3000/readOneUser/${userId}`).then(
-      (response) => {
-        setUserInfo(response.data);
-        console.log("soy el userInfo");
-        console.log(response.data);
-        console.log(userInfo);
-      }
-    );
+    Axios.get(
+      `https://exponetapp-8fxj.onrender.com/readOneUser/${userId}`
+    ).then((response) => {
+      setUserInfo(response.data);
+      console.log("soy el userInfo");
+      console.log(response.data);
+      console.log(userInfo);
+    });
   };
 
   const handleBankChange = (e) => {

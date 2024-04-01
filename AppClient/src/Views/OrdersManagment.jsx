@@ -19,10 +19,10 @@ function OrdersManagment() {
     const fetchData = async () => {
       try {
         const usersResponse = await axios.get(
-          "http://localhost:3000/ordersManagmentUsers"
+          "https://exponetapp-8fxj.onrender.com/ordersManagmentUsers"
         );
         const ordersResponse = await axios.get(
-          "http://localhost:3000/ordersManagmentBuyCarList"
+          "https://exponetapp-8fxj.onrender.com/ordersManagmentBuyCarList"
         );
 
         setUsers(usersResponse.data);
@@ -90,7 +90,7 @@ function OrdersManagment() {
     console.log("soy el newbuycarcontent del final", newBuyCarContent);
 
     axios
-      .post("http://localhost:3000/ProductStockUpdate", {
+      .post("https://exponetapp-8fxj.onrender.com/ProductStockUpdate", {
         productsIds,
         productsQuantities,
         productsShopOwners,
@@ -115,7 +115,7 @@ function OrdersManagment() {
     console.log("soy el nuevo buycarcontent entre los axios", newBuyCarContent);
 
     axios
-      .put("http://localhost:3000/updateBuyCar", {
+      .put("https://exponetapp-8fxj.onrender.com/updateBuyCar", {
         buyCarId,
         newBuyCarContent,
       })
@@ -174,7 +174,7 @@ function OrdersManagment() {
     );
 
     axios
-      .put("http://localhost:3000/updateBuyCar", {
+      .put("https://exponetapp-8fxj.onrender.com/updateBuyCar", {
         buyCarId,
         parsedContentCanceled,
       })
@@ -195,15 +195,17 @@ function OrdersManagment() {
       return;
     }
 
-    axios.put(`http://localhost:3000/deleteBuyCar/${buyCarId}`).then(() => {
-      Swal.fire({
-        position: "center",
-        icon: "success",
-        title: "Carrito eliminado",
-        showConfirmButton: false,
-        timer: 1500,
+    axios
+      .put(`https://exponetapp-8fxj.onrender.com/deleteBuyCar/${buyCarId}`)
+      .then(() => {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Carrito eliminado",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       });
-    });
   };
 
   return (
@@ -219,7 +221,9 @@ function OrdersManagment() {
             return (
               <li key={userId}>
                 <div className="userInfo">
-                  <h5 className="info-client"><b>Información del cliente</b></h5>
+                  <h5 className="info-client">
+                    <b>Información del cliente</b>
+                  </h5>
                   <p>
                     <b>ID:</b> {user.userId}
                   </p>
@@ -233,7 +237,9 @@ function OrdersManagment() {
                     <b>Correo Electrónico:</b> {user.userMail}
                   </p>
                 </div>
-                <h5 className="title-compra"><b>Informacion de compra</b></h5>
+                <h5 className="title-compra">
+                  <b>Informacion de compra</b>
+                </h5>
                 <table className="product-container">
                   <thead>
                     <tr>
