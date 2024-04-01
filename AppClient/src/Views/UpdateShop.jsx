@@ -19,7 +19,8 @@ function UpdateProduct() {
   const [productsList, setProductsList] = useState([]);
   const [productShopOwner, setProductShopOwner] = useState("");
   const [file, setFile] = useState(null);
-  const { globalShopId } = useContext(ShopContextValues);
+  const { globalShopId, searchText, setSearchText } =
+    useContext(ShopContextValues);
   const [selectedFile, setSelectedFile] = useState(null);
 
   const add = () => {
@@ -108,9 +109,7 @@ function UpdateProduct() {
       return;
     }
 
-    Axios.put(
-      `http://localhost:3000/deleteProduct/${productId}`
-    ).then(() => {
+    Axios.put(`http://localhost:3000/deleteProduct/${productId}`).then(() => {
       Swal.fire({
         position: "center",
         icon: "success",
@@ -156,15 +155,19 @@ function UpdateProduct() {
   const getProductsList = () => {
     Axios.get(
       `http://localhost:3000/productsListUpdateProducts/${productShopOwner}`
-    ).then((response) => {
-      setProductsList(response.data);
-      console.dir(response.data);
-    });
+    )
+      .then((response) => {
+        // Filtrar productos por nombre usando el searchText
+        const filteredProducts = response.data.filter((product) =>
+          product.productName.toLowerCase().includes(searchText.toLowerCase())
+        );
+        setProductsList(filteredProducts);
+        console.dir(filteredProducts);
+      })
+      .catch((error) => {
+        console.error("Error al obtener la lista de productos:", error);
+      });
   };
-
-  // const handleFileChange = (event) => {
-  //   setFile(event.target.files[0]);
-  // };
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -178,6 +181,15 @@ function UpdateProduct() {
     console.log("soy product shop owner", productShopOwner);
     getProductsList();
   }, [productShopOwner]);
+
+  useEffect(() => {
+    getProductsList(); // Ejecutar la función cada vez que searchText cambie
+  }, [searchText]);
+
+  useEffect(() => {
+    setProductShopOwner(globalShopId);
+    getProductsList();
+  }, [globalShopId]);
 
   return (
     <>
