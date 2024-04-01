@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "./CreateShop.css";
 import Header from "../Components/Header/Header";
 import Footer from "../Components/Footer/Footer";
 import Cookies from "js-cookie";
 import { useContext } from "react";
 import { ShopContextValues } from "../Components/Context/ShopContext";
 import Swal from "sweetalert2";
+import "./CreateShop.css";
 
 function CreateShop() {
   const [shopName, setShopName] = useState("");
@@ -267,7 +267,7 @@ function CreateShop() {
               </tr>
             ))}
           </tbody>
-        </table> */}
+                    </table> */}
       </div>
       <Footer />
     </>
