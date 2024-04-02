@@ -129,7 +129,7 @@ function UserHistory() {
                         <td className="tdUserHistory">
                           {product.productState === "Entregado" && (
                             <>
-                              <button
+                              <button className="eliminarButton"
                                 onClick={() => {
                                   handleDelete(
                                     filteredBuyCar.buyCarId // Pasar buyCarId como argumento
@@ -138,7 +138,7 @@ function UserHistory() {
                               >
                                 Eliminar
                               </button>
-                              <button
+                              <button className="commentButton"
                                 onClick={() =>
                                   handleComment(
                                     product.productName,
@@ -164,12 +164,12 @@ function UserHistory() {
           <div className="modal-content">
             <h1>Comentario para {selectedProductName}</h1>{" "}
             {/* Mostrar el nombre del producto seleccionado */}
-            <textarea
+            <textarea className="textAreaComment"
               placeholder="Escribe tu comentario aquí"
               value={comment}
               onChange={(e) => setComment(e.target.value)}
             />
-            <button
+            <button className="enviarButton"
               onClick={() => {
                 createComment(
                   comment,
@@ -181,7 +181,7 @@ function UserHistory() {
             >
               Enviar
             </button>
-            <button
+            <button className="cerrarButton"
               onClick={() => {
                 setShowModal(false);
               }}
