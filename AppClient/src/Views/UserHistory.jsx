@@ -72,15 +72,18 @@ function UserHistory() {
     <>
       <Header />
       <div className="box-title-historial">
-        <h2 className="product-title-historial">Historial De Compra</h2>
+        <h2 className="product-title-historial">Historial de compras</h2>
       </div>
       {loading ? (
         <p>Cargando historial de compras...</p>
       ) : (
         <div className="shops-container-historial">
-          <table className="table table-bordered info-user-history">
-            <thead className="table-titles theadUserHistory">
-              <tr className="table-light tr-table-history">
+          <table className="table table-bordered shadow-sm info-user-history">
+            <thead className="table-titles">
+              <tr className="table-light tr-table">
+                <th scope="col" className="imgProduct">
+                  imagen
+                </th>
                 <th scope="col" className="productName">
                   Nombre del Producto
                 </th>
@@ -107,7 +110,10 @@ function UserHistory() {
                 .map((filteredBuyCar) =>
                   JSON.parse(filteredBuyCar.buyCarContent).products.map(
                     (product, index) => (
-                      <tr className="trUserHistory" key={product.productId}>
+                      <tr className="tr-table" key={product.productId}>
+                        <td className="thuserhistory">
+                          <img src={product.productimgurl} alt="" />
+                        </td>
                         <td className="tdUserHistory">{product.productName}</td>
                         <td className="tdUserHistory tdDescription">
                           {product.productDescription}
@@ -126,10 +132,11 @@ function UserHistory() {
                               index
                             ].quantity}
                         </td>
-                        <td className="tdUserHistory">
+                        <td className="flex justify-center items-center">
                           {product.productState === "Entregado" && (
                             <>
-                              <button className="eliminarButton"
+                              <button
+                                className="eliminarButton"
                                 onClick={() => {
                                   handleDelete(
                                     filteredBuyCar.buyCarId // Pasar buyCarId como argumento
@@ -138,7 +145,8 @@ function UserHistory() {
                               >
                                 Eliminar
                               </button>
-                              <button className="commentButton"
+                              <button
+                                className="commentButton"
                                 onClick={() =>
                                   handleComment(
                                     product.productName,
@@ -164,12 +172,14 @@ function UserHistory() {
           <div className="modal-content">
             <h1>Comentario para {selectedProductName}</h1>{" "}
             {/* Mostrar el nombre del producto seleccionado */}
-            <textarea className="textAreaComment"
+            <textarea
+              className="textAreaComment"
               placeholder="Escribe tu comentario aquí"
               value={comment}
               onChange={(e) => setComment(e.target.value)}
             />
-            <button className="enviarButton"
+            <button
+              className="enviarButton"
               onClick={() => {
                 createComment(
                   comment,
@@ -181,7 +191,8 @@ function UserHistory() {
             >
               Enviar
             </button>
-            <button className="cerrarButton"
+            <button
+              className="cerrarButton"
               onClick={() => {
                 setShowModal(false);
               }}

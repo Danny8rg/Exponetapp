@@ -199,11 +199,18 @@ function UpdateProduct() {
       <div className="container-update-shop">
         <div className="card shadow-sm">
           <div className="card-header flex justify-center">
-            <h2 className="text-center text-4xl font-bold leading-9 tracking-tight text-gray-900 title-create-prod">Creación de productos</h2>
+            <h2 className="text-center text-4xl font-bold leading-9 tracking-tight text-gray-900 title-create-prod">
+              Creación de productos
+            </h2>
           </div>
           <div className="card-body flex flex-col">
             <div className="info-product mb-2">
-              <span className="block font-medium leading-6 text-gray-900" id="basic-addon1">Producto:</span>
+              <span
+                className="block font-medium leading-6 text-gray-900"
+                id="basic-addon1"
+              >
+                Producto:
+              </span>
               <input
                 type="text"
                 value={productName}
@@ -218,7 +225,12 @@ function UpdateProduct() {
             </div>
 
             <div className="info-product mb-2">
-              <span className="block font-medium leading-6 text-gray-900" id="basic-addon1">Cantidad:</span>
+              <span
+                className="block font-medium leading-6 text-gray-900"
+                id="basic-addon1"
+              >
+                Cantidad:
+              </span>
               <input
                 type="number"
                 value={productStock}
@@ -233,7 +245,12 @@ function UpdateProduct() {
             </div>
 
             <div className="info-product mb-2">
-              <span className="block font-medium leading-6 text-gray-900" id="basic-addon1">Categoría:</span>
+              <span
+                className="block font-medium leading-6 text-gray-900"
+                id="basic-addon1"
+              >
+                Categoría:
+              </span>
               <input
                 type="text"
                 value={productCategory}
@@ -248,7 +265,12 @@ function UpdateProduct() {
             </div>
 
             <div className="info-product mb-2">
-              <span className="block font-medium leading-6 text-gray-900" id="basic-addon1">Descripción:</span>
+              <span
+                className="block font-medium leading-6 text-gray-900"
+                id="basic-addon1"
+              >
+                Descripción:
+              </span>
               <textarea
                 type="text"
                 value={productDescription}
@@ -263,7 +285,12 @@ function UpdateProduct() {
             </div>
 
             <div className="info-product mb-2">
-              <span className="block font-medium leading-6 text-gray-900" id="basic-addon1">Precio:</span>
+              <span
+                className="block font-medium leading-6 text-gray-900"
+                id="basic-addon1"
+              >
+                Precio:
+              </span>
               <input
                 type="number"
                 value={productPrize}
@@ -276,7 +303,10 @@ function UpdateProduct() {
               />
             </div>
             <div className="mt-3 flex">
-              <label className="block shadow-sm leading-6 text-gray-900 select-img-store" htmlFor="file">
+              <label
+                className="block shadow-sm leading-6 text-gray-900 select-img-store"
+                htmlFor="file"
+              >
                 Seleccionar imagen del producto
               </label>
               <input
@@ -305,12 +335,18 @@ function UpdateProduct() {
                 >
                   Actualizar
                 </button>
-                <button onClick={CancelarUpdate} className="flex justify-center rounded-md px-3 py-1 font-semibold leading-6 text-white shadow-sm btn-cancel-prod">
+                <button
+                  onClick={CancelarUpdate}
+                  className="flex justify-center rounded-md px-3 py-1 font-semibold leading-6 text-white shadow-sm btn-cancel-prod"
+                >
                   Cancelar
                 </button>
               </div>
             ) : (
-              <button onClick={add} className="flex justify-center rounded-md px-3 py-1 font-semibold leading-6 text-white shadow-sm btn-new-prod">
+              <button
+                onClick={add}
+                className="flex justify-center rounded-md px-3 py-1 font-semibold leading-6 text-white shadow-sm btn-new-prod"
+              >
                 Registrar
               </button>
             )}

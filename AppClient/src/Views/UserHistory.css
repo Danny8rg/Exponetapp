@@ -22,39 +22,35 @@
     font-size: 2.2rem;
     font-weight: 700;
     text-align: center;
-    /* border-bottom: 3px solid #b1e7f0; */
 }
 
 .info-user-history{
-    width: 78%;
+    width: 82%;
 }
 
-.tr-table-history{
-    text-align: center;
-}
-/* .shop-card-historial {
-    height: auto;
-    padding: 1rem;
-    width: 35%;
-    border: 2px solid #2874a7;
-    box-shadow: 1px 1px 4px rgb(220, 220, 220);
-    display: flex;
-    flex-direction: column;
-    border-radius: 10px;
-    gap: 10px;
-    background-color: whitesmoke;
-}
-
-.shops-info {
-    width: 100%;
-}
-
-.invoice-item {
+.eliminarButton {
     margin: 0;
-    padding: 0;
-    font-weight: bold;
-    color: black;
-} */
+    border: 2px solid red;
+    width: 6vw;
+}
+
+.eliminarButton:hover {
+    background-color: red;
+    color: white;
+}
+
+.commentButton {
+    margin: 0;
+    border: 2px solid rgb(113, 197, 230);
+    width: 6vw;
+}
+
+.commentButton:hover {
+    background-color: rgb(113, 197, 230);
+    color: white;
+}
+
+
 
 /* Estilos para la modal */
 .modal {
@@ -76,30 +72,6 @@
     padding: 20px;
     border-radius: 5px;
     align-items: center;
-}
-
-.eliminarButton {
-    border: 2px solid red;
-    width: 6vw;
-    margin-left: 17%;
-    margin-top: 7%;
-}
-
-.eliminarButton:hover {
-    background-color: red;
-    color: white;
-}
-
-.commentButton {
-    border: 2px solid rgb(113, 197, 230);
-    width: 6vw;
-    margin-left: 17%;
-    margin-top: 5%;
-}
-
-.commentButton:hover {
-    background-color: rgb(113, 197, 230);
-    color: white;
 }
 
 .textAreaComment {
