@@ -1,16 +1,37 @@
 .container-shops-manag{
-    padding-top: 5.5rem;
-    height: 91vh;
-    display: flex;
-    justify-content: center;
+  min-height: 91vh;
+  padding-top: 9rem;
+  gap: 5rem 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
+
+/* ESTILOS FORMULARIO */
+.input-edit-store{
+  font-size: 1rem;
+  border: 1px solid #d1d1d1;
+}
+
+.input-edit-store:focus {
+  outline-style: auto;
+  outline-color: #7bd6e5;
+}
+
+
+/* ESTILOS TABLA */
 .info-shops-manag{
     width: 78%;
+    z-index: 1;
 }
 
 .tr-table{
     text-align: center;
+}
+
+.tr-table th{
+  color: #4cbfd5;
 }
 
 .btn-edit-store{

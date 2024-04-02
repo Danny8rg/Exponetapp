@@ -6,7 +6,7 @@ footer {
   align-items: center;
   justify-content: center;
   text-align: center;
-  background-color: #f8f8f8;
+  z-index: 999;
 }
 
 .box-footer-txt h3 {
@@ -37,15 +37,14 @@ footer {
   border-radius: 10px;
   z-index: 2;
   font-size: 1.8rem;
-  /* box-shadow: 1px 1px 3px #bdbdbd; */
-  /* border: 1px solid #dcdcdc; */
+  border: #dcdcdc solid 1px;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   color: black;
-  background-color: #dcdcdc;
+  background-color: white;
 }
 
 .react-icon-mail {
@@ -57,9 +56,8 @@ footer {
 }
 
 .social-media .icon:hover a {
-  border-radius: 50%;
+  /* border-radius: 50%; */
   transition: 0.5s;
-  box-shadow: 0 0 8px #bdbdbd;
   color: white;
 }
 
@@ -73,7 +71,6 @@ footer {
   position: absolute;
   background: white;
   color: white;
-  box-shadow: 0 0 10px #d1d1d1;
   opacity: 0;
   pointer-events: none;
   transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
@@ -105,7 +102,7 @@ footer {
 .social-media .gmail:hover a,
 .social-media .gmail:hover .tool,
 .social-media .gmail:hover .tool:before {
-  background-color: #e30d31;
+  background-color: #4cbfd5;
 }
 
 .social-media .whatsapp:hover a,

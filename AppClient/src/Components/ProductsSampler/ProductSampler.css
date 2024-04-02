@@ -44,7 +44,6 @@
 }
 
 .box-btn {
-  width: 6.8rem;
   top: 0.5rem;
   right: 0.5rem;
   position: absolute;
@@ -71,7 +70,7 @@
   box-shadow: 1px 1px 3px #efefef;
 }
 
-.delete-icon {
+/* .delete-icon {
   width: 1.5rem;
   font-size: 1rem;
   border-radius: 8px;
@@ -88,7 +87,8 @@
 .delete-icon:hover {
   background-color: white;
   box-shadow: 1px 1px 3px #efefef;
-}
+} */
+
 .box-img {
   height: 20rem;
   width: 100%;
@@ -189,6 +189,10 @@
   background-color: #bdbdbd;
 }
 
+.btn-minor:hover{
+  background-color: #dcdcdc;
+}
+
 .span-quan {
   width: 2rem;
   font-size: 1.1rem;
@@ -206,6 +210,10 @@
   justify-content: center;
   color: white;
   background-color: #4cbfd5;
+}
+
+.btn-plus:hover{
+  background-color: #7bd6e5;
 }
 
 .span-btn {

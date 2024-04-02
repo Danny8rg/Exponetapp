@@ -25,6 +25,7 @@ function OrdersManagment() {
           "https://exponetapp-8fxj.onrender.com/ordersManagmentBuyCarList"
         );
 
+
         setUsers(usersResponse.data);
         setOrders(ordersResponse.data); // Almacena los datos de los carritos de compras
         console.log("soy orders");
@@ -39,6 +40,8 @@ function OrdersManagment() {
 
     fetchData();
   }, []);
+
+
 
   function ChangeState(buyCarContent, globalShopId) {
     const parsedContent = JSON.parse(buyCarContent);
@@ -208,41 +211,38 @@ function OrdersManagment() {
       });
   };
 
+
   return (
     <>
       <Header />
-      <h1 className="subtitles"> Orders Management </h1>
       <div className="orders-container">
+        <div className="box-title-orders">
+          <h1 className="product-title-orders">Historial de entregas</h1>
+        </div>
         {users.map((user, userId) => {
           const userOrders = orders.filter(
             (order) => order.buyCarUser === user.userId
           );
           if (userOrders.length > 0) {
             return (
-              <li key={userId}>
-                <div className="userInfo">
-                  <h5 className="info-client">
-                    <b>Información del cliente</b>
-                  </h5>
-                  <p>
-                    <b>ID:</b> {user.userId}
+              <li className="shadow-sm bg-gray-50" key={userId}>
+              <h5 className="m-0 info-client">Información del cliente</h5>
+                <div className="user-info">
+                  <p className="m-0 w-24 shadow-sm"><span className="text-gray-400">
+                    ID</span> {user.userId}
                   </p>
-                  <p>
-                    <b>Nombre:</b> {user.userName}
+                  <p className="m-0 w-72 shadow-sm"><span className="text-gray-400">
+                    Nombre cliente</span>{user.userName}
+                  </p><p className="m-0 w-96 shadow-sm"><span className="text-gray-400">
+                    Dirección</span> {user.userAdress}
                   </p>
-                  <p>
-                    <b>Dirección:</b> {user.userAdress}
-                  </p>
-                  <p>
-                    <b>Correo Electrónico:</b> {user.userMail}
+                  <p className="m-0 w-96 shadow-sm"><span className="text-gray-400">
+                    Correo electrónico</span> {user.userMail}
                   </p>
                 </div>
-                <h5 className="title-compra">
-                  <b>Informacion de compra</b>
-                </h5>
-                <table className="product-container">
-                  <thead>
-                    <tr>
+                <table className="table table-bordered shadow-sm info-orders-manag">
+                  <thead className="table-titles">
+                    <tr className="tr-table">
                       <th>Producto</th>
                       <th>ID Tienda</th>
                       <th>Descripción</th>
@@ -252,54 +252,37 @@ function OrdersManagment() {
                       <th>Acciones</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody className="table-body">
                     {userOrders.map((order, orderId) => (
                       <React.Fragment key={orderId}>
-                        {JSON.parse(order.buyCarContent).products.map(
-                          (product, productId) => {
-                            if (product.productShopOwner === globalShopId) {
-                              const total =
-                                product.productPrize * product.quantity;
-                              return (
-                                <tr className="compra" key={productId}>
-                                  <td>{product.productName}</td>
-                                  <td>{product.productShopOwner}</td>
-                                  <td>{product.productDescription}</td>
-                                  <td>{product.productPrize}</td>
-                                  <td>{product.quantity}</td>
-                                  <td>{total}</td>
-                                  <td className="action-button">
-                                    <button
-                                      className="despachar"
-                                      onClick={() => {
-                                        orderDelivered(
-                                          order.buyCarContent,
-                                          globalShopId,
-                                          order.buyCarId
-                                        );
-                                      }}
-                                    >
-                                      Despachar
-                                    </button>
-                                    <button
-                                      className="cancelar"
-                                      onClick={() => {
-                                        ChangeStateCanceled(
-                                          order.buyCarContent,
-                                          globalShopId
-                                        );
-                                      }}
-                                    >
-                                      Cancelar
-                                    </button>
-                                  </td>
-                                </tr>
-                              );
-                            } else {
-                              return null;
-                            }
+                        {JSON.parse(order.buyCarContent).products.map((product, productId) => {
+                          if (product.productShopOwner === globalShopId) {
+                            const total = product.productPrize * product.quantity;
+                            return (
+                              <tr key={productId}>
+                                <td>{product.productName}</td>
+                                <td>{product.productShopOwner}</td>
+                                <td>{product.productDescription}</td>
+                                <td>{product.productPrize}</td>
+                                <td>{product.quantity}</td>
+                                <td>{total}</td>
+                                <td><button onClick={() => {
+                                  orderDelivered(order.buyCarContent, globalShopId, order.buyCarId)
+                                }}>
+                                  Despachar
+                                </button>
+                                  <button onClick={() => {
+                                    ChangeStateCanceled(order.buyCarContent, globalShopId)
+                                  }}>
+                                    Cancelar
+                                  </button>
+                                </td>
+                              </tr>
+                            );
+                          } else {
+                            return null;
                           }
-                        )}
+                        })}
                       </React.Fragment>
                     ))}
                   </tbody>
@@ -314,6 +297,7 @@ function OrdersManagment() {
       <Footer />
     </>
   );
+
 }
 
 export default OrdersManagment;

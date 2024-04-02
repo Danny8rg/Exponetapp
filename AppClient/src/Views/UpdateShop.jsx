@@ -196,91 +196,90 @@ function UpdateProduct() {
   return (
     <>
       <Header />
-      <div className="container">
-        <div className="card">
-          <div className="card-header">
-            <h2 className="title-create-prod">Creación De Productos</h2>
+      <div className="container-update-shop">
+        <div className="card shadow-sm">
+          <div className="card-header flex justify-center">
+            <h2 className="text-center text-4xl font-bold leading-9 tracking-tight text-gray-900 title-create-prod">Creación De Productos</h2>
           </div>
-          <div className="card-body">
-            <div className="label-product">
-              <span id="basic-addon1">Producto:</span>
+          <div className="card-body flex flex-col">
+            <div className="info-product mb-2">
+              <span className="block font-medium leading-6 text-gray-900" id="basic-addon1">Producto:</span>
               <input
                 type="text"
                 value={productName}
                 onChange={(Event) => {
                   setProductName(Event.target.value);
                 }}
-                className="input-product"
+                className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-product"
                 placeholder="Ingrese un producto"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
               />
             </div>
 
-            <div className="label-store">
-              <span id="basic-addon1">Cantidad:</span>
+            <div className="info-product mb-2">
+              <span className="block font-medium leading-6 text-gray-900" id="basic-addon1">Cantidad:</span>
               <input
                 type="number"
                 value={productStock}
                 onChange={(Event) => {
                   setProductStock(Event.target.value);
                 }}
-                className="input-product"
+                className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-product"
                 placeholder="Ingrese la cantidad"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
               />
             </div>
 
-            <div className="label-product">
-              <span id="basic-addon1">Categoría:</span>
+            <div className="info-product mb-2">
+              <span className="block font-medium leading-6 text-gray-900" id="basic-addon1">Categoría:</span>
               <input
                 type="text"
                 value={productCategory}
                 onChange={(Event) => {
                   setProductCategory(Event.target.value);
                 }}
-                className="input-product"
+                className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-product"
                 placeholder="Ingrese la categoría"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
               />
             </div>
 
-            <div className="label-product">
-              <span id="basic-addon1">Descripción:</span>
+            <div className="info-product mb-2">
+              <span className="block font-medium leading-6 text-gray-900" id="basic-addon1">Descripción:</span>
               <textarea
                 type="text"
                 value={productDescription}
                 onChange={(Event) => {
                   setProductDescription(Event.target.value);
                 }}
-                className="input-product"
+                className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 resize-none placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-product"
                 placeholder="Ingrese la descripción"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
               />
             </div>
 
-            <div className="label-product">
-              <span id="basic-addon1">Precio:</span>
+            <div className="info-product mb-2">
+              <span className="block font-medium leading-6 text-gray-900" id="basic-addon1">Precio:</span>
               <input
                 type="number"
                 value={productPrize}
                 onChange={(Event) => {
                   setProductPrize(Event.target.value);
                 }}
-                className="input-product"
+                className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-product"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
               />
             </div>
-            <div className="input-group mt-3">
-              <label className="select-img-prod" htmlFor="file">
+            <div className="mt-3 flex">
+              <label className="block shadow-sm leading-6 text-gray-900 select-img-store" htmlFor="file">
                 Seleccionar imagen del producto
               </label>
               <input
-                className="h-10 pl-2 self-center"
                 type="file"
                 id="file"
                 name="file"
@@ -302,25 +301,25 @@ function UpdateProduct() {
                   onClick={() => {
                     update();
                   }}
-                  className="btn-update-prod"
+                  className="flex justify-center rounded-md px-3 py-1 font-semibold leading-6 text-white shadow-sm btn-update-prod"
                 >
                   Actualizar
                 </button>
-                <button onClick={CancelarUpdate} className="btn-cancel-prod">
+                <button onClick={CancelarUpdate} className="flex justify-center rounded-md px-3 py-1 font-semibold leading-6 text-white shadow-sm btn-cancel-prod">
                   Cancelar
                 </button>
               </div>
             ) : (
-              <button onClick={add} className="btn-new-prod">
+              <button onClick={add} className="flex justify-center rounded-md px-3 py-1 font-semibold leading-6 text-white shadow-sm btn-new-prod">
                 Registrar
               </button>
             )}
           </div>
         </div>
 
-        <table className="table table-hover mt-12">
-          <thead className="table-titles-prod">
-            <tr>
+        <table className="table table-bordered shadow-sm info-prod-shops">
+          <thead className="table-titles">
+            <tr className="table-light tr-table">
               <th scope="col">Productos</th>
               <th scope="col">Cantidad</th>
               <th scope="col">Categoria</th>
@@ -329,7 +328,7 @@ function UpdateProduct() {
               <th scope="col">Acciones</th>
             </tr>
           </thead>
-          <tbody className="table-body-prod">
+          <tbody className="table-body">
             {productsList.map((val, key) => {
               return (
                 <tr key={val.productId}>

@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "./CreateShop.css";
 import Header from "../Components/Header/Header";
 import Footer from "../Components/Footer/Footer";
 import Cookies from "js-cookie";
 import { useContext } from "react";
 import { ShopContextValues } from "../Components/Context/ShopContext";
 import Swal from "sweetalert2";
+import "./CreateShop.css";
 
 function CreateShop() {
   const [shopName, setShopName] = useState("");
@@ -84,11 +84,8 @@ function CreateShop() {
             </h2>
           </div>
           <div className="card-body flex flex-col">
-            <div className="label-store mb-2">
-              <span
-                id="basic-addon1"
-                className="block font-medium leading-6 text-gray-900"
-              >
+            <div className="info-store mb-2">
+              <span id="basic-addon1" className="block font-medium leading-6 text-gray-900">
                 Nombre de la tienda:
               </span>
               <input
@@ -107,11 +104,8 @@ function CreateShop() {
               )}
             </div>
 
-            <div className="label-store mb-2">
-              <span
-                id="basic-addon1"
-                className="block font-medium leading-6 text-gray-900"
-              >
+            <div className="info-store mb-2">
+              <span id="basic-addon1" className="block font-medium leading-6 text-gray-900">
                 Teléfono:
               </span>
               <input
@@ -130,11 +124,8 @@ function CreateShop() {
               )}
             </div>
 
-            <div className="label-store mb-2">
-              <span
-                id="basic-addon1"
-                className="block font-medium leading-6 text-gray-900"
-              >
+            <div className="info-store mb-2">
+              <span id="basic-addon1" className="block font-medium leading-6 text-gray-900">
                 Correo electrónico:
               </span>
               <input
@@ -151,11 +142,8 @@ function CreateShop() {
               )}
             </div>
 
-            <div className="label-store mb-2">
-              <span
-                id="basic-addon1"
-                className="block font-medium leading-6 text-gray-900"
-              >
+            <div className="info-store mb-2">
+              <span id="basic-addon1" className="block font-medium leading-6 text-gray-900">
                 Dirección:
               </span>
               <input
@@ -169,11 +157,8 @@ function CreateShop() {
               />
             </div>
 
-            <div className="label-store">
-              <span
-                id="basic-addon1"
-                className="block font-medium leading-6 text-gray-900"
-              >
+            <div className="info-store">
+              <span id="basic-addon1" className="block font-medium leading-6 text-gray-900">
                 Descripción:
               </span>
               <textarea
@@ -286,7 +271,7 @@ function CreateShop() {
               </tr>
             ))}
           </tbody>
-        </table> */}
+                    </table> */}
       </div>
       <Footer />
     </>

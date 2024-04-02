@@ -4,7 +4,6 @@ import Cookies from "js-cookie";
 import { ShopContextValues } from "../Context/ShopContext";
 import Axios from "axios";
 import { MdShoppingCart } from "react-icons/md";
-// import { FaSearch } from "react-icons/fa";
 import { FaBars, FaTimes, FaSearch } from "react-icons/fa"; // Importa los íconos de hamburguesa y de cerrar
 import "./Header.css";
 
@@ -54,15 +53,14 @@ const Header = () => {
 
   return (
     <>
-      <header className="header-home">
+      <header className="header-home bg-gray-100">
         <div className="h-full flex items-center justify-center header-home-box">
           <Link to="/" className="icon-box">
             <h1 className="icon-txt">EXPONET</h1>
             <img className="logo-header" src="./exponet-logo.webp" alt="" />
           </Link>
-          <nav className={`nav ${isMenuOpen ? "open" : ""}`}>
-            <ul className="filter-nav">
-              <li className="box-input-search">
+          <ul className="filter-nav">
+            <li className="box-input-search shadow-sm">
                 <FaSearch className="icon-search" />
                 <input
                   type="text"
@@ -74,6 +72,7 @@ const Header = () => {
                 />
               </li>
             </ul>
+          <nav className={`nav bg-gray-100 shadow-sm ${isMenuOpen ? "open" : ""}`}>
             <ul className="links-nav">
               <li>
                 <Link
