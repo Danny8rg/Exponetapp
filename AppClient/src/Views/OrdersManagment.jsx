@@ -19,10 +19,10 @@ function OrdersManagment() {
     const fetchData = async () => {
       try {
         const usersResponse = await axios.get(
-          "http://localhost:3000/ordersManagmentUsers"
+          "https://exponetapp-8fxj.onrender.com/ordersManagmentUsers"
         );
         const ordersResponse = await axios.get(
-          "http://localhost:3000/ordersManagmentBuyCarList"
+          "https://exponetapp-8fxj.onrender.com/ordersManagmentBuyCarList"
         );
 
 
@@ -93,7 +93,7 @@ function OrdersManagment() {
     console.log("soy el newbuycarcontent del final", newBuyCarContent);
 
     axios
-      .post("http://localhost:3000/ProductStockUpdate", {
+      .post("https://exponetapp-8fxj.onrender.com/ProductStockUpdate", {
         productsIds,
         productsQuantities,
         productsShopOwners,
@@ -118,7 +118,7 @@ function OrdersManagment() {
     console.log("soy el nuevo buycarcontent entre los axios", newBuyCarContent);
 
     axios
-      .put("http://localhost:3000/updateBuyCar", {
+      .put("https://exponetapp-8fxj.onrender.com/updateBuyCar", {
         buyCarId,
         newBuyCarContent,
       })
@@ -177,7 +177,7 @@ function OrdersManagment() {
     );
 
     axios
-      .put("http://localhost:3000/updateBuyCar", {
+      .put("https://exponetapp-8fxj.onrender.com/updateBuyCar", {
         buyCarId,
         parsedContentCanceled,
       })
@@ -198,15 +198,17 @@ function OrdersManagment() {
       return;
     }
 
-    axios.put(`http://localhost:3000/deleteBuyCar/${buyCarId}`).then(() => {
-      Swal.fire({
-        position: "center",
-        icon: "success",
-        title: "Carrito eliminado",
-        showConfirmButton: false,
-        timer: 1500,
+    axios
+      .put(`https://exponetapp-8fxj.onrender.com/deleteBuyCar/${buyCarId}`)
+      .then(() => {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Carrito eliminado",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       });
-    });
   };
 
 

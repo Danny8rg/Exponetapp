@@ -30,14 +30,14 @@ const Header = () => {
   const location = useLocation();
 
   const getUserInfo = (userId) => {
-    Axios.get(`http://localhost:3000/readOneUser/${userId}`).then(
-      (response) => {
-        setUserInfo(response.data);
-        console.log("soy el userInfo");
-        console.log(response.data);
-        console.log(userInfo);
-      }
-    );
+    Axios.get(
+      `https://exponetapp-8fxj.onrender.com/readOneUser/${userId}`
+    ).then((response) => {
+      setUserInfo(response.data);
+      console.log("soy el userInfo");
+      console.log(response.data);
+      console.log(userInfo);
+    });
   };
 
   const handleSearchInputChange = (event) => {

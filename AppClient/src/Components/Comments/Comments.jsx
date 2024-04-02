@@ -10,7 +10,7 @@ function Comments() {
     const fetchComments = async () => {
       try {
         const response = await axios.get(
-          "https://exponetappfinal.onrender.com/commentsList"
+          "https://exponetapp-8fxj.onrender.com/commentsList"
         );
         setComments(response.data);
       } catch (error) {
