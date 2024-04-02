@@ -34,3 +34,43 @@
 .btn-edit-store:hover {
   background-color: #7bd6e5;
 }
+
+.btn-new-prod{
+  background-color: #4cbfd5;
+}
+
+.btn-new-prod:hover{
+  background-color: #7bd6e5;
+}
+
+.btn-update-prod{
+  background-color: #4cbfd5;
+}
+
+.btn-update-prod:hover{
+  background-color: #7bd6e5;
+}
+
+.btn-cancel-prod{
+  background-color: #aaaaaa;
+}
+
+.btn-cancel-prod:hover{
+  background-color: #bdbdbd;
+}
+
+.btn-edit-prod{
+  background-color: #20809a;
+}
+
+.btn-edit-prod:hover {
+  background-color: #239eb7;
+}
+
+.btn-delete-prod{
+  background-color: #888888;
+}
+
+.btn-delete-prod:hover{
+  background-color: #aaaaaa;
+}

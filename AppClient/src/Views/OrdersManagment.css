@@ -97,24 +97,21 @@
     margin-top: 17%;
   }
 
-  .despachar {
-    border: 2px solid rgb(64, 211, 221);
-    margin-bottom: 7%;
-  }
+.despachar{
+  background-color: #20809a;
+}
 
-  .despachar:hover {
-    background-color: rgb(64, 211, 221);
-    color: white;
-  }
+.despachar:hover{
+  background-color: #239eb7;
+}
 
-  .cancelar {
-    border: 2px solid red;
-  }
+.cancelar{
+  background-color: #888888;
+}
 
-  .cancelar:hover {
-    background-color: red;
-    color: white;
-  }
+.cancelar:hover{
+  background-color: #aaaaaa;
+}
 
   /* li::marker es el punto que aparece en cada tarjeta */
   li::marker {

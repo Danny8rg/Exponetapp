@@ -126,7 +126,7 @@ function RegisterForm() {
         <div className="w-2/6 py-4 px-4 flex flex-col items-center justify-center rounded-md shadow-sm bg-gray-50 general-register">
           <img
             className="mx-auto h-20 w-auto image-register"
-            src="/exponet-logo.webp"
+            src="https://res.cloudinary.com/dooxttior/image/upload/v1712008832/nohlp5rsuvaaacjolniw.webp"
             alt=""
           />
           <h1 className="mt-0 mb-0 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900 title-register">
@@ -143,7 +143,7 @@ function RegisterForm() {
                 </label>
                 <div className="mt-0">
                   <input
-                    className="block w-full rounded-md border-0 pl-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-register"
+                    className="block w-full rounded-md border-0 pl-3 py-1.5 text-gray-900 shadow-sm  placeholder:text-gray-400  sm:text-sm sm:leading-6 input-register"
                     type="text"
                     id="userName"
                     name="userName"
@@ -162,7 +162,7 @@ function RegisterForm() {
               </label>
               <div className="mt-0">
                 <input
-                  className={`block w-full rounded-md border-0 pl-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-register ${
+                  className={`block w-full rounded-md border-0 pl-3 py-1.5 text-gray-900 shadow-sm  placeholder:text-gray-400  sm:text-sm sm:leading-6 input-register ${
                     formData.emailError ? "border-red-500" : ""
                   }`}
                   type="email"
@@ -188,7 +188,7 @@ function RegisterForm() {
                 </label>
                 <div className="mt-0">
                   <input
-                    className="block w-full rounded-md border-0 pl-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-register"
+                    className="block w-full rounded-md border-0 pl-3 py-1.5 text-gray-900 shadow-sm  placeholder:text-gray-400  sm:text-sm sm:leading-6 input-register"
                     type="text"
                     id="userAdress"
                     name="userAdress"
@@ -208,7 +208,7 @@ function RegisterForm() {
                 </label>
                 <div className="mt-0">
                   <input
-                    className={`block w-full rounded-md border-0 pl-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-register ${
+                    className={`block w-full rounded-md border-0 pl-3 py-1.5 text-gray-900 shadow-sm  placeholder:text-gray-400  sm:text-sm sm:leading-6 input-register ${
                       formData.passwordError ? "border-red-500" : ""
                     }`}
                     type="password"
@@ -234,7 +234,7 @@ function RegisterForm() {
                 </label>
                 <div className="mt-0">
                   <input
-                    className={`block w-full rounded-md border-0 pl-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-register ${
+                    className={`block w-full rounded-md border-0 pl-3 py-1.5 text-gray-900 shadow-sm  placeholder:text-gray-400  sm:text-sm sm:leading-6 input-register ${
                       formData.passwordError ? "border-red-500" : ""
                     }`}
                     type="password"
@@ -253,7 +253,7 @@ function RegisterForm() {
                   Rol
                 </label>
                 <select
-                  className="block w-36 rounded-md border-0 px-2 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-register input-rol"
+                  className="block w-36 rounded-md border-0 px-2 py-2 text-gray-900 shadow-sm  placeholder:text-gray-400  sm:text-sm sm:leading-6 input-register input-rol"
                   id="userRole"
                   name="userRole"
                   required

@@ -4,8 +4,9 @@ import { FaPlus, FaMinus } from "react-icons/fa";
 import Axios from "axios";
 import { ShopContextValues } from "../Context/ShopContext";
 import Cookies from "js-cookie";
-import "./ProductSamplerBuyCar.css";
+import { TiDelete } from "react-icons/ti";
 import Swal from "sweetalert2";
+import "./ProductSamplerBuyCar.css";
 
 function ProductSamplerBuyCar() {
   const { buyCarProducts, setBuyCarProducts } = useContext(ShopContextValues);
@@ -52,10 +53,10 @@ function ProductSamplerBuyCar() {
       const updatedProducts = buyCarProducts.map((p) =>
         p.productId === productId
           ? {
-              ...p,
-              quantity: updatedQuantities[productId],
-              productStock: p.productStock - 1,
-            }
+            ...p,
+            quantity: updatedQuantities[productId],
+            productStock: p.productStock - 1,
+          }
           : p
       );
 
@@ -77,10 +78,10 @@ function ProductSamplerBuyCar() {
       const updatedProducts = buyCarProducts.map((p) =>
         p.productId === productId
           ? {
-              ...p,
-              quantity: updatedQuantities[productId],
-              productStock: p.productStock + 1,
-            }
+            ...p,
+            quantity: updatedQuantities[productId],
+            productStock: p.productStock + 1,
+          }
           : p
       );
 
@@ -233,178 +234,187 @@ function ProductSamplerBuyCar() {
   return (
     <>
       <div className="product-container-cart">
-        <div className="box-title-cart">
-          <h1 className="product-title-cart">Carrito De Compras </h1>
-        </div>
-        {buyCarProducts.map((product) => (
-          <div key={product.productId} className="product-card-home bg-gray-50">
-            <div className="box-img-home">
-              <img
-                src={product.productimgurl}
-                alt="imgProduct"
-                className="prod-img-home"
-              />
-            </div>
-            <h3 className="prod-title">{product.productName}</h3>
-            <div className="card-item-descrip">
-              <p className="subtitle-descrip">Descripción</p>
-              <p className="value-descrip">{product.productDescription}</p>
-            </div>
-            <section className="card-dates">
-              <div className="card-item">
-                <p className="subtitle">Precio</p>
-                <p className="value">${product.productPrize}</p>
+        <div className="second-container-cart shadow-sm">
+          <div className="box-title-cart">
+            <h1 className="product-title-cart">Carrito de compras </h1>
+          </div>
+          {buyCarProducts.map((product) => (
+            <div key={product.productId} className="product-card-home bg-gray-50">
+              <div className="box-img-home">
+                <img
+                  src={product.productimgurl}
+                  alt="imgProduct"
+                  className="prod-img-home"
+                />
               </div>
-              <div className="card-item">
-                <p className="subtitle">Existencias</p>
-                <p className="value">{product.productStock}</p>
+              <h3 className="prod-title">{product.productName}</h3>
+              <div className="card-item-descrip">
+                <p className="value-descrip">{product.productDescription}</p>
               </div>
-              <div className="card-item">
-                <p className="subtitle">Total</p>
-                <p className="value">${product.productTotal}</p>
-              </div>
-            </section>
-            <div className="quantity-controls">
-              <button
-                className="btn-minor shadow-sm"
-                onClick={() => handleDecrement(product.productId)}
-              >
-                <span className="span-btn">
-                  <FaMinus />
+              <section className="card-dates">
+                <div className="card-item">
+                  <p className="subtitle">Existencias</p>
+                  <p className="value">{product.productStock}</p>
+                </div>
+                <div className="card-item">
+                  <p className="subtitle">Total</p>
+                  <p className="value">${product.productTotal}</p>
+                </div>
+              </section>
+                <div className="card-item-price">
+                  <p className="value-price">${product.productPrize}</p>
+                </div>
+              <div className="quantity-controls">
+                <button
+                  className="btn-minor shadow-sm"
+                  onClick={() => handleDecrement(product.productId)}
+                >
+                  <span className="span-btn">
+                    <FaMinus />
+                  </span>
+                </button>
+                <span className="span-quan">
+                  {selectedQuantities[product.productId] || 0}
                 </span>
-              </button>
-              <span className="span-quan">
-                {selectedQuantities[product.productId] || 0}
-              </span>
-              <button
-                className="btn-plus shadow-sm"
-                onClick={() => handleIncrement(product.productId)}
-                disabled={product.productStock <= 0}
-              >
-                <span className="span-btn">
-                  <FaPlus />
-                </span>
-              </button>
+                <button
+                  className="btn-plus shadow-sm"
+                  onClick={() => handleIncrement(product.productId)}
+                  disabled={product.productStock <= 0}
+                >
+                  <span className="span-btn">
+                    <FaPlus />
+                  </span>
+                </button>
+              </div>
+              <div className="box-btn-delete">
+                <button
+                  className="btn-delete"
+                  onClick={() => {
+                    deleteOneProduct(product.productId);
+                  }}
+                >
+                  <TiDelete />
+                </button>
+              </div>
             </div>
-            <div>
+          ))}
+          <div className="box-btn-buyCart">
+            <div className="flex gap-2">
+              <button className="flex justify-center rounded-md px-3 py-1 font-semibold leading-6 text-white shadow-sm btn-deleteCart" onClick={handleBorrar}>
+                Borrar{" "}
+              </button>
               <button
-                className="DeleteButton"
+                className="flex justify-center rounded-md px-3 py-1 font-semibold leading-6 text-white shadow-sm btn-buyCart"
                 onClick={() => {
-                  deleteOneProduct(product.productId);
+                  setShowModal(true);
                 }}
               >
-                Borrar
+                Comprar Productos
               </button>
             </div>
+            <div className="w-64 flex flex-col items-center justify-center box-value-total">
+              <p className="subtitle-buyCart">Valor total</p>
+              <p className="value-buyCart">${total}</p>
+            </div>
           </div>
-        ))}
-        <div className="box-btn-buyCart">
-          <div>
-            <p className="subtitle-buyCart">Valor Total De La Compra</p>
-            <p className="value-buyCart">${total}</p>
-          </div>
-          <div className="flex flex-col gap-1">
-            <button
-              className="btn-buyCart"
-              onClick={() => {
-                setShowModal(true);
-              }}
-            >
-              Comprar Productos
-            </button>
-            <button className="btn-buyCart" onClick={handleBorrar}>
-              Borrar{" "}
-            </button>
-          </div>
-        </div>
 
-        {/* modal inicio */}
+          {/* modal inicio */}
 
-        {showModal && (
-          <div className="modal2">
-            <select
-              name="DeliveredSelector"
-              id="DeliveredSelector"
-              onChange={(e) => {
-                if (e.target.value === "Targeta De Credito") {
-                  setShowCardInput(true);
-                } else {
-                  setShowCardInput(false);
-                }
-              }}
-            >
-              <option value="contraEntrega">ContraEntrega</option>
-              <option value="Targeta De Credito">Pago Con Tarjeta</option>
-            </select>
-            {showCardInput && (
-              <div className="pago-tarjeta">
-                <select
-                  className="pago"
-                  name="Bank"
-                  id="Bank"
-                  onChange={handleBankChange}
-                >
-                  <option value="bancolombia">Bancolombia</option>
-                  <option value="davivienda">Davivienda</option>
-                  <option value="popular">Banco Popular</option>
-                </select>
-                <input
-                  id="cardNumber"
-                  type="text"
-                  placeholder="Número de tu cuenta"
-                  value={cardNumber}
-                  onChange={(e) => setCardNumber(e.target.value)}
-                />
-                {cardNumber.length !== 16 && (
-                  <p className="format">Se requieren 16 dígitos.</p>
+          {showModal && (
+            <div className="container-modal">
+              <div className="modal2 shadow-sm">
+                <div className="select-modal shadow-sm bg-gray-100">
+                  <p className="">Forma de pago</p>
+                  <select
+                    name="DeliveredSelector"
+                    id="DeliveredSelector"
+                    onChange={(e) => {
+                      if (e.target.value === "Targeta De Credito") {
+                        setShowCardInput(true);
+                      } else {
+                        setShowCardInput(false);
+                      }
+                    }}
+                  >
+                    <option value="contraEntrega">Contra entrega</option>
+                    <option value="Targeta De Credito">Pago con tarjeta</option>
+                  </select>
+                </div>
+                {showCardInput && (
+                  <div className="pago-tarjeta shadow-sm bg-gray-100">
+                    <p className="title-bank">Banco</p>
+                    <input
+                    className="block m-0 w-full rounded-md px-3 py-1.5 text-gray-900 bg-white shadow-sm sm:text-sm sm:leading-6 input-modal"
+                      id="cardNumber"
+                      type="text"
+                      placeholder="Número de tu cuenta"
+                      value={cardNumber}
+                      onChange={(e) => setCardNumber(e.target.value)}
+                    />
+                    {cardNumber.length !== 16 && (
+                      <p className="format">Se requieren 16 dígitos.</p>
+                    )}
+                    <select
+                      className="pago"
+                      name="Bank"
+                      id="Bank"
+                      onChange={handleBankChange}
+                    >
+                      <option value="bancolombia">Bancolombia</option>
+                      <option value="davivienda">Davivienda</option>
+                      <option value="popular">Banco Popular</option>
+                    </select>
+                  </div>
                 )}
+                <div className="btn-modal flex gap-2">
+                  <button
+                    onClick={() => {
+                      setShowModal(false);
+                    }}
+                    className="flex justify-center rounded-md px-3 py-1 font-semibold leading-6 text-white shadow-sm cerrar"
+                  >
+                    Cerrar
+                  </button>
+                  <button
+                    className="flex justify-center rounded-md px-3 py-1 font-semibold leading-6 text-white shadow-sm comprar"
+                    onClick={() => {
+                      if (showCardInput == true) {
+                        let name = userInfo[0].userName;
+                        let adrees = userInfo[0].userAdress;
+                        setShowModal(false);
+                        setCardNumber(cardNumber);
+                        setBank(bank);
+                        updateUserCreditCard(cardNumber, buyCarUser, bank);
+                        handleCompra();
+                        Swal.fire({
+                          position: "top-end",
+                          icon: "success",
+                          title: "Pagaste con tarjeta de crédito",
+                          showConfirmButton: false,
+                          timer: 1500
+                        });
+                        let message = `Usuario ${name}, su pedido será entregado en ${adrees}. El dia de la entrega le será confirmado en las proximas horas, recibirá la notificación via correo electrónico.`;
+                        Swal.fire(message);
+                      } else {
+                        getUserInfo(buyCarUser);
+                        let name = userInfo[0].userName;
+                        let adrees = userInfo[0].userAdress;
+                        let message = `Usuario ${name}, su pedido será entregado en ${adrees}. El dia de la entrega le sera confirmado en las proximas horas `;
+                        Swal.fire(message);
+                        sendMail(userInfo[0].userName, userInfo[0].userMail);
+                        handleCompra();
+                      }
+                    }}
+                  >
+                    Comprar
+                  </button>
+                </div>
               </div>
-            )}
-            <button
-              onClick={() => {
-                setShowModal(false);
-              }}
-              className="buttons2 cerrar"
-            >
-              Cerrar
-            </button>
-            <button
-              className="buttons2 comprar"
-              onClick={() => {
-                if (showCardInput == true) {
-                  let name = userInfo[0].userName;
-                  let adrees = userInfo[0].userAdress;
-                  setShowModal(false);
-                  setCardNumber(cardNumber);
-                  setBank(bank);
-                  updateUserCreditCard(cardNumber, buyCarUser, bank);
-                  handleCompra();
-                  Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: "Pagaste con tarjeta de crédito",
-                    showConfirmButton: false,
-                    timer: 1500
-                  });
-                  let message = `usuario ",${name}, " su pedido sera entregado en ", ${adrees}, "el dia de la entrega le sera confirmado en las proximas horas, la notificacion le llegara via correo electronico `;
-                  Swal.fire(message);
-                } else {
-                  getUserInfo(buyCarUser);
-                  let name = userInfo[0].userName;
-                  let adrees = userInfo[0].userAdress;
-                  let message = `usuario ",${name}, " su pedido sera entregado en ", ${adrees}, "el dia de la entrega le sera confirmado en las proximas horas `;
-                  Swal.fire(message);
-                  sendMail(userInfo[0].userName, userInfo[0].userMail);
-                  handleCompra();
-                }
-              }}
-            >
-              Comprar
-            </button>
-          </div>
-        )}
+            </div>
+          )}
 
-        {/* modal final */}
+          {/* modal final */}
+        </div>
       </div>
     </>
   );

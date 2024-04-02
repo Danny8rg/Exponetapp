@@ -226,7 +226,7 @@ function OrdersManagment() {
           if (userOrders.length > 0) {
             return (
               <li className="shadow-sm bg-gray-50" key={userId}>
-              <h5 className="m-0 info-client">Información del cliente</h5>
+                <h5 className="m-0 info-client">Información del cliente</h5>
                 <div className="user-info">
                   <p className="m-0 w-24 shadow-sm"><span className="text-gray-400">
                     ID</span> {user.userId}
@@ -259,19 +259,20 @@ function OrdersManagment() {
                           if (product.productShopOwner === globalShopId) {
                             const total = product.productPrize * product.quantity;
                             return (
-                              <tr key={productId}>
+                              <tr className="tr-table" key={productId}>
                                 <td>{product.productName}</td>
                                 <td>{product.productShopOwner}</td>
                                 <td>{product.productDescription}</td>
                                 <td>{product.productPrize}</td>
                                 <td>{product.quantity}</td>
                                 <td>{total}</td>
-                                <td><button onClick={() => {
-                                  orderDelivered(order.buyCarContent, globalShopId, order.buyCarId)
-                                }}>
-                                  Despachar
-                                </button>
-                                  <button onClick={() => {
+                                <td>
+                                  <button className="flex justify-center rounded-md px-3 py-0 text-white leading-6 shadow-sm despachar" onClick={() => {
+                                    orderDelivered(order.buyCarContent, globalShopId, order.buyCarId)
+                                  }}>
+                                    Despachar
+                                  </button>
+                                  <button className="flex justify-center rounded-md px-3 py-0 text-white leading-6 shadow-sm cancelar" onClick={() => {
                                     ChangeStateCanceled(order.buyCarContent, globalShopId)
                                   }}>
                                     Cancelar

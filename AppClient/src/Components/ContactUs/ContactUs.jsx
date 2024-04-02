@@ -11,7 +11,7 @@ const ContactUs = () => {
                 <div className='min-w-full'>
                     <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900 label-contact">Nombre</label>
                     <input
-                        className="block w-full rounded-md border-0 pl-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-contact"
+                        className="block w-full rounded-md border-0 pl-3 py-1.5 text-gray-900 shadow-sm  placeholder:text-gray-400  sm:text-sm sm:leading-6 input-contact"
                         id="name"
                         type="text"
                         placeholder="Nombre"
@@ -20,7 +20,7 @@ const ContactUs = () => {
                 <div className='min-w-full'>
                     <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900 label-contact">Teléfono</label>
                     <input
-                        className="block w-full rounded-md border-0 pl-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-contact"
+                        className="block w-full rounded-md border-0 pl-3 py-1.5 text-gray-900 shadow-sm  placeholder:text-gray-400  sm:text-sm sm:leading-6 input-contact"
                         id="tel"
                         type="tel"
                         placeholder="315 000 0000"
@@ -29,7 +29,7 @@ const ContactUs = () => {
                 <div className='min-w-full'>
                     <label htmlFor="message" className="block text-sm font-medium leading-6 text-gray-900 label-contact">Mensaje</label>
                     <textarea
-                        className="block w-full rounded-md border-0 pl-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 resize-none placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 textarea-contact"
+                        className="block w-full rounded-md border-0 pl-3 py-1.5 text-gray-900 shadow-sm  resize-none placeholder:text-gray-400  sm:text-sm sm:leading-6 textarea-contact"
                         id="message"
                         placeholder="Mensaje"
                         rows="6"

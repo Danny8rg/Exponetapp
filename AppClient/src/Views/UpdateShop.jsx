@@ -199,7 +199,7 @@ function UpdateProduct() {
       <div className="container-update-shop">
         <div className="card shadow-sm">
           <div className="card-header flex justify-center">
-            <h2 className="text-center text-4xl font-bold leading-9 tracking-tight text-gray-900 title-create-prod">Creación De Productos</h2>
+            <h2 className="text-center text-4xl font-bold leading-9 tracking-tight text-gray-900 title-create-prod">Creación de productos</h2>
           </div>
           <div className="card-body flex flex-col">
             <div className="info-product mb-2">
@@ -210,7 +210,7 @@ function UpdateProduct() {
                 onChange={(Event) => {
                   setProductName(Event.target.value);
                 }}
-                className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-product"
+                className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm  placeholder:text-gray-400  sm:text-sm sm:leading-6 input-product"
                 placeholder="Ingrese un producto"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
@@ -225,7 +225,7 @@ function UpdateProduct() {
                 onChange={(Event) => {
                   setProductStock(Event.target.value);
                 }}
-                className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-product"
+                className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm  placeholder:text-gray-400  sm:text-sm sm:leading-6 input-product"
                 placeholder="Ingrese la cantidad"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
@@ -240,7 +240,7 @@ function UpdateProduct() {
                 onChange={(Event) => {
                   setProductCategory(Event.target.value);
                 }}
-                className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-product"
+                className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm  placeholder:text-gray-400  sm:text-sm sm:leading-6 input-product"
                 placeholder="Ingrese la categoría"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
@@ -255,7 +255,7 @@ function UpdateProduct() {
                 onChange={(Event) => {
                   setProductDescription(Event.target.value);
                 }}
-                className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 resize-none placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-product"
+                className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm  resize-none placeholder:text-gray-400  sm:text-sm sm:leading-6 input-product"
                 placeholder="Ingrese la descripción"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
@@ -270,7 +270,7 @@ function UpdateProduct() {
                 onChange={(Event) => {
                   setProductPrize(Event.target.value);
                 }}
-                className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-product"
+                className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm  placeholder:text-gray-400  sm:text-sm sm:leading-6 input-product"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
               />
@@ -331,7 +331,7 @@ function UpdateProduct() {
           <tbody className="table-body">
             {productsList.map((val, key) => {
               return (
-                <tr key={val.productId}>
+                <tr className="tr-table" key={val.productId}>
                   <td>{val.productName}</td>
                   <td>{val.productStock}</td>
                   <td>{val.productCategory}</td>
@@ -349,7 +349,7 @@ function UpdateProduct() {
                           editarProducto(val);
                           console.log("soy val en el boton", val);
                         }}
-                        className="btn-edit-prod"
+                        className="flex justify-center rounded-md px-3 py-0 leading-6 text-white shadow-sm btn-edit-prod"
                       >
                         Editar
                       </button>
@@ -358,7 +358,7 @@ function UpdateProduct() {
                         onClick={() => {
                           deleteProducto(val.productId);
                         }}
-                        className="btn-delete-prod"
+                        className="flex justify-center rounded-md px-3 py-0 text-white leading-6 shadow-sm btn-delete-prod"
                       >
                         Eliminar
                       </button>

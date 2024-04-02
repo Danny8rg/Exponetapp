@@ -50,15 +50,9 @@ function ProductSamplerHome({ products, stock, quantityCards, Route }) {
             </div>
             <h3 className="prod-title-home">{product.productName}</h3>
             <div className="dates-box-descrip">
-              {/* <p className="subtitle-home">Descripción</p> */}
               <p className="value-descrip-home">{product.productDescription}</p>
             </div>
-            {/* <div className="dates-box-one">
-              <p className="subtitle-home">Existencias</p>
-              <p className="value-home">{stock[product.productId]}</p>
-            </div> */}
             <div className="dates-box-two">
-              {/* <p className="subtitle-home">Precio</p> */}
               <p className="value-home-price">${product.productPrize}</p>
             </div>
           </div>

@@ -1,12 +1,17 @@
 footer {
   height: 9vh;
   width: 100%;
-  gap: 58rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
   z-index: 999;
+}
+
+.box-footer{
+  width: 82%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .box-footer-txt h3 {

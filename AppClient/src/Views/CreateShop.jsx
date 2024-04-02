@@ -94,7 +94,7 @@ function CreateShop() {
                 onChange={(event) => {
                   setShopName(event.target.value);
                 }}
-                className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-store"
+                className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm  placeholder:text-gray-400  sm:text-sm sm:leading-6 input-store"
                 placeholder="Nombre la tienda"
               />
               {!validateShopName(shopName) && (
@@ -114,7 +114,7 @@ function CreateShop() {
                 onChange={(event) => {
                   setShopTell(event.target.value);
                 }}
-                className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-store"
+                className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm sm:text-sm sm:leading-6 input-store"
                 placeholder="315 000 0000"
               />
               {!validatePhoneNumber(shopTell) && (
@@ -134,7 +134,7 @@ function CreateShop() {
                 onChange={(event) => {
                   setShopMail(event.target.value);
                 }}
-                className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-store"
+                className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm  placeholder:text-gray-400  sm:text-sm sm:leading-6 input-store"
                 placeholder="correo@gmail.com"
               />
               {!validateEmail(shopMail) && (
@@ -152,7 +152,7 @@ function CreateShop() {
                 onChange={(event) => {
                   setShopAdress(event.target.value);
                 }}
-                className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-store"
+                className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm  placeholder:text-gray-400  sm:text-sm sm:leading-6 input-store"
                 placeholder="Dirección de la tienda"
               />
             </div>
@@ -167,7 +167,7 @@ function CreateShop() {
                 onChange={(event) => {
                   setShopComments(event.target.value);
                 }}
-                className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 resize-none focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-store"
+                className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm  placeholder:text-gray-400 focus:ring-2 resize-none focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-store"
                 placeholder="Descripción de la tienda"
               />
             </div>

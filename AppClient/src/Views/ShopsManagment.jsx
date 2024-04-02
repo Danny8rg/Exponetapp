@@ -211,7 +211,7 @@ function ShopsManagment() {
                   onChange={(event) => {
                     setShopName(event.target.value);
                   }}
-                  className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-edit-store"
+                  className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm  placeholder:text-gray-400  sm:text-sm sm:leading-6 input-edit-store"
                   placeholder="Nombre la tienda"
                 />
               </div>
@@ -226,7 +226,7 @@ function ShopsManagment() {
                   onChange={(event) => {
                     setShopTell(event.target.value);
                   }}
-                  className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-edit-store"
+                  className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm  placeholder:text-gray-400  sm:text-sm sm:leading-6 input-edit-store"
                   placeholder="315 000 0000"
                 />
               </div>
@@ -241,7 +241,7 @@ function ShopsManagment() {
                   onChange={(event) => {
                     setShopMail(event.target.value);
                   }}
-                  className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-edit-store"
+                  className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm  placeholder:text-gray-400  sm:text-sm sm:leading-6 input-edit-store"
                   placeholder="correo@gmail.com"
                 />
               </div>
@@ -256,7 +256,7 @@ function ShopsManagment() {
                   onChange={(event) => {
                     setShopAdress(event.target.value);
                   }}
-                  className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-edit-store"
+                  className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm  placeholder:text-gray-400  sm:text-sm sm:leading-6 input-edit-store"
                   placeholder="Dirección de la tienda"
                 />
               </div>
@@ -271,7 +271,7 @@ function ShopsManagment() {
                   onChange={(event) => {
                     setShopComments(event.target.value);
                   }}
-                  className="resize-none block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 input-edit-store"
+                  className="resize-none block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm  placeholder:text-gray-400  sm:text-sm sm:leading-6 input-edit-store"
                   placeholder="Descripción de la tienda"
                 />
               </div>
@@ -327,7 +327,7 @@ function ShopsManagment() {
           </thead>
           <tbody className="table-body">
             {shopsList.map((val, key) => (
-              <tr key={val.shopId} className="">
+              <tr className="tr-table" key={val.shopId}>
                 <td>{val.shopName}</td>
                 <td>{val.shopTell}</td>
                 <td>{val.shopMail}</td>
@@ -345,7 +345,7 @@ function ShopsManagment() {
                         console.log("soy val shop id", val.shopId);
                         editarTienda(val);
                       }}
-                      className="flex justify-center rounded-md px-2 py-1 font-semibold leading-6 text-white shadow-sm btn-edit-store"
+                      className="flex justify-center rounded-md px-2 py-0 font-semibold leading-6 text-white shadow-sm btn-edit-store"
                     >
                       Editar
                     </button>
@@ -355,7 +355,7 @@ function ShopsManagment() {
                         setGlobalShopId(val.shopId);
                         navigate("/UpdateShop");
                       }}
-                      className="flex justify-center rounded-md px-2 py-1 font-semibold leading-6 text-white shadow-sm btn-link-store"
+                      className="flex justify-center rounded-md px-2 py-0 font-semibold leading-6 text-white shadow-sm btn-link-store"
                     >
                       Productos
                     </button>
@@ -364,7 +364,7 @@ function ShopsManagment() {
                         GoToOrdersManagment(val.shopId);
                         navigate("/OrdersManagment");
                       }}
-                      className="flex justify-center rounded-md px-2 py-1 font-semibold leading-6 text-white shadow-sm btn-delivery-store"
+                      className="flex justify-center rounded-md px-2 py-0 font-semibold leading-6 text-white shadow-sm btn-delivery-store"
                     >
                       Entregas
                     </button>
@@ -373,7 +373,7 @@ function ShopsManagment() {
                       onClick={() => {
                         deleteProducts(shopOwner), deleteShop(val.shopId);
                       }}
-                      className="flex justify-center rounded-md px-2 py-1 font-semibold leading-6 text-white shadow-sm btn-delete-store"
+                      className="flex justify-center rounded-md px-2 py-0 font-semibold leading-6 text-white shadow-sm btn-delete-store"
                     >
                       Eliminar
                     </button>

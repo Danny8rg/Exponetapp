@@ -57,7 +57,7 @@ const Header = () => {
         <div className="h-full flex items-center justify-center header-home-box">
           <Link to="/" className="icon-box">
             <h1 className="icon-txt">EXPONET</h1>
-            <img className="logo-header" src="./exponet-logo.webp" alt="" />
+            <img className="logo-header" src="https://res.cloudinary.com/dooxttior/image/upload/v1712008832/nohlp5rsuvaaacjolniw.webp" alt="" />
           </Link>
           <ul className="filter-nav">
             <li className="box-input-search shadow-sm">

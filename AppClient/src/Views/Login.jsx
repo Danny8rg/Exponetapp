@@ -68,7 +68,7 @@ function Login() {
         <div className="w-1/3 py-4 px-4 flex flex-col items-center justify-center rounded-md shadow-sm bg-gray-50 general-2">
           <img
             className="mx-auto h-20 w-auto image"
-            src="/exponet-logo.webp"
+            src="https://res.cloudinary.com/dooxttior/image/upload/v1712008832/nohlp5rsuvaaacjolniw.webp"
             alt=""
           />
           <h1 className="mt-2 mb-0 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900 title">
@@ -113,7 +113,7 @@ function Login() {
                 </div>
                 <div className="mt-2">
                   <input
-                    className="block w-full rounded-md border-0 pl-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 input-login"
+                    className="block w-full rounded-md border-0 pl-3 py-1.5 text-gray-900 shadow-sm  input-login"
                     type="password"
                     id="userPassword"
                     name="userPassword"
