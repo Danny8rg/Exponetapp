@@ -67,52 +67,289 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
 
 .modal-content {
+    width: 60%;
     background-color: white;
     padding: 20px;
     border-radius: 5px;
+    align-items: center;
 }
 
-/* .theadUserHistory th{
-    text-align: center;
-    border: solid 2px #afb2b3;
+.eliminarButton {
+    border: 2px solid red;
+    width: 6vw;
+    margin-left: 17%;
+    margin-top: 7%;
 }
 
-.productName {
-    width: 21%;
+.eliminarButton:hover {
+    background-color: red;
+    color: white;
 }
 
-.description {
-    width: 30%;
+.commentButton {
+    border: 2px solid rgb(113, 197, 230);
+    width: 6vw;
+    margin-left: 17%;
+    margin-top: 5%;
 }
 
-.prize {
-    width: 13%;
+.commentButton:hover {
+    background-color: rgb(113, 197, 230);
+    color: white;
 }
 
-.state {
-    width: 13%;
+.textAreaComment {
+    width: 40vw;
+    height: 18vh;
+    background-color: rgb(228, 226, 226);
+    padding: 5% 0 0 25%;
+    margin-bottom: 1%;
 }
 
-.cant {
-    width: 13%;
+.enviarButton {
+    width: 6vw;
+    border: 2px solid rgb(113, 197, 230);
+    margin-bottom: 1%;
 }
 
-.action {
-    width: 13%;
+.enviarButton:hover {
+    background-color: rgb(113, 197, 230);
+    color: white;
 }
 
-.tdBody td {
-    text-align: center;
+.cerrarButton {
+    width: 6vw;
+    border: 2px solid rgb(230, 127, 113);
 }
 
-.tdUserHistory {
-    border: solid 2px #afb2b3;
-    height: 70px;
+.cerrarButton:hover {
+    background-color: rgb(230, 127, 113);
+    color: white;
 }
 
-.tdDescription {
-    text-align: center;
-} */
+@media screen and (max-width: 1200px) {
+
+    .shops-container-historial {
+        font-size: 17px;
+    }
+
+    .eliminarButton {
+        border: 1px solid red;
+        margin-left: 25%;
+    }
+
+    .commentButton {
+        border: 1px solid rgb(113, 197, 230);
+        width: 8vw;
+        margin-left: 13%;
+    }
+
+    .modal-content {
+        width: 75%;
+    }
+
+    .textAreaComment {
+        width: 60vw;
+        padding: 6% 0 0 30%;
+    }
+
+    .enviarButton {
+        width: 8vw;
+        border: 1px solid rgb(113, 197, 230);
+    }
+    
+    .cerrarButton {
+        width: 8vw;
+        border: 1px solid rgb(230, 127, 113);
+    }
+    
+    .cerrarButton:hover {
+        background-color: rgb(230, 127, 113);
+        color: white;
+    }
+
+}
+
+@media screen and (max-width: 992px) {
+
+    .shops-container-historial {
+        font-size: 15px;
+        width: 115vw;
+    }
+
+    .eliminarButton {
+        border: 1px solid red;
+        margin-left: 25%;
+    }
+
+    .commentButton {
+        border: 1px solid rgb(113, 197, 230);
+        width: 8vw;
+        margin-left: 13%;
+    }
+
+    .modal-content {
+        width: 70%;
+    }
+
+    .textAreaComment {
+        width: 60vw;
+        padding: 7% 0 0 25%;
+    }
+
+    .enviarButton {
+        width: 8vw;
+        height: 5vh;
+        border: 1px solid rgb(113, 197, 230);
+    }
+    
+    .enviarButton:hover {
+        background-color: rgb(113, 197, 230);
+        color: white;
+    }
+    
+    .cerrarButton {
+        width: 8vw;
+        height: 5vh;
+        border: 1px solid rgb(230, 127, 113);
+    }
+    
+    .cerrarButton:hover {
+        background-color: rgb(230, 127, 113);
+        color: white;
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+
+    .shops-container-historial {
+        font-size: 15px;
+        width: 125vw;
+    }
+
+    .eliminarButton {
+        width: 10vw;
+        height: 5vh;
+        margin-left: 19%;
+    }
+
+    .commentButton {
+        width: 13vw;
+        height: 5vh;
+        border: 1px solid rgb(113, 197, 230);
+        margin-left: 10%;
+    }
+
+    .modal-content {
+        width: 83%;
+    }
+
+    .textAreaComment {
+        width: 65vw;
+        padding: 7% 0 0 27%;
+    }
+
+    .enviarButton {
+        width: 10vw;
+        height: 5vh;
+        border: 1px solid rgb(113, 197, 230);
+    }
+    
+    .cerrarButton {
+        width: 10vw;
+        height: 5vh;
+        border: 1px solid rgb(230, 127, 113);
+    }
+
+}
+
+@media screen and (max-width: 600px) {
+
+    .shops-container-historial {
+        width: 140vw;
+        margin-bottom: 45%;
+    }
+
+    .eliminarButton {
+        margin-left: 25%;
+    }
+
+    .commentButton {
+        width: 15vw;
+        margin-left: 7%;
+    }
+
+    .modal-content {
+        width: 75%;
+    }
+
+    .textAreaComment {
+        width: 60vw;
+        height: 21vh;
+        padding: 9% 0 0 22%;
+        margin-bottom: 3%;
+        font-size: 14px;
+    }
+
+    .enviarButton {
+        width: 10vw;
+        height: 6vh;
+        border: 1px solid rgb(113, 197, 230);
+        margin-bottom: 2%;
+    }
+    
+    .cerrarButton {
+        width: 10vw;
+        height: 6vh;
+        border: 1px solid rgb(230, 127, 113);
+    }
+
+}
+
+@media screen and (max-width: 480px) {
+
+    .shops-container-historial {
+        width: 140vw;
+        margin-bottom: 45%;
+        margin-bottom: 140%;
+    }
+
+    .eliminarButton {
+        width: 15vw;
+        margin-left: 13%;
+    }
+
+    .commentButton {
+        width: 20vw;
+        margin-left: 1%;
+    }
+
+    .modal-content {
+        width: 80%;
+    }
+
+    .textAreaComment {
+        width: 75vw;
+        height: 23vh;
+        padding: 11% 0 0 25%;
+        margin-bottom: 3%;
+        margin-top: 3%;
+    }
+
+    .enviarButton {
+        width: 12vw;
+        border: 1px solid rgb(113, 197, 230);
+        margin-bottom: 1%;
+    }
+    
+    .cerrarButton {
+        width: 12vw;
+        border: 1px solid rgb(230, 127, 113);
+    }
+
+}
