@@ -7,6 +7,7 @@ import { useState, useEffect, useContext } from "react";
 import { ShopContextValues } from "../Components/Context/ShopContext";
 import axios from "axios";
 import "./Home.css";
+import Comments from "../Components/Comments/Comments";
 
 function Home() {
   const [products, setProducts] = useState([]);
@@ -53,6 +54,7 @@ function Home() {
           quantityCards={quantityCards}
           Route="/PrincipalShop"
         />
+        <Comments />
         <ContactUs />
         <Footer />
       </section>

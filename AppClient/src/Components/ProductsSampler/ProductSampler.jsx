@@ -216,10 +216,10 @@ function ProductSampler({ products, stock, quantityCards, Route }) {
                 </span>
               </button>
             </div>
+            <Comments />
           </div>
         ))}
       </div>
-      <Comments />
     </>
   );
 }
