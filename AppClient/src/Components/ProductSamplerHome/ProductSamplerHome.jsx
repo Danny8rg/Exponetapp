@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { ShopContextValues } from "../Context/ShopContext";
 import "./ProductSamplerHome.css";
+import Comments from "../Comments/Comments";
 
 function ProductSamplerHome({ products, stock, quantityCards, Route }) {
   const [selectedProducts, setSelectedProducts] = useState({});
@@ -54,6 +55,9 @@ function ProductSamplerHome({ products, stock, quantityCards, Route }) {
             </div>
             <div className="dates-box-two">
               <p className="value-home-price">${product.productPrize}</p>
+            </div>
+            <div>
+              <Comments />
             </div>
           </div>
           //   <Modal isOpen={modalOpen} onClose={closeModal}>

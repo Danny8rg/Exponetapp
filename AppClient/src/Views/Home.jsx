@@ -55,7 +55,6 @@ function Home() {
           Route="/PrincipalShop"
         />
         <Comments />
-        <ContactUs />
         <Footer />
       </section>
     </>
