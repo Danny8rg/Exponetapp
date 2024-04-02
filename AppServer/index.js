@@ -728,7 +728,7 @@ app.put("/deleteProductFromBuyCar"),
   };
 
 app.get("/commentsList", (req, res) => {
-  db.query("CALL obtener_datos_comentarios()", (err, result) => {
+  db.query("CALL obtener_datos_comentarios_b()", (err, result) => {
     if (err) {
       console.log(err);
       res.status(500).send("Error al obtener la lista de comentarios");
