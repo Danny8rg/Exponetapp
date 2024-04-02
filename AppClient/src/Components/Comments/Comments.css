@@ -1,20 +1,31 @@
-/* .comments-container{
-    width: auto;
-    height: 150px;
-    border: 2px;
-    border-style: solid;
-    border-color: rgb(20, 20, 20);
-    padding: 4px;
+.comments-container{
+    margin-top: 9%;
+    width: 17vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border: 1px solid #4CBFD5;
 }
 
 .comments-card{
-    margin: 5px;
-    width: 300px;
-    border: 2px;
-    border-style: solid;
-    padding: 5px;
-    font-size: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background: rgb(19,34,233);
-background: linear-gradient(90deg, rgba(19,34,233,0.8015581232492998) 0%, rgba(35,108,173,0.6727065826330532) 22%, rgba(67,179,200,1) 71%, rgba(88,90,205,1) 100%);
-} */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.nameUser {
+    margin-top: 5%;
+    font-size: 15px;
+}
+
+.commentTarjet {
+    max-width: 95%;
+    padding-left: 15px;
+}
+
+.commentState {
+    border: solid 1px black;
+    max-width: 35%;
+    margin-left: 35%;
+}

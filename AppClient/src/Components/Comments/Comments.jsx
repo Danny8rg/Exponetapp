@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Modal from "react-modal";
 
 import "./Comments.css";
 
 function Comments({ productId }) {
   const [comments, setComments] = useState([]);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   useEffect(() => {
     const fetchComments = async () => {
@@ -23,17 +25,32 @@ function Comments({ productId }) {
 
   return (
     <>
-      <div className="comments-container">
-        {comments
-          .filter((comment) => comment.productComment === productId) // Filtrar los comentarios por productId
-          .map((comment, index) => (
-            <div key={index} className="comments-card">
-              <p>{comment.userName}</p>
-              <p>{comment.appComment}</p>
-              <p>{comment.CommentState}</p>
-            </div>
-          ))}
-      </div>
+      <button onClick={() => setModalIsOpen(true)}>Abrir modal</button>
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={() => setModalIsOpen(false)}
+        contentLabel="Comentarios"
+      >
+        <div className="comments-container">
+          {comments
+            .filter((comment) => comment.productComment === productId)
+            .map((comment, index) => (
+              <div key={index} className="comments-card">
+                <p className="nameUser">
+                  <b>{comment.userName}</b>
+                </p>
+                <p className="commentTarjet">{comment.appComment}</p>
+                <p className="commentState">
+                  <b>{comment.CommentState}</b>
+                </p>
+              </div>
+            ))}
+           
+        </div>
+        <button onClick={()=>{
+              setModalIsOpen(false)
+            }}>Cerrar Modal</button>
+      </Modal>
     </>
   );
 }
