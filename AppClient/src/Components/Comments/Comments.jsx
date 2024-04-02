@@ -3,7 +3,7 @@ import axios from "axios";
 
 import "./Comments.css";
 
-function Comments() {
+function Comments({ productId }) {
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
@@ -24,13 +24,15 @@ function Comments() {
   return (
     <>
       <div className="comments-container">
-        {comments.map((comment) => (
-          <div key={comment.userName} className="comments-card">
-            <p>{comment.userName}</p>
-            <p>{comment.appComment}</p>
-            <p>{comment.CommentState}</p>
-          </div>
-        ))}
+        {comments
+          .filter((comment) => comment.productComment === productId) // Filtrar los comentarios por productId
+          .map((comment, index) => (
+            <div key={index} className="comments-card">
+              <p>{comment.userName}</p>
+              <p>{comment.appComment}</p>
+              <p>{comment.CommentState}</p>
+            </div>
+          ))}
       </div>
     </>
   );

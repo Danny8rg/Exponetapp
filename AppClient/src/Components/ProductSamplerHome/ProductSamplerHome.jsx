@@ -57,7 +57,7 @@ function ProductSamplerHome({ products, stock, quantityCards, Route }) {
               <p className="value-home-price">${product.productPrize}</p>
             </div>
             <div>
-              <Comments />
+              <Comments productId={product.productId}/>
             </div>
           </div>
           //   <Modal isOpen={modalOpen} onClose={closeModal}>
