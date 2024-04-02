@@ -1,8 +1,9 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ShopContextValues } from "../Context/ShopContext";
+import axios from "axios";
 import "./ProductSamplerHome.css";
 import Comments from "../Comments/Comments";
+import { ShopContextValues } from "../Context/ShopContext";
 
 function ProductSamplerHome({ products, stock, quantityCards, Route }) {
   const [selectedProducts, setSelectedProducts] = useState({});
@@ -11,22 +12,29 @@ function ProductSamplerHome({ products, stock, quantityCards, Route }) {
   const valor = globalShopId;
   setGlobalShopName("FreeChocolate");
   const Ruta = "/Shops";
+  const [comments, setComments] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedProductId, setSelectedProductId] = useState(null);
 
   // Filtrar productos según globalShopId
   const filteredProducts = globalShopId
     ? products.filter((product) => product.productShopOwner === valor)
     : products;
 
-  // IMPLEMENTACIÓN DE LA MODAL
-  // const [modalOpen, setModalOpen] = useState(false);
+  useEffect(() => {
+    const fetchComments = async () => {
+      try {
+        const response = await axios.get(
+          "https://exponetapp-8fxj.onrender.com/commentsList"
+        );
+        setComments(response.data);
+      } catch (error) {
+        console.error("Error al obtener la lista de comentarios:", error);
+      }
+    };
 
-  // const openModal = () => {
-  //   setModalOpen(true);
-  // };
-
-  // const closeModal = () => {
-  //   setModalOpen(false);
-  // };
+    fetchComments();
+  }, []);
 
   return (
     <>
@@ -56,17 +64,51 @@ function ProductSamplerHome({ products, stock, quantityCards, Route }) {
             <div className="dates-box-two">
               <p className="value-home-price">${product.productPrize}</p>
             </div>
-            <div>
-              <Comments productId={product.productId}/>
-            </div>
+            <button
+              onClick={() => {
+                setSelectedProductId(product.productId);
+                setShowModal(true);
+              }}
+            >
+              Abrir Modal
+            </button>
           </div>
-          //   <Modal isOpen={modalOpen} onClose={closeModal}>
-          //    <h2>Contenido del Modal</h2>
-          //    <p>¡Aquí puedes poner lo que quieras dentro del modal!</p>
-          //    <button onClick={closeModal}>Cerrar Modal</button>
-          //   </Modal>
         ))}
       </div>
+      {/*  el modal inicio*/}
+
+      {showModal && (
+        <div className="modal-overlay" onClick={() => setShowModal(false)}>
+          <div className="modal">
+            <div className="comments-container">
+              {comments
+                .filter(
+                  (comment) => comment.productComment === selectedProductId
+                )
+                .map((comment, index) => (
+                  <div key={index} className="comments-card">
+                    <p className="nameUser">
+                      <b>{comment.userName}</b>
+                    </p>
+                    <p className="commentTarjet">{comment.appComment}</p>
+                    <p className="commentState">
+                      <b>{comment.CommentState}</b>
+                    </p>
+                  </div>
+                ))}
+            </div>
+            <button
+              onClick={() => {
+                setShowModal(false);
+              }}
+            >
+              Cerrar Modal
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/*  el modal final*/}
     </>
   );
 }

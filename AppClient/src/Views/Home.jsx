@@ -54,7 +54,6 @@ function Home() {
           quantityCards={quantityCards}
           Route="/PrincipalShop"
         />
-        <Comments />
         <Footer />
       </section>
     </>

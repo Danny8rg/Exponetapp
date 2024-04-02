@@ -142,6 +142,43 @@
   color: #4cbfd5;
 }
 
+.comments-container{
+  margin-top: 9%;
+  width: 17vw;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border: 1px solid #4CBFD5;
+}
+
+.comments-card{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.nameUser {
+  margin-top: 5%;
+  font-size: 15px;
+}
+
+.commentTarjet {
+  max-width: 95%;
+  padding-left: 15px;
+}
+
+.commentState {
+  border: solid 1px black;
+  max-width: 35%;
+  margin-left: 35%;
+}
+
+.Modal__Overlay {
+  background-color: rgba(0, 0, 0, 0.5); /* Ajusta el nivel de opacidad aquí */
+}
+
 @media screen and (max-width: 992px) {
 
   .product-card-home {
