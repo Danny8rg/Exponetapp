@@ -28,6 +28,7 @@ function Comments() {
           <div key={comment.userName} className="comments-card">
             <p>{comment.userName}</p>
             <p>{comment.appComment}</p>
+            <p>{comment.commentState}</p>
           </div>
         ))}
       </div>

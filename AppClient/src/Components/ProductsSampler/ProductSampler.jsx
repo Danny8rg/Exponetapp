@@ -5,6 +5,7 @@ import { ShopContextValues } from "../Context/ShopContext";
 import { MdDeleteForever } from "react-icons/md";
 import "../ProductsSampler/ProductSampler.css";
 import Swal from "sweetalert2";
+import Comments from "../Comments/Comments";
 
 function ProductSampler({ products, stock, quantityCards, Route }) {
   const [selectedProducts, setSelectedProducts] = useState({});
@@ -218,6 +219,7 @@ function ProductSampler({ products, stock, quantityCards, Route }) {
           </div>
         ))}
       </div>
+      <Comments />
     </>
   );
 }
