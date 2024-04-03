@@ -34,6 +34,23 @@
   color: #4cbfd5;
 }
 
+.btn-update-store{
+  background-color: #4cbfd5;
+}
+
+.btn-update-store:hover{
+  background-color: #7bd6e5;
+}
+
+.btn-cancel-store{
+  background-color: #aaaaaa;
+}
+
+.btn-cancel-store:hover{
+  background-color: #bdbdbd;
+}
+
+
 .btn-edit-store{
   background-color: #20809a;
 }

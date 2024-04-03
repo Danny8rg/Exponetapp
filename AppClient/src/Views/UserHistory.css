@@ -1,5 +1,5 @@
 .shops-container-historial {
-    height: 91vh;
+    min-height: 91vh;
     width: 100%;
     padding-top: 3rem;
     padding-bottom: 4rem;
@@ -25,7 +25,11 @@
 }
 
 .info-user-history{
-    width: 82%;
+    width: 90%;
+}
+
+.td-description{
+    /* width: 40%; */
 }
 
 .eliminarButton {

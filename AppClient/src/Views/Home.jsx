@@ -8,6 +8,7 @@ import { ShopContextValues } from "../Components/Context/ShopContext";
 import axios from "axios";
 import "./Home.css";
 import Comments from "../Components/Comments/Comments";
+import AboutInfo from "../Components/AboutInfo/AboutInfo"
 
 function Home() {
   const [products, setProducts] = useState([]);
@@ -54,6 +55,7 @@ function Home() {
           quantityCards={quantityCards}
           Route="/PrincipalShop"
         />
+        <AboutInfo />
         <Footer />
       </section>
     </>

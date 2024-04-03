@@ -20,7 +20,7 @@
 }
 
 .select-img-store {
-  padding: 0.2rem 0.8rem;
+  padding: 0 0.8rem;
   font-weight: 500;
   border: 1px solid #d1d1d1;
   background-color: #f0f0f0;
@@ -29,7 +29,7 @@
 
 .result-select-img {
   margin: 0;
-  padding: 0.2rem 0.8rem;
+  padding: 0. 0.8rem;
   border: 1px solid #d1d1d1;
 }
 

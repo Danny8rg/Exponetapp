@@ -25,6 +25,12 @@
 
 .tr-table {
   text-align: center;
+  vertical-align: middle;
+}
+
+.tr-table td img{
+  height: 6rem;
+  width: 7rem;
 }
 
 .btn-edit-store {

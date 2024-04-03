@@ -245,144 +245,246 @@ color: #4cbfd5; */
 
 /* MEDIA QUERY DEL HEADER */
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 768px) {
   .header-home {
-    padding: 0;
-    height: 14vh;
+    height: 20vh;
     position: relative;
   }
 
   .header-home-box{
-    width: 100%;
+    width: 90%;
     flex-direction: column;
+    justify-content: space-around;
   }
-
+  
+  .profile-image{
+    margin-right: 0.3rem;
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+  
+  .profile-info p{
+    margin: 0;
+    font-size: 0.9rem;
+  }
+  
+  .nav {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
   .filter-nav {
-    height: 100%;
+    height: auto;
+    align-items: center;
   }
 
   .box-input-search {
-    width: 9rem;
-    font-size: 0.8rem;
+    height: 2rem;
+    width: 18rem;
   }
 
   .box-input-search input {
-    width: 9rem;
-    padding: 2px 0;
-    padding-left: 1.5rem;
+    width: 18rem;
+    padding-left: 0.5rem;
+    padding-right: 1.5rem;
+    font-size: 0.9rem;
   }
 
   .icon-search {
-    width: 12%;
-    padding: 0.2rem;
+    padding: 2px;
+    height: 1.3rem;
+    width: 1.3rem;
   }
-
-  .icon-box {
-    width: 10rem;
+  
+  .menu-toggle {
+    font-size: 1.2rem;
+    right: 10px; 
   }
 
   .icon-txt {
     padding-left: 0;
-    font-size: 1.5rem;
+    font-size: 2.1rem;
   }
   
   .logo-header {
-    height: 2.6rem;
-  }
-  
-  .box-select-category {
-    width: 9rem;
-    font-size: 0.8rem;
-  }
-  
-  .box-select-category select {
-    width: 8rem;
-    padding: 2px 6px;
+    height: 2.5rem;
   }
   
   .links-nav {
-    gap: 3rem;
+    padding: 0;
+    margin: 0;
   }
   
   .logout {
-    padding: 2px 8px;
-    font-size: 0.8rem;
+    font-size: 1rem;
   }
   
   .link-header {
-    padding: 4px 8px;
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .header-home {
+    height: 18vh;
+    position: relative;
+  }
+
+  .header-home-box{
+    width: 90%;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  
+  .profile-image{
+    margin-right: 0.3rem;
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+  
+  .profile-info p{
+    margin: 0;
     font-size: 0.8rem;
   }
   
+  .nav {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .filter-nav {
+    height: auto;
+    align-items: center;
+  }
+
+  .box-input-search {
+    height: 1.8rem;
+    width: 15rem;
+  }
+
+  .box-input-search input {
+    width: 15rem;
+    padding-left: 0.5rem;
+    padding-right: 1.5rem;
+    font-size: 0.8rem;
+  }
+
+  .icon-search {
+    padding: 2px;
+    height: 1.2rem;
+    width: 1.2rem;
+  }
+  
+  .menu-toggle {
+    font-size: 1.2rem;
+    right: 10px; 
+  }
+
+  .icon-txt {
+    padding-left: 0;
+    font-size: 2rem;
+  }
+  
+  .logo-header {
+    height: 2.4rem;
+  }
+  
+  .links-nav {
+    padding: 0;
+    margin: 0;
+  }
+  
+  .logout {
+    font-size: 1rem;
+  }
+  
+  .link-header {
+    font-size: 1rem;
+  }
 }
 
 @media screen and (max-width: 480px) {
   .header-home {
-    padding: 0;
-    height: 14vh;
+    height: 18vh;
     position: relative;
   }
 
   .header-home-box{
-    width: 100%;
+    width: 90%;
     flex-direction: column;
+    justify-content: space-around;
   }
-
+  
+  .profile-image{
+    margin-right: 0.3rem;
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+  
+  .profile-info p{
+    margin: 0;
+    font-size: 0.8rem;
+  }
+  
+  .nav {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
   .filter-nav {
-    height: 100%;
+    height: auto;
+    align-items: center;
   }
 
   .box-input-search {
-    width: 9rem;
-    font-size: 0.8rem;
+    height: 1.8rem;
+    width: 15rem;
   }
 
   .box-input-search input {
-    width: 9rem;
-    padding: 2px 0;
-    padding-left: 1.5rem;
+    width: 15rem;
+    padding-left: 0.5rem;
+    padding-right: 1.5rem;
+    font-size: 0.8rem;
   }
 
   .icon-search {
-    width: 12%;
-    padding: 0.2rem;
+    padding: 2px;
+    height: 1.2rem;
+    width: 1.2rem;
   }
-
-  .icon-box {
-    width: 10rem;
+  
+  .menu-toggle {
+    font-size: 1.2rem;
+    right: 10px; 
   }
 
   .icon-txt {
     padding-left: 0;
-    font-size: 1.5rem;
+    font-size: 2rem;
   }
   
   .logo-header {
-    height: 2.6rem;
-  }
-  
-  .box-select-category {
-    width: 9rem;
-    font-size: 0.8rem;
-  }
-  
-  .box-select-category select {
-    width: 8rem;
-    padding: 2px 6px;
+    height: 2.4rem;
   }
   
   .links-nav {
-    gap: 3rem;
+    padding: 0;
+    margin: 0;
   }
   
   .logout {
-    padding: 2px 8px;
-    font-size: 0.8rem;
+    font-size: 1rem;
   }
   
   .link-header {
-    padding: 4px 8px;
-    font-size: 0.8rem;
+    font-size: 1rem;
   }
   
 }

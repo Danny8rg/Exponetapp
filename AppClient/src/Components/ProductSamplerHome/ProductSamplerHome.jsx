@@ -1,9 +1,10 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import "./ProductSamplerHome.css";
 import Comments from "../Comments/Comments";
 import { ShopContextValues } from "../Context/ShopContext";
+import { TiDelete } from "react-icons/ti";
+import "./ProductSamplerHome.css";
 
 function ProductSamplerHome({ products, stock, quantityCards, Route }) {
   const [selectedProducts, setSelectedProducts] = useState({});
@@ -64,13 +65,13 @@ function ProductSamplerHome({ products, stock, quantityCards, Route }) {
             <div className="dates-box-two">
               <p className="value-home-price">${product.productPrize}</p>
             </div>
-            <button
+            <button className="open-modal-home"
               onClick={() => {
                 setSelectedProductId(product.productId);
                 setShowModal(true);
               }}
             >
-              Abrir Modal
+              Ver comentarios
             </button>
           </div>
         ))}
@@ -78,32 +79,32 @@ function ProductSamplerHome({ products, stock, quantityCards, Route }) {
       {/*  el modal inicio*/}
 
       {showModal && (
-        <div className="modal-overlay" onClick={() => setShowModal(false)}>
-          <div className="modal">
-            <div className="comments-container">
+        <div className="container-modal-home" onClick={() => setShowModal(false)}>
+          <div className="modal shadow-sm">
+            <div className="comments-container bg-white">
               {comments
                 .filter(
                   (comment) => comment.productComment === selectedProductId
                 )
                 .map((comment, index) => (
                   <div key={index} className="comments-card">
-                    <p className="nameUser">
-                      <b>{comment.userName}</b>
+                    <p className="name-user">
+                      {comment.userName}
                     </p>
-                    <p className="commentTarjet">{comment.appComment}</p>
-                    <p className="commentState">
-                      <b>{comment.CommentState}</b>
+                    <p className="comment-tarjet">{comment.appComment}</p>
+                    <p className="comment-state">
+                      {comment.CommentState}
                     </p>
                   </div>
                 ))}
+                <button className="close-modal-home"
+                  onClick={() => {
+                    setShowModal(false);
+                  }}
+                >
+                  <TiDelete />
+                </button>
             </div>
-            <button
-              onClick={() => {
-                setShowModal(false);
-              }}
-            >
-              Cerrar Modal
-            </button>
           </div>
         </div>
       )}

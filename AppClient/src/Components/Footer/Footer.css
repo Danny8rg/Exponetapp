@@ -119,20 +119,44 @@ footer {
 /* MEDIA QUERY DEL FOOTER */
 
 @media screen and (max-width: 768px){
-  footer {
-    gap: 24rem;
+
+  .social-media {
+    gap: 2.2rem;
   }
 
-  .box-footer-txt {
-    width: 8.5rem;
+  .social-media .icon a {
+    height: 40px;
+    width: 40px;
   }
+
+  .react-icon-mail {
+    font-size: 1.8rem;
+  }
+
+  .react-icon-wpp {
+    font-size: 1.6rem;
+  }
+
+  .social-media .icon .tool {
+    padding: 6px 12px;
+  }
+
+  .social-media .icon .tool:before {
+    height: 10px;
+    width: 10px;
+    bottom: -5px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+
 
   .box-footer-txt h3 {
     font-size: 0.9rem;
   }
 
   .social-media {
-    gap: 2.2rem;
+    gap: 2rem;
   }
 
   .social-media .icon a {
@@ -158,66 +182,18 @@ footer {
     width: 10px;
     bottom: -5px;
   }
-}
-
-@media screen and (max-width: 600px) {
-
-  footer {
-    height: 8vh;
-    gap: 16rem;
-  }
-
-  .box-footer-txt {
-    width: 8rem;
-  }
-
-  .box-footer-txt h3 {
-    font-size: 0.8rem;
-  }
-
-  .social-media {
-    gap: 2rem;
-  }
-
-  .social-media .icon a {
-    height: 30px;
-    width: 30px;
-  }
-
-  .react-icon-mail {
-    font-size: 1.4rem;
-  }
-
-  .react-icon-wpp {
-    font-size: 1.3rem;
-  }
-
-  .social-media .icon .tool {
-    font-size: 0.8rem;
-    padding: 6px 12px;
-  }
-
-  .social-media .icon .tool:before {
-    height: 10px;
-    width: 10px;
-    bottom: -5px;
-  }
 
 }
 
 
 @media screen and (max-width: 480px) {
-  footer {
-    height: 8vh;
-    gap: 11rem;
-  }
 
   .box-footer-txt {
     width: 8rem;
   }
 
   .box-footer-txt h3 {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
   }
 
   .social-media {
@@ -225,20 +201,20 @@ footer {
   }
 
   .social-media .icon a {
-    height: 30px;
-    width: 30px;
+    height: 35px;
+    width: 35px;
   }
 
   .react-icon-mail {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
   }
 
   .react-icon-wpp {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
   }
 
   .social-media .icon .tool {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     padding: 6px 12px;
   }
 

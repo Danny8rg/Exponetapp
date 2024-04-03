@@ -82,10 +82,10 @@ function UserHistory() {
             <thead className="table-titles">
               <tr className="table-light tr-table">
                 <th scope="col" className="imgProduct">
-                  imagen
+                  Imagen
                 </th>
                 <th scope="col" className="productName">
-                  Nombre del Producto
+                  Nombre del producto
                 </th>
                 <th scope="col" className="description">
                   Descripción
@@ -115,7 +115,7 @@ function UserHistory() {
                           <img src={product.productimgurl} alt="" />
                         </td>
                         <td className="tdUserHistory">{product.productName}</td>
-                        <td className="tdUserHistory tdDescription">
+                        <td className="tdUserHistory td-description">
                           {product.productDescription}
                         </td>
                         <td className="tdUserHistory">
