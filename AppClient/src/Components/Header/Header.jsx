@@ -57,22 +57,28 @@ const Header = () => {
         <div className="h-full flex items-center justify-center header-home-box">
           <Link to="/" className="icon-box">
             <h1 className="icon-txt">EXPONET</h1>
-            <img className="logo-header" src="https://res.cloudinary.com/dooxttior/image/upload/v1712008832/nohlp5rsuvaaacjolniw.webp" alt="" />
+            <img
+              className="logo-header"
+              src="https://res.cloudinary.com/dooxttior/image/upload/v1712008832/nohlp5rsuvaaacjolniw.webp"
+              alt=""
+            />
           </Link>
           <ul className="filter-nav">
             <li className="box-input-search shadow-sm">
-                <FaSearch className="icon-search" />
-                <input
-                  type="text"
-                  name=""
-                  id=""
-                  placeholder="Buscar producto"
-                  value={searchText}
-                  onChange={handleSearchInputChange}
-                />
-              </li>
-            </ul>
-          <nav className={`nav bg-gray-100 shadow-sm ${isMenuOpen ? "open" : ""}`}>
+              <FaSearch className="icon-search" />
+              <input
+                type="text"
+                name=""
+                id=""
+                placeholder="Buscar producto"
+                value={searchText}
+                onChange={handleSearchInputChange}
+              />
+            </li>
+          </ul>
+          <nav
+            className={`nav bg-gray-100 shadow-sm ${isMenuOpen ? "open" : ""}`}
+          >
             <ul className="links-nav">
               <li>
                 <Link
@@ -192,7 +198,14 @@ const Header = () => {
           </nav>
           {userInfo && userInfo.length > 0 && (
             <div className="profile-info shadow-sm">
-              <img src={userInfo[0].imgurl} alt="" className="profile-image" />
+              <img
+                src={
+                  userInfo[0].imgurl ||
+                  "https://res.cloudinary.com/dooxttior/image/upload/v1712149285/oeerknhv9y9cupbazmup.png"
+                }
+                alt=""
+                className="profile-image"
+              />
               <div className="flex items-center gap-1 profile-dates">
                 <p className="profile-user">{userInfo[0].userName}</p>
                 <p className="profile-rol">{userInfo[0].userRoll}</p>

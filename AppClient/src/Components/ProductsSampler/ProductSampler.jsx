@@ -27,10 +27,14 @@ function ProductSampler({ products, stock, quantityCards, Route }) {
   };
 
   const handleIncrement = (productId) => {
+    console.log("click incremento");
     if (stock[productId] > 0) {
       setSelectedProducts((prevSelectedProducts) => {
         const updatedProducts = { ...prevSelectedProducts };
         updatedProducts[productId] = (updatedProducts[productId] || 0) + 1;
+
+        console.log("Incrementing product:", productId);
+        console.log("Current stock:", stock[productId]);
 
         localStorage.setItem(
           "selectedProducts",
@@ -48,6 +52,7 @@ function ProductSampler({ products, stock, quantityCards, Route }) {
   };
 
   const handleDecrement = (productId) => {
+    console.log("click decremento");
     if (selectedProducts[productId] > 0) {
       setSelectedProducts((prevSelectedProducts) => {
         const updatedProducts = { ...prevSelectedProducts };
@@ -192,9 +197,9 @@ function ProductSampler({ products, stock, quantityCards, Route }) {
                 </p>
               </div>
             </section>
-              <div className="card-item-price">
-                <p className="value-price">${product.productPrize}</p>
-              </div>
+            <div className="card-item-price">
+              <p className="value-price">${product.productPrize}</p>
+            </div>
             <div className="quantity-controls">
               <button
                 className="btn-minor shadow-sm"
@@ -216,7 +221,6 @@ function ProductSampler({ products, stock, quantityCards, Route }) {
                 </span>
               </button>
             </div>
-           
           </div>
         ))}
       </div>

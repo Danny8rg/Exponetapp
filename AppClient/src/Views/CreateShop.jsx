@@ -48,7 +48,13 @@ function CreateShop() {
       formData
     )
       .then(() => {
-        alert("Tienda registrada");
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Tienda Registrada",
+          showConfirmButton: false,
+          timer: 1500,
+        });
         limpiarCampos();
       })
       .catch((error) => {

@@ -25,7 +25,6 @@ function OrdersManagment() {
           "https://exponetapp-8fxj.onrender.com/ordersManagmentBuyCarList"
         );
 
-
         setUsers(usersResponse.data);
         setOrders(ordersResponse.data); // Almacena los datos de los carritos de compras
         console.log("soy orders");
@@ -40,8 +39,6 @@ function OrdersManagment() {
 
     fetchData();
   }, []);
-
-
 
   function ChangeState(buyCarContent, globalShopId) {
     const parsedContent = JSON.parse(buyCarContent);
@@ -211,7 +208,6 @@ function OrdersManagment() {
       });
   };
 
-
   return (
     <>
       <Header />
@@ -228,23 +224,27 @@ function OrdersManagment() {
               <li className="shadow-sm bg-gray-50" key={userId}>
                 <h5 className="m-0 info-client">Información del cliente</h5>
                 <div className="user-info">
-                  <p className="m-0 w-24 shadow-sm"><span className="text-gray-400">
-                    ID</span> {user.userId}
+                  <p className="m-0 w-24 shadow-sm">
+                    <span className="text-gray-400">ID</span> {user.userId}
                   </p>
-                  <p className="m-0 w-72 shadow-sm"><span className="text-gray-400">
-                    Nombre cliente</span>{user.userName}
-                  </p><p className="m-0 w-96 shadow-sm"><span className="text-gray-400">
-                    Dirección</span> {user.userAdress}
+                  <p className="m-0 w-72 shadow-sm">
+                    <span className="text-gray-400">Nombre cliente</span>
+                    {user.userName}
                   </p>
-                  <p className="m-0 w-96 shadow-sm"><span className="text-gray-400">
-                    Correo electrónico</span> {user.userMail}
+                  <p className="m-0 w-96 shadow-sm">
+                    <span className="text-gray-400">Dirección</span>{" "}
+                    {user.userAdress}
+                  </p>
+                  <p className="m-0 w-96 shadow-sm">
+                    <span className="text-gray-400">Correo electrónico</span>{" "}
+                    {user.userMail}
                   </p>
                 </div>
                 <table className="table table-bordered shadow-sm info-orders-manag">
                   <thead className="table-titles">
                     <tr className="tr-table">
                       <th>Producto</th>
-                      <th>ID Tienda</th>
+                      <th>Código</th>
                       <th>Descripción</th>
                       <th>Precio</th>
                       <th>Unidades</th>
@@ -255,35 +255,51 @@ function OrdersManagment() {
                   <tbody className="table-body">
                     {userOrders.map((order, orderId) => (
                       <React.Fragment key={orderId}>
-                        {JSON.parse(order.buyCarContent).products.map((product, productId) => {
-                          if (product.productShopOwner === globalShopId) {
-                            const total = product.productPrize * product.quantity;
-                            return (
-                              <tr className="tr-table" key={productId}>
-                                <td>{product.productName}</td>
-                                <td>{product.productShopOwner}</td>
-                                <td>{product.productDescription}</td>
-                                <td>{product.productPrize}</td>
-                                <td>{product.quantity}</td>
-                                <td>{total}</td>
-                                <td>
-                                  <button className="flex justify-center rounded-md px-3 py-0 text-white leading-6 shadow-sm despachar" onClick={() => {
-                                    orderDelivered(order.buyCarContent, globalShopId, order.buyCarId)
-                                  }}>
-                                    Despachar
-                                  </button>
-                                  <button className="flex justify-center rounded-md px-3 py-0 text-white leading-6 shadow-sm cancelar" onClick={() => {
-                                    ChangeStateCanceled(order.buyCarContent, globalShopId)
-                                  }}>
-                                    Cancelar
-                                  </button>
-                                </td>
-                              </tr>
-                            );
-                          } else {
-                            return null;
+                        {JSON.parse(order.buyCarContent).products.map(
+                          (product, productId) => {
+                            if (product.productShopOwner === globalShopId) {
+                              const total =
+                                product.productPrize * product.quantity;
+                              return (
+                                <tr className="tr-table" key={productId}>
+                                  <td>{product.productName}</td>
+                                  <td>{product.productId}</td>
+                                  <td>{product.productDescription}</td>
+                                  <td>{product.productPrize}</td>
+                                  <td>{product.quantity}</td>
+                                  <td>{total}</td>
+                                  <td>
+                                    <button
+                                      className="flex justify-center rounded-md px-3 py-0 text-white leading-6 shadow-sm despachar"
+                                      onClick={() => {
+                                        orderDelivered(
+                                          order.buyCarContent,
+                                          globalShopId,
+                                          order.buyCarId
+                                        );
+                                      }}
+                                    >
+                                      Despachar
+                                    </button>
+                                    <button
+                                      className="flex justify-center rounded-md px-3 py-0 text-white leading-6 shadow-sm cancelar"
+                                      onClick={() => {
+                                        ChangeStateCanceled(
+                                          order.buyCarContent,
+                                          globalShopId
+                                        );
+                                      }}
+                                    >
+                                      Cancelar
+                                    </button>
+                                  </td>
+                                </tr>
+                              );
+                            } else {
+                              return null;
+                            }
                           }
-                        })}
+                        )}
                       </React.Fragment>
                     ))}
                   </tbody>
@@ -298,7 +314,6 @@ function OrdersManagment() {
       <Footer />
     </>
   );
-
 }
 
 export default OrdersManagment;

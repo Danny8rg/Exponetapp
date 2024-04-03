@@ -41,7 +41,13 @@ function ShopsManagment() {
       .then(() => {
         getShops();
         limpiarCampos();
-        alert("Tienda registrada");
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Tienda Registrada",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       })
       .catch((error) => {
         console.error("Error al enviar la solicitud:", error);
@@ -198,11 +204,16 @@ function ShopsManagment() {
         {showForm ? (
           <div className="card shadow-sm">
             <div className="card-header flex justify-center">
-              <h2 className="text-center text-4xl font-bold leading-9 tracking-tight text-gray-900 title-edit-store">Gestión de tienda</h2>
+              <h2 className="text-center text-4xl font-bold leading-9 tracking-tight text-gray-900 title-edit-store">
+                Gestión de tienda
+              </h2>
             </div>
             <div className="card-body flex flex-col">
               <div className="info-store-edit mb-2">
-                <span className="block font-medium leading-6 text-gray-900" id="basic-addon1">
+                <span
+                  className="block font-medium leading-6 text-gray-900"
+                  id="basic-addon1"
+                >
                   Nombre de la tienda:
                 </span>
                 <input
@@ -217,7 +228,10 @@ function ShopsManagment() {
               </div>
 
               <div className="info-store-edit mb-2">
-                <span className="block font-medium leading-6 text-gray-900" id="basic-addon1">
+                <span
+                  className="block font-medium leading-6 text-gray-900"
+                  id="basic-addon1"
+                >
                   Teléfono:
                 </span>
                 <input
@@ -232,7 +246,10 @@ function ShopsManagment() {
               </div>
 
               <div className="info-store-edit mb-2">
-                <span className="block font-medium leading-6 text-gray-900" id="basic-addon1">
+                <span
+                  className="block font-medium leading-6 text-gray-900"
+                  id="basic-addon1"
+                >
                   Correo electrónico:
                 </span>
                 <input
@@ -247,7 +264,10 @@ function ShopsManagment() {
               </div>
 
               <div className="info-store-edit mb-2">
-                <span className="block font-medium leading-6 text-gray-900" id="basic-addon1">
+                <span
+                  className="block font-medium leading-6 text-gray-900"
+                  id="basic-addon1"
+                >
                   Dirección:
                 </span>
                 <input
@@ -262,7 +282,10 @@ function ShopsManagment() {
               </div>
 
               <div className="info-store-edit mb-2">
-                <span className="block font-medium leading-6 text-gray-900" id="basic-addon1">
+                <span
+                  className="block font-medium leading-6 text-gray-900"
+                  id="basic-addon1"
+                >
                   Descripción:
                 </span>
                 <textarea
@@ -277,7 +300,10 @@ function ShopsManagment() {
               </div>
 
               <div className="mt-3 flex">
-                <label className="block shadow-sm leading-6 text-gray-900 select-img-store" htmlFor="file">
+                <label
+                  className="block shadow-sm leading-6 text-gray-900 select-img-store"
+                  htmlFor="file"
+                >
                   Seleccionar imagen de la tienda
                 </label>
                 <input
@@ -298,22 +324,31 @@ function ShopsManagment() {
             <div className="card-footer d-flex justify-content-center">
               {editar ? (
                 <div className="w-52 d-flex justify-content-between">
-                  <button onClick={updateShop} className="flex justify-center rounded-md px-3 py-1 font-semibold leading-6 text-white shadow-sm btn-update-store">
+                  <button
+                    onClick={updateShop}
+                    className="flex justify-center rounded-md px-3 py-1 font-semibold leading-6 text-white shadow-sm btn-update-store"
+                  >
                     Actualizar
                   </button>
-                  <button onClick={CancelarUpdate} className="flex justify-center rounded-md px-3 py-1 font-semibold leading-6 text-white shadow-sm btn-cancel-store">
+                  <button
+                    onClick={CancelarUpdate}
+                    className="flex justify-center rounded-md px-3 py-1 font-semibold leading-6 text-white shadow-sm btn-cancel-store"
+                  >
                     Cancelar
                   </button>
                 </div>
               ) : (
-                <button onClick={addShop} className="flex justify-center rounded-md px-3 py-1 font-semibold leading-6 text-white shadow-sm btn-new-store">
+                <button
+                  onClick={addShop}
+                  className="flex justify-center rounded-md px-3 py-1 font-semibold leading-6 text-white shadow-sm btn-new-store"
+                >
                   Registrar
                 </button>
               )}
             </div>
           </div>
         ) : null}
-        
+
         <table className="table table-bordered shadow-sm info-shops-manag">
           <thead className="table-titles">
             <tr className="table-light tr-table">
