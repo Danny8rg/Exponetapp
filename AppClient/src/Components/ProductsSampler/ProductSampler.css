@@ -150,7 +150,7 @@
 }
 
 .card-item-price{
-  width: 100%;
+  width: auto;
   bottom: 16px;
   left: 14px;
   display: flex;

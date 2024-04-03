@@ -41,6 +41,7 @@ function ProductSamplerBuyCar() {
   }, [buyCarProducts]);
 
   const handleIncrement = (productId) => {
+    console.log("handleIncrement");
     const product = buyCarProducts.find((p) => p.productId === productId);
 
     if (product.productStock > 0) {
@@ -53,10 +54,10 @@ function ProductSamplerBuyCar() {
       const updatedProducts = buyCarProducts.map((p) =>
         p.productId === productId
           ? {
-            ...p,
-            quantity: updatedQuantities[productId],
-            productStock: p.productStock - 1,
-          }
+              ...p,
+              quantity: updatedQuantities[productId],
+              productStock: p.productStock - 1,
+            }
           : p
       );
 
@@ -68,6 +69,7 @@ function ProductSamplerBuyCar() {
   };
 
   const handleDecrement = (productId) => {
+    console.log("handledecrement");
     if (selectedQuantities[productId] > 0) {
       const updatedQuantities = {
         ...selectedQuantities,
@@ -78,10 +80,10 @@ function ProductSamplerBuyCar() {
       const updatedProducts = buyCarProducts.map((p) =>
         p.productId === productId
           ? {
-            ...p,
-            quantity: updatedQuantities[productId],
-            productStock: p.productStock + 1,
-          }
+              ...p,
+              quantity: updatedQuantities[productId],
+              productStock: p.productStock + 1,
+            }
           : p
       );
 
@@ -239,7 +241,10 @@ function ProductSamplerBuyCar() {
             <h1 className="product-title-cart">Carrito de compras </h1>
           </div>
           {buyCarProducts.map((product) => (
-            <div key={product.productId} className="product-card-home bg-gray-50">
+            <div
+              key={product.productId}
+              className="product-card-home bg-gray-50"
+            >
               <div className="box-img-home">
                 <img
                   src={product.productimgurl}
@@ -261,9 +266,9 @@ function ProductSamplerBuyCar() {
                   <p className="value">${product.productTotal}</p>
                 </div>
               </section>
-                <div className="card-item-price">
-                  <p className="value-price">${product.productPrize}</p>
-                </div>
+              <div className="card-item-price">
+                <p className="value-price">${product.productPrize}</p>
+              </div>
               <div className="quantity-controls">
                 <button
                   className="btn-minor shadow-sm"
@@ -300,7 +305,10 @@ function ProductSamplerBuyCar() {
           ))}
           <div className="box-btn-buyCart">
             <div className="flex gap-2">
-              <button className="flex justify-center rounded-md px-3 py-1 font-semibold leading-6 text-white shadow-sm btn-deleteCart" onClick={handleBorrar}>
+              <button
+                className="flex justify-center rounded-md px-3 py-1 font-semibold leading-6 text-white shadow-sm btn-deleteCart"
+                onClick={handleBorrar}
+              >
                 Borrar{" "}
               </button>
               <button
@@ -344,7 +352,7 @@ function ProductSamplerBuyCar() {
                   <div className="pago-tarjeta shadow-sm bg-gray-100">
                     <p className="title-bank">Banco</p>
                     <input
-                    className="block m-0 w-full rounded-md px-3 py-1.5 text-gray-900 bg-white shadow-sm sm:text-sm sm:leading-6 input-modal"
+                      className="block m-0 w-full rounded-md px-3 py-1.5 text-gray-900 bg-white shadow-sm sm:text-sm sm:leading-6 input-modal"
                       id="cardNumber"
                       type="text"
                       placeholder="Número de tu cuenta"
@@ -391,7 +399,7 @@ function ProductSamplerBuyCar() {
                           icon: "success",
                           title: "Pagaste con tarjeta de crédito",
                           showConfirmButton: false,
-                          timer: 1500
+                          timer: 1500,
                         });
                         let message = `Usuario ${name}, su pedido será entregado en ${adrees}. El dia de la entrega le será confirmado en las proximas horas, recibirá la notificación via correo electrónico.`;
                         Swal.fire(message);
