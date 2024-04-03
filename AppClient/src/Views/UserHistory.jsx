@@ -132,11 +132,11 @@ function UserHistory() {
                               index
                             ].quantity}
                         </td>
-                        <td className="flex justify-center items-center">
+                        <td className="h-full flex items-center gap-2 flex-col border-0">
                           {product.productState === "Entregado" && (
                             <>
                               <button
-                                className="eliminarButton"
+                                className="flex w-32 justify-center rounded-md px-3 py-1 text-sm font-semibold no-underline leading-6 eliminarButton"
                                 onClick={() => {
                                   handleDelete(
                                     filteredBuyCar.buyCarId // Pasar buyCarId como argumento
@@ -146,7 +146,7 @@ function UserHistory() {
                                 Eliminar
                               </button>
                               <button
-                                className="commentButton"
+                                className="flex w-32 justify-center rounded-md px-3 py-1 text-sm font-semibold no-underline leading-6 commentButton"
                                 onClick={() =>
                                   handleComment(
                                     product.productName,
@@ -173,32 +173,34 @@ function UserHistory() {
             <h1>Comentario para {selectedProductName}</h1>{" "}
             {/* Mostrar el nombre del producto seleccionado */}
             <textarea
-              className="textAreaComment"
+              className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm  placeholder:text-gray-400 resize-none sm:text-sm sm:leading-6 textAreaComment"
               placeholder="Escribe tu comentario aquí"
               value={comment}
               onChange={(e) => setComment(e.target.value)}
             />
-            <button
-              className="enviarButton"
-              onClick={() => {
-                createComment(
-                  comment,
-                  buyCarUser,
-                  momentId,
-                  selectedProductName
-                );
-              }}
-            >
-              Enviar
-            </button>
-            <button
-              className="cerrarButton"
-              onClick={() => {
-                setShowModal(false);
-              }}
-            >
-              Cerrar
-            </button>
+            <div className="flex gap-2">
+              <button
+                className="flex w-28 justify-center rounded-md px-3 py-1 text-sm font-semibold no-underline leading-6 text-white enviarButton"
+                onClick={() => {
+                  createComment(
+                    comment,
+                    buyCarUser,
+                    momentId,
+                    selectedProductName
+                  );
+                }}
+              >
+                Enviar
+              </button>
+              <button
+                className="flex w-28 justify-center rounded-md px-3 py-1 text-sm font-semibold no-underline leading-6 text-white cerrarButton"
+                onClick={() => {
+                  setShowModal(false);
+                }}
+              >
+                Cerrar
+              </button>
+            </div>
           </div>
         </div>
       )}

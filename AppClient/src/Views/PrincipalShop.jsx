@@ -1,4 +1,4 @@
-// En el componente PrincipalShop
+  // En el componente PrincipalShop
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import Header from "../Components/Header/Header";

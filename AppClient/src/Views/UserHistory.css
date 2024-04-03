@@ -29,29 +29,23 @@
 }
 
 .td-description{
-    /* width: 40%; */
+    width: 40%;
 }
 
 .eliminarButton {
-    margin: 0;
-    border: 2px solid red;
-    width: 6vw;
+    background-color: #aaaaaa;
 }
 
 .eliminarButton:hover {
-    background-color: red;
-    color: white;
+    background-color: #bdbdbd;
 }
 
 .commentButton {
-    margin: 0;
-    border: 2px solid rgb(113, 197, 230);
-    width: 6vw;
+    background-color: #4cbfd5;
 }
 
 .commentButton:hover {
-    background-color: rgb(113, 197, 230);
-    color: white;
+    background-color: #7bd6e5;
 }
 
 
@@ -78,33 +72,35 @@
     align-items: center;
 }
 
+.modal-content h1{
+    font-size: 2.2rem;
+}
+
 .textAreaComment {
-    width: 40vw;
-    height: 18vh;
-    background-color: rgb(228, 226, 226);
-    padding: 5% 0 0 25%;
-    margin-bottom: 1%;
+    height: 6rem;
+    margin: 10px 0 20px;
+    border: 1px solid #bdbdbd;
+}
+
+.textAreaComment:focus{
+  outline-style: auto;
+  outline-color: #7bd6e5;
 }
 
 .enviarButton {
-    width: 6vw;
-    border: 2px solid rgb(113, 197, 230);
-    margin-bottom: 1%;
+    background-color: #4cbfd5;
 }
 
 .enviarButton:hover {
-    background-color: rgb(113, 197, 230);
-    color: white;
+    background-color: #c1e1f6;
 }
 
 .cerrarButton {
-    width: 6vw;
-    border: 2px solid rgb(230, 127, 113);
+    background-color: #aaaaaa;
 }
 
 .cerrarButton:hover {
-    background-color: rgb(230, 127, 113);
-    color: white;
+    background-color: #bdbdbd;
 }
 
 @media screen and (max-width: 1200px) {

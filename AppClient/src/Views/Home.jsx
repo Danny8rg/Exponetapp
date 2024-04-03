@@ -16,7 +16,7 @@ function Home() {
   const globalShopId = useContext(ShopContextValues);
   const { searchText } = useContext(ShopContextValues);
   useContext(ShopContextValues);
-  const quantityCards = 4;
+  const quantityCards = 6;
 
   useEffect(() => {
     globalShopId.setGlobalShopId(0);

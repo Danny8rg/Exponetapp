@@ -268,9 +268,9 @@ function OrdersManagment() {
                                   <td>{product.productPrize}</td>
                                   <td>{product.quantity}</td>
                                   <td>{total}</td>
-                                  <td>
+                                  <td className="flex flex-col items-center justify-center gap-1">
                                     <button
-                                      className="flex justify-center rounded-md px-3 py-0 text-white leading-6 shadow-sm despachar"
+                                      className=" w-28 flex justify-center rounded-md px-3 py-0 text-white leading-6 shadow-sm despachar"
                                       onClick={() => {
                                         orderDelivered(
                                           order.buyCarContent,
@@ -282,7 +282,7 @@ function OrdersManagment() {
                                       Despachar
                                     </button>
                                     <button
-                                      className="flex justify-center rounded-md px-3 py-0 text-white leading-6 shadow-sm cancelar"
+                                      className="flex w-28 justify-center rounded-md px-3 py-0 text-white leading-6 shadow-sm cancelar"
                                       onClick={() => {
                                         ChangeStateCanceled(
                                           order.buyCarContent,

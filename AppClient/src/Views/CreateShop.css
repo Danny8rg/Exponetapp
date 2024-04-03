@@ -1,6 +1,7 @@
 .container-create-shop {
-  height: 91vh;
-  margin-top: 4rem;
+  min-height: 91vh;
+  margin-top: 5rem;
+  margin-bottom: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;

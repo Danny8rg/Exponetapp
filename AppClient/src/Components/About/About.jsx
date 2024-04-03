@@ -15,8 +15,7 @@ function About() {
           Descubre y apoya a las microempresas locales
         </h1>
         <p className="about-txt">
-          ¡En ExpoNet explora productos únicos, apoya tu comunidad y celebra lo
-          mejor de tu ciudad en un solo lugar!
+          ¡En ExpoNet explora productos únicos y apoya tu comunidad!
         </p>
         <button
           onClick={scrollToSection}

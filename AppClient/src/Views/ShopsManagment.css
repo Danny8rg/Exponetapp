@@ -1,6 +1,7 @@
 .container-shops-manag{
   min-height: 91vh;
-  padding-top: 9rem;
+  padding-top: 8rem;
+  padding-bottom: 2rem;
   gap: 5rem 0;
   display: flex;
   justify-content: center;
@@ -61,4 +62,12 @@
 
 .btn-link-store{
   background-color: #4cbfd5;
+}
+
+.btn-delete-store{
+  background-color: #aaaaaa;
+}
+
+.btn-delete-store:hover{
+  background-color: #bdbdbd;
 }
