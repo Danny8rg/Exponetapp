@@ -356,6 +356,7 @@ function UpdateProduct() {
         <table className="table table-bordered shadow-sm info-prod-shops">
           <thead className="table-titles">
             <tr className="table-light tr-table">
+              <th scope="col">Imagen</th>
               <th scope="col">Productos</th>
               <th scope="col">Cantidad</th>
               <th scope="col">Categoria</th>
@@ -368,6 +369,12 @@ function UpdateProduct() {
             {productsList.map((val, key) => {
               return (
                 <tr className="tr-table" key={val.productId}>
+                  <td>
+                    <img
+                      src={val.productimgurl}
+                      alt="Descripción de la imagen"
+                    />
+                  </td>
                   <td>{val.productName}</td>
                   <td>{val.productStock}</td>
                   <td>{val.productCategory}</td>

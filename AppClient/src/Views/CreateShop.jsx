@@ -16,6 +16,7 @@ function CreateShop() {
   const [shopAdress, setShopAdress] = useState("");
   const [shopComments, setShopComments] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
+  const shopOwner = Cookies.get("userId");
 
   const navigate = useNavigate();
   const { globalShopId, setGlobalShopId } = useContext(ShopContextValues);
@@ -42,11 +43,9 @@ function CreateShop() {
     formData.append("shopMail", shopMail);
     formData.append("shopAdress", shopAdress);
     formData.append("shopComments", shopComments);
+    formData.append("shopOwner", shopOwner);
 
-    Axios.post(
-      "https://exponetapp-8fxj.onrender.com/createShop",
-      formData
-    )
+    Axios.post("https://exponetapp-8fxj.onrender.com/createShop", formData)
       .then(() => {
         Swal.fire({
           position: "center",
@@ -91,7 +90,10 @@ function CreateShop() {
           </div>
           <div className="card-body flex flex-col">
             <div className="info-store mb-2">
-              <span id="basic-addon1" className="block font-medium leading-6 text-gray-900">
+              <span
+                id="basic-addon1"
+                className="block font-medium leading-6 text-gray-900"
+              >
                 Nombre de la tienda:
               </span>
               <input
@@ -111,7 +113,10 @@ function CreateShop() {
             </div>
 
             <div className="info-store mb-2">
-              <span id="basic-addon1" className="block font-medium leading-6 text-gray-900">
+              <span
+                id="basic-addon1"
+                className="block font-medium leading-6 text-gray-900"
+              >
                 Teléfono:
               </span>
               <input
@@ -131,7 +136,10 @@ function CreateShop() {
             </div>
 
             <div className="info-store mb-2">
-              <span id="basic-addon1" className="block font-medium leading-6 text-gray-900">
+              <span
+                id="basic-addon1"
+                className="block font-medium leading-6 text-gray-900"
+              >
                 Correo electrónico:
               </span>
               <input
@@ -149,7 +157,10 @@ function CreateShop() {
             </div>
 
             <div className="info-store mb-2">
-              <span id="basic-addon1" className="block font-medium leading-6 text-gray-900">
+              <span
+                id="basic-addon1"
+                className="block font-medium leading-6 text-gray-900"
+              >
                 Dirección:
               </span>
               <input
@@ -164,7 +175,10 @@ function CreateShop() {
             </div>
 
             <div className="info-store">
-              <span id="basic-addon1" className="block font-medium leading-6 text-gray-900">
+              <span
+                id="basic-addon1"
+                className="block font-medium leading-6 text-gray-900"
+              >
                 Descripción:
               </span>
               <textarea

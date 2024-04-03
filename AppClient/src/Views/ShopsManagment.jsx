@@ -119,13 +119,14 @@ function ShopsManagment() {
   };
 
   const deleteShop = (ShopId) => {
+    console.log(ShopId);
     const confirmation = window.confirm(
       "¿Seguro que desea eliminar la tienda?"
     );
 
     if (confirmation) {
       Axios.put(
-        `//https://exponetapp-8fxj.onrender.com/deleteShop/${ShopId}`
+        `https://exponetapp-8fxj.onrender.com/deleteShop/${ShopId}`
       ).then(() => {
         alert("Tienda eliminada");
         limpiarCampos();
@@ -175,6 +176,7 @@ function ShopsManagment() {
   };
 
   const getShops = (shopOwner) => {
+    console.log("SOY EL GETSHOPS", shopOwner);
     Axios.get(
       `https://exponetapp-8fxj.onrender.com/shopsListCreateShops/${shopOwner}`
     ).then((response) => {
